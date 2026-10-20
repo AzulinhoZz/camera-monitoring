@@ -1,0 +1,36 @@
+# Variables de entorno y credenciales
+.env
+.env.*
+!.env.example
+**/.env
+**/.env.*
+!**/.env.example
+**/firebase_credentials.json
+**/*service-account*.json
+**/*service_account*.json
+
+# Android
+.gradle/
+**/.gradle/
+**/build/
+**/.idea/
+**/local.properties
+*.apk
+*.aab
+*.jks
+*.keystore
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+venv/
+.pytest_cache/
+
+# Archivos locales
+.DS_Store
+*.log
+
+# Configuraciones locales de cámaras
+backend/app/camera_configs.json
+backend/app/camera_configs.json.bak

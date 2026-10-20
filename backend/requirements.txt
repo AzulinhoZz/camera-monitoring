@@ -1,0 +1,7 @@
+fastapi>=0.115,<1
+uvicorn[standard]>=0.30,<1
+supabase>=2.10,<3
+opencv-python-headless>=4.8
+numpy>=1.24
+python-multipart>=0.0.6
+firebase-admin>=6.5

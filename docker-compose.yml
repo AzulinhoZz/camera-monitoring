@@ -1,0 +1,18 @@
+services:
+  api:
+    build: ./backend
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./backend/app:/code/app
+    env_file:
+      - .env
+    restart: unless-stopped
+  mediamtx:
+    image: bluenviron/mediamtx:1
+    ports:
+      - "8554:8554"
+      - "8888:8888"
+    volumes:
+      - ./gateway/mediamtx.yml:/mediamtx.yml:ro
+    restart: unless-stopped
