@@ -362,3 +362,8 @@ for width, height in [(640, 480), (1280, 720)]:
         process_peak_rss_mib=resource.getrusage(resource.RUSAGE_SELF).ru_maxrss/1024
     )))
 ```
+
+
+## Seguimiento posterior a esta auditoría
+
+Este documento conserva la evidencia histórica de FASE 0. El usuario autorizó FASE 1 después de su entrega. Las correcciones y validaciones posteriores se registran en [PHASE_1_VISION_INFRASTRUCTURE.md](PHASE_1_VISION_INFRASTRUCTURE.md) y en el avance del [backlog](AI_FEATURE_BACKLOG.md); no interpretar los hallazgos originales como estado inmutable ni los pendientes SQL/gateway como resueltos.

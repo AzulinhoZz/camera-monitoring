@@ -2,7 +2,7 @@
 
 Fecha: 2026-10-26. Rama documental: `feat/ai-vision-platform`. Fuente: [plan maestro](MASTER_PROMPT_AI_2_0.md) leído completo y [auditoría técnica](CURRENT_ARCHITECTURE_AUDIT.md) sobre main `fae1bad6211a58d770ab4396fc43a157846a411f` + plan `74fc4cbbe70e48383bf552bc8fd77e749598be04`.
 
-**Solo se ejecutó FASE 0.** Este backlog es propuesta para revisión, no autorización de desarrollo. No hay migraciones nuevas ni funcionalidades IA implementadas. Ninguna historia pendiente se considera resuelta porque existan mocks aprobados.
+**Línea base de FASE 0; actualización de FASE 1 al final.** El usuario autorizó continuar con FASE 1 el 2026-10-26. El estado actual se detalla en [el informe de infraestructura](PHASE_1_VISION_INFRASTRUCTURE.md); las tablas originales se conservan como trazabilidad del plan. En la auditoría original solo se ejecutó FASE 0. No hay migraciones nuevas ni funcionalidades IA implementadas. Ninguna historia pendiente se considera resuelta porque existan mocks aprobados.
 
 ## Estado de la iteración
 
@@ -15,7 +15,7 @@ Fecha: 2026-10-26. Rama documental: `feat/ai-vision-platform`. Fuente: [plan mae
 | Métricas disponibles | Microbenchmark sintético de motion a 640×480 y 1280×720; sin FPS IA ni SLO end-to-end. |
 | Propuesta de arquitectura | Incluida en auditoría, sujeta a revisión. |
 | Código, esquema remoto y producción | Sin cambios. |
-| Paso a FASE 1 | **Pendiente de aprobación explícita del usuario**. |
+| Paso a FASE 1 | Autorizado después de esta línea base; ver actualización al final. |
 
 ## Reglas para ejecutar futuras historias
 
@@ -42,7 +42,7 @@ Las correcciones de esta sección **no se realizaron en la auditoría**. Revisar
 | QA-02 | Parcial / P0 | Fixtures aisladas y pruebas que no dependan de variables reales ni mocks permisivos. QA-01. | `backend/tests`, `backend/app/tests`, dependencias de desarrollo/CI por definir. | Solo fixture local | `pytest` ejecuta 41 casos existentes con configuración explícita y sin producción; no oculta fallos de API ni usa fail-closed DB ausente como evidencia de aislamiento. Mock/fake estricto o integración local para select y permisos; diferenciar unit/integration/live. No desactivar assertions. |
 | OPS-01 | Pendiente / P0 | Obtener entorno reproducible Android e integración backend sin producción. | Gradle wrapper/checksum existentes, SDK/JDK, Compose override de prueba por definir, README. | Bootstrap de prueba por definir; no remoto | Resolver distribución oficial sin bajar verificación, SDK y toolchains compatibles; ejecutar JVM y build APK con resultado real. Tests instrumentados requieren dispositivo. Supabase/Auth/Storage de prueba aislados o emuladores compatibles, sin reutilizar credenciales productivas. Registrar límites no cubiertos. |
 
-## B. FASE 1 — Infraestructura de visión (no iniciada)
+## B. FASE 1 — Alcance propuesto en auditoría (estado actualizado al final)
 
 | ID / prioridad | Existe / falta | Trabajo propuesto y dependencias | Archivos a evaluar | Migración prevista | Pruebas y criterio de salida |
 | --- | --- | --- | --- | --- | --- |
@@ -93,4 +93,27 @@ Las correcciones de esta sección **no se realizaron en la auditoría**. Revisar
 5. Proporcionar entorno de integración de prueba sin cámaras personales ni datos reales y fuente de video permitida; resolver SDK/JDK/Gradle. La carencia no invalida los hallazgos estáticos ni las pruebas unitarias, pero limita la validación end-to-end.
 6. Solo después, ejecutar historias autorizadas de FASE 1 con límites/flags y demostrar criterios de salida. FASES 2–6 siguen pendientes de sus revisiones, licencias y mediciones.
 
-No se estiman fechas ni rendimiento de IA sin modelo/hardware/dataset definidos. El siguiente paso de esta entrega es **revisión del usuario**, no iniciar FASE 1, realizar merge ni desplegar.
+No se estiman fechas ni rendimiento de IA sin modelo/hardware/dataset definidos. Esta sección refleja el orden propuesto en FASE 0; el avance autorizado se registra a continuación.
+
+
+## G. Avance real FASE 1 — 2026-10-26
+
+El usuario autorizó «continua con la fase 1». Se implementó infraestructura optativa y aislada, preservando el camino legado. Evidencia y runbook: [PHASE_1_VISION_INFRASTRUCTURE.md](PHASE_1_VISION_INFRASTRUCTURE.md). Código: `f58e4ad` y `bd76506`. No hay modelos, nuevas migraciones ni despliegue productivo.
+
+| Historia | Estado actual / aceptación restante |
+| --- | --- |
+| GATE-00 | Autorización recibida para FASE 1; no autoriza FASE 2, merge ni producción. |
+| API-01 | Proyecciones y falsos éxitos de revisión corregidos; regresiones estrictas aprobadas. Expiración real Storage/HLS no validada. |
+| AUTH-01/02 | Corregidos scopes de grant y separación lectura/mutación en API; positivos/negativos aprobados. Pendiente atomicidad SQL y matriz integral de flota/owner/Storage. |
+| AUTH-03 | Pendiente: gateway/playlist/segmentos. Demo nueva sin red ni enlace al gateway productivo. |
+| AUTH-04 | Nueva fuente con CIDRs/puertos explícitos, DNS fijado, credenciales rechazadas y errores sin URLs. Pendientes política de egress contra redirects nativos y camino legado. |
+| DB-01/02 | Pendientes, sin cambios SQL. La auditoría histórica no se declara resuelta. |
+| QA-02 | 86 pruebas aprobadas con fixtures offline versionadas: 41 existentes y 45 nuevas; los errores de producción no se prueban mediante credenciales reales. |
+| OPS-01 | Backend/worker construidos y validados en contenedor no root sin red, healthcheck/SIGTERM aprobados. Android e integración Auth/Storage siguen pendientes. |
+| VIS-01 | Servicio separado implementado y optativo; startup idempotente por instancia. Pendiente lease/control plane con motor legado; no hay restauración automática de cámaras desde DB. |
+| VIS-02 | Captura en subproceso, mailbox fijo, colas acotadas, backoff, watchdog y cierre kill-safe probados con video/streams/fallos. |
+| VIS-03 | Contrato v1, schema JSON, scope completo, UTC, cajas y evidencia validados. Pendiente persistencia/idempotencia durable y derivación del scope desde control plane autorizado. |
+| VIS-04 | FPS independientes, métricas/health, CPU/RSS, latencias y buffers limitados implementados. No se presume inferencia ni presupuesto multicámara medido. |
+| VIS-05 | Video geométrico original, decode real, RTSP local con interrupción/reconexión y demo Docker aprobados. Sin datos personales ni modelos; falta validación de escenario de cámara real autorizado. |
+
+**La salida global de FASE 1 sigue pendiente de cerrar los P0 y revisar integración.** El siguiente incremento debe resolver esos pendientes; no introducir FASE 2 todavía. Los servicios de prueba se detuvieron y la rama de trabajo se conserva para revisión.
