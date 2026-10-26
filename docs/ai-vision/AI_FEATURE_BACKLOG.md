@@ -1,0 +1,96 @@
+# Backlog verificable — Camera Monitoring AI 2.0
+
+Fecha: 2026-10-26. Rama documental: `feat/ai-vision-platform`. Fuente: [plan maestro](MASTER_PROMPT_AI_2_0.md) leído completo y [auditoría técnica](CURRENT_ARCHITECTURE_AUDIT.md) sobre main `fae1bad6211a58d770ab4396fc43a157846a411f` + plan `74fc4cbbe70e48383bf552bc8fd77e749598be04`.
+
+**Solo se ejecutó FASE 0.** Este backlog es propuesta para revisión, no autorización de desarrollo. No hay migraciones nuevas ni funcionalidades IA implementadas. Ninguna historia pendiente se considera resuelta porque existan mocks aprobados.
+
+## Estado de la iteración
+
+| Entregable FASE 0 | Resultado real |
+| --- | --- |
+| Inventario de código, endpoints, arquitectura, auth, workers, UI y SQL | Documentado en auditoría con rutas y símbolos. |
+| Pruebas Python seguras | 35 aprobadas / 6 fallidas sin variables; diagnóstico y repetición con fixtures aisladas: 41 aprobadas, 0 omitidas/xfail. |
+| PostgreSQL local | Cadena 001–009 aplicable al fixture; seguridad con resultados mixtos, no suite totalmente aprobada. |
+| Android | Bootstrap intentado; tests NO EJECUTADOS por UnknownHostException del wrapper. |
+| Métricas disponibles | Microbenchmark sintético de motion a 640×480 y 1280×720; sin FPS IA ni SLO end-to-end. |
+| Propuesta de arquitectura | Incluida en auditoría, sujeta a revisión. |
+| Código, esquema remoto y producción | Sin cambios. |
+| Paso a FASE 1 | **Pendiente de aprobación explícita del usuario**. |
+
+## Reglas para ejecutar futuras historias
+
+Antes de cada fase: actualizar inventario existe/parcial/falta/riesgo, alcance, dependencias, archivos previstos, migraciones justificadas y pruebas. Prohibido trabajar directamente en main, forzar push, hacer merge o producción sin autorización. Commits pequeños convencionales; informar SHA real.
+
+Cada historia debe incluir definición funcional y permisos, pruebas positivas/negativas/regresión, contrato de datos, manejo de errores/logs sin secretos, métricas y límites medidos, demo reproducible o impedimento expreso. Si necesita SQL, exigir migración aditiva revisada, rollback probado y análisis de compatibilidad/backfill en DB desechable. No editar/aplicar versiones históricas para ocultar drift.
+
+Prioridades: **P0** seguridad, pipeline, contratos y pruebas; **P1** objetos/tracking/reglas/evidencias; **P2** poses/gestos/acciones experimentales; **P3** analítica y optimización. No iniciar P2/P3 antes de cerrar los bloqueos P0/P1. Las rutas indicadas abajo son existentes salvo donde se dice “por definir”; no se presentan archivos futuros como implementados.
+
+## A. Prerrequisitos P0 para una FASE 1 segura
+
+Las correcciones de esta sección **no se realizaron en la auditoría**. Revisar y aprobar su inclusión en la siguiente iteración antes de implementarlas. Sin migraciones a entornos reales.
+
+| ID | Estado / prioridad | Historia y evidencia | Dependencias / archivos previstos | SQL | Aceptación verificable |
+| --- | --- | --- | --- | --- | --- |
+| GATE-00 | Pendiente / P0 | Revisar auditoría/backlog, acordar los bloqueos y autorizar alcance FASE 1. | Ambos documentos y decisión del usuario. | No | Aprobación explícita registrada; lista de historias autorizadas, riesgos y pruebas de salida. Sin aprobación no escribir código de FASE 1. |
+| AUTH-01 | Parcial, riesgo / P0 | Aislar grants por organización y separar leer/editar/borrar/crear evento. SEC-01/02. | `backend/app/admin.py`, `permissions.py`, `cameras.py`, `events.py`, pruebas existentes y nuevas de permisos por definir. | Evaluar 009; no duplicar grants | Administrador de org A no concede cámara de B ni a destinatario de B; lector con grant no edita/borra salvo política explícita aprobada. Probar API con clave backend simulando bypass RLS y SQL con roles reales de prueba. Positivos para owner y admin autorizado, negativos anon/tenant cruzado, revocación efectiva. |
+| AUTH-02 | Defecto reproducido / P0 | Corregir selección organization_id en has_camera_access y coherencia owner/grant/admin en lectura/configuración. BUG-03. | `permissions.py`, `main.py`, `storage.py`, `retention_manager.py`, tests tenant. | Solo si matriz revisada lo exige | Fixtures respetan select; admin de misma org obtiene acceso previsto, otro tenant no. Matriz explicita qué acciones owner-only siguen siéndolo y cuáles admiten flota. No ampliar permisos por accidente. |
+| AUTH-03 | Parcial, riesgo / P0 | Autenticación efectiva gateway→API y usuario→HLS/RTSP. SEC-03. | `gateway/mediamtx.yml`, `auth.py`, Compose, `LiveStreamScreen.kt`, API de stream. | No prevista | Gateway autentica callback y no confía en ip/action arbitrarias. Publicar y leer sin credencial se rechaza según política, path coincide exactamente, revocación corta acceso, playlist y segmentos protegidos. Video sintético; nada de cámaras reales. |
+| AUTH-04 | Falta / P0 | Política SSRF para RTSP y redacción de URLs/logs. SEC-04. | `cameras.py`, `connectivity_checker.py`, `motion_detector.py`, configuración de red por definir. | No prevista; credenciales servidor requieren diseño si se habilitan | Rechazar esquemas/puertos/destinos prohibidos, loopback/metadata/redes no autorizadas y DNS cambiante. Permitir redes de cámaras explícitamente autorizadas sin prohibir indiscriminadamente toda LAN. No devolver ni registrar userinfo/secretos legados. Probar redirects/resolución según transporte y límites de conexión. |
+| DB-01 | Defecto validado / P0 | Resolver ruta canónica de 009 y permisos mínimos de helpers. SEC-05. | `backend/migrations/009_roles_and_organizations.sql`, copia `backend/app/migrations/...`, Dockerfile, tests SQL. | Requiere estrategia revisada; posible migración correctiva aditiva | Instalación con roles mínimos funciona sin GRANT ALL ON ALL FUNCTIONS. authenticated usa solo helpers necesarios; anon no ejecuta funciones indebidas. Verificar RLS como non-superuser y bypass explícito de backend. Determinar drift antes de tocar históricos; fixture existente y datos preservados. |
+| DB-02 | Parcial / P0 | Hacer verificable SQL de seguridad, corregir caso 6 y separar expected errors. QA-01. | `backend/app/tests/setup_test_db.sql`, `run_real_postgres_security_tests.sql`, `test_sql_009_isolated.py`; runner por definir. | No migración funcional | Conteos, permisos denegados y SQLSTATE comprobados con exit status fiable; unidad cruzada alcanza la instrucción pretendida. Pruebas de alta/update, grants, organizaciones, perfiles y service_role vs authenticated; entorno efímero sin red, sin sobrescribir DB existente. |
+| API-01 | Defectos reproducidos / P0 | Reparar proyecciones de evidencia, clip, metadatos de evento y stream-url. BUG-01/02. | `events.py`, `cameras.py`, `test_evidence_endpoints.py`, contratos Android. | No prevista | Filas devueltas respetan columnas seleccionadas; fotos/clips reales de fixture obtienen URL firmada, ausencia legítima se distingue, protección/revisión persisten al listar, stream-url no produce KeyError. Negativos de tenant y expiración de URL, regresión sin media. |
+| QA-02 | Parcial / P0 | Fixtures aisladas y pruebas que no dependan de variables reales ni mocks permisivos. QA-01. | `backend/tests`, `backend/app/tests`, dependencias de desarrollo/CI por definir. | Solo fixture local | `pytest` ejecuta 41 casos existentes con configuración explícita y sin producción; no oculta fallos de API ni usa fail-closed DB ausente como evidencia de aislamiento. Mock/fake estricto o integración local para select y permisos; diferenciar unit/integration/live. No desactivar assertions. |
+| OPS-01 | Pendiente / P0 | Obtener entorno reproducible Android e integración backend sin producción. | Gradle wrapper/checksum existentes, SDK/JDK, Compose override de prueba por definir, README. | Bootstrap de prueba por definir; no remoto | Resolver distribución oficial sin bajar verificación, SDK y toolchains compatibles; ejecutar JVM y build APK con resultado real. Tests instrumentados requieren dispositivo. Supabase/Auth/Storage de prueba aislados o emuladores compatibles, sin reutilizar credenciales productivas. Registrar límites no cubiertos. |
+
+## B. FASE 1 — Infraestructura de visión (no iniciada)
+
+| ID / prioridad | Existe / falta | Trabajo propuesto y dependencias | Archivos a evaluar | Migración prevista | Pruebas y criterio de salida |
+| --- | --- | --- | --- | --- | --- |
+| VIS-01 P0 | Existe motor motion; falta aislamiento | Diseñar frontera del vision-worker a partir de MotionDetectorManager; una captura por cámara, compatibilidad con motion actual. Depende GATE-00 y P0 autorizados/cerrados. | `motion_detector.py`, `main.py`, `connectivity_checker.py`, `docker-compose.yml`; módulo/servicio nuevo por definir tras revisión. | Ninguna para prototipo aislado | API sigue ofreciendo funciones previas; arranque/parada repetidos no duplican workers. Comparación de regresión motion; kill/restart recupera sin duplicar eventos. Flags y rollback restauran camino anterior, sin migración destructiva. |
+| VIS-02 P0 | Parcial y riesgoso | Captura con open/read timeout, reconexión/backoff, backpressure, cancelación y cierre ordenado. Depende VIS-01/AUTH-04. | `motion_detector.py:run`, `connectivity_checker.py`, adaptador compartido por definir. | No | Streams sintéticos: desconexión/read=false con isOpened=true, reconexión, frame lento/corrupto y stop durante bloqueo. Cola acotada demostrada, join en plazo pactado, memoria estable, counters de drops y edad de frame. |
+| VIS-03 P0 | Falta | Contrato versionado detección/evento y aislamiento de tenant derivado de cámara. Depende AUTH-01/02 y DB-01. | `events.py`, `Models.kt`; esquema formal por definir, sin inventar rutas ahora. | Evaluar extensión de camera_events, revisión previa obligatoria | schema_version, camera_id, organization_id validada, UTC, model_version, class, confidence, bbox normalizada, track_id temporal, rule_id y evidencia opcional. Pruebas de validación, idempotencia, replay, out-of-order, tenant y cámaras sin org; preservar consumidores de motion_detected. |
+| VIS-04 P0 | Solo frame_interval y logs | Separar FPS captura/evidencia/inferencia y observabilidad por cámara. Depende VIS-01/02. | `motion_detector.py`, `clip_recorder.py`; configuración/telemetría por definir. | Evaluar reutilización camera_motion_configs; no asumir esquema | FPS efectivo, p50/p95, CPU/RSS, colas/drops, reconexiones y persistencia medidos con video permitido. Configuración por cámara y límites pactados; no usar FPS de microbenchmark como capacidad de inferencia. |
+| VIS-05 P0 | Baseline solo sintético | Fixtures de video permitido, reproducibilidad y presupuesto 1 cámara. Depende QA-02 y entorno aislado. | Tests/video fixtures por definir, documentación de procedencia y benchmark. | No | Video sin datos personales y licencia verificable, metadata de duración/resolución/FPS, errores inyectados, alarmas/MB por hora observados. HLS y RTSP de prueba accesibles solo localmente. Pasar a 2/4 solo si presupuesto lo permite. |
+
+**Salida FASE 1 propuesta:** P0 acordados cerrados con evidencia, pipeline sin modelo IA probado con fuente sintética, contrato revisado, límites/telemetría y rollback demostrados. Entregar informe/commits y detenerse para revisión antes de migraciones o integración de modelos. Esta sección no aprueba el diseño final.
+
+## C. FASE 2 — Objetos y tracking (pendiente)
+
+| ID / prioridad | Estado | Dependencias y alcance | Datos / rutas previstas | Aceptación |
+| --- | --- | --- | --- | --- |
+| MODEL-01 P1 | Falta | Tras FASE 1, evaluar Ultralytics YOLO y alternativas; ByteTrack o tracker compatible. No instalar ni descargar pesos en auditoría. | Expediente de licencias/procedencia/mantenimiento/vulnerabilidades y matriz de compatibilidad por definir. Sin migración inicial. | Revisar por separado código, pesos y datasets, uso comercial y redistribución; fuentes/checksums verificables, dependencias fijadas, alternativa si licencia no satisface. Aprobación antes de integración. |
+| DET-01 P1 | Falta | Detección de clases configurables, confianza y cajas sobre VIS-03. Depende MODEL-01. | Worker/contrato de VIS-01/03; flags por cámara; posibles extensiones aditivas revisadas. | Casos positivos/negativos por clase y escenarios, threshold documentado, no detecciones “infalibles”, rollback al motion anterior. Métricas de precisión/recall en set permitido, FPS/latencia medidos, manejo de fallo/carga de modelo. |
+| TRACK-01 P1 | Falta | IDs temporales por cámara, trayectorias y conteos. Depende DET-01 y tracker auditado. | Estado temporal en worker, eventos versionados; retención por definir, no identidad persistente. | Oclusión/entrada/salida/reconexión no producen conteos no explicados; medir ID switches y error de conteo. Sin identificación personal ni seguimiento entre cámaras. Benchmarks 1 y luego 2/4 bajo presupuesto. |
+
+## D. FASE 3 — Reglas y evidencias (pendiente)
+
+| ID / prioridad | Estado y evidencia | Dependencias / archivos existentes a reutilizar | SQL y aceptación |
+| --- | --- | --- | --- |
+| RULE-01 P1 | Polígonos/máscaras existen; falta regla semántica | TRACK-01; `zone_store.py`, `main.py`, `LiveStreamScreen.kt`, 004. | Extender solo si contrato aprobado; no otra tabla de polígonos. Reglas por cámara/org/horario; pruebas dentro/fuera/borde, zonas inválidas y aislamiento, UTC/horario nocturno. Validar polígonos degenerados/autointersección según política. |
+| RULE-02 P1 | Líneas, intrusión, permanencia/conteos faltan | RULE-01; tracker y contrato versionado. | Nuevos tipos/config solo tras revisión. Cruce con dirección, permanencia con interrupciones, deduplicación y cooldown probados; medidas de falsos positivos y límites explícitos. Objeto abandonado como evento probable, sujeto a revisión. |
+| MEDIA-01 P1 | Fotos/clips existentes, API defectuosa y memoria no acotada por bytes | API-01, VIS-02/04; `evidence_uploader.py`, `clip_recorder.py`, 005/006. | Reutilizar buckets/rutas y campos existentes. Pre/postevento con timestamps y tamaño acotado, subida fallida no crea éxito falso, URLs firmadas con expiración y control tenant/path. Codec compatible Android verificado con reproducción real local. No duplicar buckets ni cambiar retención sin revisión. |
+| RET-01 P1 | Retención/protección existentes, scheduler falta y métricas estimadas | `retention_manager.py`, `storage.py`, 008; AUTH-01/02. | Evaluar sincronización/protección atómica antes de habilitar auto-cleanup. Dry-run sin borrados, protegido nunca se elimina en carrera, Storage failure no limpia path y contadores reflejan resultado. Pruebas con metadatos paginados; auto scheduler solo con política aprobada y rollback seguro. |
+| REVIEW-01 P1 | Revisión manual existe pero silencia fallos | `events.py:review_event_alert`, pantallas eventos/dashboard, BUG-04. | Evaluar reviewed_by/historial como extensión, no duplicar review_status. Respuesta de error ante persistencia fallida, actor/UTC y autorización comprobables. Acciones ambiguas deben decir “posible” y requerir revisión; no emitir juicios de delito. |
+
+## E. FASES 4–6 — Trabajo condicionado
+
+| ID / fase / prioridad | Estado y alcance | Dependencias | Aceptación y límites |
+| --- | --- | --- | --- |
+| POSE-01 / 4 / P2 | Falta MediaPipe pose/manos/gestos. | P0/P1 cerrados, licencia/modelos/datasets auditados. | Landmarks normalizados→píxel, oclusiones y visualización opt-in probados. Dibujar esqueletos/líneas no demuestra clasificación de acciones. Sin biometría persistente. |
+| ACTION-01 / 4 / P2 | Falta clasificación temporal, caídas potenciales y acciones. Evaluar MMAction2/alternativas. | POSE-01 y revisión comercial/compatibilidad, datasets permitidos. | Secuencias temporales, incertidumbre y revisión humana, alertas sensibles apagadas por defecto, falsos positivos/negativos y límites documentados. No concluir agresión/delito a partir de un frame. |
+| UI-01 / 5 / P1 | Existen dashboard/stream/eventos; faltan overlays IA, timeline y búsqueda semántica de eventos. | Contratos/reglas/media estables, Android compilable y permisos coherentes. | Overlays activables, timestamp/edad/estado inferencia, filtros por cámara/tenant, revisión humana y accesibilidad. Pruebas de pantalla y errores backend; sin mostrar secretos RTSP. |
+| MULTI-01 / 5 / P3 | Falta aislamiento y planificación multicámara por carga. | VIS-04/05 y modelo/reglas medidos en 1 cámara. | Substream para inferencia/original para evidencia cuando disponible; evaluar 2/4 sin rebasar recursos. Kill/fallo/cámara lenta no degrada otras sin control. Healthchecks y cuotas verificables, no prometer FPS no medidos. |
+| HARD-01 / 6 / P0–P1 | Cobertura actual parcial, no hardening de release. | Pases previos completos; integración aislada. | Autenticación/RLS/grants/URLs firmadas/retención/clip con roles reales, carga, cortes de red, RTSP inválido y fallo de modelo. Runner falla ante error inesperado. Backups/restauración y rollback demostrados, sin tocar datos reales. |
+| PERF-01 / 6 / P3 | ONNX/aceleración no evaluada. | Baselines comparables y licencias aprobadas. | Benchmark misma fuente/resolución/hardware, precisión equivalente, CPU/GPU/RAM/latencia reales; cambio solo si mejora objetivo acordado y tiene rollback. |
+| SUPPLY-01 / 6 / P1 | Sin lockfile/SBOM/CI/licencias verificadas. | Dependencias/modelos seleccionados. | SBOM y versiones/checksums, escáner y revisión de licencias/pesos, CI reproducible con secretos aislados, no deshabilitar firmas/TLS. Runbooks y checklist de release, sin publicación automática sin autorización. |
+
+## F. Orden propuesto y decisiones para revisión
+
+1. Aprobar o ajustar esta auditoría y el backlog (GATE-00). No se inicia implementación mientras se espera.
+2. Acordar correcciones P0 de autorización/gateway/API/SQL y validación; pueden requerir una iteración de saneamiento separada antes del pipeline de FASE 1. La auditoría no las autoriza por sí misma.
+3. Elegir una única ruta canónica de migraciones y estrategia de drift, sin asumir que la copia de Docker o Supabase coincide con Git. No usar producción para resolverlo.
+4. Acordar comportamiento para cámaras personales sin organization_id y permisos de lector/conductor/administrador de flota, tanto en evidencias como configuración y borrado.
+5. Proporcionar entorno de integración de prueba sin cámaras personales ni datos reales y fuente de video permitida; resolver SDK/JDK/Gradle. La carencia no invalida los hallazgos estáticos ni las pruebas unitarias, pero limita la validación end-to-end.
+6. Solo después, ejecutar historias autorizadas de FASE 1 con límites/flags y demostrar criterios de salida. FASES 2–6 siguen pendientes de sus revisiones, licencias y mediciones.
+
+No se estiman fechas ni rendimiento de IA sin modelo/hardware/dataset definidos. El siguiente paso de esta entrega es **revisión del usuario**, no iniciar FASE 1, realizar merge ni desplegar.
