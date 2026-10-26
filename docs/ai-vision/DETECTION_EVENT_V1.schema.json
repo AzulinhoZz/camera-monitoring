@@ -1,0 +1,192 @@
+{
+  "$defs": {
+    "BoundingBox": {
+      "additionalProperties": false,
+      "properties": {
+        "x_min": {
+          "maximum": 1,
+          "minimum": 0,
+          "title": "X Min",
+          "type": "number"
+        },
+        "y_min": {
+          "maximum": 1,
+          "minimum": 0,
+          "title": "Y Min",
+          "type": "number"
+        },
+        "x_max": {
+          "maximum": 1,
+          "minimum": 0,
+          "title": "X Max",
+          "type": "number"
+        },
+        "y_max": {
+          "maximum": 1,
+          "minimum": 0,
+          "title": "Y Max",
+          "type": "number"
+        }
+      },
+      "required": [
+        "x_min",
+        "y_min",
+        "x_max",
+        "y_max"
+      ],
+      "title": "BoundingBox",
+      "type": "object"
+    },
+    "EvidenceReference": {
+      "additionalProperties": false,
+      "properties": {
+        "bucket": {
+          "enum": [
+            "motion-evidence",
+            "motion-clips"
+          ],
+          "title": "Bucket",
+          "type": "string"
+        },
+        "path": {
+          "maxLength": 240,
+          "minLength": 1,
+          "title": "Path",
+          "type": "string"
+        }
+      },
+      "required": [
+        "bucket",
+        "path"
+      ],
+      "title": "EvidenceReference",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "camera_id": {
+      "format": "uuid",
+      "title": "Camera Id",
+      "type": "string"
+    },
+    "owner_id": {
+      "format": "uuid",
+      "title": "Owner Id",
+      "type": "string"
+    },
+    "organization_id": {
+      "anyOf": [
+        {
+          "format": "uuid",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Organization Id"
+    },
+    "schema_version": {
+      "const": "1.0",
+      "default": "1.0",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "event_id": {
+      "format": "uuid",
+      "title": "Event Id",
+      "type": "string"
+    },
+    "timestamp": {
+      "format": "date-time",
+      "title": "Timestamp",
+      "type": "string"
+    },
+    "model_version": {
+      "maxLength": 80,
+      "minLength": 1,
+      "pattern": "^[A-Za-z0-9_.:-]+$",
+      "title": "Model Version",
+      "type": "string"
+    },
+    "class": {
+      "maxLength": 80,
+      "minLength": 1,
+      "pattern": "^[A-Za-z0-9_.:-]+$",
+      "title": "Class",
+      "type": "string"
+    },
+    "confidence": {
+      "maximum": 1,
+      "minimum": 0,
+      "title": "Confidence",
+      "type": "number"
+    },
+    "bbox": {
+      "$ref": "#/$defs/BoundingBox"
+    },
+    "worker_session_id": {
+      "format": "uuid",
+      "title": "Worker Session Id",
+      "type": "string"
+    },
+    "track_id": {
+      "anyOf": [
+        {
+          "minimum": 0,
+          "type": "integer"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Track Id"
+    },
+    "rule_id": {
+      "anyOf": [
+        {
+          "format": "uuid",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Rule Id"
+    },
+    "evidence": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/EvidenceReference"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null
+    },
+    "review_status": {
+      "const": "pending",
+      "default": "pending",
+      "title": "Review Status",
+      "type": "string"
+    }
+  },
+  "required": [
+    "camera_id",
+    "owner_id",
+    "event_id",
+    "timestamp",
+    "model_version",
+    "class",
+    "confidence",
+    "bbox",
+    "worker_session_id"
+  ],
+  "title": "DetectionEvent",
+  "type": "object"
+}

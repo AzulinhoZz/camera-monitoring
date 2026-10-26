@@ -1,0 +1,22 @@
+services:
+  vision-worker:
+    # Explicit demo profile: no credentials, production data or network access.
+    profiles: [vision]
+    image: camera-monitoring-vision-worker:dev
+    build: ./backend
+    command: [python, -m, app.vision, --config, /config/vision.json]
+    network_mode: none
+    read_only: true
+    user: "65534:65534"
+    tmpfs:
+      - /tmp:size=32m,mode=1777
+    mem_limit: 512m
+    cpus: 1.0
+    pids_limit: 64
+    stop_grace_period: 15s
+    healthcheck:
+      test: [CMD, python, -c, "import json,time; from pathlib import Path; p=Path('/tmp/vision-health.json'); d=json.loads(p.read_text()); assert d['healthy'] and time.time()-p.stat().st_mtime<15"]
+      interval: 5s
+      timeout: 2s
+      start_period: 15s
+      retries: 3

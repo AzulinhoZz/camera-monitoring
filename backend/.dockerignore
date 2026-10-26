@@ -1,0 +1,12 @@
+.env
+.env.*
+**/.env
+**/.env.*
+**/firebase_credentials.json
+**/*service-account*.json
+**/*service_account*.json
+**/camera_configs.json
+**/camera_configs.json.bak
+**/__pycache__
+**/*.pyc
+.pytest_cache
