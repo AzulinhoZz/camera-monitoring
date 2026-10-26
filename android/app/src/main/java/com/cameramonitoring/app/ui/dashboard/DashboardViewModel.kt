@@ -11,7 +11,7 @@ import kotlinx.coroutines.launch
 
 sealed interface DashboardUiState {
     object Loading : DashboardUiState
-    data class Success(val cameras: List<Camera>) : DashboardUiState
+    data class Success(val cameras: List<Camera>, val actionError: String? = null) : DashboardUiState
     data class Error(val message: String) : DashboardUiState
 }
 
@@ -37,10 +37,63 @@ class DashboardViewModel(
         }
     }
 
+    fun checkCameraConnection(id: String) {
+        viewModelScope.launch {
+            val result = cameraRepository.checkCameraConnection(id)
+            result.fold(
+                onSuccess = {
+                    loadCameras()
+                },
+                onFailure = { ex ->
+                    val currentState = _uiState.value as? DashboardUiState.Success
+                    if (currentState != null) {
+                        _uiState.value = currentState.copy(actionError = ex.message ?: "Error al verificar la conexión")
+                    }
+                }
+            )
+        }
+    }
+
+    fun updateCamera(id: String, name: String, rtspUrl: String) {
+        viewModelScope.launch {
+            val res = cameraRepository.updateCamera(id, name, rtspUrl)
+            res.fold(
+                onSuccess = {
+                    loadCameras()
+                },
+                onFailure = { ex ->
+                    val currentState = _uiState.value as? DashboardUiState.Success
+                    if (currentState != null) {
+                        _uiState.value = currentState.copy(actionError = ex.message ?: "Error al actualizar la cámara")
+                    } else {
+                        _uiState.value = DashboardUiState.Error(ex.message ?: "Error al actualizar la cámara")
+                    }
+                }
+            )
+        }
+    }
+
     fun deleteCamera(cameraId: String) {
         viewModelScope.launch {
-            cameraRepository.deleteCamera(cameraId)
-            loadCameras()
+            val res = cameraRepository.deleteCamera(cameraId)
+            res.fold(
+                onSuccess = {
+                    loadCameras()
+                },
+                onFailure = { ex ->
+                    val currentState = _uiState.value as? DashboardUiState.Success
+                    if (currentState != null) {
+                        _uiState.value = currentState.copy(actionError = ex.message ?: "Error al eliminar la cámara")
+                    } else {
+                        _uiState.value = DashboardUiState.Error(ex.message ?: "Error al eliminar la cámara")
+                    }
+                }
+            )
         }
+    }
+
+    fun dismissActionError() {
+        val currentState = _uiState.value as? DashboardUiState.Success ?: return
+        _uiState.value = currentState.copy(actionError = null)
     }
 }

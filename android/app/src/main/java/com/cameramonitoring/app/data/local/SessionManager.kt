@@ -53,13 +53,15 @@ open class SessionManager {
         accessToken: String,
         refreshToken: String?,
         userId: String,
-        userEmail: String?
+        userEmail: String?,
+        fullName: String? = null
     ) {
         prefs?.edit()
             ?.putString(KEY_ACCESS_TOKEN, accessToken)
             ?.putString(KEY_REFRESH_TOKEN, refreshToken ?: "")
             ?.putString(KEY_USER_ID, userId)
             ?.putString(KEY_USER_EMAIL, userEmail ?: "")
+            ?.putString(KEY_FULL_NAME, fullName ?: "")
             ?.apply()
     }
 
@@ -78,12 +80,14 @@ open class SessionManager {
         val refreshToken = prefs.getString(KEY_REFRESH_TOKEN, null)
         val userId = prefs.getString(KEY_USER_ID, "") ?: ""
         val userEmail = prefs.getString(KEY_USER_EMAIL, null)
+        val fullName = prefs.getString(KEY_FULL_NAME, null)
 
         return SessionData(
             accessToken = token,
             refreshToken = refreshToken,
             userId = userId,
-            userEmail = userEmail
+            userEmail = userEmail,
+            fullName = if (fullName.isNullOrBlank()) null else fullName
         )
     }
 
@@ -106,6 +110,7 @@ open class SessionManager {
         private const val KEY_REFRESH_TOKEN = "refresh_token"
         private const val KEY_USER_ID = "user_id"
         private const val KEY_USER_EMAIL = "user_email"
+        private const val KEY_FULL_NAME = "full_name"
         private const val KEY_FCM_TOKEN = "fcm_token"
     }
 }

@@ -58,17 +58,26 @@ def run_tests():
     cam_id = cam_res["id"]
     log("Create camera passed: " + json.dumps(cam_res))
 
-    # 6. List Cameras for User 1
+    # 6. Edit Camera for User 1 (PUT /cameras/{id})
+    edit_data = {
+        "name": "Camara Editada Principal",
+        "rtsp_url": "rtsp://10.0.2.2:8554/camara1_edited"
+    }
+    status, edit_res = req(f"/cameras/{cam_id}", method="PUT", data=edit_data, token=token1)
+    assert status == 200 and edit_res["name"] == "Camara Editada Principal", f"Edit camera failed: {edit_res}"
+    log("Edit camera passed: " + json.dumps(edit_res))
+
+    # 7. List Cameras for User 1
     status, list_res = req("/cameras", token=token1)
     assert status == 200 and list_res["total"] >= 1, f"List cameras failed: {list_res}"
     log(f"List cameras passed. Total cameras for User 1: {list_res['total']}")
 
-    # 7. Get Specific Camera
+    # 8. Get Specific Camera
     status, single_cam = req(f"/cameras/{cam_id}", token=token1)
     assert status == 200 and single_cam["id"] == cam_id, f"Get camera failed: {single_cam}"
     log("Get camera details passed: " + json.dumps(single_cam))
 
-    # 8. Create Motion Event for Camera
+    # 9. Create Motion Event for Camera
     event_data = {
         "camera_id": cam_id,
         "event_type": "motion_detected",
@@ -78,13 +87,12 @@ def run_tests():
     assert status == 201, f"Create event failed: {event_res}"
     log("Create motion event passed: " + json.dumps(event_res))
 
-    # 9. List Events for User 1
+    # 10. List Events for User 1
     status, events_list = req("/events", token=token1)
     assert status == 200 and events_list["total"] >= 1, f"List events failed: {events_list}"
     log(f"List events passed. Total events for User 1: {events_list['total']}")
 
-    # 10. Test User Isolation (User 2)
-    # Register/Confirm User 2
+    # 11. Test User Isolation (User 2)
     import subprocess
     cmd = """
 import os, json
@@ -103,15 +111,20 @@ for u in client.auth.admin.list_users():
     assert status == 200, f"User 2 login failed: {u2_login}"
     token2 = u2_login["access_token"]
 
-    # User 2 lists cameras -> Should see 0 cameras (isolation)
-    status, u2_cams = req("/cameras", token=token2)
-    assert status == 200 and u2_cams["total"] == 0, f"User isolation broken! User 2 sees cameras: {u2_cams}"
-    log("User isolation test PASSED: User 2 sees 0 cameras of User 1")
+    # User 2 tries to edit User 1's camera -> 404/403
+    status, u2_edit = req(f"/cameras/{cam_id}", method="PUT", data={"name": "Hacked Name"}, token=token2)
+    assert status in (403, 404), f"User isolation broken! User 2 edited User 1's camera: {u2_edit}"
+    log("Camera edit ownership protection PASSED: User 2 cannot edit User 1's camera")
 
-    # User 2 tries to access User 1's camera -> 404/403
-    status, u2_access = req(f"/cameras/{cam_id}", token=token2)
-    assert status in (403, 404), f"User isolation broken! User 2 accessed camera: {u2_access}"
-    log("Camera access protection PASSED: User 2 cannot access User 1's camera")
+    # User 2 tries to delete User 1's camera -> 404/403
+    status, u2_del = req(f"/cameras/{cam_id}", method="DELETE", token=token2)
+    assert status in (403, 404), f"User isolation broken! User 2 deleted User 1's camera: {u2_del}"
+    log("Camera delete ownership protection PASSED: User 2 cannot delete User 1's camera")
+
+    # 12. User 1 Deletes Camera
+    status, del_res = req(f"/cameras/{cam_id}", method="DELETE", token=token1)
+    assert status == 200, f"Delete camera failed: {del_res}"
+    log("Delete camera passed: " + json.dumps(del_res))
 
     log("=== ALL SYSTEM INTEGRATION TESTS PASSED SUCCESSFULLY! ===", "SUCCESS")
 

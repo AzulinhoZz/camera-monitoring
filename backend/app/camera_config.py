@@ -1,7 +1,7 @@
 import json
 import os
 import logging
-from typing import Dict, Any, Optional
+from typing import Dict, Any, Optional, List
 from supabase import create_client
 
 logger = logging.getLogger("camera_config")
@@ -30,6 +30,12 @@ class CameraConfigStore:
             "min_area": 1500,
             "threshold": 25,
             "cooldown_seconds": 5.0,
+            "sensitivity_preset": "medium",
+            "schedule_type": "24/7",
+            "schedule_days": ["mon", "tue", "wed", "thu", "fri", "sat", "sun"],
+            "start_time": "00:00:00",
+            "end_time": "23:59:59",
+            "timezone": "America/Mexico_City",
         }
 
     def _load_json_fallback(self) -> Dict[str, Dict[str, Any]]:
@@ -54,34 +60,33 @@ class CameraConfigStore:
             try:
                 res = (
                     client.table("camera_motion_configs")
-                    .select("camera_id, motion_enabled, min_area, threshold, cooldown_seconds")
+                    .select("camera_id, motion_enabled, min_area, threshold, cooldown_seconds, sensitivity_preset, schedule_type, schedule_days, start_time, end_time, timezone")
                     .eq("camera_id", camera_id)
                     .execute()
                 )
                 if res.data and len(res.data) > 0:
                     row = res.data[0]
+                    defaults = self._get_default()
                     return {
                         "motion_enabled": bool(row.get("motion_enabled", True)),
                         "min_area": int(row.get("min_area", 1500)),
                         "threshold": int(row.get("threshold", 25)),
                         "cooldown_seconds": float(row.get("cooldown_seconds", 5.0)),
+                        "sensitivity_preset": row.get("sensitivity_preset") or defaults["sensitivity_preset"],
+                        "schedule_type": row.get("schedule_type") or defaults["schedule_type"],
+                        "schedule_days": row.get("schedule_days") or defaults["schedule_days"],
+                        "start_time": row.get("start_time") or defaults["start_time"],
+                        "end_time": row.get("end_time") or defaults["end_time"],
+                        "timezone": row.get("timezone") or defaults["timezone"],
                     }
                 else:
-                    # Config row does not exist yet in Supabase -> insert default row
                     default_cfg = self._get_default()
-                    self.set_config(
-                        camera_id=camera_id,
-                        motion_enabled=default_cfg["motion_enabled"],
-                        min_area=default_cfg["min_area"],
-                        threshold=default_cfg["threshold"],
-                        cooldown_seconds=default_cfg["cooldown_seconds"],
-                    )
+                    self.set_config(camera_id=camera_id, **default_cfg)
                     return default_cfg
             except Exception as e:
-                logger.warning(f"camera_motion_configs table in Supabase query failed: {e}. Using JSON store.")
+                logger.warning(f"camera_motion_configs query failed in Supabase: {e}. Using JSON fallback.")
                 self._supabase_enabled = False
 
-        # JSON Fallback
         configs = self._load_json_fallback()
         if camera_id in configs:
             cfg = configs[camera_id].copy()
@@ -99,12 +104,27 @@ class CameraConfigStore:
         min_area: int = 1500,
         threshold: int = 25,
         cooldown_seconds: float = 5.0,
+        sensitivity_preset: str = "medium",
+        schedule_type: str = "24/7",
+        schedule_days: Optional[List[str]] = None,
+        start_time: str = "00:00:00",
+        end_time: str = "23:59:59",
+        timezone: str = "America/Mexico_City",
     ) -> Dict[str, Any]:
+        if schedule_days is None:
+            schedule_days = ["mon", "tue", "wed", "thu", "fri", "sat", "sun"]
+
         cfg = {
             "motion_enabled": motion_enabled,
             "min_area": min_area,
             "threshold": threshold,
             "cooldown_seconds": cooldown_seconds,
+            "sensitivity_preset": sensitivity_preset,
+            "schedule_type": schedule_type,
+            "schedule_days": schedule_days,
+            "start_time": start_time,
+            "end_time": end_time,
+            "timezone": timezone,
         }
 
         client = self._get_supabase_client()
@@ -116,6 +136,12 @@ class CameraConfigStore:
                     "min_area": min_area,
                     "threshold": threshold,
                     "cooldown_seconds": float(cooldown_seconds),
+                    "sensitivity_preset": sensitivity_preset,
+                    "schedule_type": schedule_type,
+                    "schedule_days": schedule_days,
+                    "start_time": start_time,
+                    "end_time": end_time,
+                    "timezone": timezone,
                 }
                 res = client.table("camera_motion_configs").upsert(payload).execute()
                 if res.data:
@@ -124,7 +150,6 @@ class CameraConfigStore:
                 logger.warning(f"Failed to upsert camera_motion_configs in Supabase: {e}")
                 self._supabase_enabled = False
 
-        # JSON Fallback
         configs = self._load_json_fallback()
         configs[camera_id] = cfg
         self._save_json_fallback(configs)

@@ -57,6 +57,7 @@ dependencies {
     implementation(libs.okhttp.logging)
 
     implementation(libs.firebase.messaging)
+    implementation(libs.coil.compose)
 
     implementation(libs.media3.exoplayer)
     implementation(libs.media3.exoplayer.hls)

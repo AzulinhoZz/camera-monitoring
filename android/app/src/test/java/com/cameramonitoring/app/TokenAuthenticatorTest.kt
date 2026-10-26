@@ -26,10 +26,10 @@ class InMemorySessionManager : SessionManager() {
 
     override fun getSession(): SessionData? {
         val t = token ?: return null
-        return SessionData(t, refreshTokenStr, "user_123", "admin@cameramonitoring.com")
+        return SessionData(t, refreshTokenStr, "user_123", "admin@cameramonitoring.com", "Conductor Demo")
     }
 
-    override fun saveSession(accessToken: String, refreshToken: String?, userId: String, userEmail: String?) {
+    override fun saveSession(accessToken: String, refreshToken: String?, userId: String, userEmail: String?, fullName: String?) {
         this.token = accessToken
         this.refreshTokenStr = refreshToken
         this.savedAccessToken = accessToken
