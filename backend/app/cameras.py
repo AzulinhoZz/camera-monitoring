@@ -10,7 +10,7 @@ from app.auth import get_current_user
 from app.camera_config import config_store
 from app.connectivity_checker import check_and_update_camera
 from app.motion_detector import motion_manager
-from app.permissions import has_camera_access, get_authorized_camera_ids
+from app.permissions import has_camera_access, can_manage_camera, get_authorized_camera_ids
 
 router = APIRouter(prefix="/cameras", tags=["Cameras"])
 
@@ -176,7 +176,7 @@ def get_camera_stream_url(camera_id: str, user: dict = Depends(get_current_user)
         os.environ["SUPABASE_SECRET_KEY"],
     )
 
-    result = client.table("cameras").select("id, rtsp_url").eq("id", camera_id).execute()
+    result = client.table("cameras").select("id, name, rtsp_url").eq("id", camera_id).execute()
     if not result.data:
         raise HTTPException(status_code=404, detail="Cámara no encontrada")
 
@@ -231,7 +231,7 @@ def update_camera(
     user: dict = Depends(get_current_user),
 ):
     try:
-        if not has_camera_access(user, camera_id):
+        if not can_manage_camera(user, camera_id):
             raise HTTPException(status_code=404, detail="Cámara no encontrada o no tiene permisos")
 
         client = create_client(
@@ -310,7 +310,7 @@ def update_camera(
 @router.delete("/{camera_id}")
 def delete_camera(camera_id: str, user: dict = Depends(get_current_user)):
     try:
-        if not has_camera_access(user, camera_id):
+        if not can_manage_camera(user, camera_id):
             raise HTTPException(status_code=404, detail="Cámara no encontrada o no tiene permisos")
 
         client = create_client(

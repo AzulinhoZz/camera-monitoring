@@ -6,7 +6,7 @@ from pydantic import BaseModel, Field
 from supabase import create_client
 
 from app.auth import get_current_user
-from app.permissions import has_camera_access, get_authorized_camera_ids
+from app.permissions import has_camera_access, can_manage_camera, get_authorized_camera_ids
 
 router = APIRouter(prefix="/events", tags=["Events"])
 
@@ -53,7 +53,7 @@ def list_events(
 
         result = (
             client.table("camera_events")
-            .select("id, camera_id, event_type, detected_at, description")
+            .select("id, camera_id, event_type, detected_at, description, evidence_path, clip_path, is_protected, review_status, reviewed_at")
             .in_("camera_id", target_ids)
             .order("detected_at", desc=True)
             .limit(100)
@@ -116,13 +116,12 @@ def review_event_alert(
             raise HTTPException(status_code=403, detail="No tiene permisos para revisar este evento")
 
         now_iso = datetime.now(timezone.utc).isoformat()
-        try:
-            client.table("camera_events").update({
-                "review_status": payload.review_status,
-                "reviewed_at": now_iso
-            }).eq("id", event_id).execute()
-        except Exception:
-            pass
+        result = client.table("camera_events").update({
+            "review_status": payload.review_status,
+            "reviewed_at": now_iso
+        }).eq("id", event_id).execute()
+        if not result.data:
+            raise HTTPException(status_code=503, detail="No se pudo guardar la revisión")
 
         return {
             "event_id": event_id,
@@ -152,7 +151,7 @@ def get_event_evidence(
 
         event_res = (
             client.table("camera_events")
-            .select("id, camera_id")
+            .select("id, camera_id, evidence_path")
             .eq("id", event_id)
             .execute()
         )
@@ -209,7 +208,7 @@ def get_event_clip(
 
         event_res = (
             client.table("camera_events")
-            .select("id, camera_id")
+            .select("id, camera_id, clip_path")
             .eq("id", event_id)
             .execute()
         )
@@ -259,7 +258,7 @@ def create_event(
     user: dict = Depends(get_current_user),
 ):
     try:
-        if not has_camera_access(user, event.camera_id):
+        if not can_manage_camera(user, event.camera_id):
             raise HTTPException(status_code=403, detail="Cámara no encontrada o no pertenece al usuario")
 
         client = create_client(

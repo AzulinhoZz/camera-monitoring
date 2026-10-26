@@ -123,7 +123,15 @@ def grant_camera_access(
     if not client:
         raise HTTPException(status_code=500, detail="Database error")
 
+    org_id = admin.get("organization_id")
+    if not org_id:
+        raise HTTPException(status_code=403, detail="Se requiere una organización")
+
     try:
+        camera = client.table("cameras").select("id").eq("id", payload.camera_id).eq("organization_id", org_id).execute()
+        recipient = client.table("profiles").select("id").eq("id", payload.user_id).eq("organization_id", org_id).execute()
+        if not camera.data or not recipient.data:
+            raise HTTPException(status_code=403, detail="Cámara y usuario deben pertenecer a su organización")
         res = client.table("camera_access_grants").upsert({
             "camera_id": payload.camera_id,
             "user_id": payload.user_id,
@@ -131,5 +139,7 @@ def grant_camera_access(
         }).execute()
 
         return {"status": "granted", "grant": res.data[0] if res.data else None}
-    except Exception as e:
-        raise HTTPException(status_code=500, detail=f"Error al otorgar acceso a la cámara: {str(e)}")
+    except HTTPException:
+        raise
+    except Exception:
+        raise HTTPException(status_code=500, detail="Error al otorgar acceso a la cámara")
