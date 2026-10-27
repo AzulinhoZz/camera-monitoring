@@ -23,7 +23,7 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
 
     override fun onNewToken(token: String) {
         super.onNewToken(token)
-        Log.i("FCM", "New FCM Token received: ${token.take(20)}...")
+        Log.i("FCM", "New FCM token received")
 
         val sessionManager = SessionManager(applicationContext)
         sessionManager.saveFCMToken(token)

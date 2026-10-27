@@ -15,6 +15,11 @@ class ClosedCapture:
 
 @pytest.fixture(autouse=True)
 def isolated_backends(monkeypatch, tmp_path, request):
+    monkeypatch.setenv("CAMERA_LEASE_DIRECTORY", str(tmp_path / "capture-leases"))
+    monkeypatch.setenv("STREAM_TOKEN_SECRET", "offline-stream-signing-secret-32-bytes-long")
+    monkeypatch.setenv("MEDIAMTX_GATEWAY_SECRET", "offline-gateway-callback-32-bytes-long")
+    monkeypatch.setenv("MEDIAMTX_HLS_SECRET", "offline-internal-hls-secret-32-bytes-long")
+    monkeypatch.setenv("MEDIAMTX_PUBLISH_SECRET", "offline-publisher-secret-32-bytes-long")
     monkeypatch.setenv("SUPABASE_URL", "https://supabase.invalid")
     monkeypatch.setenv("SUPABASE_SECRET_KEY", "offline-test-placeholder")
     for key in ("FIREBASE_CREDENTIALS_PATH", "GOOGLE_APPLICATION_CREDENTIALS"):
@@ -43,6 +48,9 @@ def isolated_backends(monkeypatch, tmp_path, request):
     # New vision tests decode synthetic/local video in disposable subprocesses.
     if request.node.path.name in ("test_motion_detector.py", "test_camera_crud.py"):
         monkeypatch.setattr("cv2.VideoCapture", ClosedCapture)
+        monkeypatch.setattr("app.motion_detector.policy_rtsp_url", lambda value: value)
+    if request.node.path.name == "test_connectivity.py":
+        monkeypatch.setattr("app.connectivity_checker.policy_rtsp_url", lambda value: value)
     from app.camera_config import config_store
     from app.zone_store import zone_store
     from app.motion_detector import motion_manager

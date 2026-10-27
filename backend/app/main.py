@@ -5,6 +5,7 @@ from pydantic import BaseModel, Field
 from supabase import create_client
 
 from app.auth import get_current_user, router as auth_router
+from app.stream_proxy import router as stream_router
 from app.cameras import router as cameras_router
 from app.events import router as events_router
 from app.storage import router as storage_router
@@ -17,6 +18,7 @@ from app.zone_store import zone_store, validate_polygon
 app = FastAPI(title="Camera Monitoring API", version="1.0.0")
 
 app.include_router(auth_router)
+app.include_router(stream_router)
 app.include_router(cameras_router)
 app.include_router(events_router)
 app.include_router(storage_router)

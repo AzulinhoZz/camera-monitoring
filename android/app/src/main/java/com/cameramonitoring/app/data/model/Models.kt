@@ -71,6 +71,8 @@ data class Camera(
     @SerializedName("created_at") val createdAt: String? = null,
     @SerializedName("stream_path") val streamPath: String? = null,
     @SerializedName("hls_url") val hlsUrl: String? = null,
+    @SerializedName("stream_token") val streamToken: String? = null,
+    @SerializedName("stream_expires_at") val streamExpiresAt: String? = null,
     @SerializedName("motion_enabled") val motionEnabled: Boolean = true
 )
 

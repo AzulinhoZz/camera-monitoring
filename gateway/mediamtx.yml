@@ -1,7 +1,16 @@
-logLevel: info
+# Production/development gateway: fail closed until callback credentials are set
+# through MTX_AUTHHTTPADDRESS. Never run the open test fixture on a public port.
+logLevel: warn
+authMethod: http
+authHTTPAddress: http://api:8000/auth/mediamtx
+authHTTPExclude: []
 rtsp: true
 rtspAddress: :8554
+rtspTransports: [tcp]
 hls: true
+# Explicit broadly supported transport; low-latency fMP4 is not enabled here.
+hlsVariant: mpegts
 hlsAddress: :8888
+hlsAlwaysRemux: false
 paths:
   all_others:

@@ -29,7 +29,7 @@ def wait_for(predicate, seconds=20):
 
 def main():
     name = f"vision-smoke-{uuid4().hex[:12]}"
-    gateway = Path(__file__).resolve().parents[2] / "gateway" / "mediamtx.yml"
+    gateway = Path(__file__).resolve().parents[1] / "app/tests/fixtures/mediamtx-open.yml"
     worker = publisher = None
     created = False
     try:

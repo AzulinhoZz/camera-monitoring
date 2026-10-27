@@ -12,9 +12,10 @@ from uuid import uuid4
 
 import numpy as np
 
+from app.capture_lease import CaptureLease
 from .config import CameraConfig
 from .contracts import CameraScope
-from .source import FrameMailbox, ProcessStop, decoder_main
+from .source import FrameMailbox, ProcessStop, decoder_main, guarded_decoder
 
 
 def process_resources(pid=None):
@@ -44,6 +45,7 @@ class CameraWorker:
         self.config = config
         self.scope = CameraScope(camera_id=config.camera_id, owner_id=config.owner_id,
                                  organization_id=config.organization_id)
+        self._lease = None
         self._target = decoder_target
         self._ctx = mp.get_context("spawn")
         self._stop = threading.Event()
@@ -66,6 +68,7 @@ class CameraWorker:
         with self._lifecycle_lock:
             if self._thread and self._thread.is_alive():
                 return
+            self._lease = CaptureLease(self.config.camera_id).acquire()
             self._stop.clear()
             for lane in self._lanes.values():
                 self._clear(lane)
@@ -81,7 +84,11 @@ class CameraWorker:
                 self._started = time.monotonic()
                 self._state = "starting"
             self._thread = threading.Thread(target=self._run, name=f"vision-{self.config.camera_id}", daemon=True)
-            self._thread.start()
+            try:
+                self._thread.start()
+            except BaseException:
+                self._lease.release()
+                raise
 
     def stop(self):
         with self._lifecycle_lock:
@@ -93,6 +100,9 @@ class CameraWorker:
                     raise RuntimeError("vision supervisor did not stop within its deadline")
             for lane in self._lanes.values():
                 self._clear(lane)
+            if self._lease:
+                self._lease.release()
+                self._lease = None
 
     @staticmethod
     def _clear(lane):
@@ -202,7 +212,7 @@ class CameraWorker:
             while not self._stop.is_set():
                 channel = FrameMailbox(self._ctx, self.config)
                 child_stop = ProcessStop(self._ctx)
-                process = self._ctx.Process(target=self._target, args=(self.config, channel, child_stop), daemon=True)
+                process = self._ctx.Process(target=guarded_decoder, args=(self._target, self.config, channel, child_stop, os.getpid()), daemon=True)
                 self._process = process
                 process.start()
                 with self._lock:
@@ -283,5 +293,7 @@ class CameraWorker:
                 self._last_error = "supervisor_failed"
                 self._counts["supervisor_errors"] += 1
         finally:
+            if self._lease:
+                self._lease.release()
             with self._lock:
                 self._state = "stopped"

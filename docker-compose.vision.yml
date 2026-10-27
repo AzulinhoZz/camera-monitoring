@@ -5,6 +5,10 @@ services:
     image: camera-monitoring-vision-worker:dev
     build: ./backend
     command: [python, -m, app.vision, --config, /config/vision.json]
+    environment:
+      CAMERA_LEASE_DIRECTORY: /run/camera-leases
+    volumes:
+      - capture-leases:/run/camera-leases
     network_mode: none
     read_only: true
     user: "65534:65534"
@@ -20,3 +24,7 @@ services:
       timeout: 2s
       start_period: 15s
       retries: 3
+
+volumes:
+  capture-leases:
+    name: camera-monitoring-capture-leases

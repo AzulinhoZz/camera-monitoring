@@ -7,6 +7,8 @@ import cv2
 import numpy as np
 from supabase import create_client
 
+from app.capture_lease import CaptureLease
+from app.rtsp_policy import policy_rtsp_url
 from app.camera_config import config_store
 from app.clip_recorder import FrameRingBuffer, dispatch_clip_recording
 from app.evidence_uploader import dispatch_evidence_upload
@@ -51,11 +53,22 @@ class MotionDetectorWorker(threading.Thread):
         self.zones = zones or []
         self.ring_buffer = FrameRingBuffer(maxlen=75)
         self.latest_frame: Optional[np.ndarray] = None
+        self._capture_lease = None
+        self._stop_event = threading.Event()
         self.running = True
         self.last_event_time = 0.0
 
+    def start(self):
+        self._capture_lease = CaptureLease(self.camera_id).acquire()
+        try:
+            super().start()
+        except BaseException:
+            self._capture_lease.release()
+            raise
+
     def stop(self):
         self.running = False
+        self._stop_event.set()
 
     def update_params(
         self,
@@ -221,23 +234,25 @@ class MotionDetectorWorker(threading.Thread):
         first_frame = None
 
         try:
-            cap = cv2.VideoCapture(self.rtsp_url)
+            cap = cv2.VideoCapture(policy_rtsp_url(self.rtsp_url), cv2.CAP_FFMPEG, [cv2.CAP_PROP_OPEN_TIMEOUT_MSEC, 3000, cv2.CAP_PROP_READ_TIMEOUT_MSEC, 3000])
             if not cap.isOpened():
-                logger.warning(f"Initial attempt to open RTSP stream failed: {self.rtsp_url}")
+                logger.warning("Initial stream open failed for camera %s", self.camera_id)
 
             while self.running:
                 if cap is None or not cap.isOpened():
-                    time.sleep(1.0)
+                    self._stop_event.wait(1.0)
                     if cap is not None:
                         cap.release()
-                    cap = cv2.VideoCapture(self.rtsp_url)
+                    cap = cv2.VideoCapture(policy_rtsp_url(self.rtsp_url), cv2.CAP_FFMPEG, [cv2.CAP_PROP_OPEN_TIMEOUT_MSEC, 3000, cv2.CAP_PROP_READ_TIMEOUT_MSEC, 3000])
                     first_frame = None
                     continue
 
                 ret, frame = cap.read()
                 if not ret or frame is None:
                     # Stream disconnected or buffering; retry connection
-                    time.sleep(0.5)
+                    cap.release()
+                    cap = None
+                    self._stop_event.wait(0.5)
                     first_frame = None
                     continue
 
@@ -253,13 +268,15 @@ class MotionDetectorWorker(threading.Thread):
                         desc = f"Movimiento detectado: área={max_area}px (mín={self.min_area}px, umbral={self.threshold})"
                         self.log_event_to_db(desc, frame=frame)
 
-                time.sleep(self.frame_interval)
+                self._stop_event.wait(self.frame_interval)
 
         except Exception as e:
-            logger.error(f"Error in MotionDetectorWorker loop for camera {self.camera_id}: {e}")
+            logger.error("Motion decoder failed for camera %s", self.camera_id)
         finally:
             if cap is not None:
                 cap.release()
+            if self._capture_lease:
+                self._capture_lease.release()
             logger.info(f"Motion detector worker stopped cleanly for camera {self.camera_id}")
 
 
@@ -328,8 +345,8 @@ class MotionDetectorManager:
             timezone=cfg["timezone"],
             zones=zones,
         )
-        self.workers[camera_id] = worker
         worker.start()
+        self.workers[camera_id] = worker
         return self.get_status(camera_id)
 
     def refresh_zones(self, camera_id: str):
@@ -355,7 +372,11 @@ class MotionDetectorManager:
         )
 
         if camera_id in self.workers:
-            self.workers[camera_id].stop()
+            worker = self.workers[camera_id]
+            worker.stop()
+            worker.join(timeout=5)
+            if worker.is_alive():
+                raise RuntimeError("Camera decoder is still stopping; capture lease retained")
             del self.workers[camera_id]
             logger.info(f"Stopped detector worker for camera {camera_id}")
         return self.get_status(camera_id)
@@ -411,19 +432,23 @@ class MotionDetectorManager:
 
                     cfg = config_store.get_config(cam_id)
                     if cfg.get("motion_enabled", True):
-                        self.start_detector(
-                            camera_id=cam_id,
-                            rtsp_url=rtsp_url,
-                            min_area=cfg.get("min_area", 1500),
-                            threshold=cfg.get("threshold", 25),
-                            cooldown_seconds=cfg.get("cooldown_seconds", 5.0),
-                            sensitivity_preset=cfg.get("sensitivity_preset", "medium"),
-                            schedule_type=cfg.get("schedule_type", "24/7"),
-                            schedule_days=cfg.get("schedule_days"),
-                            start_time=cfg.get("start_time", "00:00:00"),
-                            end_time=cfg.get("end_time", "23:59:59"),
-                            timezone=cfg.get("timezone", "America/Mexico_City"),
-                        )
+                        try:
+                            self.start_detector(
+                                camera_id=cam_id,
+                                rtsp_url=rtsp_url,
+                                min_area=cfg.get("min_area", 1500),
+                                threshold=cfg.get("threshold", 25),
+                                cooldown_seconds=cfg.get("cooldown_seconds", 5.0),
+                                sensitivity_preset=cfg.get("sensitivity_preset", "medium"),
+                                schedule_type=cfg.get("schedule_type", "24/7"),
+                                schedule_days=cfg.get("schedule_days"),
+                                start_time=cfg.get("start_time", "00:00:00"),
+                                end_time=cfg.get("end_time", "23:59:59"),
+                                timezone=cfg.get("timezone", "America/Mexico_City"),
+                            )
+                        except RuntimeError:
+                            logger.info("Capture already managed for camera %s", cam_id)
+                            continue
                         restored_count += 1
 
                 logger.info(f"Restored {restored_count} motion detector workers on server startup.")
@@ -434,9 +459,12 @@ class MotionDetectorManager:
         threading.Thread(target=_do_restore, daemon=True).start()
 
     def stop_all(self):
-        for camera_id, worker in self.workers.items():
+        for worker in list(self.workers.values()):
             worker.stop()
-        self.workers.clear()
+        for camera_id, worker in list(self.workers.items()):
+            worker.join(timeout=5)
+            if not worker.is_alive():
+                self.workers.pop(camera_id, None)
 
 
 motion_manager = MotionDetectorManager()

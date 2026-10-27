@@ -1,5 +1,8 @@
 """Disposable decoder subprocess: watchdog in parent also bounds native blocking I/O."""
 import os
+import ctypes
+import signal
+import sys
 import time
 from datetime import datetime, timezone
 
@@ -96,6 +99,17 @@ class FrameMailbox:
 
 def offer_latest(channel, value):
     channel.put(value)
+
+
+def guarded_decoder(target, config, channel, stop, parent_pid):
+    # Linux capture host: a killed supervisor must not leave a decoder capturing
+    # after its ownership fd has been closed. Also handles death during spawn.
+    if sys.platform != "linux" or ctypes.CDLL(None).prctl(1, signal.SIGKILL, 0, 0, 0) != 0:
+        offer_latest(channel, ("error", "source_failed"))
+        return
+    if os.getppid() != parent_pid:
+        return
+    target(config, channel, stop)
 
 
 def decoder_main(config: CameraConfig, channel, stop):

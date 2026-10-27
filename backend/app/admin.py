@@ -128,18 +128,17 @@ def grant_camera_access(
         raise HTTPException(status_code=403, detail="Se requiere una organización")
 
     try:
-        camera = client.table("cameras").select("id").eq("id", payload.camera_id).eq("organization_id", org_id).execute()
-        recipient = client.table("profiles").select("id").eq("id", payload.user_id).eq("organization_id", org_id).execute()
-        if not camera.data or not recipient.data:
-            raise HTTPException(status_code=403, detail="Cámara y usuario deben pertenecer a su organización")
-        res = client.table("camera_access_grants").upsert({
-            "camera_id": payload.camera_id,
-            "user_id": payload.user_id,
-            "granted_by": admin["id"]
+        res = client.rpc("grant_camera_access_for_actor", {
+            "p_actor_id": admin["id"], "p_camera_id": payload.camera_id,
+            "p_recipient_id": payload.user_id,
         }).execute()
-
-        return {"status": "granted", "grant": res.data[0] if res.data else None}
+        if not res.data:
+            raise HTTPException(status_code=503, detail="No se pudo guardar la concesión")
+        return {"status": "granted", "grant": res.data[0]}
     except HTTPException:
         raise
-    except Exception:
-        raise HTTPException(status_code=500, detail="Error al otorgar acceso a la cámara")
+    except Exception as exc:
+        if getattr(exc, "code", None) == "42501":
+            raise HTTPException(status_code=403, detail="Concesión fuera de su organización") from None
+        # Missing/unapplied migration is a failure, never an unsafe local fallback.
+        raise HTTPException(status_code=503, detail="No se pudo guardar la concesión") from None

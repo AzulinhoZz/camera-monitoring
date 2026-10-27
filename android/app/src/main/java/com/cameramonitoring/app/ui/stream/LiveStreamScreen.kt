@@ -38,6 +38,8 @@ import androidx.compose.ui.unit.sp
 import androidx.compose.ui.viewinterop.AndroidView
 import androidx.compose.ui.window.Dialog
 import androidx.compose.ui.window.DialogProperties
+import androidx.media3.datasource.DefaultHttpDataSource
+import androidx.media3.exoplayer.hls.HlsMediaSource
 import androidx.media3.common.MediaItem
 import androidx.media3.exoplayer.ExoPlayer
 import androidx.media3.ui.PlayerView
@@ -158,12 +160,19 @@ fun LiveStreamScreen(
                     }
                 }
                 is StreamUiState.Success -> {
-                    val streamUrl = state.camera.hlsUrl ?: "http://10.0.2.2:8888/camara1/index.m3u8"
+                    val streamUrl = state.camera.hlsUrl
 
-                    LaunchedEffect(streamUrl) {
+                    LaunchedEffect(streamUrl, state.camera.streamToken) {
                         exoPlayer?.let { player ->
+                            val token = state.camera.streamToken
+                            if (streamUrl.isNullOrBlank() || token.isNullOrBlank()) {
+                                player.stop()
+                                return@let
+                            }
+                            val http = DefaultHttpDataSource.Factory()
+                                .setDefaultRequestProperties(mapOf("Authorization" to "Bearer $token"))
                             val mediaItem = MediaItem.fromUri(streamUrl)
-                            player.setMediaItem(mediaItem)
+                            player.setMediaSource(HlsMediaSource.Factory(http).createMediaSource(mediaItem))
                             player.prepare()
                             player.play()
                         }

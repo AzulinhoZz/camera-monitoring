@@ -1,14 +1,18 @@
 import os
+import secrets
+from datetime import datetime, timezone
 from typing import Optional
 
 from fastapi import APIRouter, Depends, HTTPException
-from fastapi.security import HTTPAuthorizationCredentials, HTTPBearer
+from fastapi.security import HTTPAuthorizationCredentials, HTTPBearer, HTTPBasic, HTTPBasicCredentials
 from pydantic import BaseModel, Field
 from supabase import create_client
 
 from app.permissions import get_user_profile, has_camera_access
+from app.streaming import stream_path, verify_stream
 
 security = HTTPBearer()
+gateway_security = HTTPBasic(auto_error=False)
 router = APIRouter(prefix="/auth", tags=["Auth"])
 
 
@@ -37,9 +41,10 @@ class FCMTokenPayload(BaseModel):
 
 
 class MediaMTXAuthPayload(BaseModel):
+    token: Optional[str] = Field(default=None, repr=False)
     ip: Optional[str] = None
     user: Optional[str] = None
-    password: Optional[str] = None
+    password: Optional[str] = Field(default=None, repr=False)
     path: str
     protocol: Optional[str] = "hls"
     action: Optional[str] = "read"
@@ -78,54 +83,52 @@ def get_current_user(
         )
 
 
-@router.post("/mediamtx")
-def authenticate_mediamtx_stream(payload: MediaMTXAuthPayload):
-    """
-    HTTP External Auth endpoint for MediaMTX gateway.
-    Validates client authorization for HLS playlists, TS segments, and RTSP streams.
-    """
-    # 1. Allow internal publishing from local workers
-    if payload.action == "publish" or payload.ip in ("127.0.0.1", "172.18.0.1", "localhost"):
-        return {"status": "authorized"}
-
-    token = payload.user or payload.password
-    if not token or token == "":
-        raise HTTPException(status_code=401, detail="Token de acceso a la transmisión requerido")
-
-    # 2. Validate token against Supabase Auth
+def authorize_stream_read(token, path, client=None):
     try:
-        supabase = create_client(
-            os.environ["SUPABASE_URL"],
-            os.environ["SUPABASE_SECRET_KEY"],
-        )
-        response = supabase.auth.get_user(token)
-        if not response.user:
-            raise HTTPException(status_code=401, detail="Token de transmisión no válido")
+        claims = verify_stream(token, path)
+        client = client or create_client(os.environ["SUPABASE_URL"], os.environ["SUPABASE_SECRET_KEY"])
+        camera = client.table("cameras").select("id, user_id, organization_id").eq("id", claims["camera_id"]).execute()
+        if not camera.data:
+            raise ValueError("camera missing")
+        row = camera.data[0]
+        if row.get("user_id") != claims["owner_id"] or row.get("organization_id") != claims["organization_id"]:
+            raise ValueError("camera scope changed")
+        if not has_camera_access(get_user_profile(claims["sub"], ""), claims["camera_id"]):
+            raise ValueError("access revoked")
+        return claims
+    except Exception:
+        raise HTTPException(status_code=403, detail="Stream authorization denied") from None
 
-        full_name = response.user.user_metadata.get("full_name") if response.user.user_metadata else None
-        user_profile = get_user_profile(str(response.user.id), response.user.email, full_name)
 
-        # 3. Find camera matching stream_path
-        cam_res = supabase.table("cameras").select("id, user_id, organization_id, rtsp_url").execute()
-        target_camera_id = None
-        for cam in (cam_res.data or []):
-            formatted_path = f"cam_{cam['id'][:8]}" if cam.get("id") else ""
-            if payload.path == cam.get("id") or payload.path == formatted_path or payload.path in cam.get("rtsp_url", ""):
-                target_camera_id = cam["id"]
-                break
-
-        if not target_camera_id:
-            raise HTTPException(status_code=404, detail="Cámara no encontrada")
-
-        if not has_camera_access(user_profile, target_camera_id):
-            raise HTTPException(status_code=403, detail="Sin permisos para acceder a esta transmisión HLS/RTSP")
-
-        return {"status": "authorized"}
-
-    except HTTPException:
-        raise
-    except Exception as e:
-        raise HTTPException(status_code=401, detail=f"Error al verificar autorización de transmisión: {str(e)}")
+@router.post("/mediamtx")
+def authenticate_mediamtx_stream(
+    payload: MediaMTXAuthPayload,
+    credentials: Optional[HTTPBasicCredentials] = Depends(gateway_security),
+):
+    expected = os.getenv("MEDIAMTX_GATEWAY_SECRET", "")
+    if (len(expected) < 32 or not credentials or credentials.username != "gateway"
+            or not secrets.compare_digest(credentials.password.encode(), expected.encode())):
+        raise HTTPException(status_code=401, detail="Gateway authentication required")
+    if payload.protocol not in ("hls", "rtsp") or payload.action not in ("read", "publish"):
+        raise HTTPException(status_code=403, detail="Stream action denied")
+    try:
+        client = create_client(os.environ["SUPABASE_URL"], os.environ["SUPABASE_SECRET_KEY"])
+        if payload.action == "publish":
+            publisher_key = os.getenv("MEDIAMTX_PUBLISH_SECRET", "")
+            if (len(publisher_key) < 32 or payload.user != "publisher"
+                    or not secrets.compare_digest((payload.password or "").encode(), publisher_key.encode())):
+                raise ValueError("publisher denied")
+            camera_id = payload.path.removeprefix("cam_")
+            if stream_path(camera_id) != payload.path:
+                raise ValueError("path denied")
+            camera = client.table("cameras").select("id").eq("id", camera_id).execute()
+            if not camera.data:
+                raise ValueError("camera missing")
+            return {"status": "authorized"}
+        claims = authorize_stream_read(payload.token or payload.password or "", payload.path, client)
+        return {"status": "authorized", "expireAt": datetime.fromtimestamp(claims["exp"], timezone.utc).isoformat()}
+    except Exception:
+        raise HTTPException(status_code=403, detail="Stream authorization denied") from None
 
 
 @router.post("/register", status_code=201)

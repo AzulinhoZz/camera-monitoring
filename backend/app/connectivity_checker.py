@@ -7,6 +7,7 @@ from typing import Dict, Any, Optional
 import cv2
 from supabase import create_client
 
+from app.rtsp_policy import policy_rtsp_url
 from app.camera_config import config_store
 from app.motion_detector import motion_manager
 
@@ -23,14 +24,14 @@ def check_rtsp_connection(rtsp_url: str, timeout_sec: float = 3.0) -> bool:
 
     cap = None
     try:
-        cap = cv2.VideoCapture(rtsp_url)
+        cap = cv2.VideoCapture(policy_rtsp_url(rtsp_url), cv2.CAP_FFMPEG, [cv2.CAP_PROP_OPEN_TIMEOUT_MSEC, int(timeout_sec * 1000), cv2.CAP_PROP_READ_TIMEOUT_MSEC, int(timeout_sec * 1000)])
         # Check if stream opened successfully
         if cap.isOpened():
             ret, frame = cap.read()
             return ret and frame is not None
         return False
     except Exception as e:
-        logger.warning(f"Error checking RTSP stream {rtsp_url}: {e}")
+        logger.warning("Stream connectivity check failed")
         return False
     finally:
         if cap is not None:
@@ -56,7 +57,19 @@ def update_camera_status_db(camera_id: str, status: str, last_seen_at: Optional[
 
 
 def check_and_update_camera(camera_id: str, rtsp_url: str) -> Dict[str, Any]:
-    is_online = check_rtsp_connection(rtsp_url)
+    existing = motion_manager.workers.get(camera_id)
+    if existing and existing.is_alive():
+        now_iso = datetime.now(timezone.utc).isoformat()
+        return {"camera_id": camera_id, "status": "unknown", "last_seen_at": None}
+    from app.capture_lease import CaptureLease
+    try:
+        probe_lease = CaptureLease(camera_id).acquire()
+    except RuntimeError:
+        return {"camera_id": camera_id, "status": "managed_externally", "last_seen_at": None}
+    try:
+        is_online = check_rtsp_connection(rtsp_url)
+    finally:
+        probe_lease.release()
     now_iso = datetime.now(timezone.utc).isoformat()
 
     if is_online:
@@ -66,7 +79,10 @@ def check_and_update_camera(camera_id: str, rtsp_url: str) -> Dict[str, Any]:
         # Ensure motion detector is active if enabled
         cfg = config_store.get_config(camera_id)
         if cfg.get("motion_enabled", True):
-            motion_manager.start_detector(camera_id, rtsp_url, cfg.get("min_area", 1500), cfg.get("threshold", 25), cfg.get("cooldown_seconds", 5.0))
+            try:
+                motion_manager.start_detector(camera_id, rtsp_url, **{key: value for key, value in cfg.items() if key != "motion_enabled"})
+            except RuntimeError:
+                pass  # Another capture owner may have acquired the released probe lease.
 
         return {"camera_id": camera_id, "status": "online", "last_seen_at": now_iso}
     else:

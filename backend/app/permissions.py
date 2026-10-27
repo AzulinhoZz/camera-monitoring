@@ -72,7 +72,7 @@ def has_camera_access(user: Dict[str, Any], camera_id: str, *, allow_grants: boo
             return True
 
         # Explicit grants confer read access, not camera administration.
-        if not allow_grants:
+        if not allow_grants or not org_id or cam.get("organization_id") != org_id:
             return False
 
         # 3. Explicit access grant check
@@ -107,8 +107,10 @@ def get_authorized_camera_ids(user: Dict[str, Any]) -> List[str]:
         # Granted cameras
         try:
             grants = client.table("camera_access_grants").select("camera_id").eq("user_id", user_id).execute()
-            for g in (grants.data or []):
-                ids.add(g["camera_id"])
+            granted_ids = [g["camera_id"] for g in (grants.data or [])]
+            if granted_ids and org_id:
+                scoped = client.table("cameras").select("id").in_("id", granted_ids).eq("organization_id", org_id).execute()
+                ids.update(c["id"] for c in (scoped.data or []))
         except Exception:
             pass
 

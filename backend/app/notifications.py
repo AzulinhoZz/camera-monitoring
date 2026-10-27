@@ -61,7 +61,7 @@ def remove_fcm_token(fcm_token: str):
     try:
         client = create_client(url, key)
         client.table("user_device_tokens").delete().eq("fcm_token", fcm_token).execute()
-        logger.info(f"Removed invalid FCM token: {fcm_token[:15]}...")
+        logger.info("Removed invalid FCM token")
     except Exception as e:
         logger.error(f"Failed to delete invalid FCM token: {e}")
 
@@ -101,9 +101,9 @@ def send_motion_push_notification(
 
             try:
                 response = messaging.send(message)
-                logger.info(f"Successfully sent FCM notification to {token[:15]}...: {response}")
+                logger.info("FCM notification dispatched")
             except Exception as send_err:
-                logger.warning(f"Error sending FCM message to {token[:15]}...: {send_err}")
+                logger.warning("FCM notification dispatch failed")
                 # Remove expired or invalid token
                 remove_fcm_token(token)
 

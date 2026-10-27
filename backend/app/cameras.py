@@ -1,12 +1,14 @@
 import os
 from typing import Optional
-from urllib.parse import urlsplit
+from urllib.parse import urlsplit, urlunsplit
 
 from fastapi import APIRouter, Depends, HTTPException
 from pydantic import BaseModel, Field
 from supabase import create_client
 
 from app.auth import get_current_user
+from app.streaming import issue_stream, stream_path
+from app.rtsp_policy import policy_rtsp_url
 from app.camera_config import config_store
 from app.connectivity_checker import check_and_update_camera
 from app.motion_detector import motion_manager
@@ -25,27 +27,37 @@ class CameraUpdate(BaseModel):
     rtsp_url: Optional[str] = Field(None, min_length=1, max_length=2048)
 
 
-def _format_camera(record: dict) -> dict:
+def _format_camera(record: dict, user: Optional[dict] = None) -> dict:
     rtsp_url = record.get("rtsp_url", "")
     parsed = urlsplit(rtsp_url)
-    path = parsed.path.lstrip('/') if parsed and parsed.path else ""
-    if not path:
-        path = f"cam_{record['id'][:8]}"
+    path = stream_path(record["id"])
+    # Remove any legacy userinfo/query credentials from client-visible data.
+    host = parsed.hostname or ""
+    host = f"[{host}]" if ":" in host else host
+    port = f":{parsed.port}" if parsed.port else ""
+    safe_rtsp_url = urlunsplit((parsed.scheme, host + port, parsed.path, "", ""))
 
     cfg = config_store.get_config(record["id"])
 
-    return {
+    result = {
         "id": record["id"],
         "user_id": record.get("user_id"),
         "name": record["name"],
-        "rtsp_url": rtsp_url,
+        "rtsp_url": safe_rtsp_url,
         "status": record.get("status", "online"),
         "last_seen_at": record.get("last_seen_at") or record.get("created_at"),
         "created_at": record.get("created_at"),
         "stream_path": path,
-        "hls_url": f"http://10.0.2.2:8888/{path}/index.m3u8",
+        "hls_url": None,
         "motion_enabled": cfg.get("motion_enabled", True)
     }
+
+    if user:
+        try:
+            result.update(issue_stream(user["id"], record))
+        except RuntimeError:
+            pass  # CRUD remains available; streaming fails closed until configured.
+    return result
 
 
 @router.post("", status_code=201)
@@ -66,6 +78,11 @@ def create_camera(
             status_code=422,
             detail="Por ahora, utiliza una URL RTSP sin credenciales",
         )
+
+    try:
+        policy_rtsp_url(camera.rtsp_url)
+    except (ValueError, OSError):
+        raise HTTPException(status_code=422, detail="Destino RTSP no autorizado por el servidor") from None
 
     client = create_client(
         os.environ["SUPABASE_URL"],
@@ -97,7 +114,7 @@ def create_camera(
         cooldown_seconds=5.0
     )
 
-    return _format_camera(rec)
+    return _format_camera(rec, user)
 
 
 @router.get("")
@@ -114,13 +131,13 @@ def list_cameras(user: dict = Depends(get_current_user)):
 
         result = (
             client.table("cameras")
-            .select("id,user_id,name,rtsp_url,status,created_at,last_seen_at")
+            .select("id,user_id,organization_id,name,rtsp_url,status,created_at,last_seen_at")
             .in_("id", auth_ids)
             .order("created_at", desc=True)
             .execute()
         )
 
-        formatted = [_format_camera(rec) for rec in result.data]
+        formatted = [_format_camera(rec, user) for rec in result.data]
 
         return {
             "total": len(formatted),
@@ -147,7 +164,7 @@ def get_camera(camera_id: str, user: dict = Depends(get_current_user)):
 
         result = (
             client.table("cameras")
-            .select("id,user_id,name,rtsp_url,status,created_at,last_seen_at")
+            .select("id,user_id,organization_id,name,rtsp_url,status,created_at,last_seen_at")
             .eq("id", camera_id)
             .execute()
         )
@@ -155,7 +172,7 @@ def get_camera(camera_id: str, user: dict = Depends(get_current_user)):
         if not result.data:
             raise HTTPException(status_code=404, detail="Cámara no encontrada o no tiene permisos")
 
-        return _format_camera(result.data[0])
+        return _format_camera(result.data[0], user)
 
     except HTTPException:
         raise
@@ -176,13 +193,17 @@ def get_camera_stream_url(camera_id: str, user: dict = Depends(get_current_user)
         os.environ["SUPABASE_SECRET_KEY"],
     )
 
-    result = client.table("cameras").select("id, name, rtsp_url").eq("id", camera_id).execute()
+    result = client.table("cameras").select("id, user_id, organization_id, name, rtsp_url").eq("id", camera_id).execute()
     if not result.data:
         raise HTTPException(status_code=404, detail="Cámara no encontrada")
 
-    formatted = _format_camera(result.data[0])
+    formatted = _format_camera(result.data[0], user)
+    if not formatted["hls_url"]:
+        raise HTTPException(status_code=503, detail="Streaming no configurado")
     return {
         "camera_id": camera_id,
+        "stream_token": formatted["stream_token"],
+        "stream_expires_at": formatted["stream_expires_at"],
         "hls_url": formatted["hls_url"],
         "stream_path": formatted["stream_path"]
     }
@@ -213,7 +234,7 @@ def check_camera_connection_endpoint(camera_id: str, user: dict = Depends(get_cu
         check_and_update_camera(cam["id"], cam["rtsp_url"])
 
         fresh_res = client.table("cameras").select("*").eq("id", camera_id).execute()
-        return _format_camera(fresh_res.data[0])
+        return _format_camera(fresh_res.data[0], user)
 
     except HTTPException:
         raise
@@ -241,7 +262,7 @@ def update_camera(
 
         existing_res = (
             client.table("cameras")
-            .select("id, name, rtsp_url, user_id")
+            .select("id, name, rtsp_url, user_id, organization_id")
             .eq("id", camera_id)
             .execute()
         )
@@ -267,10 +288,14 @@ def update_camera(
                     status_code=422,
                     detail="Por ahora, utiliza una URL RTSP sin credenciales",
                 )
+            try:
+                policy_rtsp_url(camera_update.rtsp_url.strip())
+            except (ValueError, OSError):
+                raise HTTPException(status_code=422, detail="Destino RTSP no autorizado por el servidor") from None
             update_data["rtsp_url"] = camera_update.rtsp_url.strip()
 
         if not update_data:
-            return _format_camera(existing_cam)
+            return _format_camera(existing_cam, user)
 
         res = (
             client.table("cameras")
@@ -296,7 +321,7 @@ def update_camera(
                     cooldown_seconds=cfg.get("cooldown_seconds", 5.0),
                 )
 
-        return _format_camera(updated_record)
+        return _format_camera(updated_record, user)
 
     except HTTPException:
         raise

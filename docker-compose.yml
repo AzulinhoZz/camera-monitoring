@@ -2,17 +2,26 @@ services:
   api:
     build: ./backend
     ports:
-      - "8000:8000"
+      - "127.0.0.1:8000:8000"
+    environment:
+      CAMERA_LEASE_DIRECTORY: /run/camera-leases
     volumes:
+      - capture-leases:/run/camera-leases
       - ./backend/app:/code/app
     env_file:
       - .env
     restart: unless-stopped
   mediamtx:
-    image: bluenviron/mediamtx:1
+    image: bluenviron/mediamtx@sha256:59e43552f3be43695b70c19424dc2a42fcec18075f88d91561a24ac5d70a586c
+    environment:
+      MTX_HLSCDNSECRET: "${MEDIAMTX_HLS_SECRET:?Set private HLS upstream secret}"
+      MTX_AUTHHTTPADDRESS: "http://gateway:${MEDIAMTX_GATEWAY_SECRET:?Set callback secret}@api:8000/auth/mediamtx"
     ports:
-      - "8554:8554"
-      - "8888:8888"
+      - "127.0.0.1:8554:8554"
     volumes:
       - ./gateway/mediamtx.yml:/mediamtx.yml:ro
     restart: unless-stopped
+
+volumes:
+  capture-leases:
+    name: camera-monitoring-capture-leases

@@ -1,0 +1,7 @@
+# Synthetic loopback-only fault fixture. Not deployment configuration.
+logLevel: warn
+rtsp: true
+rtspAddress: :8554
+rtspTransports: [tcp]
+paths:
+  all_others:

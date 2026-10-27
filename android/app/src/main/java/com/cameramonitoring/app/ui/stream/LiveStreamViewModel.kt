@@ -73,7 +73,15 @@ class LiveStreamViewModel(
                     val zonesRes = eventRepository.getZones(cameraId)
                     val zones = zonesRes.getOrNull() ?: emptyList()
 
-                    val eventsRes = eventRepository.getEvents(cameraId)
+                    if (android.os.SystemClock.elapsedRealtime() >= refreshAt) {
+                    val refreshed = cameraRepository.getCameraDetails(cameraId).getOrNull()
+                    val current = _uiState.value as? StreamUiState.Success
+                    if (current != null) {
+                        _uiState.value = current.copy(camera = refreshed ?: current.camera.copy(hlsUrl = null, streamToken = null))
+                    }
+                    refreshAt = android.os.SystemClock.elapsedRealtime() + 40_000L
+                }
+                val eventsRes = eventRepository.getEvents(cameraId)
                     val initialEvents = eventsRes.getOrNull() ?: emptyList()
 
                     _uiState.value = StreamUiState.Success(
@@ -265,8 +273,17 @@ class LiveStreamViewModel(
     private fun startEventPolling(cameraId: String) {
         pollingJob?.cancel()
         pollingJob = viewModelScope.launch {
+            var refreshAt = android.os.SystemClock.elapsedRealtime() + 40_000L
             while (isActive) {
                 delay(4000)
+                if (android.os.SystemClock.elapsedRealtime() >= refreshAt) {
+                    val refreshed = cameraRepository.getCameraDetails(cameraId).getOrNull()
+                    val current = _uiState.value as? StreamUiState.Success
+                    if (current != null) {
+                        _uiState.value = current.copy(camera = refreshed ?: current.camera.copy(hlsUrl = null, streamToken = null))
+                    }
+                    refreshAt = android.os.SystemClock.elapsedRealtime() + 40_000L
+                }
                 val eventsRes = eventRepository.getEvents(cameraId)
                 eventsRes.getOrNull()?.let { events ->
                     val state = _uiState.value as? StreamUiState.Success

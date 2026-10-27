@@ -61,13 +61,24 @@ class Database:
                                "description": "synthetic", "detected_at": "2026-10-26T20:00:00Z",
                                "evidence_path": "owner/cam-a/event-a.jpg", "clip_path": "owner/cam-a/event-a.mp4",
                                "is_protected": True, "review_status": "reviewed_ok", "reviewed_at": "2026-10-26T20:01:00Z"}],
-            "profiles": [{"id": "recipient", "organization_id": "org-a"}],
+            "profiles": [{"id": "recipient", "organization_id": "org-a"}, {"id": "fleet", "organization_id": "org-a", "role": "administrador_flota"}],
             "camera_access_grants": [{"id": "grant", "camera_id": "cam-a", "user_id": "reader"}],
         }
         self.writes = []
         self.fail_writes = False
         self.storage = self
         self.signed_paths = []
+
+    def rpc(self, name, values):
+        assert name == "grant_camera_access_for_actor"
+        actor = next((r for r in self.rows["profiles"] if r["id"] == values["p_actor_id"]), None)
+        recipient = next((r for r in self.rows["profiles"] if r["id"] == values["p_recipient_id"]), None)
+        camera = next((r for r in self.rows["cameras"] if r["id"] == values["p_camera_id"]), None)
+        if not (actor and recipient and camera and actor["organization_id"] == camera["organization_id"] == recipient["organization_id"]):
+            error = RuntimeError("synthetic RPC scope denial")
+            error.code = "42501"
+            raise error
+        return Query(self, "camera_access_grants").upsert(dict(camera_id=camera["id"], user_id=recipient["id"], granted_by=actor["id"]))
 
     def table(self, name): return Query(self, name)
     def from_(self, name): return self
@@ -100,7 +111,7 @@ def test_stream_url_and_event_metadata_respect_projection(backend):
     client = as_user(user())
     stream = client.get("/cameras/cam-a/stream-url")
     assert stream.status_code == 200
-    assert stream.json()["stream_path"] == "live"
+    assert stream.json()["stream_path"] == "cam_cam-a"
     response = client.get("/events")
     assert response.status_code == 200
     row = response.json()["events"][0]
