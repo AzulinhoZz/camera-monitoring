@@ -2,7 +2,7 @@
 
 Fecha: 2026-10-26. Rama documental: `feat/ai-vision-platform`. Fuente: [plan maestro](MASTER_PROMPT_AI_2_0.md) leído completo y [auditoría técnica](CURRENT_ARCHITECTURE_AUDIT.md) sobre main `fae1bad6211a58d770ab4396fc43a157846a411f` + plan `74fc4cbbe70e48383bf552bc8fd77e749598be04`.
 
-**Línea base de FASE 0; actualización de FASE 1 al final.** El usuario autorizó continuar con FASE 1 el 2026-10-26. El estado actual se detalla en [el informe de infraestructura](PHASE_1_VISION_INFRASTRUCTURE.md); las tablas originales se conservan como trazabilidad del plan. En la auditoría original solo se ejecutó FASE 0. No hay migraciones nuevas ni funcionalidades IA implementadas. Ninguna historia pendiente se considera resuelta porque existan mocks aprobados.
+**Historial de FASES 0/1; avance de FASE 2 en sección H.** El usuario autorizó continuar con FASE 1 el 2026-10-26. El estado actual se detalla en [el informe de infraestructura](PHASE_1_VISION_INFRASTRUCTURE.md); las tablas originales se conservan como trazabilidad del plan. En la auditoría original solo se ejecutó FASE 0. En la auditoría original no había migraciones nuevas ni IA implementada. Los avances posteriores se registran abajo; una prueba mocked no resuelve por sí sola una historia.
 
 ## Estado de la iteración
 
@@ -96,7 +96,7 @@ Las correcciones de esta sección **no se realizaron en la auditoría**. Revisar
 No se estiman fechas ni rendimiento de IA sin modelo/hardware/dataset definidos. Esta sección refleja el orden propuesto en FASE 0; el avance autorizado se registra a continuación.
 
 
-## G. Avance real FASE 1 — 2026-10-26
+## G. Estado al entregar FASE 1 — 2026-10-26 (histórico; ver H)
 
 El usuario autorizó «continua con la fase 1». Se implementó infraestructura optativa y aislada, preservando el camino legado. Evidencia y runbook: [PHASE_1_VISION_INFRASTRUCTURE.md](PHASE_1_VISION_INFRASTRUCTURE.md). Código: `f58e4ad` y `bd76506`. No hay modelos, nuevas migraciones ni despliegue productivo.
 
@@ -117,3 +117,24 @@ El usuario autorizó «continua con la fase 1». Se implementó infraestructura 
 | VIS-05 | Video geométrico original, decode real, RTSP local con interrupción/reconexión y demo Docker aprobados. Sin datos personales ni modelos; falta validación de escenario de cámara real autorizado. |
 
 **La salida global de FASE 1 sigue pendiente de cerrar los P0 y revisar integración.** El siguiente incremento debe resolver esos pendientes; no introducir FASE 2 todavía. Los servicios de prueba se detuvieron y la rama de trabajo se conserva para revisión.
+
+
+## H. Bloqueos corregidos e inicio autorizado de FASE 2
+
+El usuario autorizó «resuelve los bloqueos e inicia la fase 2». Evidencia detallada: [SECURITY_GATE_CLOSURE.md](SECURITY_GATE_CLOSURE.md), [PHASE_2_OBJECTS_AND_TRACKING.md](PHASE_2_OBJECTS_AND_TRACKING.md) y [MODEL_SELECTION_REVIEW.md](MODEL_SELECTION_REVIEW.md).
+
+| Historia | Estado comprobado / pendiente |
+| --- | --- |
+| DB-01/02 | 010 aditiva y down, directorio canónico único, grants mínimos, runner con assertions y prueba de concurrencia real: aprobados en PostgreSQL desechable. No aplicado en Supabase real. |
+| AUTH-01/02 | RPC concede acceso atómicamente, valida actor/cámara/destinatario, bloquea cambios concurrentes; grants pierden acceso tras cambio de org en API/RLS. Owner/admin mutan; grant solo lee. Matriz Storage y configuración owner-only preservada, sin declaración de validación administrada completa. |
+| AUTH-03 | Callback autenticado, publicación separada, JWT cámara/scope/exp, proxy por cada recurso HLS, puerto HLS nativo privado y bearer Media3. Smoke MPEG-TS real aprobado. LowLatency/fMP4 no habilitado; Android no compilado. |
+| AUTH-04 | Política común CIDR/puertos, DNS fijado, denegación por defecto, URLs/FCM saneados en respuestas/logs. **Egress de native decoder en redes reales sigue como gate de despliegue**, no garantizado por validar el primer destino. |
+| VIS-01 | Lease común API/probe/worker, cierre legado y parent-death SIGKILL: pruebas de procesos y Docker root/no-root aprobadas. Solo por host/volumen; multihost requiere otro diseño. |
+| VIS-03 | Registro servidor verifica source/owner/org y vigila cambios/fallo de DB; eventos v1 validados y replay rechazado. Eventos reales no van a stdout; persistencia durable/consumo autorizado siguen pendientes de integración. |
+| MODEL-01 | Auditoría comparativa realizada antes de integrar. YOLOX_s/OpenCV Zoo Apache-2.0 fijado por commit/hash, licencia/NOTICE en imagen; descarga/hash e inferencia CPU real comprobadas. Ultralytics/ByteTrack no incorporados. |
+| DET-01 | Adaptador CPU optativo, clases/confianza/cajas/NMS y límites implementados. Inferencia real sobre geometría negativa comprobada; faltan dataset permitido positivo, precisión/recall/falsos positivos y aceptación de escenarios. |
+| TRACK-01 | Tracker IoU temporal propio, trayectorias/conteos de tracklets y límites probados. No ByteTrack ni identidad persistente. Faltan métricas de oclusión, ID switches y conteos sobre secuencias etiquetadas. |
+| VIS-04/05 | Benchmark con modelo real 1/2/4 y memoria acotada registrado; cola de grabación drenada por consumidor independiente. No garantiza FPS objetivo multicámara ni calidad semántica. |
+| OPS-01 | Backend/Docker y modelo aislado verificados, dependencias sin conflictos. Android tests siguen NO EJECUTADOS por launcher Gradle; no se cambiaron pines/checksums para ocultarlo. |
+
+FASE 2 está iniciada como prototipo de laboratorio; **no cerrada como funcionalidad productiva**. No pasar a FASE 3/acciones/alertas antes de revisar precisión, egreso remoto y los pendientes de integración. No se migraron datos reales ni se hizo merge.

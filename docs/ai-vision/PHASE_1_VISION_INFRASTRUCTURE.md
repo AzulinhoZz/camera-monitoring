@@ -194,3 +194,8 @@ Artefactos locales: `/tmp/camera-ai-phase1-tests.xml`, `camera-ai-phase1-contain
 - Licencias/modelos/tracker, nuevas reglas y alertas permanecen en FASES 2–3, no implementadas.
 
 Siguiente paso: revisar esta entrega y cerrar los P0/decisiones de integración de FASE 1 antes de autorizar modelos o FASE 2. No hacer merge ni despliegue con datos reales desde este informe.
+
+
+## Seguimiento autorizado posterior
+
+Tras esta entrega, el usuario autorizó resolver bloqueos e iniciar FASE 2. Este documento conserva el resultado histórico; las correcciones y límites actuales están en [SECURITY_GATE_CLOSURE.md](SECURITY_GATE_CLOSURE.md) y [PHASE_2_OBJECTS_AND_TRACKING.md](PHASE_2_OBJECTS_AND_TRACKING.md).
