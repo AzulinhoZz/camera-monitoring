@@ -17,6 +17,9 @@ class CameraConfig(CameraScope):
     allowed_cidrs: tuple[str, ...] = ()
     allow_loopback: bool = False
     allowed_ports: tuple[int, ...] = (554, 8554)
+    vision_enabled: bool = False
+    object_classes: tuple[int, ...] = (0,)
+    detection_confidence: float = Field(default=.5, ge=.01, le=1)
     capture_fps: float = Field(default=15, gt=0, le=60)
     recording_fps: float = Field(default=10, gt=0, le=60)
     inference_fps: float = Field(default=3, gt=0, le=60)
@@ -29,6 +32,13 @@ class CameraConfig(CameraScope):
     reconnect_initial_seconds: float = Field(default=0.25, ge=0.05, le=10)
     reconnect_max_seconds: float = Field(default=5, ge=0.05, le=30)
     stale_after_seconds: float = Field(default=2, ge=0.05, le=30)
+
+    @field_validator("object_classes")
+    @classmethod
+    def valid_classes(cls, values):
+        if len(values)>80 or len(set(values))!=len(values) or any(not 0<=value<80 for value in values):
+            raise ValueError("invalid COCO class selection")
+        return values
 
     @field_validator("allowed_cidrs")
     @classmethod

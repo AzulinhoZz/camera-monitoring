@@ -1,0 +1,10 @@
+Camera Monitoring optional YOLOX adapter:
+Architecture and pre/postprocessing references: OpenCV Zoo, commit
+48b10fa505aeb51fbd127fc60a5c660040e823b7, models/object_detection_yolox.
+Upstream contributor: Sri Siddarth Chakaravarthy, OpenCV GSoC 2022.
+Adaptations in app/vision/detection.py add pinned artifact validation, normalized
+bounded outputs, class configuration and camera-scoped pipeline integration.
+See YOLOX-OpenCV-Zoo-Apache-2.0.txt for the upstream license.
+The ONNX artifact is not bundled; its separately downloaded copy must retain
+this notice/license when redistributed. No Ultralytics or ByteTrack code/weights
+are included. The temporal IoU tracker is an independent implementation.

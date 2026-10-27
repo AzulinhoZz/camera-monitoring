@@ -1,0 +1,26 @@
+[
+  {
+    "package": "opencv-python-headless",
+    "version": "5.0.0.93",
+    "vulnerabilities": [],
+    "source": "https://pypi.org/pypi/opencv-python-headless/5.0.0.93/json"
+  },
+  {
+    "package": "numpy",
+    "version": "2.5.4",
+    "vulnerabilities": [],
+    "source": "https://pypi.org/pypi/numpy/2.5.4/json"
+  },
+  {
+    "package": "pydantic",
+    "version": "2.14.1",
+    "vulnerabilities": [],
+    "source": "https://pypi.org/pypi/pydantic/2.14.1/json"
+  },
+  {
+    "package": "PyJWT",
+    "version": "2.15.1",
+    "vulnerabilities": [],
+    "source": "https://pypi.org/pypi/PyJWT/2.15.1/json"
+  }
+]

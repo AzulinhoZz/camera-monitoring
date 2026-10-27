@@ -1,0 +1,6 @@
+# Explicit local-only object detection demo. Combine with docker-compose.vision.yml.
+services:
+  vision-worker:
+    command: [python, -m, app.vision, --config, /config/detection.json, --model, /models/yolox_s.onnx, --emit-detections]
+    volumes:
+      - ./.models/yolox_s.onnx:/models/yolox_s.onnx:ro

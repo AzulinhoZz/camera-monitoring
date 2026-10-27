@@ -34,3 +34,7 @@ venv/
 # Configuraciones locales de cámaras
 backend/app/camera_configs.json
 backend/app/camera_configs.json.bak
+
+# Verified model cache is local-only; never commit weights.
+.models/
+*.onnx

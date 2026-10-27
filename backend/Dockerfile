@@ -11,4 +11,6 @@ RUN --mount=type=secret,id=package_ca \
 COPY --chown=65534:65534 app ./app
 COPY --chown=65534:65534 migrations ./migrations
 COPY --chown=65534:65534 vision-worker.example.json /config/vision.json
+COPY --chown=65534:65534 vision-detection.example.json /config/detection.json
+COPY --chown=65534:65534 licenses /licenses
 CMD ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8000", "--reload"]
