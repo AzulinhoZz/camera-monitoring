@@ -44,6 +44,15 @@ class EventHistoryViewModel(
         }
     }
 
+    fun reviewEvent(eventId: String, status: String) {
+        viewModelScope.launch {
+            eventRepository.reviewAlert(eventId, status).fold(
+                onSuccess = { loadEvents() },
+                onFailure = { _uiState.value = EventHistoryUiState.Error("No se pudo guardar la revisión. Reintenta.") }
+            )
+        }
+    }
+
     fun toggleProtection(eventId: String, currentProtected: Boolean) {
         viewModelScope.launch {
             val newProtected = !currentProtected

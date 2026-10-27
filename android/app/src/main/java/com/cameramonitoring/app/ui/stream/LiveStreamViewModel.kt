@@ -73,15 +73,7 @@ class LiveStreamViewModel(
                     val zonesRes = eventRepository.getZones(cameraId)
                     val zones = zonesRes.getOrNull() ?: emptyList()
 
-                    if (android.os.SystemClock.elapsedRealtime() >= refreshAt) {
-                    val refreshed = cameraRepository.getCameraDetails(cameraId).getOrNull()
-                    val current = _uiState.value as? StreamUiState.Success
-                    if (current != null) {
-                        _uiState.value = current.copy(camera = refreshed ?: current.camera.copy(hlsUrl = null, streamToken = null))
-                    }
-                    refreshAt = android.os.SystemClock.elapsedRealtime() + 40_000L
-                }
-                val eventsRes = eventRepository.getEvents(cameraId)
+                    val eventsRes = eventRepository.getEvents(cameraId)
                     val initialEvents = eventsRes.getOrNull() ?: emptyList()
 
                     _uiState.value = StreamUiState.Success(

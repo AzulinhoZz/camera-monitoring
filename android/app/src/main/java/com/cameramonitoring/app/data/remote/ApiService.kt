@@ -6,6 +6,12 @@ import retrofit2.Response
 import retrofit2.http.*
 
 interface ApiService {
+    @GET("cameras/{id}/vision-rules")
+    suspend fun getVisionRules(@Path("id") id: String): Response<VisionConfig>
+
+    @PUT("cameras/{id}/vision-rules")
+    suspend fun saveVisionRules(@Path("id") id: String, @Body body: VisionConfigUpdate): Response<VisionConfig>
+
 
     @POST("auth/register")
     suspend fun register(

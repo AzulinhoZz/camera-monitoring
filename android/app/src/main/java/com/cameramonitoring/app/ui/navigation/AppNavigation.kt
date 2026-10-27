@@ -29,6 +29,7 @@ import com.cameramonitoring.app.ui.storage.StorageManagementScreen
 import com.cameramonitoring.app.ui.storage.StorageViewModel
 import com.cameramonitoring.app.ui.stream.LiveStreamScreen
 import com.cameramonitoring.app.ui.stream.LiveStreamViewModel
+import com.cameramonitoring.app.ui.vision.VisionRulesScreen
 
 object Destinations {
     const val WELCOME = "welcome"
@@ -36,6 +37,7 @@ object Destinations {
     const val REGISTER = "register"
     const val DASHBOARD = "dashboard"
     const val ADD_CAMERA = "add_camera"
+    const val VISION = "vision/{cameraId}"
     const val STREAM = "stream/{cameraId}"
     const val EVENTS = "events"
     const val STORAGE = "storage"
@@ -141,8 +143,13 @@ fun AppNavigation() {
             LiveStreamScreen(
                 cameraId = cameraId,
                 viewModel = liveStreamViewModel,
+                onVisionRules = { navController.navigate("vision/$cameraId") },
                 onBackClick = { navController.popBackStack() }
             )
+        }
+
+        composable(Destinations.VISION, arguments = listOf(navArgument("cameraId") { type = NavType.StringType })) { entry ->
+            VisionRulesScreen(entry.arguments?.getString("cameraId") ?: "", apiService) { navController.popBackStack() }
         }
 
         composable(Destinations.EVENTS) {

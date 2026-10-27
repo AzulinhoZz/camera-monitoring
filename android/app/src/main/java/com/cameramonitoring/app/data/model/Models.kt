@@ -104,6 +104,7 @@ data class CameraEvent(
     @SerializedName("has_clip") val hasClip: Boolean = false,
     @SerializedName("is_protected") val isProtected: Boolean = false,
     @SerializedName("review_status") val reviewStatus: String = "pending",
+    @SerializedName("vision_summary") val visionSummary: VisionSummary? = null,
     @SerializedName("reviewed_at") val reviewedAt: String? = null
 )
 
@@ -233,4 +234,40 @@ data class TransportUnit(
 data class TransportUnitCreateRequest(
     @SerializedName("unit_number") val unitNumber: String,
     @SerializedName("plate_number") val plateNumber: String? = null
+)
+
+// Server derives tenant scope; never submit owner/organization IDs in this DTO.
+data class VisionRule(
+    @SerializedName("rule_id") val ruleId: String,
+    val kind: String = "intrusion",
+    val enabled: Boolean = false,
+    val classes: List<String> = listOf("person"),
+    val polygon: List<NormalizedPoint> = emptyList(),
+    val line: List<NormalizedPoint>? = null,
+    val direction: String = "both",
+    @SerializedName("min_confidence") val minConfidence: Double = 0.5,
+    @SerializedName("min_observations") val minObservations: Int = 2,
+    @SerializedName("line_margin") val lineMargin: Double = 0.005,
+    val threshold: Int = 1,
+    @SerializedName("duration_seconds") val durationSeconds: Double = 10.0,
+    @SerializedName("cooldown_seconds") val cooldownSeconds: Double = 30.0,
+    @SerializedName("stationary_radius") val stationaryRadius: Double = 0.02,
+    @SerializedName("timezone_name") val timezoneName: String = "America/Mexico_City",
+    val weekdays: List<Int> = (0..6).toList(),
+    val start: String = "00:00:00",
+    val end: String = "23:59:59"
+)
+
+data class VisionConfig(
+    val revision: Long = 0,
+    val rules: List<VisionRule> = emptyList(),
+    @SerializedName("can_manage") val canManage: Boolean = false
+)
+data class VisionConfigUpdate(val revision: Long, val rules: List<VisionRule>)
+
+data class VisionSummary(
+    @SerializedName("rule_id") val ruleId: String? = null,
+    @SerializedName("event_type") val eventType: String? = null,
+    val count: Int? = null,
+    val direction: String? = null
 )

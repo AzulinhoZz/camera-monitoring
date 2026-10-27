@@ -191,6 +191,10 @@ fun EventHistoryScreen(
                 onPlayClip = { url ->
                     activePlayingClipUrl = url
                 },
+                onReview = { status ->
+                    viewModel.reviewEvent(event.id, status)
+                    selectedEventForDetail = null
+                },
                 onToggleProtect = {
                     viewModel.toggleProtection(event.id, event.isProtected)
                     selectedEventForDetail = null
@@ -378,7 +382,8 @@ fun EventDetailDialog(
     clipUrl: String?,
     onDismiss: () -> Unit,
     onPlayClip: (String) -> Unit,
-    onToggleProtect: () -> Unit
+    onToggleProtect: () -> Unit,
+    onReview: (String) -> Unit = {}
 ) {
     Dialog(
         onDismissRequest = onDismiss,
@@ -490,7 +495,7 @@ fun EventDetailDialog(
                     ) {
                         Icon(Icons.Default.PlayCircle, contentDescription = null, modifier = Modifier.size(20.dp))
                         Spacer(modifier = Modifier.width(8.dp))
-                        Text("Ver Grabación (~15s MP4)", fontWeight = FontWeight.Bold)
+                        Text("Ver grabación", fontWeight = FontWeight.Bold)
                     }
                     Spacer(modifier = Modifier.height(8.dp))
                 } else if (event.hasClip || event.clipPath != null) {
@@ -507,6 +512,18 @@ fun EventDetailDialog(
                     Spacer(modifier = Modifier.height(8.dp))
                 }
 
+                Text("Estado de revisión: ${event.reviewStatus}")
+                if (event.eventType.startsWith("vision_")) {
+                    Text("Detección automática sujeta a revisión humana; puede ser un falso positivo.")
+                    val labels = mapOf("intrusion" to "Intrusión", "dwell" to "Permanencia", "count" to "Conteo", "line_crossing" to "Cruce de línea", "probable_abandoned_object" to "Posible objeto abandonado")
+                    Text(labels[event.visionSummary?.eventType] ?: "Regla de visión")
+                    event.visionSummary?.count?.let { Text("Objetos visibles: $it") }
+                    event.visionSummary?.direction?.let { Text("Dirección: ${if (it == "positive") "positiva" else "negativa"}") }
+                }
+                Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+                    TextButton(onClick = { onReview("reviewed_ok") }) { Text("Revisado / sin incidencia") }
+                    TextButton(onClick = { onReview("help_requested") }) { Text("Solicitar ayuda") }
+                }
                 OutlinedButton(
                     onClick = onToggleProtect,
                     modifier = Modifier.fillMaxWidth(),

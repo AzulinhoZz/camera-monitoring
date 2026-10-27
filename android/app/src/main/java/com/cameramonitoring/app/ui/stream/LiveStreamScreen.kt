@@ -52,7 +52,8 @@ import com.cameramonitoring.app.data.model.NormalizedPoint
 fun LiveStreamScreen(
     cameraId: String,
     viewModel: LiveStreamViewModel,
-    onBackClick: () -> Unit
+    onBackClick: () -> Unit,
+    onVisionRules: () -> Unit = {}
 ) {
     val context = LocalContext.current
     val uiState by viewModel.uiState.collectAsState()
@@ -98,6 +99,7 @@ fun LiveStreamScreen(
                     }
                 },
                 actions = {
+                    TextButton(onClick = onVisionRules) { Text("Reglas IA") }
                     IconButton(onClick = { showZoneEditorDialog = true }) {
                         Icon(Icons.Default.Polyline, contentDescription = "Zonas de Detección")
                     }
