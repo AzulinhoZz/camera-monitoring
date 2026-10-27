@@ -8,6 +8,7 @@ from urllib.parse import urlsplit, urlunsplit
 from pydantic import Field, field_validator, model_validator
 
 from .contracts import CameraScope, Contract
+from .rules import Rule
 
 
 class CameraConfig(CameraScope):
@@ -17,6 +18,7 @@ class CameraConfig(CameraScope):
     allowed_cidrs: tuple[str, ...] = ()
     allow_loopback: bool = False
     allowed_ports: tuple[int, ...] = (554, 8554)
+    rules: tuple[Rule, ...] = Field(default=(), max_length=32)
     vision_enabled: bool = False
     object_classes: tuple[int, ...] = (0,)
     detection_confidence: float = Field(default=.5, ge=.01, le=1)
@@ -56,6 +58,11 @@ class CameraConfig(CameraScope):
 
     @model_validator(mode="after")
     def consistent(self):
+        if self.rules:
+            from .rules import RuleEngine
+            RuleEngine(CameraScope(camera_id=self.camera_id, owner_id=self.owner_id, organization_id=self.organization_id), self.rules)
+            if not self.vision_enabled:
+                raise ValueError("rules require camera vision opt-in")
         if max(self.recording_fps, self.inference_fps) > self.capture_fps:
             raise ValueError("consumer FPS cannot exceed capture FPS")
         if self.reconnect_max_seconds < self.reconnect_initial_seconds:

@@ -138,3 +138,9 @@ El usuario autorizó «resuelve los bloqueos e inicia la fase 2». Evidencia det
 | OPS-01 | Backend/Docker y modelo aislado verificados, dependencias sin conflictos. Android tests siguen NO EJECUTADOS por launcher Gradle; no se cambiaron pines/checksums para ocultarlo. |
 
 FASE 2 está iniciada como prototipo de laboratorio; **no cerrada como funcionalidad productiva**. No pasar a FASE 3/acciones/alertas antes de revisar precisión, egreso remoto y los pendientes de integración. No se migraron datos reales ni se hizo merge.
+
+## I. Fase 3 autorizada — primer incremento de reglas
+
+Usuario autoriza validar y continuar fase 3. Implementado motor opt-in por scope con geometría, reglas temporales, horarios, cooldown y deduplicación en memoria. Véase [informe de fase 3](PHASE_3_RULES_AND_EVIDENCE.md).
+
+Pendiente P1: persistencia idempotente de eventos/reglas, API/UI de configuración, conexión segura a evidencias pre/postevento reutilizando clips/retención, pruebas con secuencias permitidas/etiquetadas, métricas bajo carga y reducción de falsos positivos/jitter. Pendientes anteriores Android, egress nativo RTSP e integración Supabase real siguen abiertos. Fase 3 iniciada, no aceptada como completa. Fase 4 no iniciada.
