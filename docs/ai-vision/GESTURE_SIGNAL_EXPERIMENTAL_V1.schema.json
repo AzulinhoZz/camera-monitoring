@@ -1,0 +1,104 @@
+{
+  "additionalProperties": false,
+  "properties": {
+    "camera_id": {
+      "format": "uuid",
+      "title": "Camera Id",
+      "type": "string"
+    },
+    "owner_id": {
+      "format": "uuid",
+      "title": "Owner Id",
+      "type": "string"
+    },
+    "organization_id": {
+      "anyOf": [
+        {
+          "format": "uuid",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Organization Id"
+    },
+    "schema_version": {
+      "const": "experimental-1.0",
+      "default": "experimental-1.0",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "event_id": {
+      "format": "uuid",
+      "title": "Event Id",
+      "type": "string"
+    },
+    "worker_session_id": {
+      "format": "uuid",
+      "title": "Worker Session Id",
+      "type": "string"
+    },
+    "frame_sequence": {
+      "minimum": 1,
+      "title": "Frame Sequence",
+      "type": "integer"
+    },
+    "landmark_set_id": {
+      "exclusiveMaximum": 200,
+      "minimum": 0,
+      "title": "Landmark Set Id",
+      "type": "integer"
+    },
+    "timestamp": {
+      "format": "date-time",
+      "title": "Timestamp",
+      "type": "string"
+    },
+    "model_version": {
+      "maxLength": 80,
+      "minLength": 1,
+      "pattern": "^[A-Za-z0-9_.:-]+$",
+      "title": "Model Version",
+      "type": "string"
+    },
+    "label": {
+      "const": "possible_hands_raised",
+      "default": "possible_hands_raised",
+      "title": "Label",
+      "type": "string"
+    },
+    "basis": {
+      "const": "temporal_geometry",
+      "default": "temporal_geometry",
+      "title": "Basis",
+      "type": "string"
+    },
+    "review_status": {
+      "const": "pending",
+      "default": "pending",
+      "title": "Review Status",
+      "type": "string"
+    },
+    "input_quality": {
+      "maximum": 1,
+      "minimum": 0,
+      "title": "Input Quality",
+      "type": "number"
+    }
+  },
+  "required": [
+    "camera_id",
+    "owner_id",
+    "event_id",
+    "worker_session_id",
+    "frame_sequence",
+    "landmark_set_id",
+    "timestamp",
+    "model_version",
+    "input_quality"
+  ],
+  "title": "GestureSignal",
+  "type": "object"
+}

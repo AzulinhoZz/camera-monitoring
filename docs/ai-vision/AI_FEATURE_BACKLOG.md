@@ -150,3 +150,9 @@ Pendiente P1: persistencia idempotente de eventos/reglas, API/UI de configuraci�
 El incremento I queda sustituido por la integración completa de reglas/eventos/evidencias/API/UI descrita en [PHASE_3_RULES_AND_EVIDENCE.md](PHASE_3_RULES_AND_EVIDENCE.md). Migración reversible 011, configuración con revisión/ACL/RLS, ingestión idempotente con cooldown durable, scopes verificados al guardar/adjuntar/firmar, consumidor y evidencia acotados sobre el carril existente, revisión/protección/retención reutilizadas. Filtros de confianza, observaciones y margen de línea. Sin identidades persistentes ni alertas sensibles automáticas.
 
 Validación: 129 pruebas backend; ocho unitarias Android y APK debug compilado; PostgreSQL desechable + recorrido API/regla/evento/JPEG/MP4/revisión/protección/retención con Auth/Storage locales explícitos. Benchmarks de motor sintético documentados. El despliegue/migración real, integración Supabase administrado, egress nativo RTSP, calidad en vídeos anotados y validación visual en dispositivo siguen como puertas de release. El resultado Android/Docker final figura en el informe. Fase 4 no iniciada.
+
+## K. Fase 4 autorizada e iniciada (2026-10-27)
+
+Primer incremento: revisión fijada de MediaPipe/MMAction2, contratos de landmarks transitorios de cuerpo/manos sin puntos faciales de pose, render OpenCV y señal geométrica temporal posible_hands_raised únicamente de laboratorio/desactivada por defecto. [Informe](PHASE_4_POSES_HANDS_ACTIONS.md). 138 pruebas backend aprobadas; demo con coordenadas sintéticas, sin inferencia real. No cambian captura, API, DB, app ni dependencias de producción.
+
+Pendiente P2: licencias/procedencia de pesos, runtime aislado compatible, extractor real, calidad/asociación temporal y secuencias anotadas; caídas/acciones no implementadas. Los gates P0/P1 de release anteriores no se consideran cerrados por esta demo. Fase 4 iniciada, no completa; fase 5 no iniciada.

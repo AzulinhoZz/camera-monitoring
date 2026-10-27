@@ -1,0 +1,29 @@
+{
+  "fixture": "generated body/hand points; no real model inference or human data",
+  "model_integrated": false,
+  "default_disabled": true,
+  "generated_signals": 1,
+  "signal_type": "possible_hands_raised",
+  "review_status": "pending",
+  "image_size": [
+    640,
+    360
+  ],
+  "render_only_latency_ms": {
+    "samples": 100,
+    "p50": 0.2588890001788968,
+    "p95": 0.40763799916021526
+  },
+  "artifacts": [
+    "skeleton.png",
+    "energy.png",
+    "gesture_signal.json"
+  ],
+  "metrics": {
+    "enabled": true,
+    "processed_frames": 3,
+    "provisional_signals": 1,
+    "active_candidates": 1,
+    "cooldown_entries": 1
+  }
+}

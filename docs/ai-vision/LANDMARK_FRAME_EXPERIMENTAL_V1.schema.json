@@ -1,0 +1,177 @@
+{
+  "$defs": {
+    "Landmark": {
+      "additionalProperties": false,
+      "properties": {
+        "index": {
+          "maximum": 32,
+          "minimum": 0,
+          "title": "Index",
+          "type": "integer"
+        },
+        "x": {
+          "maximum": 3,
+          "minimum": -2,
+          "title": "X",
+          "type": "number"
+        },
+        "y": {
+          "maximum": 3,
+          "minimum": -2,
+          "title": "Y",
+          "type": "number"
+        },
+        "z": {
+          "default": 0,
+          "maximum": 10,
+          "minimum": -10,
+          "title": "Z",
+          "type": "number"
+        },
+        "visibility": {
+          "anyOf": [
+            {
+              "maximum": 1,
+              "minimum": 0,
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Visibility"
+        },
+        "presence": {
+          "anyOf": [
+            {
+              "maximum": 1,
+              "minimum": 0,
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Presence"
+        }
+      },
+      "required": [
+        "index",
+        "x",
+        "y"
+      ],
+      "title": "Landmark",
+      "type": "object"
+    },
+    "LandmarkSet": {
+      "additionalProperties": false,
+      "properties": {
+        "kind": {
+          "enum": [
+            "pose_body",
+            "hand"
+          ],
+          "title": "Kind",
+          "type": "string"
+        },
+        "landmark_set_id": {
+          "exclusiveMaximum": 200,
+          "minimum": 0,
+          "title": "Landmark Set Id",
+          "type": "integer"
+        },
+        "points": {
+          "items": {
+            "$ref": "#/$defs/Landmark"
+          },
+          "maxItems": 22,
+          "minItems": 21,
+          "title": "Points",
+          "type": "array"
+        }
+      },
+      "required": [
+        "kind",
+        "landmark_set_id",
+        "points"
+      ],
+      "title": "LandmarkSet",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "camera_id": {
+      "format": "uuid",
+      "title": "Camera Id",
+      "type": "string"
+    },
+    "owner_id": {
+      "format": "uuid",
+      "title": "Owner Id",
+      "type": "string"
+    },
+    "organization_id": {
+      "anyOf": [
+        {
+          "format": "uuid",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Organization Id"
+    },
+    "schema_version": {
+      "const": "experimental-1.0",
+      "default": "experimental-1.0",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "worker_session_id": {
+      "format": "uuid",
+      "title": "Worker Session Id",
+      "type": "string"
+    },
+    "frame_sequence": {
+      "minimum": 1,
+      "title": "Frame Sequence",
+      "type": "integer"
+    },
+    "timestamp": {
+      "format": "date-time",
+      "title": "Timestamp",
+      "type": "string"
+    },
+    "model_version": {
+      "maxLength": 80,
+      "minLength": 1,
+      "pattern": "^[A-Za-z0-9_.:-]+$",
+      "title": "Model Version",
+      "type": "string"
+    },
+    "observations": {
+      "default": [],
+      "items": {
+        "$ref": "#/$defs/LandmarkSet"
+      },
+      "maxItems": 12,
+      "title": "Observations",
+      "type": "array"
+    }
+  },
+  "required": [
+    "camera_id",
+    "owner_id",
+    "worker_session_id",
+    "frame_sequence",
+    "timestamp",
+    "model_version"
+  ],
+  "title": "LandmarkFrame",
+  "type": "object"
+}
