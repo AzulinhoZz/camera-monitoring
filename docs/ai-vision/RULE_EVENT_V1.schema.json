@@ -1,0 +1,129 @@
+{
+  "additionalProperties": false,
+  "properties": {
+    "camera_id": {
+      "format": "uuid",
+      "title": "Camera Id",
+      "type": "string"
+    },
+    "owner_id": {
+      "format": "uuid",
+      "title": "Owner Id",
+      "type": "string"
+    },
+    "organization_id": {
+      "anyOf": [
+        {
+          "format": "uuid",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Organization Id"
+    },
+    "schema_version": {
+      "const": "1.0",
+      "default": "1.0",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "event_id": {
+      "format": "uuid",
+      "title": "Event Id",
+      "type": "string"
+    },
+    "rule_id": {
+      "format": "uuid",
+      "title": "Rule Id",
+      "type": "string"
+    },
+    "worker_session_id": {
+      "format": "uuid",
+      "title": "Worker Session Id",
+      "type": "string"
+    },
+    "track_id": {
+      "anyOf": [
+        {
+          "minimum": 0,
+          "type": "integer"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Track Id"
+    },
+    "timestamp": {
+      "format": "date-time",
+      "title": "Timestamp",
+      "type": "string"
+    },
+    "event_type": {
+      "enum": [
+        "intrusion",
+        "dwell",
+        "line_crossing",
+        "count",
+        "probable_abandoned_object"
+      ],
+      "title": "Event Type",
+      "type": "string"
+    },
+    "direction": {
+      "anyOf": [
+        {
+          "enum": [
+            "positive",
+            "negative"
+          ],
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Direction"
+    },
+    "count": {
+      "maximum": 100,
+      "minimum": 0,
+      "title": "Count",
+      "type": "integer"
+    },
+    "review_status": {
+      "const": "pending",
+      "default": "pending",
+      "title": "Review Status",
+      "type": "string"
+    },
+    "evidence": {
+      "default": null,
+      "title": "Evidence",
+      "type": "null"
+    },
+    "description": {
+      "maxLength": 160,
+      "title": "Description",
+      "type": "string"
+    }
+  },
+  "required": [
+    "camera_id",
+    "owner_id",
+    "event_id",
+    "rule_id",
+    "worker_session_id",
+    "timestamp",
+    "event_type",
+    "count",
+    "description"
+  ],
+  "title": "RuleEvent",
+  "type": "object"
+}

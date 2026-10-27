@@ -1,0 +1,17 @@
+{
+  "fixture": "generated rectangles, injected detector, real isolated PostgreSQL; local Storage/Auth substitutes",
+  "api_config": true,
+  "rules": true,
+  "persisted": true,
+  "duplicate_suppressed": true,
+  "reviewed": true,
+  "jpeg": true,
+  "mp4_frames": 25,
+  "protection": true,
+  "retention": true,
+  "metrics": {
+    "persisted": 1,
+    "snapshots": 1,
+    "clips": 1
+  }
+}

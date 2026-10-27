@@ -1,0 +1,19 @@
+{
+  "source_copy_matches_workspace": true,
+  "source_files_checked": 72,
+  "gradle": "9.6.0; repository SHA256 verified",
+  "jdk": "Oracle JDK 25.0.5.0.3; official SHA256 verified",
+  "sdk_platform": 35,
+  "build_tools": "36.0.0",
+  "command": ":app:testDebugUnitTest :app:assembleDebug --no-daemon --max-workers=2",
+  "result": "BUILD SUCCESSFUL",
+  "unit_test_counts": {
+    "tests": 8,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "instrumented_tests": "NO EJECUTADA: no device/emulator",
+  "apk_bytes": 25255573,
+  "apk_sha256": "8056e81a9c4a90402135f84e3d0e96fe98b76f33adebd83b838cfff1c196083f"
+}

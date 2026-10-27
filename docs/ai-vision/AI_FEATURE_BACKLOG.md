@@ -144,3 +144,9 @@ FASE 2 está iniciada como prototipo de laboratorio; **no cerrada como funcional
 Usuario autoriza validar y continuar fase 3. Implementado motor opt-in por scope con geometría, reglas temporales, horarios, cooldown y deduplicación en memoria. Véase [informe de fase 3](PHASE_3_RULES_AND_EVIDENCE.md).
 
 Pendiente P1: persistencia idempotente de eventos/reglas, API/UI de configuración, conexión segura a evidencias pre/postevento reutilizando clips/retención, pruebas con secuencias permitidas/etiquetadas, métricas bajo carga y reducción de falsos positivos/jitter. Pendientes anteriores Android, egress nativo RTSP e integración Supabase real siguen abiertos. Fase 3 iniciada, no aceptada como completa. Fase 4 no iniciada.
+
+## J. Cierre funcional de fase 3 (2026-10-27)
+
+El incremento I queda sustituido por la integración completa de reglas/eventos/evidencias/API/UI descrita en [PHASE_3_RULES_AND_EVIDENCE.md](PHASE_3_RULES_AND_EVIDENCE.md). Migración reversible 011, configuración con revisión/ACL/RLS, ingestión idempotente con cooldown durable, scopes verificados al guardar/adjuntar/firmar, consumidor y evidencia acotados sobre el carril existente, revisión/protección/retención reutilizadas. Filtros de confianza, observaciones y margen de línea. Sin identidades persistentes ni alertas sensibles automáticas.
+
+Validación: 129 pruebas backend; ocho unitarias Android y APK debug compilado; PostgreSQL desechable + recorrido API/regla/evento/JPEG/MP4/revisión/protección/retención con Auth/Storage locales explícitos. Benchmarks de motor sintético documentados. El despliegue/migración real, integración Supabase administrado, egress nativo RTSP, calidad en vídeos anotados y validación visual en dispositivo siguen como puertas de release. El resultado Android/Docker final figura en el informe. Fase 4 no iniciada.

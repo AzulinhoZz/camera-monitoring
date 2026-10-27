@@ -1,0 +1,44 @@
+{
+  "scope": "synthetic rules only; no decoder/model/storage/network",
+  "measurements": [
+    {
+      "cameras": 1,
+      "rules_per_camera": 32,
+      "tracks_per_camera": 100,
+      "samples": 100,
+      "sequential_batch_p50_ms": 14.629,
+      "sequential_batch_p95_ms": 19.134,
+      "resources": {
+        "pid": 12376,
+        "cpu_seconds": 2.68,
+        "rss_bytes": 59289600
+      }
+    },
+    {
+      "cameras": 2,
+      "rules_per_camera": 32,
+      "tracks_per_camera": 100,
+      "samples": 100,
+      "sequential_batch_p50_ms": 30.737,
+      "sequential_batch_p95_ms": 43.522,
+      "resources": {
+        "pid": 12376,
+        "cpu_seconds": 6.32,
+        "rss_bytes": 64008192
+      }
+    },
+    {
+      "cameras": 4,
+      "rules_per_camera": 32,
+      "tracks_per_camera": 100,
+      "samples": 100,
+      "sequential_batch_p50_ms": 65.234,
+      "sequential_batch_p95_ms": 77.573,
+      "resources": {
+        "pid": 12376,
+        "cpu_seconds": 13.6,
+        "rss_bytes": 73314304
+      }
+    }
+  ]
+}

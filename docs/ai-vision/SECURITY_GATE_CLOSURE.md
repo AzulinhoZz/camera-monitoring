@@ -98,3 +98,7 @@ PASS: root crea el inode, worker UID 65534 lo abre, root no captura mientras el 
 El código y las pruebas cierran los bloqueos de RLS/grants, gateway por recurso y captura **en el ámbito comprobado**. Egress remoto, Android y despliegue real siguen como gates operativos explícitos; no se afirma preparación productiva completa.
 
 Implementación de los gates: commit `9b56c62`; integración de objetos/tracking posterior: `f5af196`. No se presenta el estado de procesos antiguos del onboarding como validación de esos commits.
+
+## Seguimiento 2026-10-27
+
+El build y los tests unitarios Android antes bloqueados se ejecutaron durante fase 3: ocho pruebas y APK debug, sin cambiar pins ni desactivar TLS. Véanse [informe fase 3](PHASE_3_RULES_AND_EVIDENCE.md) y [evidencia Android](PHASE_3_ANDROID_VALIDATION.json). La validación visual en dispositivo, Supabase administrado y egress RTSP siguen pendientes de release.
