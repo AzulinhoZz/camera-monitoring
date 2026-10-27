@@ -132,3 +132,22 @@ def test_polygon_boundary_self_intersection_and_batch_bounds():
         RuleEngine(SCOPE,[rule() for _ in range(33)])
     with pytest.raises(ValueError):
         step(RuleEngine(SCOPE,[rule()]),events=[event(track=i) for i in range(101)])
+
+
+def test_confidence_observation_gate_and_line_hysteresis():
+    r=rule(min_confidence=.8,min_observations=2,cooldown_seconds=0)
+    engine=RuleEngine(SCOPE,[r])
+    assert step(engine,0,[event().model_copy(update={'confidence':.3})])==[]
+    assert step(engine,1)==[]
+    assert len(step(engine,2))==1
+    assert step(engine,3)==[]
+    line=RuleEngine(SCOPE,[rule('line_crossing',line=({'x':.5,'y':.2},{'x':.5,'y':.8}),line_margin=.02)])
+    step(line,0,[event(x=.6)])
+    assert step(line,1,[event(1,x=.499)])==[]
+    assert step(line,2,[event(2,x=.501)])==[]
+    assert len(step(line,3,[event(3,x=.4)]))==1
+
+
+def test_class_and_timezone_configuration_validation():
+    for fields in ({'classes':['invented']},{'timezone_name':'bad/timezone'},{'classes':['person','person']}):
+        with pytest.raises(ValueError):Rule(**{**rule().model_dump(),**fields})

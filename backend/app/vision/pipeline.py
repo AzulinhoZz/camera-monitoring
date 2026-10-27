@@ -32,7 +32,10 @@ class ObjectPipeline:
         if frame.sequence <= self.sequence:
             raise ValueError("duplicate/out-of-order frame")
         start = time.perf_counter()
-        detections = self.detector.detect(frame.pixels, classes=self.config.object_classes, confidence=self.config.detection_confidence)
+        classes=tuple(sorted(set(self.config.object_classes) | {
+            COCO_CLASSES.index(label) for rule in self.config.rules if rule.enabled for label in rule.classes
+        }))
+        detections = self.detector.detect(frame.pixels, classes=classes, confidence=self.config.detection_confidence)
         tracks = self.tracker.update(detections, frame.captured_monotonic)
         self.sequence = frame.sequence
         self.latencies.append((time.perf_counter()-start)*1000)

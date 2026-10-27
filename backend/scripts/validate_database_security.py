@@ -1,6 +1,9 @@
 """Creates its own networkless PostgreSQL instance. No DSN or production target."""
 from pathlib import Path
 import subprocess
+import sys
+import tempfile
+from unittest.mock import patch
 import time
 from uuid import uuid4
 
@@ -15,11 +18,11 @@ def main():
                                "-v", "ON_ERROR_STOP=1", *args], check=True, capture_output=True, text=True).stdout
     created = False
     try:
-        subprocess.run(["docker", "run", "--rm", "-d", "--name", name, "--network", "none",
+        subprocess.run(["docker", "run", "--rm", "-d", "--name", name, "--network", "none", "--tmpfs", "/var/lib/postgresql/data:rw,size=256m,mode=0700",
                         "-e", "POSTGRES_HOST_AUTH_METHOD=trust", "--mount", f"type=bind,src={root},dst=/repo,readonly", IMAGE], check=True, capture_output=True)
         created = True
         for _ in range(100):
-            if subprocess.run(["docker", "exec", name, "pg_isready", "-U", "postgres"], capture_output=True).returncode == 0:
+            if subprocess.run(["docker", "exec", name, "pg_isready", "-h", "127.0.0.1", "-U", "postgres"], capture_output=True).returncode == 0:
                 break
             time.sleep(.1)
         else:
@@ -34,6 +37,22 @@ def main():
         output = psql("-f", "/repo/backend/app/tests/run_real_postgres_security_tests.sql")
         assert "PASS:" in output
         print(output.split("PASS:")[-1].strip())
+        print(psql("-f", "/repo/backend/app/tests/run_vision_postgres_tests.sql").split("PASS:")[-1].strip())
+        sys.path.insert(0,str(root / "backend"))
+        artifact_directory=tempfile.mkdtemp(prefix="camera-phase3-workflow-")
+        with patch.dict('os.environ',{'SUPABASE_URL':'','SUPABASE_SECRET_KEY':'','FIREBASE_CREDENTIALS_PATH':'','GOOGLE_APPLICATION_CREDENTIALS':''}):
+            from vision_workflow_fixture import run as run_vision_fixture
+            run_vision_fixture(psql,artifact_directory)
+        print("Synthetic workflow artifacts:",artifact_directory)
+        psql("-c", """INSERT INTO public.camera_events(id,camera_id,event_type,vision_metadata,evidence_path,is_protected,review_status)
+          VALUES('77777777-7777-7777-7777-777777777777','c1000000-0000-0000-0000-000000000001','vision_intrusion','{}','fixture/kept.jpg',true,'reviewed_ok');""")
+        psql("-f", "/repo/backend/migrations/rollback/011_vision_rules_and_events.sql")
+        assert psql("-tAc", "SELECT count(*) FROM public.camera_events WHERE id='77777777-7777-7777-7777-777777777777' AND evidence_path='fixture/kept.jpg' AND is_protected AND review_status='reviewed_ok'").strip()=="1"
+        psql("-c", "DELETE FROM public.camera_events WHERE id='77777777-7777-7777-7777-777777777777'")
+        assert psql("-tAc", "SELECT count(*) FROM public.camera_events").strip()=="12"
+        psql("-f", "/repo/backend/migrations/011_vision_rules_and_events.sql")
+        assert "PASS:" in psql("-f", "/repo/backend/app/tests/run_vision_postgres_tests.sql")
+        print("PASS: vision rollback preserves legacy events; reapply passes")
         psql("-f", "/repo/backend/migrations/rollback/010_security_helpers_and_atomic_grants.sql")
         assert psql("-tAc", "SELECT to_regprocedure('public.grant_camera_access_for_actor(uuid,uuid,uuid)') IS NULL").strip() == "t"
         assert psql("-tAc", "SELECT count(*) FROM public.cameras").strip() == "12"
@@ -70,7 +89,7 @@ def main():
         raise RuntimeError(exc.stderr or "disposable SQL command failed") from None
     finally:
         if created:
-            subprocess.run(["docker", "stop", name], check=True, capture_output=True)
+            subprocess.run(["docker", "rm", "-f", name], check=False, capture_output=True)
 
 
 if __name__ == "__main__":

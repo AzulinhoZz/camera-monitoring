@@ -8,6 +8,32 @@ from supabase import create_client
 from app.auth import get_current_user
 from app.permissions import has_camera_access, can_manage_camera, get_authorized_camera_ids
 
+def query_events(client, columns, configure):
+    """Legacy-only compatibility before 011; never bypass a failed authorization."""
+    try:
+        return configure(client.table('camera_events').select(columns+', vision_metadata')).execute()
+    except Exception as exc:
+        if getattr(exc,'code',None)!='42703' or 'vision_metadata' not in str(exc):
+            raise
+        return configure(client.table('camera_events').select(columns)).execute()
+
+
+def verify_vision_media_scope(client, event, path, suffix):
+    metadata=event.get('vision_metadata')
+    if not metadata:
+        if event.get('event_type','').startswith('vision_'):
+            raise HTTPException(403,'Metadatos de evidencia de visión no disponibles')
+        return  # Legacy media behavior unchanged.
+    rows=client.table('cameras').select('id,user_id,organization_id').eq('id',event['camera_id']).execute().data or []
+    if len(rows)!=1:
+        raise HTTPException(403,'Ámbito de evidencia no disponible')
+    cam=rows[0]
+    if metadata.get('owner_id')!=cam['user_id'] or metadata.get('organization_id')!=cam.get('organization_id'):
+        raise HTTPException(403,'La evidencia pertenece al ámbito anterior de la cámara')
+    if path!=f"{cam['user_id']}/{cam['id']}/{event['id']}{suffix}":
+        raise HTTPException(403,'Ruta de evidencia inválida')
+
+
 router = APIRouter(prefix="/events", tags=["Events"])
 
 
@@ -51,14 +77,9 @@ def list_events(
         )
         camera_map = {cam["id"]: cam["name"] for cam in (user_cameras.data or [])}
 
-        result = (
-            client.table("camera_events")
-            .select("id, camera_id, event_type, detected_at, description, evidence_path, clip_path, is_protected, review_status, reviewed_at")
-            .in_("camera_id", target_ids)
-            .order("detected_at", desc=True)
-            .limit(100)
-            .execute()
-        )
+        result = query_events(client,
+            "id, camera_id, event_type, detected_at, description, evidence_path, clip_path, is_protected, review_status, reviewed_at",
+            lambda q:q.in_("camera_id",target_ids).order("detected_at",desc=True).limit(100))
 
         events = []
         for record in result.data or []:
@@ -79,6 +100,7 @@ def list_events(
                 "is_protected": bool(record.get("is_protected", False)),
                 "review_status": record.get("review_status", "pending"),
                 "reviewed_at": record.get("reviewed_at"),
+                "vision_summary": {k:(record.get("vision_metadata") or {}).get(k) for k in ("rule_id","event_type","count","direction")},
             })
 
         return {
@@ -91,7 +113,7 @@ def list_events(
     except Exception as e:
         raise HTTPException(
             status_code=500,
-            detail=f"Error al listar los eventos: {str(e)}",
+            detail="Error al listar los eventos",
         )
 
 
@@ -134,7 +156,7 @@ def review_event_alert(
     except Exception as e:
         raise HTTPException(
             status_code=500,
-            detail=f"Error al registrar la revisión del evento: {str(e)}",
+            detail="Error al registrar la revisión del evento",
         )
 
 
@@ -149,12 +171,7 @@ def get_event_evidence(
             os.environ["SUPABASE_SECRET_KEY"],
         )
 
-        event_res = (
-            client.table("camera_events")
-            .select("id, camera_id, evidence_path")
-            .eq("id", event_id)
-            .execute()
-        )
+        event_res = query_events(client,"id, camera_id, event_type, evidence_path",lambda q:q.eq("id",event_id))
 
         if not event_res.data:
             raise HTTPException(status_code=404, detail="Evento no encontrado")
@@ -169,6 +186,7 @@ def get_event_evidence(
         if not evidence_path:
             return {"event_id": event_id, "has_evidence": False, "signed_url": None}
 
+        verify_vision_media_scope(client,event,evidence_path,".jpg")
         signed_url = None
         try:
             res = client.storage.from_("motion-evidence").create_signed_url(evidence_path, 1800)
@@ -191,7 +209,7 @@ def get_event_evidence(
     except Exception as e:
         raise HTTPException(
             status_code=500,
-            detail=f"Error al obtener evidencia del evento: {str(e)}",
+            detail="Error al obtener evidencia del evento",
         )
 
 
@@ -206,12 +224,7 @@ def get_event_clip(
             os.environ["SUPABASE_SECRET_KEY"],
         )
 
-        event_res = (
-            client.table("camera_events")
-            .select("id, camera_id, clip_path")
-            .eq("id", event_id)
-            .execute()
-        )
+        event_res = query_events(client,"id, camera_id, event_type, clip_path",lambda q:q.eq("id",event_id))
 
         if not event_res.data:
             raise HTTPException(status_code=404, detail="Evento no encontrado")
@@ -226,6 +239,7 @@ def get_event_clip(
         if not clip_path:
             return {"event_id": event_id, "has_clip": False, "signed_url": None}
 
+        verify_vision_media_scope(client,event,clip_path,".mp4")
         signed_url = None
         try:
             res = client.storage.from_("motion-clips").create_signed_url(clip_path, 1800)
@@ -248,7 +262,7 @@ def get_event_clip(
     except Exception as e:
         raise HTTPException(
             status_code=500,
-            detail=f"Error al obtener clip del evento: {str(e)}",
+            detail="Error al obtener clip del evento",
         )
 
 
@@ -295,5 +309,5 @@ def create_event(
     except Exception as e:
         raise HTTPException(
             status_code=500,
-            detail=f"Error al crear el evento: {str(e)}",
+            detail="Error al crear el evento",
         )

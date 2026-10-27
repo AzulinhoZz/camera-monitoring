@@ -38,6 +38,32 @@ class FrameRingBuffer:
             self.buffer.clear()
 
 
+def encode_clip_frames(frames, filename, fps=10):
+    """Shared bounded-input MP4 encoder. Caller owns frames, path and cleanup."""
+    if not frames:
+        raise ValueError("clip has no frames")
+    h, w = frames[0].shape[:2]
+    scale = min(1., 1280 / w, 720 / h)
+    w, h = max(2, int(w*scale)//2*2), max(2, int(h*scale)//2*2)
+    writer = None
+    try:
+        for codec in ('mp4v', 'avc1', 'MJPG'):
+            writer = cv2.VideoWriter(str(filename), cv2.VideoWriter_fourcc(*codec), float(fps), (w,h))
+            if writer.isOpened():
+                break
+            writer.release()
+            writer = None
+        if writer is None:
+            raise ValueError("clip encoder unavailable")
+        for frame in frames:
+            writer.write(cv2.resize(frame,(w,h)) if frame.shape[:2] != (h,w) else frame)
+    finally:
+        if writer is not None:
+            writer.release()
+    if not os.path.exists(filename) or not os.path.getsize(filename):
+        raise ValueError("empty clip output")
+
+
 def record_and_upload_clip(
     event_id: str,
     user_id: str,
@@ -70,39 +96,7 @@ def record_and_upload_clip(
             logger.warning(f"No frames captured for clip event {event_id}")
             return
 
-        # Determine target resolution (max 1280x720)
-        h, w = all_frames[0].shape[:2]
-        if w > 1280 or h > 720:
-            scale = min(1280.0 / w, 720.0 / h)
-            w, h = int(w * scale), int(h * scale)
-
-        # Robust VideoWriter initialization with codec fallbacks
-        codecs_to_try = ['mp4v', 'avc1', 'MJPG']
-        for codec in codecs_to_try:
-            fourcc = cv2.VideoWriter_fourcc(*codec)
-            video_writer = cv2.VideoWriter(tmp_mp4_path, fourcc, float(fps), (w, h))
-            if video_writer.isOpened():
-                logger.info(f"VideoWriter initialized using codec '{codec}' for event {event_id}")
-                break
-            else:
-                video_writer.release()
-                video_writer = None
-
-        if video_writer is None or not video_writer.isOpened():
-            logger.error(f"Failed to initialize VideoWriter for event {event_id} with any codec")
-            return
-
-        for f in all_frames:
-            if f.shape[1] != w or f.shape[0] != h:
-                f = cv2.resize(f, (w, h), interpolation=cv2.INTER_AREA)
-            video_writer.write(f)
-
-        video_writer.release()
-        video_writer = None
-
-        if not os.path.exists(tmp_mp4_path) or os.path.getsize(tmp_mp4_path) == 0:
-            logger.error(f"Failed to create valid MP4 file for event {event_id}")
-            return
+        encode_clip_frames(all_frames, tmp_mp4_path, fps)
 
         # Upload to Supabase Storage private bucket 'motion-clips'
         url = os.getenv("SUPABASE_URL")

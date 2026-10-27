@@ -10,6 +10,7 @@ from app.cameras import router as cameras_router
 from app.events import router as events_router
 from app.storage import router as storage_router
 from app.admin import router as admin_router
+from app.vision_api import router as vision_router
 from app.motion_detector import motion_manager
 from app.connectivity_checker import health_checker
 from app.schedule_evaluator import SENSITIVITY_PRESETS
@@ -23,6 +24,7 @@ app.include_router(cameras_router)
 app.include_router(events_router)
 app.include_router(storage_router)
 app.include_router(admin_router)
+app.include_router(vision_router)
 
 
 class MotionConfigPayload(BaseModel):

@@ -3,7 +3,7 @@ from datetime import datetime, time, timezone
 from math import hypot
 from typing import Literal
 from uuid import UUID, NAMESPACE_URL, uuid5
-from zoneinfo import ZoneInfo
+from zoneinfo import ZoneInfo, ZoneInfoNotFoundError
 
 from pydantic import Field, model_validator
 
@@ -45,6 +45,9 @@ class Rule(CameraScope):
     polygon: tuple[Point, ...] = Field(default=(), max_length=32)
     line: tuple[Point, Point] | None = None
     direction: Literal['both','positive','negative'] = 'both'
+    min_confidence: float = Field(default=.5, ge=.01, le=1)
+    min_observations: int = Field(default=1, ge=1, le=60)
+    line_margin: float = Field(default=.005, ge=0, le=.1)
     threshold: int = Field(default=1, ge=1, le=100)
     duration_seconds: float = Field(default=10, ge=1, le=86400)
     cooldown_seconds: float = Field(default=30, ge=0, le=86400)
@@ -56,7 +59,13 @@ class Rule(CameraScope):
 
     @model_validator(mode='after')
     def geometry(self):
-        ZoneInfo(self.timezone_name)
+        try:
+            ZoneInfo(self.timezone_name)
+        except (ZoneInfoNotFoundError, ValueError):
+            raise ValueError('invalid timezone') from None
+        from .detection import COCO_CLASSES
+        if len(set(self.classes))!=len(self.classes) or any(c not in COCO_CLASSES for c in self.classes):
+            raise ValueError('unknown or duplicate object class')
         if self.start.tzinfo or self.end.tzinfo or not self.weekdays or any(d not in range(7) for d in self.weekdays):
             raise ValueError('invalid schedule')
         if self.kind == 'line_crossing':
@@ -129,7 +138,7 @@ class RuleEngine:
                 self.state.pop(rule.rule_id,None)
                 continue
             for event in parsed:
-                if event.class_name not in rule.classes:
+                if event.class_name not in rule.classes or event.confidence<rule.min_confidence:
                     continue
                 box=event.bbox
                 p=Point(x=(box.x_min+box.x_max)/2,y=(box.y_min+box.y_max)/2)
@@ -138,27 +147,34 @@ class RuleEngine:
                     old=None
                 entered=old['entered'] if old else now
                 anchor=old['anchor'] if old else p
+                observations=old.get('observations',0)+1 if old else 1
                 triggered=False
                 direction=None
                 if rule.kind=='line_crossing':
                     a,b=rule.line
                     value=side(a,b,p)
+                    if abs(value)/hypot(b.x-a.x,b.y-a.y)<=rule.line_margin:
+                        value=0
                     # Keep last nonzero side through points exactly on the line.
                     prior=old['side'] if old else 0
                     prior_point=old['point'] if old else p
                     if value and prior and value*prior<0 and intersects(a,b,prior_point,p):
                         direction='positive' if value>0 else 'negative'
-                        triggered=rule.direction in ('both',direction)
+                        triggered=observations>=rule.min_observations and rule.direction in ('both',direction)
                     current[event.track_id]={'side':value or prior,'point':p if value else prior_point,'entered':entered,'anchor':anchor,'last':now,'fired':False}
                 elif inside(p,rule.polygon):
                     if rule.kind=='probable_abandoned_object' and hypot(p.x-anchor.x,p.y-anchor.y)>rule.stationary_radius:
                         entered=now; anchor=p; old=None
                     fired=old['fired'] if old else False
-                    triggered=(not old if rule.kind=='intrusion' else now-entered>=rule.duration_seconds and not fired)
+                    triggered=observations>=rule.min_observations and not fired and (rule.kind=='intrusion' or now-entered>=rule.duration_seconds)
                     current[event.track_id]={'side':0,'point':p,'entered':entered,'anchor':anchor,'last':now,'fired':fired}
+                if event.track_id in current:
+                    current[event.track_id]['observations']=observations
                 if triggered and rule.kind!='count':
                     candidates.append((event,direction))
-            if rule.kind=='count' and len(current)>=rule.threshold and len(previous)<rule.threshold:
+            visible_count=sum(v['observations']>=rule.min_observations for v in current.values())
+            previous_count=sum(v['observations']>=rule.min_observations for v in previous.values())
+            if rule.kind=='count' and visible_count>=rule.threshold and previous_count<rule.threshold:
                 candidates=[(None,None)]
             for event,direction in candidates:
                 if now-self.cooldowns.get(rule.rule_id,float('-inf'))<rule.cooldown_seconds:
@@ -168,7 +184,7 @@ class RuleEngine:
                     'event_id':str(uuid5(NAMESPACE_URL,f'{session}/{rule.rule_id}/{timestamp.isoformat()}/{track_id}')),
                     'rule_id':str(rule.rule_id),'worker_session_id':str(session),'track_id':track_id,
                     'timestamp':timestamp.isoformat(),'event_type':rule.kind,'direction':direction,
-                    'count':len(current),'review_status':'pending','evidence':None,
+                    'count':visible_count,'review_status':'pending','evidence':None,
                     'description':'Posible objeto abandonado; requiere revisión humana' if rule.kind=='probable_abandoned_object' else 'Regla de visión; requiere revisión humana'})
                 self.cooldowns[rule.rule_id]=now
                 if track_id in current:
