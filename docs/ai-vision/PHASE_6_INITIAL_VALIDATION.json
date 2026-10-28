@@ -1,0 +1,41 @@
+{
+  "date": "2026-10-28 America/Mexico_City",
+  "backend_clean_venv": {
+    "tests": 183,
+    "failures": 0,
+    "errors": 0,
+    "legacy_warnings": 5,
+    "seconds": 12.38,
+    "initial_run": "182 passed, 1 reconnect deadline failure; isolated rerun passed and full rerun passed with native thread pools=1; cause unproven"
+  },
+  "dependency_snapshot": {
+    "initial_affected_packages": 1,
+    "remediation": "pip25.0.1 -> 26.2; verified wheel",
+    "core_packages": 70,
+    "core_lookup_errors": 0,
+    "core_affected_packages": 0,
+    "pose_packages": 25,
+    "pose_lookup_errors": 0,
+    "pose_affected_packages": 0,
+    "binary_ci_wheels": 69,
+    "installed_bytes_verified": false
+  },
+  "postgres": {
+    "result": "PASS",
+    "network": "none",
+    "scope": "real disposable SQL/RLS/rollback/concurrency; workflow Auth/Storage are local substitutes",
+    "checkout_mounted": false
+  },
+  "pose_setup": "idempotent tooling install, pip check and bundles verified",
+  "workflow": {
+    "yaml_parsed": true,
+    "static_guards_checked": true,
+    "github_run": "NOT EXECUTED; no push"
+  },
+  "artifacts": {
+    "backend/requirements-ci.lock": "557b74af94144d3a39f14be94ad612059aa5c98701b349e36439756d99dac450",
+    "backend/requirements-tooling.lock": "5e1aae2eba2f2ff755eb90cfbcb05a092dd34137ee311f108c05c1edae79751b",
+    "docs/ai-vision/PHASE_6_PYTHON_SBOM.cdx.json": "f3cb0e131cbc3052d4e881d3a223ea17b9cfe8c60d4dd7ca383ee514b3a363a7"
+  },
+  "release_approved": false
+}

@@ -1,0 +1,49 @@
+{
+  "name": "pip",
+  "version": "26.2",
+  "source": "https://pypi.org/pypi/pip/26.2/json",
+  "license": "MIT",
+  "vulnerabilities": [],
+  "filename": "pip-26.2-py3-none-any.whl",
+  "url": "https://files.pythonhosted.org/packages/62/36/a3aed958d60531cb442b7ab4596cda7b3621cfb916f8ae1d6769795c7dc1/pip-26.2-py3-none-any.whl",
+  "bytes": 1816475,
+  "sha256": "931c303696af6fa3417112103b1cad26890e5a07eccb5b99783700e33f2b8aad",
+  "scope": "Installer tooling, not application runtime; PyPI advisory snapshot only",
+  "rejected_version": {
+    "version": "25.0.1",
+    "advisory_ids": [
+      "GHSA-4xh5-x5gv-qwph",
+      "GHSA-58qw-9mgm-455v",
+      "GHSA-6vgw-5pg2-w6jp",
+      "GHSA-jp4c-xjxw-mgf9",
+      "GHSA-qwm4-qh6w-59xr",
+      "GHSA-wf93-45jw-7689",
+      "PYSEC-2026-1795",
+      "PYSEC-2026-1796",
+      "PYSEC-2026-196",
+      "PYSEC-2026-2875",
+      "PYSEC-2026-2876",
+      "PYSEC-2026-3721"
+    ],
+    "aliases": [
+      "CVE-2025-8869",
+      "CVE-2026-13346",
+      "CVE-2026-1703",
+      "CVE-2026-3219",
+      "CVE-2026-6357",
+      "CVE-2026-8643",
+      "GHSA-4xh5-x5gv-qwph",
+      "GHSA-58qw-9mgm-455v",
+      "GHSA-6vgw-5pg2-w6jp",
+      "GHSA-jp4c-xjxw-mgf9",
+      "GHSA-qwm4-qh6w-59xr",
+      "GHSA-wf93-45jw-7689",
+      "PYSEC-2026-1795",
+      "PYSEC-2026-1796",
+      "PYSEC-2026-196",
+      "PYSEC-2026-2875",
+      "PYSEC-2026-2876",
+      "PYSEC-2026-3721"
+    ]
+  }
+}

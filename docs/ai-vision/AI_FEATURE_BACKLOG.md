@@ -179,3 +179,11 @@ El usuario autoriza terminar fase 5. El incremento M queda ampliado por [PHASE_5
 Validado: 172 tests backend, 12 Android y APK compilado; modelos reales CPU con captura sintética 1/2/4, JPEG/MP4 concurrentes con eventos inyectados y sustitutos RPC/Storage locales, muerte/recuperación de una cámara y salud de otra; dos vídeos locales original/substream; contenedor con fuente actual, UID65534/read-only/network none. Objetivo 3 FPS no alcanzado: ~0.57–0.92 FPS efectivos, picos RSS ~576 MiB por grupo; no activar acciones sensibles bajo esos resultados. Datos y límites explícitos en el informe. Sin migraciones/push/merge/producción.
 
 Fase 5 completada como implementación funcional controlada. Gates de release pendientes: nuevo build de imagen (falló por disco), dispositivo/instrumentación, Supabase/PostgREST e índices, equipos RTSP/PTS/egress reales, capacidad sostenida y precisión/condiciones de modelos de fases anteriores. No se reinterpretan como aprobados por esta demo. Fase 6 no iniciada; esperar instrucción.
+
+## O. Fase 6 autorizada — hardening inicial (2026-10-28)
+
+[Informe](PHASE_6_HARDENING_AND_RELEASE.md), [checklist](RELEASE_CHECKLIST.md). Nuevos tests de rechazo anónimo/bearer y privacidad de archivos de dashboard; inventario Python CycloneDX, revisión PyPI, locks CI/tooling y workflow readonly con acciones oficiales por SHA. Hallazgo real pip25.0.1 corregido a26.2 con wheel/licencia/hash revisados; locks retenidos hasta revisión limpia. Runner SQL copia solo fixtures/migraciones, sin checkout/secretos montados.
+
+Validación: 183 backend en venv limpio desde 69 wheels con hashes; 70 distribuciones sin avisos ni errores en snapshot PyPI (no escaneo nativo completo); PostgreSQL desechable/RLS/concurrencia/media/retención/rollback PASS; runtime pose idempotente verificado. Timeout inicial de reconexión registrado, caso aislado y repetición completa pasan; no se declara causa demostrada ni se oculta el fallo.
+
+Pendiente: CI remoto, escaneos OS/nativo/Android y SBOM completo, imagen release por falta de disco, staging administrado, equipo/dispositivo, soak/red/PTS/precisión, backup/restore y aceptación final. ONNX Runtime/GPU solo evaluación posterior al baseline y auditoría; no instalado. Fase 6 iniciada, no terminada ni release aprobado. Sin migraciones/datos reales/push/merge/despliegue.

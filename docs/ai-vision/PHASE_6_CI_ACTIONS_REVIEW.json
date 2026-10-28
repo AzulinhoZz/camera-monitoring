@@ -1,0 +1,59 @@
+{
+  "scope": "official immutable refs, metadata and license checked; not a full transitive JS audit",
+  "actions": [
+    {
+      "repository": "actions/checkout",
+      "ref": "3d3c42e5aac5ba805825da76410c181273ba90b1",
+      "tag_observed": "v7",
+      "action.yml": {
+        "url": "https://raw.githubusercontent.com/actions/checkout/3d3c42e5aac5ba805825da76410c181273ba90b1/action.yml",
+        "sha256": "d59219cb79590abdb877deaa14e3b65a00c05318bf5a6f3b989b9162b5d08c35"
+      },
+      "runtime_lines": [
+        "using: node24"
+      ],
+      "LICENSE": {
+        "url": "https://raw.githubusercontent.com/actions/checkout/3d3c42e5aac5ba805825da76410c181273ba90b1/LICENSE",
+        "sha256": "3e855ffa704114a51628ef8f0bf3aeb41728adf9d9070e263bf58aa5640b0eb5"
+      },
+      "license_first_line": "The MIT License (MIT)",
+      "license": "MIT"
+    },
+    {
+      "repository": "actions/setup-python",
+      "ref": "6d4fd22b20465ccc0f7354476588e8df7c9ca0e0",
+      "tag_observed": "v7",
+      "action.yml": {
+        "url": "https://raw.githubusercontent.com/actions/setup-python/6d4fd22b20465ccc0f7354476588e8df7c9ca0e0/action.yml",
+        "sha256": "0829b3f54d769f8b25cefd4d856c735bc8e097d6597835b838ebb4da497c838d"
+      },
+      "runtime_lines": [
+        "using: 'node24'"
+      ],
+      "LICENSE": {
+        "url": "https://raw.githubusercontent.com/actions/setup-python/6d4fd22b20465ccc0f7354476588e8df7c9ca0e0/LICENSE",
+        "sha256": "7d070f6b64d9bcc530fe99cc21eaaa4b3c364e0b2d367d7735671fa202a03b32"
+      },
+      "license_first_line": "The MIT License (MIT)",
+      "license": "MIT"
+    },
+    {
+      "repository": "actions/upload-artifact",
+      "ref": "cf430e030ddbb5b0abf93d22962f4752f3646cd9",
+      "tag_observed": "v7",
+      "action.yml": {
+        "url": "https://raw.githubusercontent.com/actions/upload-artifact/cf430e030ddbb5b0abf93d22962f4752f3646cd9/action.yml",
+        "sha256": "c5979822866a72362e609844b6ebe77d4b7e759af68cc1c2c425dcf51481fab4"
+      },
+      "runtime_lines": [
+        "using: 'node24'"
+      ],
+      "LICENSE": {
+        "url": "https://raw.githubusercontent.com/actions/upload-artifact/cf430e030ddbb5b0abf93d22962f4752f3646cd9/LICENSE",
+        "sha256": "3e855ffa704114a51628ef8f0bf3aeb41728adf9d9070e263bf58aa5640b0eb5"
+      },
+      "license_first_line": "The MIT License (MIT)",
+      "license": "MIT"
+    }
+  ]
+}

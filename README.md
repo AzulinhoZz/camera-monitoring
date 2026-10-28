@@ -15,3 +15,5 @@ The `/health/db` endpoint verifies access to the `public.cameras` table. Camera 
 ## Camera Monitoring AI 2.0
 
 The development implementation includes scoped vision rules/events, review and evidence, optional pose/action experiments, a paged Android event dashboard, expiring analyzed-frame overlays and a per-camera fleet supervisor. See [phase 5 completion](docs/ai-vision/PHASE_5_COMPLETION.md) for setup, measured limits and rollback. Production acceptance, managed integration, device verification and release hardening remain separate gates.
+
+Phase 6 hardening is in progress: see the [initial hardening report](docs/ai-vision/PHASE_6_HARDENING_AND_RELEASE.md) and [release checklist](docs/ai-vision/RELEASE_CHECKLIST.md). The reviewed CI snapshot targets Python 3.12/Linux x86_64; it does not approve a production image or deployment.
