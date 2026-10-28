@@ -1,6 +1,7 @@
 import os
 from datetime import datetime, timezone
-from typing import Optional
+from typing import Optional, Annotated, Literal
+from .event_timeline import configure_timeline, page_metadata
 from fastapi import APIRouter, Depends, HTTPException, Query
 from pydantic import BaseModel, Field
 from supabase import create_client
@@ -51,6 +52,12 @@ class ReviewAlertPayload(BaseModel):
 def list_events(
     camera_id: Optional[str] = Query(None),
     user: dict = Depends(get_current_user),
+    event_type: Annotated[str | None, Query(pattern=r"^[a-zA-Z0-9_-]{1,64}$")] = None,
+    review_status: Literal['pending', 'reviewed_ok', 'help_requested'] | None = None,
+    since: datetime | None = None,
+    until: datetime | None = None,
+    cursor: Annotated[str | None, Query(max_length=512)] = None,
+    limit: Annotated[int, Query(ge=1, le=100)] = 100,
 ):
     try:
         client = create_client(
@@ -60,7 +67,8 @@ def list_events(
 
         auth_camera_ids = get_authorized_camera_ids(user)
         if not auth_camera_ids:
-            return {"total": 0, "events": []}
+            return {"total": 0, "events": [], "has_more": False, "next_cursor": None,
+                    "summary": {"scope": "page", "by_type": {}, "by_review_status": {}}}
 
         if camera_id:
             if not has_camera_access(user, camera_id):
@@ -79,10 +87,12 @@ def list_events(
 
         result = query_events(client,
             "id, camera_id, event_type, detected_at, description, evidence_path, clip_path, is_protected, review_status, reviewed_at",
-            lambda q:q.in_("camera_id",target_ids).order("detected_at",desc=True).limit(100))
+            lambda q:configure_timeline(q, target_ids, event_type=event_type,
+                review_status=review_status, since=since, until=until, cursor=cursor, limit=limit))
+        records, metadata = page_metadata(result.data or [], limit)
 
         events = []
-        for record in result.data or []:
+        for record in records:
             cam_id = record.get("camera_id")
             ev_path = record.get("evidence_path")
             cl_path = record.get("clip_path")
@@ -106,6 +116,7 @@ def list_events(
         return {
             "total": len(events),
             "events": events,
+            **metadata,
         }
 
     except HTTPException:
