@@ -19,6 +19,18 @@ class EventRepository(
         }
     }
 
+    suspend fun getVisionStatus(cameraId: String, preview: Boolean, overlay: Boolean): VisionStatus? = try {
+        val response = apiService.getVisionStatus(cameraId, preview, overlay)
+        if (response.isSuccessful) response.body() else null
+    } catch (e: kotlinx.coroutines.CancellationException) { throw e }
+    catch (_: Exception) { null }
+
+    suspend fun getStatistics(cameraId: String?, type: String?, review: String?, since: String?): EventStatistics? = try {
+        val response = apiService.getEventStatistics(cameraId, type, review, since)
+        if (response.isSuccessful) response.body() else null
+    } catch (e: kotlinx.coroutines.CancellationException) { throw e }
+    catch (_: Exception) { null }
+
     suspend fun getEventPage(
         cameraId: String? = null, eventType: String? = null, reviewStatus: String? = null,
         since: String? = null, cursor: String? = null

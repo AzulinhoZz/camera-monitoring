@@ -80,6 +80,17 @@ interface ApiService {
         @Path("id") id: String
     ): Response<Unit>
 
+    @GET("cameras/{id}/vision-status")
+    suspend fun getVisionStatus(@Path("id") id: String,
+        @Query("preview") preview: Boolean = false,
+        @Query("overlay") overlay: Boolean = false): Response<VisionStatus>
+
+    @GET("events/statistics")
+    suspend fun getEventStatistics(@Query("camera_id") cameraId: String? = null,
+        @Query("event_type") eventType: String? = null,
+        @Query("review_status") reviewStatus: String? = null,
+        @Query("since") since: String? = null): Response<EventStatistics>
+
     @GET("events")
     suspend fun getEvents(
         @Query("camera_id") cameraId: String? = null,

@@ -273,3 +273,26 @@ data class VisionSummary(
     val count: Int? = null,
     val direction: String? = null
 )
+
+
+data class VisionStatus(
+    @SerializedName("camera_id") val cameraId: String,
+    val healthy: Boolean = false,
+    val state: String = "unavailable",
+    val session: String? = null,
+    @SerializedName("frame_at") val frameAt: String? = null,
+    @SerializedName("capture_fps") val captureFps: Double = 0.0,
+    @SerializedName("inference_fps") val inferenceFps: Double = 0.0,
+    @SerializedName("inference_frames") val inferenceFrames: Long = 0,
+    @SerializedName("inference_dropped") val inferenceDropped: Long = 0,
+    @SerializedName("rss_bytes") val rssBytes: Long = 0,
+    @SerializedName("cpu_seconds") val cpuSeconds: Double = 0.0,
+    @SerializedName("image_age_seconds") val imageAgeSeconds: Double = 10.0,
+    @SerializedName("preview_ttl_seconds") val previewTtlSeconds: Int = 3,
+    @SerializedName("image_base64") val imageBase64: String? = null
+)
+
+data class EventStatistics(
+    val total: Long, val pending: Long,
+    val since: String, val until: String, val scope: String
+)

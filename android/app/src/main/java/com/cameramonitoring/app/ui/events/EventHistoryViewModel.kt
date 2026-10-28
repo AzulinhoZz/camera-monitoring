@@ -2,6 +2,9 @@ package com.cameramonitoring.app.ui.events
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.cameramonitoring.app.data.model.Camera
+import com.cameramonitoring.app.data.model.EventStatistics
+import com.cameramonitoring.app.data.repository.CameraRepository
 import com.cameramonitoring.app.data.model.CameraEvent
 import com.cameramonitoring.app.data.repository.EventRepository
 import com.cameramonitoring.app.data.repository.StorageRepository
@@ -21,17 +24,22 @@ sealed interface EventHistoryUiState {
         val evidenceUrls: Map<String, String> = emptyMap(),
         val clipUrls: Map<String, String> = emptyMap(),
         val nextCursor: String? = null,
-        val hasMore: Boolean = false
+        val hasMore: Boolean = false,
+        val statistics: EventStatistics? = null
     ) : EventHistoryUiState
     data class Error(val message: String) : EventHistoryUiState
 }
 
 class EventHistoryViewModel(
     private val eventRepository: EventRepository,
-    private val storageRepository: StorageRepository
+    private val storageRepository: StorageRepository,
+    private val cameraRepository: CameraRepository
 ) : ViewModel() {
     private val _uiState = MutableStateFlow<EventHistoryUiState>(EventHistoryUiState.Loading)
     val uiState: StateFlow<EventHistoryUiState> = _uiState.asStateFlow()
+    private val _cameras = MutableStateFlow<List<Camera>>(emptyList())
+    val cameras = _cameras.asStateFlow()
+    fun loadCameras() { viewModelScope.launch { _cameras.value = cameraRepository.getCameras().getOrDefault(emptyList()) } }
     private var request: Job? = null
     private var generation = 0L
     private var selectedCamera: String? = null
@@ -40,7 +48,8 @@ class EventHistoryViewModel(
     private var since: String? = null
     private var cursor: String? = null
 
-    fun search(type: String?, review: String?, hours: Long?) {
+    fun search(type: String?, review: String?, hours: Long?, cameraId: String? = null) {
+        selectedCamera = cameraId
         eventType = type; reviewStatus = review
         since = hours?.let { Instant.now().minusSeconds(it * 3600).toString() }
         cursor = null
@@ -66,6 +75,10 @@ class EventHistoryViewModel(
                 onSuccess = { page ->
                     if (!currentCoroutineContext().isActive || generation != currentGeneration) return@launch
                     _uiState.value = EventHistoryUiState.Success(page.events, nextCursor = page.nextCursor, hasMore = page.hasMore)
+                    val statistics = eventRepository.getStatistics(selectedCamera, eventType, reviewStatus, since)
+                    if (!currentCoroutineContext().isActive || generation != currentGeneration) return@launch
+                    val firstState = _uiState.value as? EventHistoryUiState.Success
+                    if (firstState != null) _uiState.value = firstState.copy(statistics = statistics)
                     // Media belongs only to this request; a newer search cancels it.
                     val evUrls = mutableMapOf<String, String>()
                     val clUrls = mutableMapOf<String, String>()

@@ -187,6 +187,9 @@ fun LiveStreamScreen(
                         verticalArrangement = Arrangement.spacedBy(16.dp)
                     ) {
                         item {
+                            VisionStatusPanel(cameraId) { preview, overlay -> viewModel.visionStatus(cameraId, preview, overlay) }
+                        }
+                        item {
                             Card(
                                 modifier = Modifier
                                     .fillMaxWidth()

@@ -72,7 +72,7 @@ fun AppNavigation() {
     val dashboardViewModel = remember { DashboardViewModel(cameraRepository) }
     val addCameraViewModel = remember { AddCameraViewModel(cameraRepository) }
     val liveStreamViewModel = remember { LiveStreamViewModel(cameraRepository, eventRepository) }
-    val eventHistoryViewModel = remember { EventHistoryViewModel(eventRepository, storageRepository) }
+    val eventHistoryViewModel = remember { EventHistoryViewModel(eventRepository, storageRepository, cameraRepository) }
     val storageViewModel = remember { StorageViewModel(storageRepository) }
 
     val startDestination = if (authRepository.isLoggedIn()) Destinations.DASHBOARD else Destinations.WELCOME

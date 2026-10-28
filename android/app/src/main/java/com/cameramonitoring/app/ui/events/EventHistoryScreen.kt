@@ -50,16 +50,19 @@ fun EventHistoryScreen(
     onStorageClick: () -> Unit = {}
 ) {
     val uiState by viewModel.uiState.collectAsState()
+    val cameras by viewModel.cameras.collectAsState()
+    var selectedCamera by rememberSaveable { mutableStateOf<String?>(null) }
+    LaunchedEffect(Unit) { viewModel.loadCameras() }
     var selectedEventForDetail by remember { mutableStateOf<Triple<CameraEvent, String?, String?>?>(null) }
     var activePlayingClipUrl by remember { mutableStateOf<String?>(null) }
 
     var eventType by rememberSaveable { mutableStateOf<String?>(null) }
     var reviewStatus by rememberSaveable { mutableStateOf<String?>(null) }
     var hours by rememberSaveable { mutableStateOf<Long?>(null) }
-    LaunchedEffect(eventType, reviewStatus, hours) {
+    LaunchedEffect(eventType, reviewStatus, hours, selectedCamera) {
         selectedEventForDetail = null
         activePlayingClipUrl = null
-        viewModel.search(eventType, reviewStatus, hours)
+        viewModel.search(eventType, reviewStatus, hours, selectedCamera)
     }
 
     Scaffold(
@@ -93,6 +96,12 @@ fun EventHistoryScreen(
         ) {
             Column(Modifier.padding(horizontal = 16.dp)) {
                 Text("Buscar eventos", style = MaterialTheme.typography.titleMedium)
+                Row(Modifier.horizontalScroll(rememberScrollState()), horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+                    FilterChip(selected = selectedCamera == null, onClick = { selectedCamera = null }, label = { Text("Todas las cámaras") })
+                    cameras.forEach { camera ->
+                        FilterChip(selected = selectedCamera == camera.id, onClick = { selectedCamera = camera.id }, label = { Text(camera.name) })
+                    }
+                }
                 Row(Modifier.horizontalScroll(rememberScrollState()), horizontalArrangement = Arrangement.spacedBy(8.dp)) {
                     listOf(null to "Todos", "motion_detected" to "Movimiento", "vision_intrusion" to "Intrusión",
                         "vision_dwell" to "Permanencia", "vision_line_crossing" to "Cruce",
@@ -154,6 +163,10 @@ fun EventHistoryScreen(
                         modifier = Modifier.fillMaxSize()
                     ) {
                         item {
+                            state.statistics?.let { stats ->
+                                Text("Estadísticas · ${if (hours == null) "últimas 24 h" else if (hours == 24L) "últimas 24 h" else "últimos 7 días"}", style = MaterialTheme.typography.titleMedium)
+                                Text("${stats.total} eventos · ${stats.pending} pendientes (cámaras y filtros seleccionados)")
+                            } ?: Text("Estadísticas no disponibles; los eventos siguen visibles.")
                             Text("Resumen de esta página", style = MaterialTheme.typography.titleMedium)
                             Text("${state.events.size} eventos · ${state.events.count { it.reviewStatus == "pending" }} pendientes")
                             Text("Los conteos corresponden a esta página, no al total del historial.", style = MaterialTheme.typography.bodySmall)

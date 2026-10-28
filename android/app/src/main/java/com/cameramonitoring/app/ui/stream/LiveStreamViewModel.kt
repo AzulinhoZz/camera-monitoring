@@ -47,6 +47,9 @@ class LiveStreamViewModel(
     private val _uiState = MutableStateFlow<StreamUiState>(StreamUiState.Loading)
     val uiState: StateFlow<StreamUiState> = _uiState.asStateFlow()
 
+    suspend fun visionStatus(cameraId: String, preview: Boolean, overlay: Boolean) =
+        eventRepository.getVisionStatus(cameraId, preview, overlay)
+
     private var pollingJob: Job? = null
 
     fun loadCamera(cameraId: String) {
