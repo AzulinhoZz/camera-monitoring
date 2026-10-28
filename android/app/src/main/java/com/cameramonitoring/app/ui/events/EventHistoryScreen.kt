@@ -1,5 +1,8 @@
 package com.cameramonitoring.app.ui.events
 
+import androidx.compose.foundation.horizontalScroll
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
@@ -50,8 +53,13 @@ fun EventHistoryScreen(
     var selectedEventForDetail by remember { mutableStateOf<Triple<CameraEvent, String?, String?>?>(null) }
     var activePlayingClipUrl by remember { mutableStateOf<String?>(null) }
 
-    LaunchedEffect(Unit) {
-        viewModel.loadEvents()
+    var eventType by rememberSaveable { mutableStateOf<String?>(null) }
+    var reviewStatus by rememberSaveable { mutableStateOf<String?>(null) }
+    var hours by rememberSaveable { mutableStateOf<Long?>(null) }
+    LaunchedEffect(eventType, reviewStatus, hours) {
+        selectedEventForDetail = null
+        activePlayingClipUrl = null
+        viewModel.search(eventType, reviewStatus, hours)
     }
 
     Scaffold(
@@ -77,12 +85,33 @@ fun EventHistoryScreen(
             )
         }
     ) { paddingValues ->
-        Box(
+        Column(
             modifier = Modifier
                 .fillMaxSize()
                 .padding(paddingValues)
                 .background(MaterialTheme.colorScheme.background)
         ) {
+            Column(Modifier.padding(horizontal = 16.dp)) {
+                Text("Buscar eventos", style = MaterialTheme.typography.titleMedium)
+                Row(Modifier.horizontalScroll(rememberScrollState()), horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+                    listOf(null to "Todos", "motion_detected" to "Movimiento", "vision_intrusion" to "Intrusión",
+                        "vision_dwell" to "Permanencia", "vision_line_crossing" to "Cruce",
+                        "vision_count" to "Conteo", "vision_probable_abandoned_object" to "Posible abandono").forEach { (value, label) ->
+                        FilterChip(selected = eventType == value, onClick = { eventType = value }, label = { Text(label) })
+                    }
+                }
+                Row(Modifier.horizontalScroll(rememberScrollState()), horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+                    listOf(null to "Toda revisión", "pending" to "Pendientes", "reviewed_ok" to "Revisados", "help_requested" to "Ayuda solicitada").forEach { (value, label) ->
+                        FilterChip(selected = reviewStatus == value, onClick = { reviewStatus = value }, label = { Text(label) })
+                    }
+                }
+                Row(Modifier.horizontalScroll(rememberScrollState()), horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+                    listOf(null to "Todo el periodo", 24L to "Últimas 24 h", 168L to "Últimos 7 días").forEach { (value, label) ->
+                        FilterChip(selected = hours == value, onClick = { hours = value }, label = { Text(label) })
+                    }
+                }
+            }
+            Box(Modifier.weight(1f)) {
             when (val state = uiState) {
                 is EventHistoryUiState.Loading -> {
                     Box(
@@ -119,63 +148,36 @@ fun EventHistoryScreen(
                     }
                 }
                 is EventHistoryUiState.Success -> {
-                    if (state.events.isEmpty()) {
-                        Column(
-                            modifier = Modifier
-                                .fillMaxSize()
-                                .padding(32.dp),
-                            horizontalAlignment = Alignment.CenterHorizontally,
-                            verticalArrangement = Arrangement.Center
-                        ) {
-                            Surface(
-                                shape = CircleShape,
-                                color = MaterialTheme.colorScheme.surfaceVariant,
-                                modifier = Modifier.size(80.dp)
-                            ) {
-                                Box(contentAlignment = Alignment.Center) {
-                                    Icon(
-                                        imageVector = Icons.Default.NotificationsNone,
-                                        contentDescription = "Sin eventos",
-                                        modifier = Modifier.size(40.dp),
-                                        tint = MaterialTheme.colorScheme.onSurfaceVariant
-                                    )
-                                }
+                    LazyColumn(
+                        contentPadding = PaddingValues(16.dp),
+                        verticalArrangement = Arrangement.spacedBy(12.dp),
+                        modifier = Modifier.fillMaxSize()
+                    ) {
+                        item {
+                            Text("Resumen de esta página", style = MaterialTheme.typography.titleMedium)
+                            Text("${state.events.size} eventos · ${state.events.count { it.reviewStatus == "pending" }} pendientes")
+                            Text("Los conteos corresponden a esta página, no al total del historial.", style = MaterialTheme.typography.bodySmall)
+                            Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+                                OutlinedButton(onClick = { viewModel.firstPage() }) { Text("Inicio") }
+                                Button(onClick = { viewModel.nextPage() }, enabled = state.hasMore && state.nextCursor != null) { Text("Siguiente") }
                             }
-                            Spacer(modifier = Modifier.height(16.dp))
-                            Text(
-                                text = "Sin eventos de movimiento registrados",
-                                fontSize = 18.sp,
-                                fontWeight = FontWeight.Bold,
-                                color = MaterialTheme.colorScheme.onSurface
-                            )
-                            Spacer(modifier = Modifier.height(8.dp))
-                            Text(
-                                text = "Los eventos de detección de movimiento con OpenCV aparecerán aquí.",
-                                fontSize = 14.sp,
-                                color = MaterialTheme.colorScheme.onSurfaceVariant
-                            )
                         }
-                    } else {
-                        LazyColumn(
-                            contentPadding = PaddingValues(16.dp),
-                            verticalArrangement = Arrangement.spacedBy(12.dp),
-                            modifier = Modifier.fillMaxSize()
-                        ) {
-                            items(state.events) { event ->
-                                val imageUrl = state.evidenceUrls[event.id]
-                                val clipUrl = state.clipUrls[event.id]
-                                EventItemCard(
-                                    event = event,
-                                    imageUrl = imageUrl,
-                                    hasClip = clipUrl != null || event.hasClip || event.clipPath != null,
-                                    onClick = {
-                                        selectedEventForDetail = Triple(event, imageUrl, clipUrl)
-                                    }
-                                )
-                            }
+                        if (state.events.isEmpty()) item {
+                            Text("Sin eventos para estos filtros. Puedes cambiar el periodo o volver al inicio.")
+                        }
+                        items(state.events, key = { it.id }) { event ->
+                            val imageUrl = state.evidenceUrls[event.id]
+                            val clipUrl = state.clipUrls[event.id]
+                            EventItemCard(
+                                event = event,
+                                imageUrl = imageUrl,
+                                hasClip = clipUrl != null || event.hasClip || event.clipPath != null,
+                                onClick = { selectedEventForDetail = Triple(event, imageUrl, clipUrl) }
+                            )
                         }
                     }
                 }
+            }
             }
         }
 

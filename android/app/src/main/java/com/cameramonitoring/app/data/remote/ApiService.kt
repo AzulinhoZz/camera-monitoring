@@ -82,7 +82,12 @@ interface ApiService {
 
     @GET("events")
     suspend fun getEvents(
-        @Query("camera_id") cameraId: String? = null
+        @Query("camera_id") cameraId: String? = null,
+        @Query("event_type") eventType: String? = null,
+        @Query("review_status") reviewStatus: String? = null,
+        @Query("since") since: String? = null,
+        @Query("cursor") cursor: String? = null,
+        @Query("limit") limit: Int = 100
     ): Response<EventListResponse>
 
     @POST("events/{id}/review")

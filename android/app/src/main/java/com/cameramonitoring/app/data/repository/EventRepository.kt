@@ -19,6 +19,20 @@ class EventRepository(
         }
     }
 
+    suspend fun getEventPage(
+        cameraId: String? = null, eventType: String? = null, reviewStatus: String? = null,
+        since: String? = null, cursor: String? = null
+    ): Result<EventListResponse> = try {
+        val response = apiService.getEvents(cameraId, eventType, reviewStatus, since, cursor, 30)
+        val body = response.body()
+        if (response.isSuccessful && body != null) Result.success(body)
+        else Result.failure(Exception("No se pudo consultar el historial (${response.code()})"))
+    } catch (e: kotlinx.coroutines.CancellationException) {
+        throw e
+    } catch (_: Exception) {
+        Result.failure(Exception("No se pudo conectar. Reintenta."))
+    }
+
     suspend fun reviewAlert(eventId: String, reviewStatus: String): Result<Unit> {
         return try {
             val response = apiService.reviewAlert(eventId, ReviewAlertRequest(reviewStatus))

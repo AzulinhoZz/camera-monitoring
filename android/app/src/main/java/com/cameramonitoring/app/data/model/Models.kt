@@ -128,7 +128,9 @@ data class EventClipResponse(
 
 data class EventListResponse(
     val total: Int,
-    val events: List<CameraEvent>
+    val events: List<CameraEvent>,
+    @SerializedName("has_more") val hasMore: Boolean = false,
+    @SerializedName("next_cursor") val nextCursor: String? = null
 )
 
 data class EventCreateRequest(
