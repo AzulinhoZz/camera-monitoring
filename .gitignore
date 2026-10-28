@@ -38,3 +38,7 @@ backend/app/camera_configs.json.bak
 # Verified model cache is local-only; never commit weights.
 .models/
 *.onnx
+
+# Private operator source registries and transient dashboard frames
+vision-substreams.private.json
+vision-dashboard/

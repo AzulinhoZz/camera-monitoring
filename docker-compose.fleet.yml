@@ -1,0 +1,29 @@
+# Explicit demo: synthetic inputs, no network, no models, no production activation.
+services:
+  vision-fleet:
+    profiles: [vision-fleet]
+    build: ./backend
+    command: [python, -m, app.vision.fleet, --config, /code/vision-fleet.example.json, --cpu-slots, "2", --memory-mib, "768", --camera-memory-mib, "384", --health-file, /tmp/vision-fleet-health.json]
+    network_mode: none
+    read_only: true
+    user: "65534:65534"
+    environment:
+      CAMERA_LEASE_DIRECTORY: /run/camera-leases
+    volumes:
+      - capture-leases:/run/camera-leases
+      - ./backend/vision-fleet.example.json:/code/vision-fleet.example.json:ro
+    tmpfs:
+      - /tmp:size=128m,mode=1777
+    cpus: 2.0
+    mem_limit: 1024m
+    pids_limit: 96
+    stop_grace_period: 20s
+    healthcheck:
+      test: [CMD, python, -c, "import json,time; from pathlib import Path; p=Path('/tmp/vision-fleet-health.json'); assert time.time()-p.stat().st_mtime<5 and json.loads(p.read_text())['healthy']"]
+      interval: 5s
+      timeout: 2s
+      start_period: 20s
+      retries: 3
+volumes:
+  capture-leases:
+    name: camera-monitoring-capture-leases

@@ -322,3 +322,42 @@ def create_event(
             status_code=500,
             detail="Error al crear el evento",
         )
+
+
+@router.get('/statistics')
+def event_statistics(camera_id: Optional[str]=None,
+    event_type: Annotated[str | None, Query(pattern=r'^[a-zA-Z0-9_-]{1,64}$')]=None,
+    review_status: Literal['pending','reviewed_ok','help_requested'] | None=None,
+    since: datetime | None=None, until: datetime | None=None,
+    user:dict=Depends(get_current_user)):
+    """Two bounded aggregate queries, current ACL, max 31 days; no media/rows."""
+    from datetime import timedelta
+    from .event_timeline import utc
+    try:
+        end=utc(until) if until else datetime.now(timezone.utc)
+        start=utc(since) if since else end-timedelta(days=1)
+        if not timedelta(0)<=end-start<=timedelta(days=31):
+            raise ValueError('range')
+    except ValueError:
+        raise HTTPException(422,'Estadísticas requieren zona horaria y un periodo de hasta 31 días') from None
+    ids=get_authorized_camera_ids(user)
+    if camera_id:
+        if not has_camera_access(user,camera_id):raise HTTPException(403,'Sin acceso a esta cámara')
+        ids=[camera_id]
+    try:
+        client=create_client(os.environ['SUPABASE_URL'],os.environ['SUPABASE_SECRET_KEY'])
+        def count(status):
+            if not ids:return 0
+            q=client.table('camera_events').select('id',count='exact',head=True).in_('camera_id',ids).gte('detected_at',start.isoformat()).lte('detected_at',end.isoformat())
+            if event_type:q=q.eq('event_type',event_type)
+            if status:q=q.eq('review_status',status)
+            value=q.execute().count
+            if value is None:raise ValueError('count unavailable')
+            return value
+        total=count(review_status)
+        pending=count('pending') if review_status in (None,'pending') else 0
+        from fastapi.responses import JSONResponse
+        return JSONResponse({'total':total,'pending':pending,'since':start.isoformat(),'until':end.isoformat(),
+                             'scope':'authorized_window'},headers={'Cache-Control':'no-store, private'})
+    except HTTPException:raise
+    except Exception:raise HTTPException(503,'Estadísticas no disponibles') from None

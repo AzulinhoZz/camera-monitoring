@@ -41,10 +41,11 @@ class Frame:
 
 
 class CameraWorker:
-    def __init__(self, config: CameraConfig, *, decoder_target=decoder_main):
+    def __init__(self, config: CameraConfig, *, decoder_target=decoder_main, lease_id=None):
         self.config = config
         self.scope = CameraScope(camera_id=config.camera_id, owner_id=config.owner_id,
                                  organization_id=config.organization_id)
+        self._lease_id = lease_id or config.camera_id
         self._lease = None
         self._target = decoder_target
         self._ctx = mp.get_context("spawn")
@@ -68,7 +69,7 @@ class CameraWorker:
         with self._lifecycle_lock:
             if self._thread and self._thread.is_alive():
                 return
-            self._lease = CaptureLease(self.config.camera_id).acquire()
+            self._lease = CaptureLease(self._lease_id).acquire()
             self._stop.clear()
             for lane in self._lanes.values():
                 self._clear(lane)

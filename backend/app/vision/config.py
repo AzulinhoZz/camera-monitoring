@@ -15,6 +15,7 @@ class CameraConfig(CameraScope):
     # Never serialize source into metrics/logs/errors shown to clients.
     source_kind: Literal["synthetic", "video", "rtsp"] = "synthetic"
     source: str = Field(default="", repr=False, exclude=True, max_length=2048)
+    inference_source: str = Field(default="", repr=False, exclude=True, max_length=2048)
     allowed_cidrs: tuple[str, ...] = ()
     allow_loopback: bool = False
     allowed_ports: tuple[int, ...] = (554, 8554)
@@ -78,6 +79,13 @@ class CameraConfig(CameraScope):
             raise ValueError("source required")
         if self.source_kind == "synthetic" and self.source:
             raise ValueError("synthetic source must not have a URL")
+        if self.inference_source:
+            if self.source_kind == 'synthetic' or self.inference_source == self.source:
+                raise ValueError('substream must be a distinct approved source')
+            if self.source_kind == 'video':
+                sub=Path(self.inference_source)
+                if not sub.is_absolute() or sub.suffix.lower() not in ('.avi','.mp4') or not sub.is_file():
+                    raise ValueError('invalid local inference video')
         if self.source_kind == "video":
             path = Path(self.source)
             if not path.is_absolute() or path.suffix.lower() not in (".avi", ".mp4") or not path.is_file():
@@ -134,7 +142,7 @@ class WorkerConfig(Contract):
             raise ValueError("duplicate camera configuration")
         # Budget shared slots, two lanes and two in-flight copies. Decoder/library
         # allocations are additionally bounded by the container memory limit.
-        frame_bytes = sum(c.max_width * c.max_height * 3 * (3 + 2 * c.queue_size) for c in self.cameras)
+        frame_bytes = sum(c.max_width * c.max_height * 3 * (3 + 2 * c.queue_size) * (2 if c.inference_source else 1) for c in self.cameras)
         if frame_bytes > 64 * 1024 * 1024:
             raise ValueError("configured frame buffers exceed the 64 MiB budget")
         return self

@@ -83,3 +83,28 @@ def replace_rules(camera_id: UUID, payload:ConfigUpdate, user:dict=Depends(get_c
     except ValidationError: raise HTTPException(422,'Regla inválida: comprueba geometría, clases y horario') from None
     except HTTPException: raise
     except Exception as exc: raise failure(exc) from None
+
+
+@router.get('/{camera_id}/vision-status')
+def vision_status(camera_id: UUID, preview:bool=False, overlay:bool=False,
+                  user:dict=Depends(get_current_user)):
+    from datetime import datetime, timezone
+    from .vision.dashboard import read_snapshot, TTL
+    from fastapi.responses import JSONResponse
+    if not has_camera_access(user,str(camera_id)):
+        raise HTTPException(403,'Sin acceso a esta cámara')
+    try:
+        scope=camera_scope(get_client(),camera_id)
+        root=os.getenv('VISION_DASHBOARD_DIRECTORY')
+        if not root:raise ValueError('dashboard disabled')
+        snapshot=read_snapshot(root,scope)
+        data=snapshot.model_dump(mode='json',exclude={'owner_id','organization_id','image','overlay_image'})
+        age=(datetime.now(timezone.utc)-snapshot.frame_at).total_seconds() if snapshot.frame_at else TTL+1
+        data['image_base64']=(snapshot.overlay_image if overlay else snapshot.image) if preview and snapshot.healthy and 0<=age<=3 else None
+        data['preview_ttl_seconds']=3
+        data['image_age_seconds']=max(0,age)
+        return JSONResponse(data,headers={'Cache-Control':'no-store, private'})
+    except HTTPException:raise
+    except Exception:
+        return JSONResponse({'camera_id':str(camera_id),'state':'unavailable','healthy':False,
+                             'image_base64':None},headers={'Cache-Control':'no-store, private'})

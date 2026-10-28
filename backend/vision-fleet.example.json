@@ -1,0 +1,7 @@
+{
+  "metrics_interval_seconds": 1,
+  "cameras": [
+    {"camera_id":"00000000-0000-0000-0000-000000000001","owner_id":"00000000-0000-0000-0000-000000000010","source_kind":"synthetic","capture_fps":10,"recording_fps":5,"inference_fps":2,"max_width":320,"max_height":180},
+    {"camera_id":"00000000-0000-0000-0000-000000000002","owner_id":"00000000-0000-0000-0000-000000000010","source_kind":"synthetic","capture_fps":10,"recording_fps":5,"inference_fps":2,"max_width":320,"max_height":180}
+  ]
+}

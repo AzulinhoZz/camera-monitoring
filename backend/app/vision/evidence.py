@@ -23,7 +23,8 @@ class EvidenceCollector:
     pre_frames=10  # two seconds at five FPS, maximum 320x180 per frame
     post_frames=15
 
-    def __init__(self,scope,dispatcher):
+    def __init__(self,scope,dispatcher,*,separate_recording=False):
+        self.separate_recording=separate_recording
         self.scope=scope
         self.dispatcher=dispatcher
         self.buffer=FrameRingBuffer(maxlen=self.pre_frames)
@@ -44,11 +45,23 @@ class EvidenceCollector:
                 accepted=self.dispatcher.submit({'event':parsed.model_dump(mode='json'),'revision':revision,'snapshot':None,'frames':[]})
                 if not accepted: self.metrics['queue_dropped']+=1
                 return accepted
-            # Snapshot comes from the exact inference frame, not a later frame.
-            snapshot=cv2.resize(frame.pixels,(320,180))
+            # With a substream, select original-stream media close in server capture time.
+            # This is bounded arrival-time alignment, never a promise of sensor PTS sync.
+            recording_session=frame.session_id
+            if self.separate_recording:
+                candidates=[(abs(stamp-frame.captured_monotonic),pixels) for stamp,pixels in zip(self.sample_times,self.buffer.get_frames_copy()) if abs(stamp-frame.captured_monotonic)<=.5]
+                if not candidates:
+                    self.metrics['unmatched_original']+=1
+                    accepted=self.dispatcher.submit({'event':parsed.model_dump(mode='json'),'revision':revision,'snapshot':None,'frames':[]})
+                    if not accepted:self.metrics['queue_dropped']+=1
+                    return accepted
+                snapshot=min(candidates,key=lambda pair:pair[0])[1]
+                recording_session=self.session
+            else:
+                snapshot=cv2.resize(frame.pixels,(320,180))
             self.pending={'event':parsed.model_dump(mode='json'),'revision':revision,
-                'snapshot':snapshot,'frames':[pixels for stamp,pixels in zip(self.sample_times,self.buffer.get_frames_copy()) if frame.captured_monotonic-2-1e-6<=stamp<=frame.captured_monotonic] if self.session==frame.session_id else [],
-                'deadline':time.monotonic()+3,'post':0,'session':frame.session_id,
+                'snapshot':snapshot,'frames':[pixels for stamp,pixels in zip(self.sample_times,self.buffer.get_frames_copy()) if frame.captured_monotonic-2-1e-6<=stamp<=frame.captured_monotonic] if self.session==recording_session else [],
+                'deadline':time.monotonic()+3,'post':0,'session':recording_session,
                 'event_monotonic':frame.captured_monotonic}
             self.metrics['offered']+=1
             return True
