@@ -165,3 +165,9 @@ El estado pendiente del incremento K queda sustituido por [PHASE_4_COMPLETION.md
 Validación: 154 tests backend, modelos reales positivos de cuerpo/manos, blanco negativo, muerte/timeout y recuperación, benchmark de pose+manos 1/2/4, dos smoke tests del worker (pose solo y combinado con YOLOX), diez secuencias geométricas con un falso positivo semántico explícito. No es precisión/recall natural. Runtime legacy descartado por CVE de Protobuf; entorno final sin él.
 
 Pendiente para release: vídeos autorizados/anotados de gestos/caídas, calidad y asociación con oclusiones/múltiples sujetos, capacidad integral en hardware destino (512 MiB insuficiente), model cards/derechos completos de datasets y gates P0/P1 anteriores. Fase 4 completada como implementación experimental verificable, no aceptación productiva. Fase 5 no iniciada; esperar autorización.
+
+## M. Fase 5 autorizada — búsqueda y resumen paginado (2026-10-27)
+
+Usuario autoriza iniciar fase 5. Primer incremento en [PHASE_5_DASHBOARD_AND_MULTICAMERA.md](PHASE_5_DASHBOARD_AND_MULTICAMERA.md): GET /events con filtros tipo/revisión/periodo, keyset por UTC/UUID, acceso efectivo por solicitud, límite acotado y resumen explícito de página. App Android reutiliza historial/revisión/protección, añade filtros/inicio/siguiente y evita mezclar respuestas/URLs de consultas anteriores. Sin migraciones, dependencias ni activación de análisis.
+
+Backend 165 pruebas aprobadas. Evidencia Android se registra en el informe. Pendientes de fase 5: salud de inferencia autorizada/fresca en app, overlays sincronizados optativos, selección multicámara y estadísticas globales, aislamiento/admisión CPU/RAM y pruebas integrales de carga, substream/original y validación en dispositivo. La implementación de laboratorio de fase 4 no implica aptitud productiva ni cierra gates P0/P1. Fase 5 iniciada, no completada; fase 6 no iniciada.

@@ -1,0 +1,27 @@
+{
+  "date": "2026-10-27 America/Mexico_City",
+  "android": {
+    "result": "BUILD SUCCESSFUL",
+    "duration_seconds": 44,
+    "unit_tests": {
+      "tests": 10,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "source_files_verified": 73,
+    "apk_bytes": 25376568,
+    "apk_sha256": "6a3dc60c7338c2a02d13654257dab576a83c4762a84e1a94fb48ca692f02eab7",
+    "scope": "Offline build, local MockWebServer; not instrumented or visually verified",
+    "log": "/tmp/camera-phase5/android-build.log"
+  },
+  "backend": {
+    "tests": 165,
+    "failures": 0,
+    "errors": 0,
+    "legacy_warnings": 5,
+    "seconds": 13.82,
+    "scope": "Offline fixtures, not managed Supabase/PostgREST",
+    "junit": "/tmp/camera-phase5/backend-tests.xml"
+  }
+}
