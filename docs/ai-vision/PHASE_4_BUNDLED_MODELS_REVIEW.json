@@ -1,0 +1,88 @@
+{
+  "version": "0.10.21",
+  "source_commit": "cad7f3ab99ebf175947e40c5252c642612aae927",
+  "license_source": "https://raw.githubusercontent.com/google-ai-edge/mediapipe/cad7f3ab99ebf175947e40c5252c642612aae927/LICENSE",
+  "license_sha256": "8707eef0533987efc5b155d64761eeb6e20793f50b9bd1a68dad1cf4719d0ed8",
+  "distribution_license": "Apache-2.0 plus included Lucent notice; no per-model exception in inspected wheel",
+  "wheel_sha256": "956eb1ebc275c629e61b085b2cab89c3a5b9e93bad1bb107348d98dafb5a4bb5",
+  "models": {
+    "mediapipe/modules/pose_detection/pose_detection.tflite": {
+      "size": 2959046,
+      "sha256": "9ba9dd3d42efaaba86b4ff0122b06f29c4122e756b329d89dca1e297fd8f866c"
+    },
+    "mediapipe/modules/pose_landmark/pose_landmark_full.tflite": {
+      "size": 6440512,
+      "sha256": "e9a5c5cb17f736fafd4c2ec1da3b3d331d6edbe8a0d32395855aeb2cdfd64b9f"
+    },
+    "mediapipe/modules/hand_landmark/hand_landmark_full.tflite": {
+      "size": 5478917,
+      "sha256": "11c272b891e1a99ab034208e23937a8008388cf11ed2a9d776ed3d01d0ba00e3"
+    },
+    "mediapipe/modules/palm_detection/palm_detection_full.tflite": {
+      "size": 2339846,
+      "sha256": "1b14e9422c6ad006cde6581a46c8b90dd573c07ab7f3934b5589e7cea3f89a54"
+    }
+  },
+  "decision": "Use only the source weight assets from this wheel; do NOT install its Python runtime. Final runtime is MediaPipe Tasks0.10.32 without Protobuf.",
+  "limitations": [
+    "External model cards and newer Tasks artifacts blocked by network403",
+    "No outside weights or automatic runtime download",
+    "Bundled face/iris graphs are not used; facial pose points excluded from export",
+    "Dataset/model card review remains a release gate"
+  ],
+  "rejected_legacy_runtime": {
+    "protobuf": "4.25.9",
+    "advisory": "CVE-2026-0994 / GHSA-7gcm-g887-7qv7",
+    "remediation": "Do not install legacy0.10.21/Protobuf4; construct source-verified Tasks bundles and use0.10.32."
+  },
+  "derived_bundles": {
+    "pose_full.task": {
+      "size": 9398078,
+      "sha256": "c1492ead320c87471d9ae324ee00d1e057636522e991d339ff8f07e90982d4aa"
+    },
+    "hand_full.task": {
+      "size": 7819594,
+      "sha256": "e5fe265a93d7f530428a4b22f230598c3655de527c12deed889514bc890d0508"
+    }
+  },
+  "derivation": {
+    "neural_tensor_buffers_changed": false,
+    "normalization_metadata_added": true,
+    "source_pose_detection_range": [
+      -1,
+      1
+    ],
+    "source_pose_landmark_range": [
+      0,
+      1
+    ],
+    "source_palm_range": [
+      0,
+      1
+    ],
+    "source_hand_landmark_range": [
+      0,
+      1
+    ],
+    "deterministic_builder": "backend/scripts/build_pose_tasks.py",
+    "runtime_download": false
+  },
+  "source_graphs": [
+    {
+      "url": "https://raw.githubusercontent.com/google-ai-edge/mediapipe/cad7f3ab99ebf175947e40c5252c642612aae927/mediapipe/modules/pose_detection/pose_detection_cpu.pbtxt",
+      "sha256": "705fb6edb2fa2da48fbdf8b0bc7e3e5050e645a23e8a2f7d3930a7bca25bfdb1"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/google-ai-edge/mediapipe/cad7f3ab99ebf175947e40c5252c642612aae927/mediapipe/modules/pose_landmark/pose_landmark_by_roi_cpu.pbtxt",
+      "sha256": "abcb811a9f99bfb4e7e04db8caa915ca20938fc44d4122bf7d8537c9c0871f1f"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/google-ai-edge/mediapipe/cad7f3ab99ebf175947e40c5252c642612aae927/mediapipe/modules/palm_detection/palm_detection_cpu.pbtxt",
+      "sha256": "8301b1fe1568e307b25aae2561352b4ea36eed03bae3d5c20d1eee31a9ec44a3"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/google-ai-edge/mediapipe/cad7f3ab99ebf175947e40c5252c642612aae927/mediapipe/modules/hand_landmark/hand_landmark_cpu.pbtxt",
+      "sha256": "f2f481bc4f7e6c1740ac11fc089d93e2cc7b9d17c7a20c91f52dee5c05debfb5"
+    }
+  ]
+}

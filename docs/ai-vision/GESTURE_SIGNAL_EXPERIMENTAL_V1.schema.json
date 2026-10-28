@@ -25,8 +25,8 @@
       "title": "Organization Id"
     },
     "schema_version": {
-      "const": "experimental-1.0",
-      "default": "experimental-1.0",
+      "const": "experimental-1.1",
+      "default": "experimental-1.1",
       "title": "Schema Version",
       "type": "string"
     },
@@ -64,8 +64,13 @@
       "type": "string"
     },
     "label": {
-      "const": "possible_hands_raised",
       "default": "possible_hands_raised",
+      "enum": [
+        "possible_hands_raised",
+        "possible_open_palm",
+        "possible_closed_fist",
+        "possible_fall"
+      ],
       "title": "Label",
       "type": "string"
     },
@@ -82,10 +87,18 @@
       "type": "string"
     },
     "input_quality": {
-      "maximum": 1,
-      "minimum": 0,
-      "title": "Input Quality",
-      "type": "number"
+      "anyOf": [
+        {
+          "maximum": 1,
+          "minimum": 0,
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Input Quality"
     }
   },
   "required": [
@@ -96,8 +109,7 @@
     "frame_sequence",
     "landmark_set_id",
     "timestamp",
-    "model_version",
-    "input_quality"
+    "model_version"
   ],
   "title": "GestureSignal",
   "type": "object"

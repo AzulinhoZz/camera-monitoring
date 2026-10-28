@@ -1,0 +1,147 @@
+{
+  "real_model_runtime": true,
+  "fixture": "explicit permitted image, positive body extraction; derived frames, not real fall sequences",
+  "positive_body_warmups": 7,
+  "positive_hand_warmups": 2,
+  "blank_negative": true,
+  "kill_recovery": true,
+  "timeout_recovery": true,
+  "cross_tenant_rejected": true,
+  "default_sensitive_alerts": false,
+  "measurements": [
+    {
+      "cameras": 1,
+      "warm_sequential_batches": 6,
+      "inferences": 6,
+      "elapsed_seconds": 0.30212354000104824,
+      "batch_latency_ms": {
+        "p50": 50.25084249973588,
+        "max": 58.491641999353305
+      },
+      "per_camera_fps": 19.859425716973867,
+      "summed_child_rss_bytes": 368775168,
+      "parent_resources": {
+        "pid": 42195,
+        "cpu_seconds": 1.07,
+        "rss_bytes": 60964864
+      },
+      "scope": "Pose+hands only; excludes YOLOX/capture/evidence/DB, shared host CPU; RSS is sum, not PSS"
+    },
+    {
+      "cameras": 2,
+      "warm_sequential_batches": 6,
+      "inferences": 12,
+      "elapsed_seconds": 0.6479236519990081,
+      "batch_latency_ms": {
+        "p50": 104.58546249901701,
+        "max": 134.08815699949628
+      },
+      "per_camera_fps": 9.260350322894501,
+      "summed_child_rss_bytes": 740044800,
+      "parent_resources": {
+        "pid": 42195,
+        "cpu_seconds": 1.16,
+        "rss_bytes": 64004096
+      },
+      "scope": "Pose+hands only; excludes YOLOX/capture/evidence/DB, shared host CPU; RSS is sum, not PSS"
+    },
+    {
+      "cameras": 4,
+      "warm_sequential_batches": 6,
+      "inferences": 24,
+      "elapsed_seconds": 1.5471959210008208,
+      "batch_latency_ms": {
+        "p50": 270.3140075000192,
+        "max": 299.0860789996077
+      },
+      "per_camera_fps": 3.8779833365375174,
+      "summed_child_rss_bytes": 1481994240,
+      "parent_resources": {
+        "pid": 42195,
+        "cpu_seconds": 1.21,
+        "rss_bytes": 65576960
+      },
+      "scope": "Pose+hands only; excludes YOLOX/capture/evidence/DB, shared host CPU; RSS is sum, not PSS"
+    }
+  ],
+  "action_corpus": {
+    "dataset": "generated landmark sequences, not real-world fall accuracy",
+    "sequences": [
+      {
+        "name": "rapid_fall_geometry",
+        "expected_geometric_candidate": true,
+        "candidate": true,
+        "semantic_fall_label": true,
+        "known_ambiguity": false
+      },
+      {
+        "name": "already_horizontal",
+        "expected_geometric_candidate": false,
+        "candidate": false,
+        "semantic_fall_label": false,
+        "known_ambiguity": false
+      },
+      {
+        "name": "walking",
+        "expected_geometric_candidate": false,
+        "candidate": false,
+        "semantic_fall_label": false,
+        "known_ambiguity": false
+      },
+      {
+        "name": "sitting",
+        "expected_geometric_candidate": false,
+        "candidate": false,
+        "semantic_fall_label": false,
+        "known_ambiguity": false
+      },
+      {
+        "name": "bend_without_drop",
+        "expected_geometric_candidate": false,
+        "candidate": false,
+        "semantic_fall_label": false,
+        "known_ambiguity": false
+      },
+      {
+        "name": "occlusion",
+        "expected_geometric_candidate": false,
+        "candidate": false,
+        "semantic_fall_label": false,
+        "known_ambiguity": false
+      },
+      {
+        "name": "gap",
+        "expected_geometric_candidate": false,
+        "candidate": false,
+        "semantic_fall_label": false,
+        "known_ambiguity": false
+      },
+      {
+        "name": "track_change",
+        "expected_geometric_candidate": false,
+        "candidate": false,
+        "semantic_fall_label": false,
+        "known_ambiguity": false
+      },
+      {
+        "name": "unassociated",
+        "expected_geometric_candidate": false,
+        "candidate": false,
+        "semantic_fall_label": false,
+        "known_ambiguity": false
+      },
+      {
+        "name": "fast_intentional_lie_down",
+        "expected_geometric_candidate": true,
+        "candidate": true,
+        "semantic_fall_label": false,
+        "known_ambiguity": true
+      }
+    ],
+    "geometric_checks_passed": 10,
+    "semantic_false_positives": 1,
+    "limitations": "Fast intentional lying down has the same geometric signature and produces a possible event requiring review."
+  },
+  "real_hand_sequence": "static published hand fixture repeated; single-hand association supplied explicitly, not a tracking accuracy test",
+  "remaining_validation": "annotated real-world gesture/fall videos, target hardware and operational acceptance"
+}

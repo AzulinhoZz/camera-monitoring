@@ -1,3 +1,5 @@
+> Actualización: selección final, pesos derivados y rechazo del runtime legacy en [PHASE_4_COMPLETION.md](PHASE_4_COMPLETION.md), `PHASE_4_RUNTIME_REVIEW.json` y `PHASE_4_BUNDLED_MODELS_REVIEW.json`. Esta evaluación inicial se conserva como historial.
+
 # Fase 4 — revisión de componentes antes de integración
 
 Fecha: 2026-10-27 (America/Mexico_City). Evaluación, no autorización de despliegue.

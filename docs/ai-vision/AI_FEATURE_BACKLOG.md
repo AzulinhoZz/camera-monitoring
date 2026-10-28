@@ -156,3 +156,12 @@ Validación: 129 pruebas backend; ocho unitarias Android y APK debug compilado; 
 Primer incremento: revisión fijada de MediaPipe/MMAction2, contratos de landmarks transitorios de cuerpo/manos sin puntos faciales de pose, render OpenCV y señal geométrica temporal posible_hands_raised únicamente de laboratorio/desactivada por defecto. [Informe](PHASE_4_POSES_HANDS_ACTIONS.md). 138 pruebas backend aprobadas; demo con coordenadas sintéticas, sin inferencia real. No cambian captura, API, DB, app ni dependencias de producción.
 
 Pendiente P2: licencias/procedencia de pesos, runtime aislado compatible, extractor real, calidad/asociación temporal y secuencias anotadas; caídas/acciones no implementadas. Los gates P0/P1 de release anteriores no se consideran cerrados por esta demo. Fase 4 iniciada, no completa; fase 5 no iniciada.
+
+
+## L. Cierre experimental de fase 4 (2026-10-27)
+
+El estado pendiente del incremento K queda sustituido por [PHASE_4_COMPLETION.md](PHASE_4_COMPLETION.md). MediaPipe Tasks CPU aislado con 24 dependencias y bundles fijados por hash, extractor real cuerpo/manos sin puntos faciales de pose, esqueletos, manos levantadas/palma/puño y posible caída temporales con revisión humana. MMAction2 evaluado, no seleccionado. Asociación conservadora por persona/track/scope/frame, flags desactivados, métricas/timeout/backoff/recuperación y límite de memoria. Ninguna señal sensible llega a RPC/FCM/evidencias automáticas. Sin migraciones ni cambios Android/API.
+
+Validación: 154 tests backend, modelos reales positivos de cuerpo/manos, blanco negativo, muerte/timeout y recuperación, benchmark de pose+manos 1/2/4, dos smoke tests del worker (pose solo y combinado con YOLOX), diez secuencias geométricas con un falso positivo semántico explícito. No es precisión/recall natural. Runtime legacy descartado por CVE de Protobuf; entorno final sin él.
+
+Pendiente para release: vídeos autorizados/anotados de gestos/caídas, calidad y asociación con oclusiones/múltiples sujetos, capacidad integral en hardware destino (512 MiB insuficiente), model cards/derechos completos de datasets y gates P0/P1 anteriores. Fase 4 completada como implementación experimental verificable, no aceptación productiva. Fase 5 no iniciada; esperar autorización.

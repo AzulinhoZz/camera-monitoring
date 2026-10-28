@@ -1,0 +1,210 @@
+{
+  "worker-final": {
+    "healthy_running_snapshots": 2,
+    "final_state": "stopped",
+    "final_counts": {
+      "connection_attempts": 1,
+      "capture_dropped": 0,
+      "frames_received": 86,
+      "recording_sampled": 57,
+      "inference_sampled": 17,
+      "recording_consumed": 57,
+      "inference_consumed": 14,
+      "inference_dropped": 3,
+      "decoder_exits": 1
+    },
+    "final_queue_depth": {
+      "recording": 0,
+      "inference": 0
+    },
+    "last_running": {
+      "camera_id": "00000000-0000-0000-0000-000000000001",
+      "owner_id": "00000000-0000-0000-0000-000000000002",
+      "organization_id": null,
+      "worker_session_id": "1e33af59-ff51-48e0-8d2f-f326767ad5fc",
+      "state": "streaming",
+      "healthy": true,
+      "last_error": null,
+      "uptime_seconds": 4.394,
+      "last_frame_age_seconds": 0.049,
+      "counts": {
+        "connection_attempts": 1,
+        "capture_dropped": 0,
+        "frames_received": 61,
+        "recording_sampled": 41,
+        "inference_sampled": 13,
+        "recording_consumed": 41,
+        "inference_consumed": 10,
+        "inference_dropped": 3
+      },
+      "capture_fps_observed": 13.881904372428176,
+      "queue_depth": {
+        "recording": 0,
+        "inference": 0
+      },
+      "queue_capacity": 2,
+      "configured_fps": {
+        "capture": 15.0,
+        "recording": 10.0,
+        "inference": 3.0
+      },
+      "decode_latency_ms": {
+        "sample_count": 61,
+        "p50": 0.1269999993382953,
+        "p95": 0.2346479996049311
+      },
+      "frame_age_ms": {
+        "recording": {
+          "sample_count": 41,
+          "p50": 6.5525730005902005,
+          "p95": 9.72172900037549
+        },
+        "inference": {
+          "sample_count": 10,
+          "p50": 13.90426100078912,
+          "p95": 325.2914910008258
+        }
+      },
+      "decoder_resources": {
+        "pid": 42244,
+        "cpu_seconds": 0.77,
+        "rss_bytes": 56569856
+      },
+      "pose": {
+        "model_version": "mediapipe:0.10.32:tasks-source-0.10.21:full:v1",
+        "counts": {
+          "starts": 1,
+          "frames": 10,
+          "stale_results": 1
+        },
+        "latency_ms": {
+          "samples": 10,
+          "p50": 29.59141599967552,
+          "p95": 46.605747998910374
+        },
+        "resources": {
+          "pid": 42253,
+          "cpu_seconds": 2.17,
+          "rss_bytes": 361586688
+        },
+        "actions": {
+          "frames": 9,
+          "unassociated_frames": 9
+        }
+      }
+    }
+  },
+  "combined": {
+    "healthy_running_snapshots": 3,
+    "final_state": "stopped",
+    "final_counts": {
+      "connection_attempts": 1,
+      "capture_dropped": 0,
+      "frames_received": 118,
+      "recording_sampled": 78,
+      "inference_sampled": 24,
+      "recording_consumed": 78,
+      "inference_consumed": 12,
+      "inference_dropped": 10,
+      "decoder_exits": 1
+    },
+    "final_queue_depth": {
+      "recording": 0,
+      "inference": 0
+    },
+    "last_running": {
+      "camera_id": "00000000-0000-0000-0000-000000000001",
+      "owner_id": "00000000-0000-0000-0000-000000000002",
+      "organization_id": null,
+      "worker_session_id": "6b905eee-e718-420f-8c6f-f8276f4ba719",
+      "state": "streaming",
+      "healthy": true,
+      "last_error": null,
+      "uptime_seconds": 8.094,
+      "last_frame_age_seconds": 0.025,
+      "counts": {
+        "connection_attempts": 1,
+        "capture_dropped": 0,
+        "frames_received": 118,
+        "recording_sampled": 78,
+        "inference_sampled": 24,
+        "recording_consumed": 78,
+        "inference_consumed": 12,
+        "inference_dropped": 10
+      },
+      "capture_fps_observed": 14.578627508352078,
+      "queue_depth": {
+        "recording": 0,
+        "inference": 2
+      },
+      "queue_capacity": 2,
+      "configured_fps": {
+        "capture": 15.0,
+        "recording": 10.0,
+        "inference": 3.0
+      },
+      "decode_latency_ms": {
+        "sample_count": 118,
+        "p50": 1.578743000209215,
+        "p95": 3.6982370002078824
+      },
+      "frame_age_ms": {
+        "recording": {
+          "sample_count": 78,
+          "p50": 7.328732999667409,
+          "p95": 10.199148000538116
+        },
+        "inference": {
+          "sample_count": 12,
+          "p50": 467.23324399863486,
+          "p95": 617.9407150011684
+        }
+      },
+      "decoder_resources": {
+        "pid": 42847,
+        "cpu_seconds": 1.02,
+        "rss_bytes": 65941504
+      },
+      "inference": {
+        "model_version": "opencv-zoo:yolox_s:2022nov:c5c2d13e",
+        "processed_frames": 12,
+        "latency_ms": {
+          "samples": 12,
+          "p50": 418.79573299956974,
+          "p95": 447.14585700057796
+        },
+        "counts": {
+          "visible_by_class": {
+            "0": 1
+          },
+          "tracklets_created_by_class": {
+            "0": 2
+          },
+          "active_tracklets": 1
+        }
+      },
+      "pose": {
+        "model_version": "mediapipe:0.10.32:tasks-source-0.10.21:full:v1",
+        "counts": {
+          "starts": 1,
+          "frames": 12,
+          "stale_results": 1
+        },
+        "latency_ms": {
+          "samples": 12,
+          "p50": 49.17980299978808,
+          "p95": 63.6528390004969
+        },
+        "resources": {
+          "pid": 42868,
+          "cpu_seconds": 2.48,
+          "rss_bytes": 372465664
+        },
+        "actions": {
+          "frames": 11,
+          "unassociated_frames": 11
+        }
+      }
+    }
+  }
+}

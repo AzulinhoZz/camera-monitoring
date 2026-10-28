@@ -82,6 +82,15 @@
           "title": "Landmark Set Id",
           "type": "integer"
         },
+        "quality_basis": {
+          "default": "per_landmark_scores",
+          "enum": [
+            "per_landmark_scores",
+            "detector_presence_only"
+          ],
+          "title": "Quality Basis",
+          "type": "string"
+        },
         "points": {
           "items": {
             "$ref": "#/$defs/Landmark"
@@ -127,8 +136,8 @@
       "title": "Organization Id"
     },
     "schema_version": {
-      "const": "experimental-1.0",
-      "default": "experimental-1.0",
+      "const": "experimental-1.1",
+      "default": "experimental-1.1",
       "title": "Schema Version",
       "type": "string"
     },
@@ -153,6 +162,20 @@
       "pattern": "^[A-Za-z0-9_.:-]+$",
       "title": "Model Version",
       "type": "string"
+    },
+    "image_width": {
+      "default": 1,
+      "maximum": 1280,
+      "minimum": 1,
+      "title": "Image Width",
+      "type": "integer"
+    },
+    "image_height": {
+      "default": 1,
+      "maximum": 720,
+      "minimum": 1,
+      "title": "Image Height",
+      "type": "integer"
     },
     "observations": {
       "default": [],

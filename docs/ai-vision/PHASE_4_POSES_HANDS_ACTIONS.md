@@ -1,3 +1,5 @@
+> **Informe histórico del primer incremento.** El cierre y la evidencia vigente están en [PHASE_4_COMPLETION.md](PHASE_4_COMPLETION.md). Las limitaciones de este informe describen el inicio, no el estado final.
+
 # Fase 4 — inicio: poses, manos y señales temporales de laboratorio
 
 Fecha: 2026-10-27 (America/Mexico_City). Rama `feat/ai-vision-platform`.
