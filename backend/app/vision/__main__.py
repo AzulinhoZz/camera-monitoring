@@ -27,6 +27,7 @@ def main(argv=None):
     parser.add_argument("--config", required=True)
     parser.add_argument("--emit-detections", action="store_true", help="export laboratory fixture events to stdout (not permitted for RTSP)")
     parser.add_argument("--persist-events", action="store_true", help="explicit server opt-in to scoped rules/event/media persistence; requires --resolve-scopes")
+    parser.add_argument("--pose-runtime-python", help="explicit isolated Python with audited bundled MediaPipe runtime")
     parser.add_argument("--model", help="audited YOLOX_s ONNX; only used for explicitly enabled cameras")
     parser.add_argument("--resolve-scopes", action="store_true", help="verify RTSP scopes against server camera registry")
     parser.add_argument("--duration", type=float, default=0, help="seconds; 0 runs until SIGTERM")
@@ -56,6 +57,15 @@ def main(argv=None):
                 revisions[camera.camera_id]=revision
                 cameras.append(camera.model_copy(update={'rules':rules if camera.vision_enabled else ()}))
             config=config.model_copy(update={'cameras':tuple(cameras)})
+        pose_enabled=any(c.pose_enabled for c in config.cameras)
+        if pose_enabled!=bool(args.pose_runtime_python):
+            raise ValueError("pose runtime and camera opt-in must both be configured")
+        if pose_enabled:
+            from .pose_process import validate_pose_budget
+            validate_pose_budget(config.cameras)
+            runtime=Path(args.pose_runtime_python)
+            if not runtime.is_absolute() or not runtime.is_file() or not os.access(runtime,os.X_OK):
+                raise ValueError("pose runtime unavailable")
         detector = None
         enabled = any(c.vision_enabled for c in config.cameras)
         if enabled != bool(args.model):
@@ -72,6 +82,11 @@ def main(argv=None):
     workers = [CameraWorker(camera) for camera in config.cameras]
     from .pipeline import ObjectPipeline
     pipelines = {c.camera_id:ObjectPipeline(c,detector) for c in config.cameras if c.vision_enabled}
+    from .pose_process import PoseProcess
+    from .actions import TemporalActions,associated_person
+    from .contracts import CameraScope
+    pose_clients={c.camera_id:PoseProcess(CameraScope(camera_id=c.camera_id,owner_id=c.owner_id,organization_id=c.organization_id),args.pose_runtime_python) for c in config.cameras if c.pose_enabled}
+    actions={c.camera_id:TemporalActions(pose_clients[c.camera_id].scope,gestures=c.hand_gestures_enabled,falls=c.fall_candidates_enabled) for c in config.cameras if c.pose_enabled}
     started = time.monotonic()
     next_metrics = started
     result = 0
@@ -121,12 +136,27 @@ def main(argv=None):
             for worker in workers:
                 frame = worker.get_frame("inference")
                 pipeline = pipelines.get(worker.config.camera_id)
-                if frame is not None and pipeline is not None:
+                if frame is not None and (pipeline is not None or worker.config.camera_id in pose_clients):
                     try:
-                        batch = pipeline.process(frame)
+                        batch = pipeline.process(frame) if pipeline else {'events':[],'rule_events':[]}
                         if args.persist_events:
                             for event in batch['rule_events']:
                                 collectors[worker.config.camera_id].offer(event,revisions[worker.config.camera_id],frame)
+                        client=pose_clients.get(worker.config.camera_id)
+                        if client:
+                            packet=client.infer(frame)
+                            if packet is not None and time.monotonic()-frame.captured_monotonic>worker.config.stale_after_seconds:
+                                client.metrics['stale_results']+=1
+                                packet=None
+                            if packet is None:
+                                actions[worker.config.camera_id].reset_candidates()
+                            else:
+                                signals=actions[worker.config.camera_id].process(packet,person_track_id=associated_person(packet,batch['events']))
+                                # Human-review candidates remain a separate experimental contract.
+                                # Never feed sensitive actions to rules, FCM or automatic evidence.
+                                if args.emit_detections:
+                                    batch['pose_signals']=[s.model_dump(mode='json') for s in signals]
+                                batch['pose_observations']=len(packet.observations)
                         if args.emit_detections:
                             print(json.dumps(batch), flush=True)
                     except Exception:
@@ -141,12 +171,15 @@ def main(argv=None):
                     pipeline=pipelines.get(worker.config.camera_id)
                     if pipeline:
                         row["inference"]=pipeline.metrics()
+                    client=pose_clients.get(worker.config.camera_id)
+                    if client:
+                        row['pose']={**client.snapshot(),'actions':dict(actions[worker.config.camera_id].metrics)}
                     collector=collectors.get(worker.config.camera_id)
                     if collector:
                         row['evidence']=dict(collector.metrics)
                     metrics.append(row)
                 snapshot = {"schema_version": "1.0", "timestamp_unix": time.time(),
-                            "healthy": (dispatcher is None or dispatcher.thread.is_alive()) and not stop.is_set() and all(recorder.is_alive() for recorder in recording_threads) and all(m["healthy"] for m in metrics), "supervisor_resources": process_resources(), "cameras": metrics, "event_io": dict(dispatcher.metrics) if dispatcher else {}, "delivery_degraded": bool(dispatcher and any(dispatcher.metrics[k] for k in ("failed","snapshot_failed","clip_failed","shutdown_pending"))) or any(c.metrics["queue_dropped"] for c in collectors.values())}
+                            "healthy": all(c.process is not None and c.process.poll() is None for c in pose_clients.values()) and (dispatcher is None or dispatcher.thread.is_alive()) and not stop.is_set() and all(recorder.is_alive() for recorder in recording_threads) and all(m["healthy"] for m in metrics), "supervisor_resources": process_resources(), "cameras": metrics, "event_io": dict(dispatcher.metrics) if dispatcher else {}, "delivery_degraded": bool(dispatcher and any(dispatcher.metrics[k] for k in ("failed","snapshot_failed","clip_failed","shutdown_pending"))) or any(c.metrics["queue_dropped"] for c in collectors.values())}
                 print(json.dumps(snapshot), flush=True)
                 write_health(args.health_file, snapshot)
                 next_metrics = now + config.metrics_interval_seconds
@@ -164,11 +197,15 @@ def main(argv=None):
             recorder.join(1)
         for worker in workers:
             worker.stop()
+        for client in pose_clients.values():
+            client.close()
         for collector in collectors.values():
             collector.close()
         if dispatcher:
             if not dispatcher.close() or any(dispatcher.metrics[k] for k in ('failed','snapshot_failed','clip_failed')):
                 result=1
+        if any(client.metrics['failed'] for client in pose_clients.values()):
+            result=1
         if any(c.metrics['queue_dropped'] for c in collectors.values()):
             result=1
         snapshot = {"schema_version": "1.0", "timestamp_unix": time.time(),

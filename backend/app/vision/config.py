@@ -19,6 +19,9 @@ class CameraConfig(CameraScope):
     allow_loopback: bool = False
     allowed_ports: tuple[int, ...] = (554, 8554)
     rules: tuple[Rule, ...] = Field(default=(), max_length=32)
+    pose_enabled: bool = False
+    hand_gestures_enabled: bool = False
+    fall_candidates_enabled: bool = False
     vision_enabled: bool = False
     object_classes: tuple[int, ...] = (0,)
     detection_confidence: float = Field(default=.5, ge=.01, le=1)
@@ -58,6 +61,10 @@ class CameraConfig(CameraScope):
 
     @model_validator(mode="after")
     def consistent(self):
+        if (self.hand_gestures_enabled or self.fall_candidates_enabled) and not (self.pose_enabled and self.vision_enabled):
+            raise ValueError("temporal actions require explicit pose and object opt-in")
+        if (self.hand_gestures_enabled or self.fall_candidates_enabled) and self.inference_fps<2:
+            raise ValueError("temporal actions require at least 2 configured inference FPS")
         if self.rules:
             from .rules import RuleEngine
             RuleEngine(CameraScope(camera_id=self.camera_id, owner_id=self.owner_id, organization_id=self.organization_id), self.rules)

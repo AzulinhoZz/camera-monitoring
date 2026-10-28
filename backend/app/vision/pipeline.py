@@ -32,7 +32,7 @@ class ObjectPipeline:
         if frame.sequence <= self.sequence:
             raise ValueError("duplicate/out-of-order frame")
         start = time.perf_counter()
-        classes=tuple(sorted(set(self.config.object_classes) | {
+        classes=tuple(sorted(set(self.config.object_classes) | ({0} if self.config.hand_gestures_enabled or self.config.fall_candidates_enabled else set()) | {
             COCO_CLASSES.index(label) for rule in self.config.rules if rule.enabled for label in rule.classes
         }))
         detections = self.detector.detect(frame.pixels, classes=classes, confidence=self.config.detection_confidence)

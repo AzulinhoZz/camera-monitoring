@@ -28,6 +28,7 @@ class LandmarkSet(Contract):
     kind: Literal['pose_body','hand']
     # Ephemeral index meaningful only for this camera/session, not a person ID.
     landmark_set_id: int = Field(ge=0, lt=200)
+    quality_basis: Literal['per_landmark_scores','detector_presence_only'] = 'per_landmark_scores'
     points: tuple[Landmark, ...] = Field(min_length=21, max_length=22)
 
     @model_validator(mode='after')
@@ -40,11 +41,13 @@ class LandmarkSet(Contract):
 
 
 class LandmarkFrame(CameraScope):
-    schema_version: Literal['experimental-1.0']='experimental-1.0'
+    schema_version: Literal['experimental-1.1']='experimental-1.1'
     worker_session_id: UUID
     frame_sequence: int = Field(ge=1)
     timestamp: datetime
     model_version: SafeLabel
+    image_width: int = Field(default=1, ge=1, le=1280)
+    image_height: int = Field(default=1, ge=1, le=720)
     observations: tuple[LandmarkSet, ...] = Field(default=(), max_length=12)
 
     @field_validator('timestamp')

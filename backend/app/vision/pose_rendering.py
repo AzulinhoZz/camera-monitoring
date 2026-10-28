@@ -26,7 +26,7 @@ def draw_energy_line(canvas,start,end,color):
     cv2.line(canvas,start,end,(240,240,240),1,cv2.LINE_AA)
 
 
-def draw_skeleton(image,packet,scope,*,min_quality=.6,energy_effect=False):
+def draw_skeleton(image,packet,scope,*,min_quality=.6,energy_effect=False,show_unscored_hands=False):
     packet.require_scope(scope)
     if not isinstance(image,np.ndarray) or image.dtype!=np.uint8 or image.ndim!=3 or image.shape[2]!=3:
         raise ValueError('expected uint8 BGR frame')
@@ -35,7 +35,7 @@ def draw_skeleton(image,packet,scope,*,min_quality=.6,energy_effect=False):
         raise ValueError('invalid render limits')
     output=image.copy()
     for observation in packet.observations:
-        points={p.index:lm_px(p,width,height) for p in observation.points if p.reliable(min_quality)}
+        points={p.index:lm_px(p,width,height) for p in observation.points if p.reliable(min_quality) or (show_unscored_hands and observation.kind=='hand' and observation.quality_basis=='detector_presence_only' and 0<=p.x<=1 and 0<=p.y<=1)}
         edges=BODY_EDGES if observation.kind=='pose_body' else HAND_EDGES
         color=(80,230,80) if observation.kind=='pose_body' else (255,180,40)
         for a,b in edges:

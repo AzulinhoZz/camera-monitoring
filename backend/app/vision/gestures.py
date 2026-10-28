@@ -8,18 +8,18 @@ from .contracts import CameraScope, Contract, SafeLabel
 
 
 class GestureSignal(CameraScope):
-    schema_version: Literal['experimental-1.0']='experimental-1.0'
+    schema_version: Literal['experimental-1.1']='experimental-1.1'
     event_id: UUID
     worker_session_id: UUID
     frame_sequence: int = Field(ge=1)
     landmark_set_id: int = Field(ge=0,lt=200)
     timestamp: datetime
     model_version: SafeLabel
-    label: Literal['possible_hands_raised']='possible_hands_raised'
+    label: Literal['possible_hands_raised','possible_open_palm','possible_closed_fist','possible_fall']='possible_hands_raised'
     basis: Literal['temporal_geometry']='temporal_geometry'
     review_status: Literal['pending']='pending'
     # Input visibility/presence minimum; NOT probability the gesture is correct.
-    input_quality: float = Field(ge=0,le=1)
+    input_quality: float | None = Field(default=None,ge=0,le=1)
 
     @field_validator('timestamp')
     @classmethod

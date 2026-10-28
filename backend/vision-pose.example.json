@@ -1,0 +1,21 @@
+{
+  "metrics_interval_seconds": 2,
+  "cameras": [
+    {
+      "camera_id": "00000000-0000-0000-0000-000000000001",
+      "owner_id": "00000000-0000-0000-0000-000000000002",
+      "organization_id": null,
+      "source_kind": "synthetic",
+      "capture_fps": 15,
+      "recording_fps": 10,
+      "inference_fps": 3,
+      "max_width": 320,
+      "max_height": 240,
+      "queue_size": 2,
+      "pose_enabled": true,
+      "vision_enabled": false,
+      "hand_gestures_enabled": false,
+      "fall_candidates_enabled": false
+    }
+  ]
+}
