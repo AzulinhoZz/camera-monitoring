@@ -20,6 +20,7 @@ def main():
     root=Path(__file__).resolve().parents[1]
     if not target.exists():subprocess.run([sys.executable,'-m','venv',str(target)],check=True)
     python=str(target/'bin/python')
+    subprocess.run([python,'-m','pip','install','--only-binary=:all:','--require-hashes','-r',str(root/'requirements-tooling.lock')],check=True)
     subprocess.run([python,'-m','pip','install','--no-cache-dir','--only-binary=:all:','--require-hashes','-r',str(root/'requirements-pose.lock')],check=True)
     subprocess.run([python,'-m','pip','check'],check=True)
     # Do not reuse a legacy or unrelated environment with unreviewed leftovers.

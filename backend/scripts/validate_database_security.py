@@ -3,6 +3,8 @@ from pathlib import Path
 import subprocess
 import sys
 import tempfile
+import io
+import tarfile
 from unittest.mock import patch
 import time
 from uuid import uuid4
@@ -19,8 +21,17 @@ def main():
     created = False
     try:
         subprocess.run(["docker", "run", "--rm", "-d", "--name", name, "--network", "none", "--tmpfs", "/var/lib/postgresql/data:rw,size=256m,mode=0700",
-                        "-e", "POSTGRES_HOST_AUTH_METHOD=trust", "--mount", f"type=bind,src={root},dst=/repo,readonly", IMAGE], check=True, capture_output=True)
+                        "-e", "POSTGRES_HOST_AUTH_METHOD=trust", IMAGE], check=True, capture_output=True)
         created = True
+        # Copy only synthetic SQL and migrations through stdin. No checkout bind,
+        # credentials, ignored files or daemon-local path assumptions.
+        paths=list((root/'backend/migrations').rglob('*.sql')) + [root/'backend/app/tests'/name for name in (
+            'setup_test_db.sql','run_real_postgres_security_tests.sql','run_vision_postgres_tests.sql')]
+        archive=io.BytesIO()
+        with tarfile.open(fileobj=archive,mode='w') as bundle:
+            for path in paths:bundle.add(path,arcname=str(path.relative_to(root)),recursive=False)
+        subprocess.run(['docker','exec',name,'mkdir','-p','/repo'],check=True,capture_output=True)
+        subprocess.run(['docker','exec','-i',name,'tar','-xf','-','-C','/repo'],input=archive.getvalue(),check=True,capture_output=True)
         for _ in range(100):
             if subprocess.run(["docker", "exec", name, "pg_isready", "-h", "127.0.0.1", "-U", "postgres"], capture_output=True).returncode == 0:
                 break
