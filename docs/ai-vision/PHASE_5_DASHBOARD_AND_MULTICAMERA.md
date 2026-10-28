@@ -1,3 +1,5 @@
+> **Informe histórico del primer incremento.** El cierre funcional y los resultados vigentes están en [PHASE_5_COMPLETION.md](PHASE_5_COMPLETION.md).
+
 # Fase 5 — dashboard y multicámara: primer incremento
 
 Fecha: 2026-10-27 (America/Mexico_City). Rama `feat/ai-vision-platform`.

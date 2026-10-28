@@ -1,0 +1,201 @@
+[
+  {
+    "cameras": 1,
+    "duration_seconds": 16,
+    "exit_code": 0,
+    "native_models": "YOLOX_s + MediaPipe Tasks pose/hands, CPU",
+    "scope": "Synthetic capture and real negative inference; concurrent injected evidence with local RPC/Storage substitutes, not natural action accuracy or managed integration",
+    "last_running_snapshots": {
+      "00000000-0000-0000-0000-000000000001": {
+        "camera_id": "00000000-0000-0000-0000-000000000001",
+        "owner_id": "00000000-0000-0000-0000-00000000000a",
+        "organization_id": null,
+        "schema_version": "1.0",
+        "session": "db2b83a6-a315-4bd2-8415-dc15cacaa74c",
+        "published_at": "2026-10-28T03:27:22.475370Z",
+        "frame_at": "2026-10-28T03:27:21.209578Z",
+        "healthy": true,
+        "state": "streaming",
+        "capture_fps": 11.602774877288162,
+        "inference_fps": 0.8287865184059673,
+        "inference_frames": 12,
+        "inference_dropped": 28,
+        "rss_bytes": 594231296,
+        "cpu_seconds": 12.31,
+        "model_version": "opencv-zoo:yolox_s:2022nov:c5c2d13e mediapipe:0.10.32:tasks-source-0.10.21:full:v1"
+      }
+    },
+    "peak_summed_group_rss_bytes": {
+      "00000000-0000-0000-0000-000000000001": 604454912
+    },
+    "evidence_counts": {
+      "persisted": 9,
+      "snapshots": 9,
+      "clips": 9
+    },
+    "local_upload_bytes": 48735,
+    "fixture_evidence_queue_dropped": 0,
+    "one_child_killed": false,
+    "recovered": false,
+    "other_camera_continued": false,
+    "scoped_preview_decoded": true
+  },
+  {
+    "cameras": 2,
+    "duration_seconds": 30,
+    "exit_code": 0,
+    "native_models": "YOLOX_s + MediaPipe Tasks pose/hands, CPU",
+    "scope": "Synthetic capture and real negative inference; concurrent injected evidence with local RPC/Storage substitutes, not natural action accuracy or managed integration",
+    "last_running_snapshots": {
+      "00000000-0000-0000-0000-000000000001": {
+        "camera_id": "00000000-0000-0000-0000-000000000001",
+        "owner_id": "00000000-0000-0000-0000-00000000000a",
+        "organization_id": null,
+        "schema_version": "1.0",
+        "session": "b75d2ee6-3255-4e35-8491-c57e1ea97c73",
+        "published_at": "2026-10-28T03:27:56.285177Z",
+        "frame_at": "2026-10-28T03:27:54.384289Z",
+        "healthy": false,
+        "state": "unavailable",
+        "capture_fps": 11.182154169925512,
+        "inference_fps": 0.8407600470825626,
+        "inference_frames": 20,
+        "inference_dropped": 45,
+        "rss_bytes": 226521088,
+        "cpu_seconds": 19.04,
+        "model_version": "opencv-zoo:yolox_s:2022nov:c5c2d13e mediapipe:0.10.32:tasks-source-0.10.21:full:v1"
+      },
+      "00000000-0000-0000-0000-000000000002": {
+        "camera_id": "00000000-0000-0000-0000-000000000002",
+        "owner_id": "00000000-0000-0000-0000-00000000000a",
+        "organization_id": null,
+        "schema_version": "1.0",
+        "session": "b2bc3097-2968-47f0-bab4-c74ddc22878d",
+        "published_at": "2026-10-28T03:27:56.265232Z",
+        "frame_at": "2026-10-28T03:27:54.414196Z",
+        "healthy": false,
+        "state": "unavailable",
+        "capture_fps": 10.946073754678853,
+        "inference_fps": 0.915006100040667,
+        "inference_frames": 27,
+        "inference_dropped": 52,
+        "rss_bytes": 225894400,
+        "cpu_seconds": 23.91,
+        "model_version": "opencv-zoo:yolox_s:2022nov:c5c2d13e mediapipe:0.10.32:tasks-source-0.10.21:full:v1"
+      }
+    },
+    "peak_summed_group_rss_bytes": {
+      "00000000-0000-0000-0000-000000000001": 604393472,
+      "00000000-0000-0000-0000-000000000002": 604717056
+    },
+    "evidence_counts": {
+      "persisted": 32,
+      "snapshots": 32,
+      "clips": 32
+    },
+    "local_upload_bytes": 173280,
+    "fixture_evidence_queue_dropped": 0,
+    "one_child_killed": true,
+    "recovered": true,
+    "other_camera_continued": true,
+    "scoped_preview_decoded": true
+  },
+  {
+    "cameras": 4,
+    "duration_seconds": 16,
+    "exit_code": 0,
+    "native_models": "YOLOX_s + MediaPipe Tasks pose/hands, CPU",
+    "scope": "Synthetic capture and real negative inference; concurrent injected evidence with local RPC/Storage substitutes, not natural action accuracy or managed integration",
+    "last_running_snapshots": {
+      "00000000-0000-0000-0000-000000000001": {
+        "camera_id": "00000000-0000-0000-0000-000000000001",
+        "owner_id": "00000000-0000-0000-0000-00000000000a",
+        "organization_id": null,
+        "schema_version": "1.0",
+        "session": "922a7e21-cab2-44df-9593-4de2188ad5e3",
+        "published_at": "2026-10-28T03:28:13.821171Z",
+        "frame_at": "2026-10-28T03:28:12.037015Z",
+        "healthy": false,
+        "state": "unavailable",
+        "capture_fps": 11.06203084265563,
+        "inference_fps": 0.6913890634820867,
+        "inference_frames": 11,
+        "inference_dropped": 31,
+        "rss_bytes": 216616960,
+        "cpu_seconds": 11.059999999999999,
+        "model_version": "opencv-zoo:yolox_s:2022nov:c5c2d13e mediapipe:0.10.32:tasks-source-0.10.21:full:v1"
+      },
+      "00000000-0000-0000-0000-000000000002": {
+        "camera_id": "00000000-0000-0000-0000-000000000002",
+        "owner_id": "00000000-0000-0000-0000-00000000000a",
+        "organization_id": null,
+        "schema_version": "1.0",
+        "session": "7a2491fd-a5f8-414c-8391-909d6a54dadc",
+        "published_at": "2026-10-28T03:28:14.125296Z",
+        "frame_at": "2026-10-28T03:28:12.030700Z",
+        "healthy": false,
+        "state": "unavailable",
+        "capture_fps": 10.850819191507888,
+        "inference_fps": 0.6781750924784218,
+        "inference_frames": 11,
+        "inference_dropped": 31,
+        "rss_bytes": 223895552,
+        "cpu_seconds": 11.4,
+        "model_version": "opencv-zoo:yolox_s:2022nov:c5c2d13e mediapipe:0.10.32:tasks-source-0.10.21:full:v1"
+      },
+      "00000000-0000-0000-0000-000000000003": {
+        "camera_id": "00000000-0000-0000-0000-000000000003",
+        "owner_id": "00000000-0000-0000-0000-00000000000a",
+        "organization_id": null,
+        "schema_version": "1.0",
+        "session": "f62b4e9c-6ed9-4250-ac08-46a60ebebda4",
+        "published_at": "2026-10-28T03:28:13.842061Z",
+        "frame_at": "2026-10-28T03:28:11.512716Z",
+        "healthy": false,
+        "state": "unavailable",
+        "capture_fps": 10.973775351800324,
+        "inference_fps": 0.5676084762865792,
+        "inference_frames": 9,
+        "inference_dropped": 33,
+        "rss_bytes": 196624384,
+        "cpu_seconds": 10.52,
+        "model_version": "opencv-zoo:yolox_s:2022nov:c5c2d13e mediapipe:0.10.32:tasks-source-0.10.21:full:v1"
+      },
+      "00000000-0000-0000-0000-000000000004": {
+        "camera_id": "00000000-0000-0000-0000-000000000004",
+        "owner_id": "00000000-0000-0000-0000-00000000000a",
+        "organization_id": null,
+        "schema_version": "1.0",
+        "session": "9717892b-adc1-495b-98cc-30cb3a37c4bc",
+        "published_at": "2026-10-28T03:28:13.355027Z",
+        "frame_at": "2026-10-28T03:28:11.506007Z",
+        "healthy": false,
+        "state": "unavailable",
+        "capture_fps": 11.249435897363231,
+        "inference_fps": 0.5852136029650823,
+        "inference_frames": 9,
+        "inference_dropped": 33,
+        "rss_bytes": 181768192,
+        "cpu_seconds": 10.2,
+        "model_version": "opencv-zoo:yolox_s:2022nov:c5c2d13e mediapipe:0.10.32:tasks-source-0.10.21:full:v1"
+      }
+    },
+    "peak_summed_group_rss_bytes": {
+      "00000000-0000-0000-0000-000000000001": 603803648,
+      "00000000-0000-0000-0000-000000000002": 603291648,
+      "00000000-0000-0000-0000-000000000003": 603353088,
+      "00000000-0000-0000-0000-000000000004": 603320320
+    },
+    "evidence_counts": {
+      "persisted": 36,
+      "snapshots": 36,
+      "clips": 36
+    },
+    "local_upload_bytes": 194940,
+    "fixture_evidence_queue_dropped": 0,
+    "one_child_killed": false,
+    "recovered": false,
+    "other_camera_continued": false,
+    "scoped_preview_decoded": true
+  }
+]

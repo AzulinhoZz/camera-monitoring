@@ -1,0 +1,186 @@
+{
+  "date": "2026-10-27 America/Mexico_City",
+  "backend": {
+    "tests": 172,
+    "failures": 0,
+    "errors": 0,
+    "warnings": 5,
+    "seconds": 17.46
+  },
+  "android": {
+    "result": "BUILD SUCCESSFUL",
+    "unit_tests": {
+      "tests": 12,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "verified_source_files": 76,
+    "apk_bytes": 25507155,
+    "apk_sha256": "a778d2a3d4891b7bdd50685ba55ab8dcc20c8eb7dbdf70302b42ff96fab7a470",
+    "scope": "Offline build and local unit tests; device/instrumented validation NOT EXECUTED"
+  },
+  "substreams": {
+    "exit_result": "stopped normally, fixture run",
+    "healthy_snapshots": 4,
+    "last_running": {
+      "camera_id": "00000000-0000-0000-0000-000000000020",
+      "owner_id": "00000000-0000-0000-0000-000000000010",
+      "organization_id": null,
+      "worker_session_id": "679d5946-6808-48f4-80c3-be31d3814190",
+      "state": "streaming",
+      "healthy": true,
+      "last_error": null,
+      "uptime_seconds": 5.238,
+      "last_frame_age_seconds": 0.055,
+      "counts": {
+        "connection_attempts": 1,
+        "capture_dropped": 0,
+        "frames_received": 57,
+        "recording_sampled": 24,
+        "inference_sampled": 10,
+        "inference_consumed": 9,
+        "recording_consumed": 23
+      },
+      "capture_fps_observed": 10.881090817793893,
+      "queue_depth": {
+        "recording": 1,
+        "inference": 1
+      },
+      "queue_capacity": 2,
+      "configured_fps": {
+        "capture": 12.0,
+        "recording": 5.0,
+        "inference": 2.0
+      },
+      "decode_latency_ms": {
+        "sample_count": 57,
+        "p50": 0.5592439993051812,
+        "p95": 3.273066999099683
+      },
+      "frame_age_ms": {
+        "recording": {
+          "sample_count": 23,
+          "p50": 76.91138800146291,
+          "p95": 94.7262369991222
+        },
+        "inference": {
+          "sample_count": 9,
+          "p50": 180.70748899845057,
+          "p95": 208.23618899885332
+        }
+      },
+      "decoder_resources": {
+        "pid": 53813,
+        "cpu_seconds": 0.56,
+        "rss_bytes": 63369216
+      },
+      "inference": {
+        "model_version": "opencv-zoo:yolox_s:2022nov:c5c2d13e",
+        "processed_frames": 9,
+        "latency_ms": {
+          "samples": 9,
+          "p50": 487.26539299968863,
+          "p95": 533.8157209989731
+        },
+        "counts": {
+          "visible_by_class": {},
+          "tracklets_created_by_class": {},
+          "active_tracklets": 0
+        }
+      },
+      "original_capture": {
+        "camera_id": "00000000-0000-0000-0000-000000000020",
+        "owner_id": "00000000-0000-0000-0000-000000000010",
+        "organization_id": null,
+        "worker_session_id": "e084681a-8567-4603-9951-2d3d9cef97f4",
+        "state": "streaming",
+        "healthy": true,
+        "last_error": null,
+        "uptime_seconds": 5.238,
+        "last_frame_age_seconds": 0.086,
+        "counts": {
+          "connection_attempts": 1,
+          "capture_dropped": 0,
+          "frames_received": 58,
+          "recording_sampled": 24,
+          "inference_sampled": 10,
+          "recording_consumed": 24,
+          "inference_consumed": 10
+        },
+        "capture_fps_observed": 11.072240350524755,
+        "queue_depth": {
+          "recording": 0,
+          "inference": 0
+        },
+        "queue_capacity": 2,
+        "configured_fps": {
+          "capture": 12.0,
+          "recording": 5.0,
+          "inference": 2.0
+        },
+        "decode_latency_ms": {
+          "sample_count": 58,
+          "p50": 0.4256649990566075,
+          "p95": 2.3127860004024114
+        },
+        "frame_age_ms": {
+          "recording": {
+            "sample_count": 24,
+            "p50": 4.855019000387983,
+            "p95": 8.1426590004412
+          },
+          "inference": {
+            "sample_count": 10,
+            "p50": 5.611206997855334,
+            "p95": 24.29895199747989
+          }
+        },
+        "decoder_resources": {
+          "pid": 53812,
+          "cpu_seconds": 0.57,
+          "rss_bytes": 63139840
+        }
+      }
+    },
+    "scope": "two generated local videos; not RTSP/original sensor PTS validation"
+  },
+  "docker": {
+    "new_image_build": "FAILED: Docker overlay disk exhausted; only cache IDs created by this failed build were removed",
+    "runtime": "current source streamed into tmpfs of existing dependency image; not a new built image",
+    "isolation": "false none 65534:65534 true",
+    "health": {
+      "healthy": false,
+      "stopped": true,
+      "counts": {
+        "starts": 2
+      },
+      "cameras": [
+        {
+          "camera_id": "00000000-0000-0000-0000-000000000001",
+          "healthy": true,
+          "restarts": 0,
+          "resources": {
+            "rss_bytes": 152481792,
+            "cpu_seconds": 1.1600000000000001,
+            "processes": 3
+          },
+          "cpu_cores_observed": 0.0
+        },
+        {
+          "camera_id": "00000000-0000-0000-0000-000000000002",
+          "healthy": true,
+          "restarts": 0,
+          "resources": {
+            "rss_bytes": 152883200,
+            "cpu_seconds": 1.1500000000000001,
+            "processes": 3
+          },
+          "cpu_cores_observed": 0.0
+        }
+      ]
+    },
+    "compose_config": "docker compose -f docker-compose.fleet.yml config --quiet: passed"
+  },
+  "limits": "No production, managed Supabase, device, RTSP substream sensor synchronization or model accuracy acceptance"
+}
