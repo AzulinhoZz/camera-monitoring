@@ -57,7 +57,7 @@ fun VisionStatusPanel(cameraId: String, load: suspend (Boolean, Boolean) -> Visi
         Column(Modifier.padding(12.dp), verticalArrangement = Arrangement.spacedBy(6.dp)) {
             Text("Análisis IA", style = MaterialTheme.typography.titleMedium)
             val current = snapshot
-            Text(if (current == null || current.state == "unavailable") "Estado no disponible" else if (current.healthy) "Worker activo" else "Worker sin señal saludable")
+            Text(if (current == null || current.state == "unavailable") "Estado no disponible" else if (current.healthy) "Análisis activo" else "Sin señal de análisis saludable")
             current?.diagnostics?.codes?.forEach { code ->
                 val label = when (code) {
                     "capture_unavailable" -> "La cámara no está enviando señal saludable."

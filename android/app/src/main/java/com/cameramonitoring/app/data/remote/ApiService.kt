@@ -93,7 +93,8 @@ interface ApiService {
         @Query("event_type") eventType: String? = null,
         @Query("review_status") reviewStatus: String? = null,
         @Query("since") since: String? = null,
-        @Query("rule_id") ruleId: String? = null): Response<EventStatistics>
+        @Query("rule_id") ruleId: String? = null,
+        @Query("until") until: String? = null): Response<EventStatistics>
 
     @GET("events")
     suspend fun getEvents(
@@ -103,7 +104,8 @@ interface ApiService {
         @Query("since") since: String? = null,
         @Query("cursor") cursor: String? = null,
         @Query("limit") limit: Int = 100,
-        @Query("rule_id") ruleId: String? = null
+        @Query("rule_id") ruleId: String? = null,
+        @Query("until") until: String? = null
     ): Response<EventListResponse>
 
     @POST("events/{id}/review")

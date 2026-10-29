@@ -37,8 +37,8 @@ class EventRepository(
     } catch (e: kotlinx.coroutines.CancellationException) { throw e }
     catch (_: Exception) { null }
 
-    suspend fun getStatistics(cameraId: String?, type: String?, review: String?, since: String?, ruleId: String? = null): EventStatistics? = try {
-        val response = apiService.getEventStatistics(cameraId, type, review, since, ruleId)
+    suspend fun getStatistics(cameraId: String?, type: String?, review: String?, since: String?, ruleId: String? = null, until: String? = null): EventStatistics? = try {
+        val response = apiService.getEventStatistics(cameraId, type, review, since, ruleId, until)
         val body = response.body()
         if (response.isSuccessful && (ruleId == null || ruleId.equals(body?.appliedFilters?.ruleId, ignoreCase = true))) body else null
     } catch (e: kotlinx.coroutines.CancellationException) { throw e }
@@ -46,9 +46,9 @@ class EventRepository(
 
     suspend fun getEventPage(
         cameraId: String? = null, eventType: String? = null, reviewStatus: String? = null,
-        since: String? = null, cursor: String? = null, ruleId: String? = null
+        since: String? = null, cursor: String? = null, ruleId: String? = null, until: String? = null
     ): Result<EventListResponse> = try {
-        val response = apiService.getEvents(cameraId, eventType, reviewStatus, since, cursor, 30, ruleId)
+        val response = apiService.getEvents(cameraId, eventType, reviewStatus, since, cursor, 30, ruleId, until)
         val body = response.body()
         if (response.isSuccessful && body != null && (ruleId == null || ruleId.equals(body.appliedFilters?.ruleId, ignoreCase = true))) Result.success(body)
         else Result.failure(Exception("No se pudo consultar el historial (${response.code()})"))

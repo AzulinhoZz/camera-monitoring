@@ -49,6 +49,8 @@ import androidx.lifecycle.LifecycleEventObserver
 import androidx.lifecycle.compose.LocalLifecycleOwner
 import com.cameramonitoring.app.data.model.incidentReason
 import com.cameramonitoring.app.data.model.eventTimestampLabel
+import com.cameramonitoring.app.data.model.eventSearchRange
+import com.cameramonitoring.app.data.model.EventSearchRange
 import com.cameramonitoring.app.data.model.CameraEvent
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -69,13 +71,16 @@ fun EventHistoryScreen(
     var selectedEventForDetail by remember { mutableStateOf<CameraEvent?>(null) }
     var activePlayingClipUrl by remember { mutableStateOf<String?>(null) }
 
+    var customSince by rememberSaveable { mutableStateOf<String?>(null) }
+    var customUntil by rememberSaveable { mutableStateOf<String?>(null) }
+    var showRange by remember { mutableStateOf(false) }
     var eventType by rememberSaveable { mutableStateOf<String?>(null) }
     var reviewStatus by rememberSaveable(initialPending) { mutableStateOf<String?>(if (initialPending) "pending" else null) }
     var hours by rememberSaveable(initialPending) { mutableStateOf<Long?>(if (initialPending) 24L else null) }
-    LaunchedEffect(eventType, reviewStatus, hours, selectedCamera, selectedRule) {
+    LaunchedEffect(eventType, reviewStatus, hours, selectedCamera, selectedRule, customSince, customUntil) {
         selectedEventForDetail = null
         activePlayingClipUrl = null
-        viewModel.search(eventType, reviewStatus, hours, selectedCamera, selectedRule)
+        viewModel.search(eventType, reviewStatus, hours, selectedCamera, selectedRule, customSince, customUntil)
     }
 
     val lifecycleOwner = LocalLifecycleOwner.current
@@ -150,9 +155,11 @@ fun EventHistoryScreen(
                 }
                 Row(Modifier.horizontalScroll(rememberScrollState()), horizontalArrangement = Arrangement.spacedBy(8.dp)) {
                     listOf(null to "Todo el periodo", 24L to "Últimas 24 h", 168L to "Últimos 7 días").forEach { (value, label) ->
-                        FilterChip(selected = hours == value, onClick = { hours = value }, label = { Text(label) })
+                        FilterChip(selected = hours == value && customSince == null, onClick = { hours = value; customSince = null; customUntil = null }, label = { Text(label) })
                     }
+                    FilterChip(selected = customSince != null, onClick = { showRange = true }, label = { Text("Fecha y hora") })
                 }
+                if (customSince != null) Text("${eventTimestampLabel(customSince)} — ${eventTimestampLabel(customUntil)}", style = MaterialTheme.typography.bodySmall)
             }
             Box(Modifier.weight(1f)) {
             when (val state = uiState) {
@@ -199,7 +206,7 @@ fun EventHistoryScreen(
                         item {
                             state.actionMessage?.let { Text(it, color = MaterialTheme.colorScheme.error) }
                             state.statistics?.let { stats ->
-                                Text("Estadísticas · ${if (hours == null) "últimas 24 h" else if (hours == 24L) "últimas 24 h" else "últimos 7 días"}", style = MaterialTheme.typography.titleMedium)
+                                Text("Estadísticas · ${if (customSince != null) "rango seleccionado" else if (hours == null) "últimas 24 h" else if (hours == 24L) "últimas 24 h" else "últimos 7 días"}", style = MaterialTheme.typography.titleMedium)
                                 Text("${stats.total} eventos · ${stats.pending} pendientes (cámaras y filtros seleccionados)")
                             } ?: Text("Estadísticas no disponibles; los eventos siguen visibles.")
                             Text("Resumen de esta página", style = MaterialTheme.typography.titleMedium)
@@ -228,6 +235,10 @@ fun EventHistoryScreen(
             }
             }
         }
+
+        if (showRange) EventSearchRangeDialog(onDismiss = { showRange = false }, onApply = { range ->
+            hours = null; customSince = range.since; customUntil = range.until; showRange = false
+        })
 
         selectedEventForDetail?.let { event ->
             val currentImgUrl = (uiState as? EventHistoryUiState.Success)?.evidenceUrls?.get(event.id)
@@ -685,5 +696,54 @@ fun ClipPlayerDialog(
                 }
             }
         }
+    }
+}
+
+
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+private fun EventSearchRangeDialog(onDismiss: () -> Unit, onApply: (EventSearchRange) -> Unit) {
+    var start by remember { mutableStateOf(java.time.LocalDateTime.now().minusDays(1).withSecond(0).withNano(0)) }
+    var end by remember { mutableStateOf(java.time.LocalDateTime.now().withSecond(0).withNano(0)) }
+    var editDate by remember { mutableStateOf<Boolean?>(null) }
+    var editTime by remember { mutableStateOf<Boolean?>(null) }
+    var error by remember { mutableStateOf<String?>(null) }
+    val formatter = remember { java.time.format.DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm") }
+    AlertDialog(onDismissRequest = onDismiss, title = { Text("Buscar por fecha y hora") }, text = {
+        Column(Modifier.heightIn(max = LocalConfiguration.current.screenHeightDp.dp * 0.6f).verticalScroll(rememberScrollState())) {
+            Text("Hora del teléfono: ${java.time.ZoneId.systemDefault().id}")
+            Text("Desde: ${start.format(formatter)}")
+            Row { TextButton(onClick = { editDate = true }) { Text("Fecha inicial") }; TextButton(onClick = { editTime = true }) { Text("Hora inicial") } }
+            Text("Hasta: ${end.format(formatter)} (minuto incluido)")
+            Row { TextButton(onClick = { editDate = false }) { Text("Fecha final") }; TextButton(onClick = { editTime = false }) { Text("Hora final") } }
+            Text("Máximo 31 días para incluir las estadísticas.")
+            error?.let { Text(it, color = MaterialTheme.colorScheme.error) }
+        }
+    }, confirmButton = { TextButton(onClick = {
+        runCatching { eventSearchRange(start,end) }.fold(onSuccess = onApply, onFailure = { error = it.message ?: "Rango inválido" })
+    }) { Text("Buscar") } }, dismissButton = { TextButton(onClick = onDismiss) { Text("Cancelar") } })
+    editDate?.let { initial ->
+        val value = if (initial) start else end
+        val state = rememberDatePickerState(initialSelectedDateMillis = value.toLocalDate().atStartOfDay(java.time.ZoneOffset.UTC).toInstant().toEpochMilli())
+        DatePickerDialog(onDismissRequest = { editDate = null }, confirmButton = {
+            TextButton(onClick = {
+                state.selectedDateMillis?.let { millis ->
+                    val date = java.time.Instant.ofEpochMilli(millis).atZone(java.time.ZoneOffset.UTC).toLocalDate()
+                    if (initial) start = java.time.LocalDateTime.of(date,start.toLocalTime()) else end = java.time.LocalDateTime.of(date,end.toLocalTime())
+                }
+                editDate = null; error = null
+            }) { Text("Aceptar") }
+        }, dismissButton = { TextButton(onClick = { editDate = null }) { Text("Cancelar") } }) { DatePicker(state) }
+    }
+    editTime?.let { initial ->
+        val value = if (initial) start else end
+        val state = rememberTimePickerState(initialHour = value.hour,initialMinute = value.minute,is24Hour = true)
+        AlertDialog(onDismissRequest = { editTime = null }, title = { Text(if (initial) "Hora inicial" else "Hora final") },
+            text = { Box(Modifier.heightIn(max = LocalConfiguration.current.screenHeightDp.dp * 0.6f).verticalScroll(rememberScrollState())) { TimePicker(state) } }, confirmButton = {
+                TextButton(onClick = {
+                    if (initial) start = start.withHour(state.hour).withMinute(state.minute) else end = end.withHour(state.hour).withMinute(state.minute)
+                    editTime = null; error = null
+                }) { Text("Aceptar") }
+            }, dismissButton = { TextButton(onClick = { editTime = null }) { Text("Cancelar") } })
     }
 }

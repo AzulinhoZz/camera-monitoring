@@ -37,8 +37,10 @@ class ProductReadinessContractTest {
         try {
             val api = Retrofit.Builder().baseUrl(server.url("/")).addConverterFactory(GsonConverterFactory.create()).build().create(ApiService::class.java)
             server.enqueue(MockResponse().setBody("""{"total":0,"events":[]}"""))
-            api.getEvents(cameraId = "camera", ruleId = "rule")
-            assertEquals("rule", server.takeRequest().requestUrl!!.queryParameter("rule_id"))
+            api.getEvents(cameraId = "camera", ruleId = "rule", until = "2026-10-28T12:00:00Z")
+            val historyUrl = server.takeRequest().requestUrl!!
+            assertEquals("rule", historyUrl.queryParameter("rule_id"))
+            assertEquals("2026-10-28T12:00:00Z", historyUrl.queryParameter("until"))
             server.enqueue(MockResponse().setBody("""{"total":0,"pending":0,"since":"a","until":"b","scope":"authorized_window"}"""))
             api.getEventStatistics(cameraId = "camera", ruleId = "rule")
             assertEquals("rule", server.takeRequest().requestUrl!!.queryParameter("rule_id"))
@@ -75,6 +77,25 @@ class ProductReadinessContractTest {
             try { request.await(); fail("Cancellation must propagate") } catch (_: CancellationException) { }
             assertFalse(returned)
         } finally { server.shutdown() }
+    }
+
+    @Test fun customSearchRangeUsesLocalZoneAndIncludesTheFinalMinute() {
+        val from = java.time.LocalDateTime.parse("2026-10-28T06:30:00")
+        val to = java.time.LocalDateTime.parse("2026-10-28T07:45:00")
+        val range = eventSearchRange(from,to,java.time.ZoneId.of("America/Mexico_City"))
+        assertEquals("2026-10-28T12:30:00Z",range.since)
+        assertEquals("2026-10-28T13:45:59.999999Z",range.until)
+    }
+
+    @Test fun customRangeRejectsReversedLongAndAmbiguousDaylightSavingTimes() {
+        val normal = java.time.LocalDateTime.parse("2026-10-28T06:30:00")
+        for (end in listOf(normal.minusHours(1), normal.plusDays(32))) {
+            try { eventSearchRange(normal,end,java.time.ZoneOffset.UTC); fail("Invalid range") } catch (_: IllegalArgumentException) { }
+        }
+        for (local in listOf("2026-03-08T02:30:00","2026-11-01T01:30:00")) {
+            val value = java.time.LocalDateTime.parse(local)
+            try { eventSearchRange(value,value.plusHours(2),java.time.ZoneId.of("America/New_York")); fail("Ambiguous/missing local time") } catch (_: IllegalArgumentException) { }
+        }
     }
 
 }

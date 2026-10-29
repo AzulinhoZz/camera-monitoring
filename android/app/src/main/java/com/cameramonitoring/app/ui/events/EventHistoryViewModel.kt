@@ -59,16 +59,18 @@ class EventHistoryViewModel(
     private var eventType: String? = null
     private var reviewStatus: String? = null
     private var since: String? = null
+    private var until: String? = null
     private var cursor: String? = null
 
-    fun search(type: String?, review: String?, hours: Long?, cameraId: String? = null, selectedRuleId: String? = null) {
+    fun search(type: String?, review: String?, hours: Long?, cameraId: String? = null, selectedRuleId: String? = null, from: String? = null, to: String? = null) {
         val cameraChanged = cameraId != selectedCamera
         selectedCamera = cameraId
         if (cameraChanged) { ruleRequest?.cancel(); _rules.value = emptyList() }
         ruleId = selectedRuleId
         selectedCamera = cameraId
         eventType = type; reviewStatus = review
-        since = hours?.let { Instant.now().minusSeconds(it * 3600).toString() }
+        since = from ?: hours?.let { Instant.now().minusSeconds(it * 3600).toString() }
+        until = to
         cursor = null
         loadEvents()
     }
@@ -95,12 +97,12 @@ class EventHistoryViewModel(
         val currentGeneration = ++generation
         request = viewModelScope.launch {
             _uiState.value = EventHistoryUiState.Loading
-            eventRepository.getEventPage(selectedCamera, eventType, reviewStatus, since, cursor, ruleId).fold(
+            eventRepository.getEventPage(selectedCamera, eventType, reviewStatus, since, cursor, ruleId, until).fold(
                 onSuccess = { page ->
                     if (!currentCoroutineContext().isActive || generation != currentGeneration) return@launch
                     _uiState.value = EventHistoryUiState.Success(page.events, nextCursor = page.nextCursor, hasMore = page.hasMore)
                     launch {
-                        val statistics = withTimeoutOrNull(5000) { eventRepository.getStatistics(selectedCamera, eventType, reviewStatus, since, ruleId) }
+                        val statistics = withTimeoutOrNull(5000) { eventRepository.getStatistics(selectedCamera, eventType, reviewStatus, since, ruleId, until) }
                         if (currentCoroutineContext().isActive && generation == currentGeneration) {
                             val state = _uiState.value as? EventHistoryUiState.Success
                             if (state != null) _uiState.value = state.copy(statistics = statistics)

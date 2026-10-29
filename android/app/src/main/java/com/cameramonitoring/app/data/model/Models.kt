@@ -330,3 +330,22 @@ fun eventTimestampLabel(value: String?): String = runCatching {
 }.getOrDefault("Fecha no disponible")
 
 data class AppliedEventFilters(@SerializedName("rule_id") val ruleId: String? = null)
+
+
+data class EventSearchRange(val since: String, val until: String)
+
+fun eventSearchRange(start: java.time.LocalDateTime, end: java.time.LocalDateTime,
+                     zone: java.time.ZoneId = java.time.ZoneId.systemDefault()): EventSearchRange {
+    fun instant(value: java.time.LocalDateTime): java.time.Instant {
+        val offsets = zone.rules.getValidOffsets(value)
+        require(offsets.size == 1) { "Elige otra hora: el cambio de horario hace ambigua o inexistente esta selección." }
+        return value.toInstant(offsets.single())
+    }
+    val from = instant(start.withSecond(0).withNano(0))
+    // Picker precision is minutes: include the complete selected final minute.
+    val to = instant(end.withSecond(0).withNano(0)).plusSeconds(59).plusNanos(999_999_000)
+    require(!to.isBefore(from) && java.time.Duration.between(from, to) <= java.time.Duration.ofDays(31)) {
+        "El rango debe estar ordenado y ser de hasta 31 días."
+    }
+    return EventSearchRange(from.toString(), to.toString())
+}
