@@ -59,7 +59,7 @@ class MainActivity : ComponentActivity() {
             FirebaseMessaging.getInstance().token.addOnCompleteListener { task ->
                 if (task.isSuccessful && task.result != null) {
                     val token = task.result
-                    Log.i("MainActivity", "FCM Token retrieved: ${token.take(20)}...")
+                    Log.i("MainActivity", "FCM token registered locally")
                     val sessionManager = SessionManager(applicationContext)
                     sessionManager.saveFCMToken(token)
 
@@ -73,7 +73,7 @@ class MainActivity : ComponentActivity() {
                 }
             }
         } catch (e: Exception) {
-            Log.w("MainActivity", "FirebaseMessaging not initialized yet: ${e.message}")
+            Log.w("MainActivity", "FirebaseMessaging is not available")
         }
     }
 }
