@@ -5,6 +5,10 @@ import android.util.Base64
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
+import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.lifecycle.compose.LocalLifecycleOwner
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.repeatOnLifecycle
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.unit.dp
@@ -24,7 +28,11 @@ fun VisionStatusPanel(cameraId: String, load: suspend (Boolean, Boolean) -> Visi
     var overlay by remember(cameraId) { mutableStateOf(false) }
     var snapshot by remember(cameraId) { mutableStateOf<VisionStatus?>(null) }
     var image by remember(cameraId) { mutableStateOf<ByteArray?>(null) }
-    LaunchedEffect(cameraId, preview, overlay) {
+    val owner = LocalLifecycleOwner.current
+    var details by rememberSaveable(cameraId) { mutableStateOf(false) }
+    LaunchedEffect(cameraId, preview, overlay, owner) {
+        owner.lifecycle.repeatOnLifecycle(Lifecycle.State.STARTED) {
+        try {
         snapshot = null; image = null
         while (isActive) {
             val started = SystemClock.elapsedRealtime()
@@ -42,13 +50,27 @@ fun VisionStatusPanel(cameraId: String, load: suspend (Boolean, Boolean) -> Visi
             image = null
             snapshot = null
         }
+        } finally { snapshot = null; image = null }
+        }
     }
     Card(Modifier.fillMaxWidth()) {
         Column(Modifier.padding(12.dp), verticalArrangement = Arrangement.spacedBy(6.dp)) {
             Text("Análisis IA", style = MaterialTheme.typography.titleMedium)
             val current = snapshot
             Text(if (current == null || current.state == "unavailable") "Estado no disponible" else if (current.healthy) "Worker activo" else "Worker sin señal saludable")
-            current?.let {
+            current?.diagnostics?.codes?.forEach { code ->
+                val label = when (code) {
+                    "capture_unavailable" -> "La cámara no está enviando señal saludable."
+                    "frame_stale" -> "La imagen de análisis está retrasada."
+                    "inference_not_ready" -> "El análisis aún no está listo."
+                    "inference_below_target" -> "El análisis no alcanza la velocidad objetivo; revisa la capacidad del servidor."
+                    "inference_drops_observed" -> "Se han omitido imágenes de análisis; revisa la carga si continúa."
+                    else -> null
+                }
+                label?.let { Text(it, style = MaterialTheme.typography.bodySmall) }
+            }
+            Row { Switch(details, { details = it }); Text(" Detalles de diagnóstico") }
+            if (details) current?.let {
                 Text("Captura: ${"%.1f".format(it.captureFps)} FPS · Inferencia: ${"%.1f".format(it.inferenceFps)} FPS · ${it.inferenceFrames} frames analizados · ${it.inferenceDropped} descartados")
                 Text("Memoria: ${it.rssBytes / 1048576} MiB · CPU acumulada: ${"%.1f".format(it.cpuSeconds)} s")
             }

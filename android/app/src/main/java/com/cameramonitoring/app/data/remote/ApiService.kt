@@ -85,11 +85,15 @@ interface ApiService {
         @Query("preview") preview: Boolean = false,
         @Query("overlay") overlay: Boolean = false): Response<VisionStatus>
 
+    @GET("events/attention")
+    suspend fun getCameraAttention(): Response<CameraAttention>
+
     @GET("events/statistics")
     suspend fun getEventStatistics(@Query("camera_id") cameraId: String? = null,
         @Query("event_type") eventType: String? = null,
         @Query("review_status") reviewStatus: String? = null,
-        @Query("since") since: String? = null): Response<EventStatistics>
+        @Query("since") since: String? = null,
+        @Query("rule_id") ruleId: String? = null): Response<EventStatistics>
 
     @GET("events")
     suspend fun getEvents(
@@ -98,7 +102,8 @@ interface ApiService {
         @Query("review_status") reviewStatus: String? = null,
         @Query("since") since: String? = null,
         @Query("cursor") cursor: String? = null,
-        @Query("limit") limit: Int = 100
+        @Query("limit") limit: Int = 100,
+        @Query("rule_id") ruleId: String? = null
     ): Response<EventListResponse>
 
     @POST("events/{id}/review")

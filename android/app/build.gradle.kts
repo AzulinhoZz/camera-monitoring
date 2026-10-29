@@ -1,7 +1,22 @@
+import java.net.URI
+
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.compose)
 }
+
+val cameraApiBaseUrl = providers.gradleProperty("cameraApiBaseUrl").getOrElse("http://10.0.2.2:8000/")
+val cameraApiUri = runCatching { URI(cameraApiBaseUrl) }.getOrElse { error("Invalid API base URL") }
+require(cameraApiUri.scheme in listOf("http", "https") && !cameraApiUri.host.isNullOrBlank() &&
+    cameraApiUri.rawUserInfo == null && cameraApiUri.rawQuery == null && cameraApiUri.rawFragment == null && cameraApiBaseUrl.endsWith("/")) {
+    "API base URL must be HTTP(S), end with /, and contain no credentials, query or fragment"
+}
+val validateReleaseEndpoint = tasks.register("validateReleaseEndpoint") {
+    val scheme = cameraApiUri.scheme
+    inputs.property("apiScheme", scheme)
+    doLast { require(scheme == "https") { "Release requires an HTTPS cameraApiBaseUrl" } }
+}
+tasks.matching { it.name == "preReleaseBuild" }.configureEach { dependsOn(validateReleaseEndpoint) }
 
 android {
     namespace = "com.cameramonitoring.app"
@@ -15,6 +30,7 @@ android {
         versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+        buildConfigField("String", "API_BASE_URL", "\"$cameraApiBaseUrl\"")
     }
 
     testOptions {
@@ -24,7 +40,9 @@ android {
     }
 
     buildTypes {
+        debug { manifestPlaceholders["allowCleartext"] = "true" }
         release {
+            manifestPlaceholders["allowCleartext"] = "false"
             optimization {
                 enable = false
             }
@@ -35,6 +53,7 @@ android {
         targetCompatibility = JavaVersion.VERSION_17
     }
     buildFeatures {
+        buildConfig = true
         compose = true
     }
 }

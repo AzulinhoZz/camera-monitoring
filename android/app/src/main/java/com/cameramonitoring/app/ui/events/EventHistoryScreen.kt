@@ -1,5 +1,6 @@
 package com.cameramonitoring.app.ui.events
 
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.runtime.saveable.rememberSaveable
@@ -30,6 +31,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -40,6 +42,13 @@ import androidx.media3.common.MediaItem
 import androidx.media3.exoplayer.ExoPlayer
 import androidx.media3.ui.PlayerView
 import coil.compose.AsyncImage
+import coil.request.ImageRequest
+import coil.request.CachePolicy
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.LifecycleEventObserver
+import androidx.lifecycle.compose.LocalLifecycleOwner
+import com.cameramonitoring.app.data.model.incidentReason
+import com.cameramonitoring.app.data.model.eventTimestampLabel
 import com.cameramonitoring.app.data.model.CameraEvent
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -47,22 +56,40 @@ import com.cameramonitoring.app.data.model.CameraEvent
 fun EventHistoryScreen(
     viewModel: EventHistoryViewModel,
     onBackClick: () -> Unit,
-    onStorageClick: () -> Unit = {}
+    onStorageClick: () -> Unit = {},
+    initialCameraId: String? = null,
+    initialPending: Boolean = false
 ) {
     val uiState by viewModel.uiState.collectAsState()
     val cameras by viewModel.cameras.collectAsState()
-    var selectedCamera by rememberSaveable { mutableStateOf<String?>(null) }
+    val rules by viewModel.rules.collectAsState()
+    var selectedRule by rememberSaveable { mutableStateOf<String?>(null) }
+    var selectedCamera by rememberSaveable(initialCameraId) { mutableStateOf(initialCameraId) }
     LaunchedEffect(Unit) { viewModel.loadCameras() }
-    var selectedEventForDetail by remember { mutableStateOf<Triple<CameraEvent, String?, String?>?>(null) }
+    var selectedEventForDetail by remember { mutableStateOf<CameraEvent?>(null) }
     var activePlayingClipUrl by remember { mutableStateOf<String?>(null) }
 
     var eventType by rememberSaveable { mutableStateOf<String?>(null) }
-    var reviewStatus by rememberSaveable { mutableStateOf<String?>(null) }
-    var hours by rememberSaveable { mutableStateOf<Long?>(null) }
-    LaunchedEffect(eventType, reviewStatus, hours, selectedCamera) {
+    var reviewStatus by rememberSaveable(initialPending) { mutableStateOf<String?>(if (initialPending) "pending" else null) }
+    var hours by rememberSaveable(initialPending) { mutableStateOf<Long?>(if (initialPending) 24L else null) }
+    LaunchedEffect(eventType, reviewStatus, hours, selectedCamera, selectedRule) {
         selectedEventForDetail = null
         activePlayingClipUrl = null
-        viewModel.search(eventType, reviewStatus, hours, selectedCamera)
+        viewModel.search(eventType, reviewStatus, hours, selectedCamera, selectedRule)
+    }
+
+    val lifecycleOwner = LocalLifecycleOwner.current
+    DisposableEffect(lifecycleOwner) {
+        var stopped = false
+        val observer = LifecycleEventObserver { _, event ->
+            if (event == Lifecycle.Event.ON_STOP) {
+                stopped = true; selectedEventForDetail = null; activePlayingClipUrl = null; viewModel.clearMedia()
+            } else if (event == Lifecycle.Event.ON_START && stopped) {
+                stopped = false; viewModel.loadCameras(); viewModel.loadEvents()
+            }
+        }
+        lifecycleOwner.lifecycle.addObserver(observer)
+        onDispose { lifecycleOwner.lifecycle.removeObserver(observer); viewModel.clearMedia() }
     }
 
     Scaffold(
@@ -97,9 +124,16 @@ fun EventHistoryScreen(
             Column(Modifier.padding(horizontal = 16.dp)) {
                 Text("Buscar eventos", style = MaterialTheme.typography.titleMedium)
                 Row(Modifier.horizontalScroll(rememberScrollState()), horizontalArrangement = Arrangement.spacedBy(8.dp)) {
-                    FilterChip(selected = selectedCamera == null, onClick = { selectedCamera = null }, label = { Text("Todas las cámaras") })
+                    FilterChip(selected = selectedCamera == null, onClick = { selectedCamera = null; selectedRule = null }, label = { Text("Todas las cámaras") })
                     cameras.forEach { camera ->
-                        FilterChip(selected = selectedCamera == camera.id, onClick = { selectedCamera = camera.id }, label = { Text(camera.name) })
+                        FilterChip(selected = selectedCamera == camera.id, onClick = { selectedCamera = camera.id; selectedRule = null }, label = { Text(camera.name) })
+                    }
+                }
+                if (selectedCamera != null && (rules.isNotEmpty() || selectedRule != null)) Row(Modifier.horizontalScroll(rememberScrollState()), horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+                    FilterChip(selected = selectedRule == null, onClick = { selectedRule = null }, label = { Text("Todas las reglas / zonas") })
+                    if (selectedRule != null && rules.none { it.ruleId == selectedRule }) FilterChip(selected = true, onClick = { selectedRule = null }, label = { Text("Regla anterior · quitar filtro") })
+                    rules.forEachIndexed { index, rule ->
+                        FilterChip(selected = selectedRule == rule.ruleId, onClick = { selectedRule = rule.ruleId }, label = { Text("Regla / zona ${index + 1}${if (rule.enabled) "" else " · pausada"}") })
                     }
                 }
                 Row(Modifier.horizontalScroll(rememberScrollState()), horizontalArrangement = Arrangement.spacedBy(8.dp)) {
@@ -163,6 +197,7 @@ fun EventHistoryScreen(
                         modifier = Modifier.fillMaxSize()
                     ) {
                         item {
+                            state.actionMessage?.let { Text(it, color = MaterialTheme.colorScheme.error) }
                             state.statistics?.let { stats ->
                                 Text("Estadísticas · ${if (hours == null) "últimas 24 h" else if (hours == 24L) "últimas 24 h" else "últimos 7 días"}", style = MaterialTheme.typography.titleMedium)
                                 Text("${stats.total} eventos · ${stats.pending} pendientes (cámaras y filtros seleccionados)")
@@ -185,7 +220,7 @@ fun EventHistoryScreen(
                                 event = event,
                                 imageUrl = imageUrl,
                                 hasClip = clipUrl != null || event.hasClip || event.clipPath != null,
-                                onClick = { selectedEventForDetail = Triple(event, imageUrl, clipUrl) }
+                                onClick = { selectedEventForDetail = event; viewModel.loadEventMedia(event.id) }
                             )
                         }
                     }
@@ -194,14 +229,16 @@ fun EventHistoryScreen(
             }
         }
 
-        selectedEventForDetail?.let { (event, initialImgUrl, initialClipUrl) ->
-            val currentImgUrl = (uiState as? EventHistoryUiState.Success)?.evidenceUrls?.get(event.id) ?: initialImgUrl
-            val currentClipUrl = (uiState as? EventHistoryUiState.Success)?.clipUrls?.get(event.id) ?: initialClipUrl
+        selectedEventForDetail?.let { event ->
+            val currentImgUrl = (uiState as? EventHistoryUiState.Success)?.evidenceUrls?.get(event.id)
+            val currentClipUrl = (uiState as? EventHistoryUiState.Success)?.clipUrls?.get(event.id)
 
             EventDetailDialog(
                 event = event,
                 imageUrl = currentImgUrl,
                 clipUrl = currentClipUrl,
+                mediaUnavailable = (uiState as? EventHistoryUiState.Success)?.mediaErrors?.contains(event.id) == true,
+                onRetryMedia = { viewModel.loadEventMedia(event.id) },
                 onDismiss = { selectedEventForDetail = null },
                 onPlayClip = { url ->
                     activePlayingClipUrl = url
@@ -252,7 +289,7 @@ fun EventItemCard(
             if (imageUrl != null) {
                 Box {
                     AsyncImage(
-                        model = imageUrl,
+                        model = ImageRequest.Builder(LocalContext.current).data(imageUrl).memoryCachePolicy(CachePolicy.DISABLED).diskCachePolicy(CachePolicy.DISABLED).build(),
                         contentDescription = "Evidencia Fotograma",
                         contentScale = ContentScale.Crop,
                         modifier = Modifier
@@ -332,7 +369,7 @@ fun EventItemCard(
                         }
                     }
                     Text(
-                        text = event.detectedAt?.take(19)?.replace("T", " ") ?: "",
+                        text = eventTimestampLabel(event.detectedAt),
                         fontSize = 11.sp,
                         color = MaterialTheme.colorScheme.onSurfaceVariant
                     )
@@ -398,7 +435,9 @@ fun EventDetailDialog(
     onDismiss: () -> Unit,
     onPlayClip: (String) -> Unit,
     onToggleProtect: () -> Unit,
-    onReview: (String) -> Unit = {}
+    onReview: (String) -> Unit = {},
+    mediaUnavailable: Boolean = false,
+    onRetryMedia: () -> Unit = {}
 ) {
     Dialog(
         onDismissRequest = onDismiss,
@@ -407,12 +446,13 @@ fun EventDetailDialog(
         Surface(
             modifier = Modifier
                 .fillMaxWidth(0.92f)
+                .heightIn(max = LocalConfiguration.current.screenHeightDp.dp * 0.9f)
                 .wrapContentHeight(),
             shape = RoundedCornerShape(16.dp),
             color = MaterialTheme.colorScheme.surface
         ) {
             Column(
-                modifier = Modifier.padding(20.dp)
+                modifier = Modifier.verticalScroll(rememberScrollState()).padding(20.dp)
             ) {
                 Row(
                     modifier = Modifier.fillMaxWidth(),
@@ -445,7 +485,7 @@ fun EventDetailDialog(
                             .aspectRatio(16f / 9f)
                     ) {
                         AsyncImage(
-                            model = imageUrl,
+                            model = ImageRequest.Builder(LocalContext.current).data(imageUrl).memoryCachePolicy(CachePolicy.DISABLED).diskCachePolicy(CachePolicy.DISABLED).build(),
                             contentDescription = "Evidencia Completa de Movimiento",
                             contentScale = ContentScale.Fit,
                             modifier = Modifier
@@ -453,7 +493,7 @@ fun EventDetailDialog(
                                 .background(Color.Black)
                         )
                     }
-                } else if (event.hasEvidence || event.evidencePath != null) {
+                } else if ((event.hasEvidence || event.evidencePath != null) && !mediaUnavailable) {
                     Surface(
                         color = MaterialTheme.colorScheme.surfaceVariant,
                         shape = RoundedCornerShape(12.dp),
@@ -478,7 +518,7 @@ fun EventDetailDialog(
                             .height(100.dp)
                     ) {
                         Box(contentAlignment = Alignment.Center) {
-                            Text("Sin captura de evidencia fotográfica", fontSize = 12.sp, color = MaterialTheme.colorScheme.onSurfaceVariant)
+                            Text(if (mediaUnavailable) "Captura no disponible" else "Sin captura de evidencia fotográfica", fontSize = 12.sp, color = MaterialTheme.colorScheme.onSurfaceVariant)
                         }
                     }
                 }
@@ -486,13 +526,18 @@ fun EventDetailDialog(
                 Spacer(modifier = Modifier.height(16.dp))
 
                 Text(
-                    text = "Fecha y hora: ${event.detectedAt?.take(19)?.replace("T", " ") ?: "Desconocida"}",
+                    text = "Fecha y hora: ${eventTimestampLabel(event.detectedAt)}",
                     fontSize = 13.sp,
                     color = MaterialTheme.colorScheme.onSurface
                 )
 
                 Spacer(modifier = Modifier.height(6.dp))
 
+                Text("Motivo: ${event.incidentReason()}", style = MaterialTheme.typography.titleMedium)
+                if (mediaUnavailable) {
+                    Text("No se pudo cargar toda la evidencia. Comprueba tu conexión o permisos.")
+                    TextButton(onClick = onRetryMedia) { Text("Reintentar evidencia") }
+                }
                 Text(
                     text = "Descripción: ${event.description ?: "Movimiento detectado por OpenCV"}",
                     fontSize = 13.sp,
@@ -513,7 +558,7 @@ fun EventDetailDialog(
                         Text("Ver grabación", fontWeight = FontWeight.Bold)
                     }
                     Spacer(modifier = Modifier.height(8.dp))
-                } else if (event.hasClip || event.clipPath != null) {
+                } else if ((event.hasClip || event.clipPath != null) && !mediaUnavailable) {
                     OutlinedButton(
                         onClick = { },
                         enabled = false,
@@ -570,9 +615,13 @@ fun ClipPlayerDialog(
 ) {
     val context = LocalContext.current
     var exoPlayer by remember { mutableStateOf<ExoPlayer?>(null) }
+    var playbackFailed by remember(clipUrl) { mutableStateOf(false) }
 
     DisposableEffect(clipUrl) {
         val player = ExoPlayer.Builder(context).build().apply {
+            addListener(object : androidx.media3.common.Player.Listener {
+                override fun onPlayerError(error: androidx.media3.common.PlaybackException) { playbackFailed = true }
+            })
             setMediaItem(MediaItem.fromUri(clipUrl))
             prepare()
             playWhenReady = true
@@ -600,7 +649,7 @@ fun ClipPlayerDialog(
                     horizontalArrangement = Arrangement.SpaceBetween,
                     verticalAlignment = Alignment.CenterVertically
                 ) {
-                    Text("Reproduciendo Clip MP4", color = Color.White, fontWeight = FontWeight.Bold, fontSize = 16.sp)
+                    Text(if (playbackFailed) "No se pudo reproducir. Revisa la conexión y vuelve a abrir el incidente." else "Reproduciendo Clip MP4", color = Color.White, fontWeight = FontWeight.Bold, fontSize = 16.sp)
                     IconButton(onClick = onDismiss) {
                         Icon(Icons.Default.Close, contentDescription = "Cerrar Video", tint = Color.White)
                     }

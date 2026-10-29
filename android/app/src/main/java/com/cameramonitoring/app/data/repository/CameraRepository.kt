@@ -16,7 +16,7 @@ class CameraRepository(
             } else {
                 Result.failure(Exception("Error al obtener las cámaras (${response.code()})"))
             }
-        } catch (e: Exception) {
+        } catch (e: kotlinx.coroutines.CancellationException) { throw e } catch (e: Exception) {
             Result.failure(e)
         }
     }
@@ -29,7 +29,7 @@ class CameraRepository(
             } else {
                 Result.failure(Exception("Error al registrar la cámara. Verifique la URL RTSP."))
             }
-        } catch (e: Exception) {
+        } catch (e: kotlinx.coroutines.CancellationException) { throw e } catch (e: Exception) {
             Result.failure(e)
         }
     }
@@ -42,7 +42,7 @@ class CameraRepository(
             } else {
                 Result.failure(Exception("Error al editar la cámara (${response.code()})"))
             }
-        } catch (e: Exception) {
+        } catch (e: kotlinx.coroutines.CancellationException) { throw e } catch (e: Exception) {
             Result.failure(e)
         }
     }
@@ -55,7 +55,7 @@ class CameraRepository(
             } else {
                 Result.failure(Exception("Cámara no encontrada."))
             }
-        } catch (e: Exception) {
+        } catch (e: kotlinx.coroutines.CancellationException) { throw e } catch (e: Exception) {
             Result.failure(e)
         }
     }
@@ -68,7 +68,7 @@ class CameraRepository(
             } else {
                 Result.failure(Exception("Error al verificar conexión (${response.code()})"))
             }
-        } catch (e: Exception) {
+        } catch (e: kotlinx.coroutines.CancellationException) { throw e } catch (e: Exception) {
             Result.failure(e)
         }
     }
@@ -81,7 +81,7 @@ class CameraRepository(
             } else {
                 Result.failure(Exception("Error al eliminar la cámara (${response.code()})"))
             }
-        } catch (e: Exception) {
+        } catch (e: kotlinx.coroutines.CancellationException) { throw e } catch (e: Exception) {
             Result.failure(e)
         }
     }

@@ -130,7 +130,8 @@ data class EventListResponse(
     val total: Int,
     val events: List<CameraEvent>,
     @SerializedName("has_more") val hasMore: Boolean = false,
-    @SerializedName("next_cursor") val nextCursor: String? = null
+    @SerializedName("next_cursor") val nextCursor: String? = null,
+    @SerializedName("applied_filters") val appliedFilters: AppliedEventFilters? = null
 )
 
 data class EventCreateRequest(
@@ -279,6 +280,7 @@ data class VisionStatus(
     @SerializedName("camera_id") val cameraId: String,
     val healthy: Boolean = false,
     val state: String = "unavailable",
+    val diagnostics: VisionDiagnostics? = null,
     val session: String? = null,
     @SerializedName("frame_at") val frameAt: String? = null,
     @SerializedName("capture_fps") val captureFps: Double = 0.0,
@@ -294,5 +296,37 @@ data class VisionStatus(
 
 data class EventStatistics(
     val total: Long, val pending: Long,
-    val since: String, val until: String, val scope: String
+    val since: String, val until: String, val scope: String,
+    @SerializedName("applied_filters") val appliedFilters: AppliedEventFilters? = null
 )
+
+
+data class CameraAttention(
+    @SerializedName("pending_by_camera") val pendingByCamera: Map<String,Long> = emptyMap(),
+    val complete: Boolean = false,
+    val since: String? = null,
+    val until: String? = null
+) {
+    fun pending(cameraId: String): Long? = pendingByCamera[cameraId] ?: if (complete) 0L else null
+}
+
+data class VisionDiagnostics(val ready: Boolean = false, val codes: List<String> = emptyList(), @SerializedName("target_fps") val targetFps: Double = 2.0)
+
+fun CameraEvent.incidentReason(): String = when (eventType) {
+    "vision_intrusion" -> "Entrada en una zona configurada"
+    "vision_dwell" -> "Permanencia superior al tiempo configurado"
+    "vision_line_crossing" -> "Cruce de una línea configurada"
+    "vision_count" -> "Se alcanzó el conteo configurado"
+    "vision_probable_abandoned_object" -> "Posible objeto abandonado; requiere revisión"
+    "motion_detected" -> "Movimiento detectado; revisa la evidencia"
+    else -> "Evento registrado; requiere revisión humana"
+}
+
+
+fun eventTimestampLabel(value: String?): String = runCatching {
+    val instant = java.time.OffsetDateTime.parse(value).toInstant()
+    java.time.format.DateTimeFormatter.ofLocalizedDateTime(java.time.format.FormatStyle.MEDIUM)
+        .withLocale(java.util.Locale.getDefault()).withZone(java.time.ZoneId.systemDefault()).format(instant)
+}.getOrDefault("Fecha no disponible")
+
+data class AppliedEventFilters(@SerializedName("rule_id") val ruleId: String? = null)

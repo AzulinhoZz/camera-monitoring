@@ -8,16 +8,28 @@ class EventRepository(
 ) {
     suspend fun getEvents(cameraId: String? = null): Result<List<CameraEvent>> {
         return try {
-            val response = apiService.getEvents(cameraId)
+            val response = apiService.getEvents(cameraId, limit = 10)
             if (response.isSuccessful && response.body() != null) {
                 Result.success(response.body()!!.events)
             } else {
                 Result.failure(Exception("Error al consultar eventos (${response.code()})"))
             }
-        } catch (e: Exception) {
+        } catch (e: kotlinx.coroutines.CancellationException) { throw e } catch (e: Exception) {
             Result.failure(e)
         }
     }
+
+    suspend fun getCameraAttention(): CameraAttention? = try {
+        val response = apiService.getCameraAttention()
+        if (response.isSuccessful) response.body() else null
+    } catch (e: kotlinx.coroutines.CancellationException) { throw e }
+    catch (_: Exception) { null }
+
+    suspend fun getVisionRules(cameraId: String): List<VisionRule> = try {
+        val response = apiService.getVisionRules(cameraId)
+        if (response.isSuccessful) response.body()?.rules ?: emptyList() else emptyList()
+    } catch (e: kotlinx.coroutines.CancellationException) { throw e }
+    catch (_: Exception) { emptyList() }
 
     suspend fun getVisionStatus(cameraId: String, preview: Boolean, overlay: Boolean): VisionStatus? = try {
         val response = apiService.getVisionStatus(cameraId, preview, overlay)
@@ -25,19 +37,20 @@ class EventRepository(
     } catch (e: kotlinx.coroutines.CancellationException) { throw e }
     catch (_: Exception) { null }
 
-    suspend fun getStatistics(cameraId: String?, type: String?, review: String?, since: String?): EventStatistics? = try {
-        val response = apiService.getEventStatistics(cameraId, type, review, since)
-        if (response.isSuccessful) response.body() else null
+    suspend fun getStatistics(cameraId: String?, type: String?, review: String?, since: String?, ruleId: String? = null): EventStatistics? = try {
+        val response = apiService.getEventStatistics(cameraId, type, review, since, ruleId)
+        val body = response.body()
+        if (response.isSuccessful && (ruleId == null || ruleId.equals(body?.appliedFilters?.ruleId, ignoreCase = true))) body else null
     } catch (e: kotlinx.coroutines.CancellationException) { throw e }
     catch (_: Exception) { null }
 
     suspend fun getEventPage(
         cameraId: String? = null, eventType: String? = null, reviewStatus: String? = null,
-        since: String? = null, cursor: String? = null
+        since: String? = null, cursor: String? = null, ruleId: String? = null
     ): Result<EventListResponse> = try {
-        val response = apiService.getEvents(cameraId, eventType, reviewStatus, since, cursor, 30)
+        val response = apiService.getEvents(cameraId, eventType, reviewStatus, since, cursor, 30, ruleId)
         val body = response.body()
-        if (response.isSuccessful && body != null) Result.success(body)
+        if (response.isSuccessful && body != null && (ruleId == null || ruleId.equals(body.appliedFilters?.ruleId, ignoreCase = true))) Result.success(body)
         else Result.failure(Exception("No se pudo consultar el historial (${response.code()})"))
     } catch (e: kotlinx.coroutines.CancellationException) {
         throw e
@@ -53,7 +66,7 @@ class EventRepository(
             } else {
                 Result.failure(Exception("Error al registrar revisión de alerta (${response.code()})"))
             }
-        } catch (e: Exception) {
+        } catch (e: kotlinx.coroutines.CancellationException) { throw e } catch (e: Exception) {
             Result.failure(e)
         }
     }
@@ -66,7 +79,7 @@ class EventRepository(
             } else {
                 Result.failure(Exception("Error al consultar evidencia (${response.code()})"))
             }
-        } catch (e: Exception) {
+        } catch (e: kotlinx.coroutines.CancellationException) { throw e } catch (e: Exception) {
             Result.failure(e)
         }
     }
@@ -79,7 +92,7 @@ class EventRepository(
             } else {
                 Result.failure(Exception("Error al consultar clip de video (${response.code()})"))
             }
-        } catch (e: Exception) {
+        } catch (e: kotlinx.coroutines.CancellationException) { throw e } catch (e: Exception) {
             Result.failure(e)
         }
     }
@@ -92,7 +105,7 @@ class EventRepository(
             } else {
                 Result.failure(Exception("Error al registrar evento"))
             }
-        } catch (e: Exception) {
+        } catch (e: kotlinx.coroutines.CancellationException) { throw e } catch (e: Exception) {
             Result.failure(e)
         }
     }
@@ -105,7 +118,7 @@ class EventRepository(
             } else {
                 Result.failure(Exception("Error al consultar estado de detección (${response.code()})"))
             }
-        } catch (e: Exception) {
+        } catch (e: kotlinx.coroutines.CancellationException) { throw e } catch (e: Exception) {
             Result.failure(e)
         }
     }
@@ -142,7 +155,7 @@ class EventRepository(
             } else {
                 Result.failure(Exception("Error al configurar detección de movimiento (${response.code()})"))
             }
-        } catch (e: Exception) {
+        } catch (e: kotlinx.coroutines.CancellationException) { throw e } catch (e: Exception) {
             Result.failure(e)
         }
     }
@@ -155,7 +168,7 @@ class EventRepository(
             } else {
                 Result.failure(Exception("Error al obtener zonas (${response.code()})"))
             }
-        } catch (e: Exception) {
+        } catch (e: kotlinx.coroutines.CancellationException) { throw e } catch (e: Exception) {
             Result.failure(e)
         }
     }
@@ -168,7 +181,7 @@ class EventRepository(
             } else {
                 Result.failure(Exception("Error al crear zona. Asegúrese de ingresar un polígono válido con al menos 3 puntos."))
             }
-        } catch (e: Exception) {
+        } catch (e: kotlinx.coroutines.CancellationException) { throw e } catch (e: Exception) {
             Result.failure(e)
         }
     }
@@ -181,7 +194,7 @@ class EventRepository(
             } else {
                 Result.failure(Exception("Error al eliminar zona (${response.code()})"))
             }
-        } catch (e: Exception) {
+        } catch (e: kotlinx.coroutines.CancellationException) { throw e } catch (e: Exception) {
             Result.failure(e)
         }
     }
@@ -194,7 +207,7 @@ class EventRepository(
             } else {
                 Result.failure(Exception("Error al restaurar detección a toda la imagen"))
             }
-        } catch (e: Exception) {
+        } catch (e: kotlinx.coroutines.CancellationException) { throw e } catch (e: Exception) {
             Result.failure(e)
         }
     }

@@ -1,6 +1,7 @@
 package com.cameramonitoring.app.data.remote
 
 import com.cameramonitoring.app.data.local.SessionManager
+import com.cameramonitoring.app.BuildConfig
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -10,7 +11,7 @@ import java.util.concurrent.TimeUnit
 
 object ApiClient {
 
-    private const val BASE_URL = "http://10.0.2.2:8000/"
+    private val BASE_URL = BuildConfig.API_BASE_URL
 
     private var apiService: ApiService? = null
 
@@ -20,9 +21,10 @@ object ApiClient {
     ): ApiService {
         if (apiService == null) {
             val logging = HttpLoggingInterceptor().apply {
-                level = HttpLoggingInterceptor.Level.HEADERS
+                level = if (BuildConfig.DEBUG) HttpLoggingInterceptor.Level.BASIC else HttpLoggingInterceptor.Level.NONE
                 redactHeader("Authorization")
                 redactHeader("Cookie")
+                redactHeader("Set-Cookie")
             }
 
             val authInterceptor = Interceptor { chain ->

@@ -30,12 +30,16 @@ fun DashboardScreen(
     onCameraSelect: (String) -> Unit,
     onEventsClick: () -> Unit,
     onStorageClick: () -> Unit,
-    onAccountClick: () -> Unit
+    onAccountClick: () -> Unit,
+    onPendingEventsClick: (String) -> Unit = {}
 ) {
     val uiState by viewModel.uiState.collectAsState()
 
+    var pendingFirst by remember { mutableStateOf(true) }
     var editingCamera by remember { mutableStateOf<Camera?>(null) }
     var deletingCamera by remember { mutableStateOf<Camera?>(null) }
+
+    DisposableEffect(Unit) { onDispose { viewModel.clear() } }
 
     LaunchedEffect(Unit) {
         viewModel.loadCameras()
@@ -244,9 +248,18 @@ fun DashboardScreen(
                                 }
                             }
 
-                            items(state.cameras) { camera ->
+                            item {
+                                FilterChip(selected = pendingFirst, onClick = { pendingFirst = !pendingFirst }, label = { Text("Pendientes primero · últimas 24 h") })
+                                if (state.attention == null) Text("Pendientes sin actualizar. Puedes actualizar el listado.")
+                                else if (!state.attention.complete) Text("Resumen parcial: los conteos mostrados son mínimos.")
+                            }
+                            val orderedCameras = if (pendingFirst) state.cameras.sortedByDescending { (state.attention?.pending(it.id) ?: 0L) > 0L } else state.cameras
+                            items(orderedCameras, key = { it.id }) { camera ->
                                 CameraCardItem(
                                     camera = camera,
+                                    pending = state.attention?.pending(camera.id),
+                                    countsComplete = state.attention?.complete == true,
+                                    onPendingClick = { onPendingEventsClick(camera.id) },
                                     onPlayClick = { onCameraSelect(camera.id) },
                                     onCheckConnectionClick = { viewModel.checkCameraConnection(camera.id) },
                                     onEditClick = { editingCamera = camera },
@@ -291,7 +304,10 @@ fun CameraCardItem(
     onPlayClick: () -> Unit,
     onCheckConnectionClick: () -> Unit,
     onEditClick: () -> Unit,
-    onDeleteClick: () -> Unit
+    onDeleteClick: () -> Unit,
+    pending: Long? = null,
+    countsComplete: Boolean = false,
+    onPendingClick: () -> Unit = {}
 ) {
     Card(
         modifier = Modifier.fillMaxWidth(),
@@ -374,6 +390,9 @@ fun CameraCardItem(
                 }
             }
 
+            if (pending != null && pending > 0) {
+                TextButton(onClick = onPendingClick) { Text("${if (countsComplete) "" else "Al menos "}$pending pendientes · Revisar") }
+            }
             Spacer(modifier = Modifier.height(14.dp))
 
             val isOnline = camera.status.lowercase() == "online"

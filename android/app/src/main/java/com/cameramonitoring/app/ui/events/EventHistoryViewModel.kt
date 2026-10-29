@@ -15,6 +15,10 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.async
+import kotlinx.coroutines.withTimeoutOrNull
+import kotlinx.coroutines.sync.Semaphore
+import kotlinx.coroutines.sync.withPermit
 import java.time.Instant
 
 sealed interface EventHistoryUiState {
@@ -25,7 +29,9 @@ sealed interface EventHistoryUiState {
         val clipUrls: Map<String, String> = emptyMap(),
         val nextCursor: String? = null,
         val hasMore: Boolean = false,
-        val statistics: EventStatistics? = null
+        val statistics: EventStatistics? = null,
+        val mediaErrors: Set<String> = emptySet(),
+        val actionMessage: String? = null
     ) : EventHistoryUiState
     data class Error(val message: String) : EventHistoryUiState
 }
@@ -39,7 +45,14 @@ class EventHistoryViewModel(
     val uiState: StateFlow<EventHistoryUiState> = _uiState.asStateFlow()
     private val _cameras = MutableStateFlow<List<Camera>>(emptyList())
     val cameras = _cameras.asStateFlow()
-    fun loadCameras() { viewModelScope.launch { _cameras.value = cameraRepository.getCameras().getOrDefault(emptyList()) } }
+    private var cameraRequest: Job? = null
+    fun loadCameras() { cameraRequest?.cancel(); _cameras.value = emptyList(); cameraRequest = viewModelScope.launch { _cameras.value = cameraRepository.getCameras().getOrDefault(emptyList()) } }
+    private val _rules = MutableStateFlow<List<com.cameramonitoring.app.data.model.VisionRule>>(emptyList())
+    val rules = _rules.asStateFlow()
+    private var ruleRequest: Job? = null
+    private var mediaRequest: Job? = null
+    private val openedMedia = mutableSetOf<String>()
+    private var ruleId: String? = null
     private var request: Job? = null
     private var generation = 0L
     private var selectedCamera: String? = null
@@ -48,7 +61,11 @@ class EventHistoryViewModel(
     private var since: String? = null
     private var cursor: String? = null
 
-    fun search(type: String?, review: String?, hours: Long?, cameraId: String? = null) {
+    fun search(type: String?, review: String?, hours: Long?, cameraId: String? = null, selectedRuleId: String? = null) {
+        val cameraChanged = cameraId != selectedCamera
+        selectedCamera = cameraId
+        if (cameraChanged) { ruleRequest?.cancel(); _rules.value = emptyList() }
+        ruleId = selectedRuleId
         selectedCamera = cameraId
         eventType = type; reviewStatus = review
         since = hours?.let { Instant.now().minusSeconds(it * 3600).toString() }
@@ -67,32 +84,41 @@ class EventHistoryViewModel(
     fun loadEvents(cameraId: String? = selectedCamera) {
         if (cameraId != selectedCamera) cursor = null
         selectedCamera = cameraId
-        request?.cancel()
+        if (cameraId != null && _rules.value.isEmpty()) {
+            ruleRequest?.cancel()
+            ruleRequest = viewModelScope.launch {
+                val result = eventRepository.getVisionRules(cameraId)
+                if (currentCoroutineContext().isActive && selectedCamera == cameraId) _rules.value = result
+            }
+        }
+        request?.cancel(); mediaRequest?.cancel(); openedMedia.clear()
         val currentGeneration = ++generation
         request = viewModelScope.launch {
             _uiState.value = EventHistoryUiState.Loading
-            eventRepository.getEventPage(selectedCamera, eventType, reviewStatus, since, cursor).fold(
+            eventRepository.getEventPage(selectedCamera, eventType, reviewStatus, since, cursor, ruleId).fold(
                 onSuccess = { page ->
                     if (!currentCoroutineContext().isActive || generation != currentGeneration) return@launch
                     _uiState.value = EventHistoryUiState.Success(page.events, nextCursor = page.nextCursor, hasMore = page.hasMore)
-                    val statistics = eventRepository.getStatistics(selectedCamera, eventType, reviewStatus, since)
-                    if (!currentCoroutineContext().isActive || generation != currentGeneration) return@launch
-                    val firstState = _uiState.value as? EventHistoryUiState.Success
-                    if (firstState != null) _uiState.value = firstState.copy(statistics = statistics)
-                    // Media belongs only to this request; a newer search cancels it.
-                    val evUrls = mutableMapOf<String, String>()
-                    val clUrls = mutableMapOf<String, String>()
-                    for (event in page.events) {
-                        if (!currentCoroutineContext().isActive || generation != currentGeneration) return@launch
-                        if (event.hasEvidence || event.evidencePath != null)
-                            eventRepository.getEventEvidence(event.id).getOrNull()?.signedUrl?.let { evUrls[event.id] = it }
-                        if (!currentCoroutineContext().isActive || generation != currentGeneration) return@launch
-                        if (event.hasClip || event.clipPath != null)
-                            eventRepository.getEventClip(event.id).getOrNull()?.signedUrl?.let { clUrls[event.id] = it }
+                    launch {
+                        val statistics = withTimeoutOrNull(5000) { eventRepository.getStatistics(selectedCamera, eventType, reviewStatus, since, ruleId) }
+                        if (currentCoroutineContext().isActive && generation == currentGeneration) {
+                            val state = _uiState.value as? EventHistoryUiState.Success
+                            if (state != null) _uiState.value = state.copy(statistics = statistics)
+                        }
                     }
-                    if (currentCoroutineContext().isActive && generation == currentGeneration) {
-                        val state = _uiState.value as? EventHistoryUiState.Success
-                        if (state != null) _uiState.value = state.copy(evidenceUrls = evUrls, clipUrls = clUrls)
+                    // Bounded thumbnail requests; clips are signed only on opening an incident.
+                    val slots = Semaphore(4)
+                    page.events.filter { it.hasEvidence || it.evidencePath != null }.forEach { event ->
+                        launch {
+                            slots.withPermit {
+                                val url = withTimeoutOrNull(6000) { eventRepository.getEventEvidence(event.id).getOrNull()?.signedUrl }
+                                if (currentCoroutineContext().isActive && generation == currentGeneration && event.id !in openedMedia) {
+                                    val state = _uiState.value as? EventHistoryUiState.Success
+                                    if (state != null) _uiState.value = if (url != null) state.copy(evidenceUrls = state.evidenceUrls + (event.id to url))
+                                        else state.copy(mediaErrors = state.mediaErrors + event.id)
+                                }
+                            }
+                        }
                     }
                 },
                 onFailure = {
@@ -103,19 +129,59 @@ class EventHistoryViewModel(
         }
     }
 
-    fun reviewEvent(eventId: String, status: String) {
-        viewModelScope.launch {
-            eventRepository.reviewAlert(eventId, status).fold(
-                onSuccess = { loadEvents() },
-                onFailure = { _uiState.value = EventHistoryUiState.Error("No se pudo guardar la revisión. Reintenta.") }
-            )
+    fun loadEventMedia(eventId: String) {
+        val state = _uiState.value as? EventHistoryUiState.Success ?: return
+        val event = state.events.find { it.id == eventId } ?: return
+        val currentGeneration = generation
+        openedMedia.add(eventId)
+        mediaRequest?.cancel()
+        _uiState.value = state.copy(evidenceUrls = state.evidenceUrls - eventId,
+            clipUrls = state.clipUrls - eventId, mediaErrors = state.mediaErrors - eventId)
+        mediaRequest = viewModelScope.launch {
+            val pendingImage = async { if (event.hasEvidence || event.evidencePath != null)
+                withTimeoutOrNull(6000) { eventRepository.getEventEvidence(eventId).getOrNull()?.signedUrl } else null }
+            val pendingClip = async { if (event.hasClip || event.clipPath != null)
+                withTimeoutOrNull(6000) { eventRepository.getEventClip(eventId).getOrNull()?.signedUrl } else null }
+            val image = pendingImage.await()
+            val clip = pendingClip.await()
+            if (currentCoroutineContext().isActive && generation == currentGeneration) {
+                val current = _uiState.value as? EventHistoryUiState.Success ?: return@launch
+                val failed = ((event.hasEvidence || event.evidencePath != null) && image == null) ||
+                    ((event.hasClip || event.clipPath != null) && clip == null)
+                _uiState.value = current.copy(
+                    evidenceUrls = if (image != null) current.evidenceUrls + (eventId to image) else current.evidenceUrls - eventId,
+                    clipUrls = if (clip != null) current.clipUrls + (eventId to clip) else current.clipUrls - eventId,
+                    mediaErrors = if (failed) current.mediaErrors + eventId else current.mediaErrors - eventId)
+            }
         }
     }
 
-    fun toggleProtection(eventId: String, currentProtected: Boolean) {
+    fun clearMedia() {
+        ++generation; request?.cancel(); mediaRequest?.cancel(); cameraRequest?.cancel(); ruleRequest?.cancel(); _rules.value = emptyList(); _cameras.value = emptyList()
+        val state = _uiState.value as? EventHistoryUiState.Success ?: return
+        _uiState.value = state.copy(evidenceUrls = emptyMap(), clipUrls = emptyMap(), mediaErrors = emptySet())
+    }
+
+    fun reviewEvent(eventId: String, status: String) {
+        val currentGeneration = generation
         viewModelScope.launch {
-            storageRepository.setEventProtectionStatus(eventId, !currentProtected)
-            loadEvents()
+            val result = eventRepository.reviewAlert(eventId, status)
+            if (generation != currentGeneration) return@launch
+            result.fold(onSuccess = { loadEvents() }, onFailure = { actionFailed("No se pudo guardar la revisión. Reintenta.") })
+        }
+    }
+
+    private fun actionFailed(message: String) {
+        val state = _uiState.value as? EventHistoryUiState.Success ?: return
+        _uiState.value = state.copy(actionMessage = message)
+    }
+
+    fun toggleProtection(eventId: String, currentProtected: Boolean) {
+        val currentGeneration = generation
+        viewModelScope.launch {
+            val result = storageRepository.setEventProtectionStatus(eventId, !currentProtected)
+            if (generation != currentGeneration) return@launch
+            result.fold(onSuccess = { loadEvents() }, onFailure = { actionFailed("No se pudo cambiar la protección. Reintenta.") })
         }
     }
 }

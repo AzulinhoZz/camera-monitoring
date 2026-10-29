@@ -21,6 +21,9 @@ import androidx.compose.material.icons.filled.Settings
 import androidx.compose.material.icons.filled.Warning
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
+import androidx.lifecycle.compose.LocalLifecycleOwner
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.LifecycleEventObserver
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -66,6 +69,20 @@ fun LiveStreamScreen(
     var showSettingsDialog by remember { mutableStateOf(false) }
     var showZoneEditorDialog by remember { mutableStateOf(false) }
 
+    val owner = LocalLifecycleOwner.current
+    DisposableEffect(owner, cameraId) {
+        var stopped = false
+        val observer = LifecycleEventObserver { _, event ->
+            if (event == Lifecycle.Event.ON_STOP) {
+                stopped = true; exoPlayer?.pause(); exoPlayer?.clearMediaItems(); viewModel.stopViewing()
+            } else if (event == Lifecycle.Event.ON_START && stopped) {
+                stopped = false; viewModel.loadCamera(cameraId)
+            }
+        }
+        owner.lifecycle.addObserver(observer)
+        onDispose { owner.lifecycle.removeObserver(observer); viewModel.stopViewing() }
+    }
+
     DisposableEffect(Unit) {
         val player = ExoPlayer.Builder(context).build().apply {
             playWhenReady = true
@@ -87,7 +104,7 @@ fun LiveStreamScreen(
                             fontSize = 18.sp
                         )
                         Text(
-                            text = "Monitoreo Persistente en Supabase",
+                            text = "Monitoreo en vivo",
                             fontSize = 12.sp,
                             color = MaterialTheme.colorScheme.onSurfaceVariant
                         )

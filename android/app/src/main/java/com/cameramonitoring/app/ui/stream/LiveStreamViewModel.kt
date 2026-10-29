@@ -9,6 +9,8 @@ import com.cameramonitoring.app.data.model.NormalizedPoint
 import com.cameramonitoring.app.data.repository.CameraRepository
 import com.cameramonitoring.app.data.repository.EventRepository
 import kotlinx.coroutines.Job
+import kotlinx.coroutines.cancelChildren
+import kotlinx.coroutines.async
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -52,13 +54,22 @@ class LiveStreamViewModel(
 
     private var pollingJob: Job? = null
 
+    fun stopViewing() {
+        viewModelScope.coroutineContext.cancelChildren(); pollingJob = null
+        _uiState.value = StreamUiState.Loading
+    }
+
     fun loadCamera(cameraId: String) {
+        stopViewing()
         viewModelScope.launch {
             _uiState.value = StreamUiState.Loading
             val cameraRes = cameraRepository.getCameraDetails(cameraId)
             cameraRes.fold(
                 onSuccess = { camera ->
-                    val statusRes = eventRepository.getDetectionStatus(cameraId)
+                    val pendingStatus = async { eventRepository.getDetectionStatus(cameraId) }
+                    val pendingZones = async { eventRepository.getZones(cameraId) }
+                    val pendingEvents = async { eventRepository.getEvents(cameraId) }
+                    val statusRes = pendingStatus.await()
                     val status = statusRes.getOrNull()
                     val isActive = status?.isActive ?: false
                     val motionEnabled = camera.motionEnabled
@@ -73,10 +84,10 @@ class LiveStreamViewModel(
                     val tz = status?.timezone ?: "America/Mexico_City"
                     val schedActive = status?.isScheduleActive ?: true
 
-                    val zonesRes = eventRepository.getZones(cameraId)
+                    val zonesRes = pendingZones.await()
                     val zones = zonesRes.getOrNull() ?: emptyList()
 
-                    val eventsRes = eventRepository.getEvents(cameraId)
+                    val eventsRes = pendingEvents.await()
                     val initialEvents = eventsRes.getOrNull() ?: emptyList()
 
                     _uiState.value = StreamUiState.Success(
