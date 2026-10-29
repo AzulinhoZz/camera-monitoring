@@ -25,9 +25,11 @@ def main():
     parser.add_argument('--seconds',type=float,default=6)
     parser.add_argument('--cameras',nargs='+',type=int,choices=(1,2,4),default=[1,2,4])
     parser.add_argument('--memory-mib',type=int,default=512)
+    parser.add_argument('--inference-fps',type=float,default=1)
     args=parser.parse_args()
     if not math.isfinite(args.seconds) or not 2<=args.seconds<=60 or not 128<=args.memory_mib<=2048:
         parser.error('invalid benchmark limits')
+    if not math.isfinite(args.inference_fps) or not .1<=args.inference_fps<=10:parser.error('inference FPS must be between .1 and 10')
     detector=YOLOXDetector(args.model)
     from app.vision.source import synthetic_frame
     detector.detect(synthetic_frame(0,160,120),classes=(0,2,5),confidence=.5)  # Unmeasured warm-up.
@@ -41,7 +43,7 @@ def main():
         workers=[];pipelines=[]
         for index in range(count):
             config=CameraConfig(camera_id=UUID(int=index+1),owner_id=UUID(int=100),source_kind='synthetic',
-                                max_width=160,max_height=120,capture_fps=10,recording_fps=5,inference_fps=1,
+                                max_width=160,max_height=120,capture_fps=10,recording_fps=5,inference_fps=args.inference_fps,
                                 vision_enabled=True,object_classes=(0,2,5),open_timeout_seconds=5)
             workers.append(CameraWorker(config));pipelines.append(ObjectPipeline(config,detector))
         peak=0;exceeded=False
@@ -81,7 +83,7 @@ def main():
                         'inference':[p.metrics() for p in pipelines],
                         'capture':[s['counts'] for s in snapshot]})
     print(json.dumps({'workload':'synthetic geometric frames 160x120, ONNX input 640x640',
-                      'model_version':MODEL_VERSION,'threads':1,'rss_budget_mib':args.memory_mib,'results':results},indent=2))
+                      'model_version':MODEL_VERSION,'threads':1,'rss_budget_mib':args.memory_mib,'configured_inference_fps':args.inference_fps,'results':results},indent=2))
 
 
 if __name__=='__main__':main()

@@ -1,0 +1,9 @@
+{
+  "dataset_kind": "synthetic",
+  "split": "calibration",
+  "rights_reference": "Generated event timestamps only; no video or personal data.",
+  "sequences": [
+    {"id":"day_positive","scenario":"day","duration_seconds":60,"expected":[{"event_type":"vision_intrusion","start_seconds":10,"end_seconds":12}],"predictions":[{"event_type":"vision_intrusion","at_seconds":11,"confidence":0.9},{"event_type":"vision_intrusion","at_seconds":11.5,"confidence":0.6}]},
+    {"id":"night_negative","scenario":"night","duration_seconds":60,"expected":[],"predictions":[{"event_type":"vision_intrusion","at_seconds":20,"confidence":0.6}]}
+  ]
+}

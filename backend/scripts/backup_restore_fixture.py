@@ -1,24 +1,21 @@
 """Encrypted backup/restore rehearsal, callable only inside the disposable runner.
 
-Only generated camera data. Keys remain in memory: this is NOT an operational
-backup/key-escrow service. Restores roles and a fresh database in a second cluster.
+Only generated camera data. A private fixture key survives into a separate restore
+process. This is NOT a managed key-escrow service. Restores roles in a second cluster.
 """
 from contextlib import contextmanager
 import hashlib
-import io
 import json
-import os
 from pathlib import Path
 import re
 import subprocess
-import tarfile
 import time
+import sys
 from uuid import uuid4
 
 import cv2
 import numpy as np
-from cryptography.hazmat.primitives.ciphers.aead import AESGCM
-from cryptography.exceptions import InvalidTag
+from encrypted_backup import create_key, encrypt
 from app.clip_recorder import encode_clip_frames
 
 
@@ -69,7 +66,8 @@ def run(container, directory):
             rows[schema+'.'+table]=hashlib.sha256(value.encode()).hexdigest()
         policies=sql("SELECT COALESCE(jsonb_agg(to_jsonb(p) ORDER BY schemaname,tablename,policyname),'[]'::jsonb) FROM pg_policies p WHERE schemaname IN ('public','auth','storage')",db)
         grants=sql("SELECT COALESCE(jsonb_agg(to_jsonb(g)-'table_catalog' ORDER BY table_schema,table_name,grantee,privilege_type),'[]'::jsonb) FROM information_schema.role_table_grants g WHERE table_schema IN ('public','auth','storage')",db)
-        return {'table_hashes':rows,'policies_sha256':hashlib.sha256(policies.encode()).hexdigest(),'grants_sha256':hashlib.sha256(grants.encode()).hexdigest()}
+        indexes=sql("SELECT COALESCE(jsonb_agg(to_jsonb(i) ORDER BY schemaname,tablename,indexname),'[]'::jsonb) FROM pg_indexes i WHERE schemaname IN ('public','auth','storage')",db)
+        return {'indexes_sha256':hashlib.sha256(indexes.encode()).hexdigest(),'table_hashes':rows,'policies_sha256':hashlib.sha256(policies.encode()).hexdigest(),'grants_sha256':hashlib.sha256(grants.encode()).hexdigest()}
     role_query="SELECT jsonb_agg(to_jsonb(r)-'oid' ORDER BY rolname) FROM pg_roles r WHERE rolname !~ '^pg_'"
     roles_before=sql(role_query,db='postgres')
     before=state('camera_test');started=time.monotonic()
@@ -78,25 +76,25 @@ def run(container, directory):
            'storage/motion-evidence/'+prefix+'.jpg':jpeg.read_bytes(),
            'storage/motion-clips/'+prefix+'.mp4':clip.read_bytes()}
     manifest={name:hashlib.sha256(data).hexdigest() for name,data in files.items()}
-    stream=io.BytesIO()
-    with tarfile.open(fileobj=stream,mode='w') as archive:
-        for name,data in files.items():
-            member=tarfile.TarInfo(name);member.size=len(data);member.mode=0o600
-            archive.addfile(member,io.BytesIO(data))
-    key=AESGCM.generate_key(bit_length=256);nonce=os.urandom(12);aad=b'camera-monitoring-disposable-backup-v1'
-    encrypted=nonce+AESGCM(key).encrypt(nonce,stream.getvalue(),aad)
-    target=directory/'fixture.backup.enc';target.write_bytes(encrypted);target.chmod(0o600)
-    corrupted=bytearray(encrypted);corrupted[-1]^=1
-    try:AESGCM(key).decrypt(bytes(corrupted[:12]),bytes(corrupted[12:]),aad)
-    except InvalidTag:pass
-    else:raise AssertionError('tampered backup was accepted')
-    plaintext=AESGCM(key).decrypt(encrypted[:12],encrypted[12:],aad)
-    restored={}
-    with tarfile.open(fileobj=io.BytesIO(plaintext),mode='r:') as archive:
-        for member in archive.getmembers():
-            if not member.isfile() or member.name not in manifest or member.size>16*1024*1024:raise ValueError('invalid backup entry')
-            restored[member.name]=archive.extractfile(member).read()
-    assert {n:hashlib.sha256(d).hexdigest() for n,d in restored.items()}==manifest
+    source_tree=directory/'durable-source';source_tree.mkdir(mode=0o700)
+    for name,data in files.items():
+        path=source_tree/name;path.parent.mkdir(parents=True,exist_ok=True,mode=0o700);path.write_bytes(data);path.chmod(0o600)
+    key_directory=directory/'keys';key_directory.mkdir(mode=0o700)
+    key_file=key_directory/'fixture.key';create_key(key_file)
+    target=directory/'fixture.backup.enc';encrypt(source_tree,key_file,target)
+    encrypted=target.read_bytes();corrupted=bytearray(encrypted);corrupted[-20]^=1
+    damaged=directory/'altered.backup.enc';damaged.write_bytes(corrupted);damaged.chmod(0o600)
+    script=Path(__file__).with_name('encrypted_backup.py')
+    def restore_process(archive,destination):
+        return subprocess.run([sys.executable,str(script),'restore','--key-file',str(key_file),
+            '--archive',str(archive),'--destination',str(destination)],capture_output=True,timeout=45)
+    rejected=directory/'rejected'
+    assert restore_process(damaged,rejected).returncode!=0 and not rejected.exists(),'tampered backup accepted'
+    recovered=directory/'authenticated-restore'
+    result=restore_process(target,recovered)
+    assert result.returncode==0,'independent durable-key restore failed'
+    restored={name:(recovered/name).read_bytes() for name in files}
+    assert {n:hashlib.sha256(data).hexdigest() for n,data in restored.items()}==manifest
     with fresh_cluster() as destination_container:
         container=destination_container
         # The fresh image owns only postgres. Keep its bootstrap CREATE out of
@@ -121,10 +119,10 @@ def run(container, directory):
         assert sql(f"SET ROLE authenticated; SET request.jwt.claim.sub='{camera['owner']}'; SELECT count(*) FROM camera_events WHERE id='{event}'",db='camera_restored').splitlines()[-1]=='1'
         assert sql(f"SET ROLE authenticated; SET request.jwt.claim.sub='{uuid4()}'; SELECT count(*) FROM camera_events WHERE id='{event}'",db='camera_restored').splitlines()[-1]=='0'
         result={'result':'PASS','scope':'generated data; roles and database restored in independent disposable cluster; local storage directories, not managed Storage',
-                'independent_cluster':True,'globals_restored':True,'role_attributes_equal':True,'database_rows_policies_grants_equal':True,'protected_reviewed_media_preserved':True,'restored_jpeg_readable':True,'restored_mp4_frames':frames,
+                'independent_cluster':True,'globals_restored':True,'role_attributes_equal':True,'database_rows_policies_grants_equal':True,'indexes_equal':True,'protected_reviewed_media_preserved':True,'restored_jpeg_readable':True,'restored_mp4_frames':frames,
                 'owner_read_allowed_stranger_denied':True,'tamper_rejected':True,'encrypted_backup_sha256':hashlib.sha256(encrypted).hexdigest(),
-                'files_sha256':manifest,'elapsed_seconds':time.monotonic()-started,'key_persisted':False,
-                'limits':'Globals replayed in independent cluster (bootstrap postgres CREATE excluded). In-memory key is discarded; encrypted fixture is not usable as a future operational backup. No RPO/RTO acceptance.'}
+                'files_sha256':manifest,'elapsed_seconds':time.monotonic()-started,'key_persisted':True,'separate_restore_process':True,'key_permissions':'0600; parent 0700',
+                'limits':'Globals replayed in independent cluster (bootstrap postgres CREATE excluded). Durable fixture key survives in a private local directory; no managed escrow, rotation, Storage or RPO/RTO acceptance.'}
         (directory/'result.json').write_text(json.dumps(result,indent=2)+'\n')
-        print('PASS: encrypted fixture backup -> independent cluster/roles/database/storage -> rows/RLS/grants/media/owner isolation; corruption rejected')
+        print('PASS: streamed encrypted fixture backup + durable key + separate restore process -> independent cluster/roles/database/storage -> rows/RLS/grants/media/owner isolation; corruption rejected')
         return result
