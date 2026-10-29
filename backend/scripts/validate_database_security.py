@@ -62,6 +62,7 @@ def main():
         psql("-c", "DELETE FROM public.camera_events WHERE id='77777777-7777-7777-7777-777777777777'")
         assert psql("-tAc", "SELECT count(*) FROM public.camera_events").strip()=="12"
         psql("-f", "/repo/backend/migrations/011_vision_rules_and_events.sql")
+        psql("-f", "/repo/backend/migrations/012_event_query_indexes.sql")
         assert "PASS:" in psql("-f", "/repo/backend/app/tests/run_vision_postgres_tests.sql")
         print("PASS: vision rollback preserves legacy events; reapply passes")
         psql("-f", "/repo/backend/migrations/rollback/010_security_helpers_and_atomic_grants.sql")
@@ -95,6 +96,14 @@ def main():
         finally:
             if holder.poll() is None:holder.terminate();holder.communicate(timeout=5)
         print("PASS: concurrent organization change blocked until atomic grant transaction completes")
+        before_indexes=psql('-tAc','SELECT count(*) FROM camera_events').strip()
+        psql('-f','/repo/backend/migrations/rollback/012_event_query_indexes.sql')
+        assert psql('-tAc','SELECT count(*) FROM camera_events').strip()==before_indexes
+        assert psql('-tAc',"SELECT to_regclass('public.idx_camera_events_rule_window_v1') IS NULL").strip()=='t'
+        for _ in range(2):psql('-f','/repo/backend/migrations/012_event_query_indexes.sql')
+        plan=psql('-tAc',"SET enable_seqscan=off; EXPLAIN SELECT id FROM camera_events WHERE camera_id='c1000000-0000-0000-0000-000000000001' AND vision_metadata->>'rule_id'='fixture-rule' ORDER BY detected_at DESC,id DESC LIMIT 30")
+        assert 'idx_camera_events_rule_window_v1' in plan
+        print('PASS: concurrent indexes valid/idempotent; rollback preserves rows; rule index access path available (not production latency proof)')
         from backup_restore_fixture import run as restore_fixture
         restore_directory=tempfile.mkdtemp(prefix='camera-phase6-restore-')
         restore_fixture(name,restore_directory)

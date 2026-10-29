@@ -37,7 +37,7 @@ def decode_cursor(value):
 
 
 def configure_timeline(query, camera_ids, *, event_type=None, review_status=None,
-                       since=None, until=None, cursor=None, limit=100):
+                       since=None, until=None, cursor=None, limit=100, rule_id=None):
     try:
         since = utc(since) if since else None
         until = utc(until) if until else None
@@ -51,6 +51,8 @@ def configure_timeline(query, camera_ids, *, event_type=None, review_status=None
         query = query.eq('event_type', event_type)
     if review_status:
         query = query.eq('review_status', review_status)
+    if rule_id:
+        query = query.eq('vision_metadata->>rule_id', str(UUID(str(rule_id))))
     if since:
         query = query.gte('detected_at', since.isoformat())
     if until:

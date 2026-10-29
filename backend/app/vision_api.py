@@ -103,6 +103,10 @@ def vision_status(camera_id: UUID, preview:bool=False, overlay:bool=False,
         data['image_base64']=(snapshot.overlay_image if overlay else snapshot.image) if preview and snapshot.healthy and 0<=age<=3 else None
         data['preview_ttl_seconds']=3
         data['image_age_seconds']=max(0,age)
+        from .vision.diagnostics import diagnose
+        try:target=float(os.getenv('VISION_MIN_EFFECTIVE_FPS','2'))
+        except ValueError:target=2.0
+        data['diagnostics']=diagnose(snapshot,max(0,age),target)
         return JSONResponse(data,headers={'Cache-Control':'no-store, private'})
     except HTTPException:raise
     except Exception:

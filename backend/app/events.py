@@ -1,5 +1,6 @@
 import os
 from datetime import datetime, timezone
+from uuid import UUID
 from typing import Optional, Annotated, Literal
 from .event_timeline import configure_timeline, page_metadata
 from fastapi import APIRouter, Depends, HTTPException, Query
@@ -58,6 +59,7 @@ def list_events(
     until: datetime | None = None,
     cursor: Annotated[str | None, Query(max_length=512)] = None,
     limit: Annotated[int, Query(ge=1, le=100)] = 100,
+    rule_id: UUID | None = None,
 ):
     try:
         client = create_client(
@@ -68,7 +70,8 @@ def list_events(
         auth_camera_ids = get_authorized_camera_ids(user)
         if not auth_camera_ids:
             return {"total": 0, "events": [], "has_more": False, "next_cursor": None,
-                    "summary": {"scope": "page", "by_type": {}, "by_review_status": {}}}
+                    "summary": {"scope": "page", "by_type": {}, "by_review_status": {}},
+                    "applied_filters": {"rule_id":str(rule_id) if rule_id else None}}
 
         if camera_id:
             if not has_camera_access(user, camera_id):
@@ -88,7 +91,7 @@ def list_events(
         result = query_events(client,
             "id, camera_id, event_type, detected_at, description, evidence_path, clip_path, is_protected, review_status, reviewed_at",
             lambda q:configure_timeline(q, target_ids, event_type=event_type,
-                review_status=review_status, since=since, until=until, cursor=cursor, limit=limit))
+                review_status=review_status, since=since, until=until, cursor=cursor, limit=limit, rule_id=rule_id))
         records, metadata = page_metadata(result.data or [], limit)
 
         events = []
@@ -117,6 +120,7 @@ def list_events(
             "total": len(events),
             "events": events,
             **metadata,
+            "applied_filters": {"rule_id":str(rule_id) if rule_id else None},
         }
 
     except HTTPException:
@@ -329,6 +333,7 @@ def event_statistics(camera_id: Optional[str]=None,
     event_type: Annotated[str | None, Query(pattern=r'^[a-zA-Z0-9_-]{1,64}$')]=None,
     review_status: Literal['pending','reviewed_ok','help_requested'] | None=None,
     since: datetime | None=None, until: datetime | None=None,
+    rule_id: UUID | None=None,
     user:dict=Depends(get_current_user)):
     """Two bounded aggregate queries, current ACL, max 31 days; no media/rows."""
     from datetime import timedelta
@@ -350,6 +355,7 @@ def event_statistics(camera_id: Optional[str]=None,
             if not ids:return 0
             q=client.table('camera_events').select('id',count='exact',head=True).in_('camera_id',ids).gte('detected_at',start.isoformat()).lte('detected_at',end.isoformat())
             if event_type:q=q.eq('event_type',event_type)
+            if rule_id:q=q.eq('vision_metadata->>rule_id',str(rule_id))
             if status:q=q.eq('review_status',status)
             value=q.execute().count
             if value is None:raise ValueError('count unavailable')
@@ -358,6 +364,27 @@ def event_statistics(camera_id: Optional[str]=None,
         pending=count('pending') if review_status in (None,'pending') else 0
         from fastapi.responses import JSONResponse
         return JSONResponse({'total':total,'pending':pending,'since':start.isoformat(),'until':end.isoformat(),
-                             'scope':'authorized_window'},headers={'Cache-Control':'no-store, private'})
+                             'scope':'authorized_window','applied_filters':{'rule_id':str(rule_id) if rule_id else None}},headers={'Cache-Control':'no-store, private'})
     except HTTPException:raise
     except Exception:raise HTTPException(503,'Estadísticas no disponibles') from None
+
+
+@router.get('/attention')
+def camera_attention(user:dict=Depends(get_current_user)):
+    """Bounded recent pending-event sample. Truncation never means zero incidents."""
+    from datetime import timedelta
+    from collections import Counter
+    from fastapi.responses import JSONResponse
+    end=datetime.now(timezone.utc);start=end-timedelta(hours=24)
+    ids=get_authorized_camera_ids(user)
+    try:
+        rows=[];total=0
+        if ids:
+            client=create_client(os.environ['SUPABASE_URL'],os.environ['SUPABASE_SECRET_KEY'])
+            response=client.table('camera_events').select('camera_id',count='exact').in_('camera_id',ids).eq('review_status','pending').gte('detected_at',start.isoformat()).lte('detected_at',end.isoformat()).order('detected_at',desc=True).limit(1001).execute()
+            rows=response.data or [];total=getattr(response,'count',None)
+        counts=Counter(row['camera_id'] for row in rows[:1000] if row.get('camera_id') in ids)
+        return JSONResponse({'since':start.isoformat(),'until':end.isoformat(),'complete':type(total) is int and total<=len(rows) and len(rows)<=1000,
+            'pending_by_camera':dict(counts),'scope':'authorized_window','sampled_events':min(len(rows),1000)},
+            headers={'Cache-Control':'no-store, private'})
+    except Exception:raise HTTPException(503,'No se pudo consultar los incidentes pendientes') from None
