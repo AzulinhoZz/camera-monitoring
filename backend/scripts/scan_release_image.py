@@ -8,6 +8,7 @@ import platform
 import re
 import subprocess
 import tarfile
+import tempfile
 from urllib.request import urlopen
 
 
@@ -24,7 +25,15 @@ def acquire(record, cache):
     with tarfile.open(archive) as bundle:
         member=bundle.getmember(tool)
         if not member.isfile() or member.size>200*1024*1024:raise ValueError('scanner entry budget')
-        executable=cache/tool;executable.write_bytes(bundle.extractfile(member).read());executable.chmod(0o700)
+        executable=cache/tool
+        # Atomic replacement permits another verified scanner process to finish
+        # without ETXTBSY from truncating its currently executing inode.
+        with tempfile.NamedTemporaryFile(dir=cache,delete=False) as temporary:
+            staged=Path(temporary.name)
+            try:
+                temporary.write(bundle.extractfile(member).read());temporary.flush()
+                staged.chmod(0o700);os.replace(staged,executable)
+            finally:staged.unlink(missing_ok=True)
     return executable
 
 

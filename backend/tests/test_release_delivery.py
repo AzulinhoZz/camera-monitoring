@@ -41,3 +41,20 @@ def test_offline_database_rejects_mismatch_and_requires_trusted_digest(tmp_path)
     with pytest.raises(ValueError):verify(archive,'a'*64)
     with pytest.raises(ValueError):verify(archive,'')
     assert verify(archive,hashlib.sha256(archive.read_bytes()).hexdigest())==archive.resolve()
+
+
+def test_scanner_refresh_keeps_existing_reader_inode(tmp_path):
+    import hashlib
+    import io
+    import tarfile
+    acquire=runpy.run_path(str(TOOLS/'scan_release_image.py'))['acquire']
+    archive=tmp_path/'fixture.tar.gz'
+    with tarfile.open(archive,'w:gz') as bundle:
+        member=tarfile.TarInfo('syft');member.size=3
+        bundle.addfile(member,io.BytesIO(b'new'))
+    executable=tmp_path/'syft';executable.write_bytes(b'old')
+    with executable.open('rb') as existing_reader:
+        result=acquire({'tool':'syft','version':'fixture','asset':archive.name,'sha256':hashlib.sha256(archive.read_bytes()).hexdigest()},tmp_path)
+        assert existing_reader.read()==b'old'
+    assert result.read_bytes()==b'new'
+    assert result.stat().st_mode&0o777==0o700
