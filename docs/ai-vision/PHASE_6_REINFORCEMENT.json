@@ -1,0 +1,25 @@
+{
+  "date": "2026-10-28",
+  "timezone": "America/Mexico_City",
+  "implementation_commit": "9c60045808798430fba67d6e10bf2755189e289d",
+  "backend_tests": 206,
+  "warnings": 5,
+  "backend_seconds": 15.04,
+  "rootless_gateway_authenticated_hls": "PASS",
+  "rootless_rtsp_interrupt_recover": "PASS",
+  "compose_configuration": "PASS",
+  "image_smoke": "PHASE_6_CURRENT_IMAGE_SMOKE.json",
+  "scan_receipt": "PHASE_6_CURRENT_IMAGE_SCAN.json",
+  "native_findings": 200,
+  "ambient_suppression_variables_tested": [
+    "GRYPE_IGNORE_WONTFIX=true",
+    "GRYPE_ONLY_FIXED=true"
+  ],
+  "application_changed": false,
+  "production_accessed": false,
+  "initial_failures": [
+    "Grype ignore-wontfix accepts string, not boolean; config type corrected before successful scan",
+    "MediaMTX root without DAC override could not read owner-only config; fixed by rootless owner UID/GID and preserved copy ownership"
+  ],
+  "limits": "Privilege reduction and bound receipts do not remediate native CVEs. Receipts are unsigned and no deployment is authorized."
+}

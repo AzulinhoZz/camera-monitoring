@@ -4,7 +4,7 @@
   "gates": {
     "regression": {
       "status": "PASS",
-      "evidence": "195 backend, PHASE_6_BACKEND_TESTS.xml; 12 Android hist\u00f3ricos, sin dispositivo"
+      "evidence": "206 backend; PHASE_6_BACKEND_TESTS.xml; Android hist\u00f3rico sin nueva prueba de dispositivo"
     },
     "database_restore": {
       "status": "PASS",
@@ -20,7 +20,7 @@
     },
     "image_vulnerability_scan": {
       "status": "FINDINGS",
-      "evidence": "PHASE_6_NATIVE_FINDINGS.json: 200 coincidencias, 77 High; DB v\u00e1lida de 2026-10-28"
+      "evidence": "PHASE_6_CURRENT_IMAGE_SCAN.json: recibo ligado a imagen/archive; 200 matches sin filtros"
     },
     "android_device": {
       "status": "BLOCKED",
@@ -40,7 +40,7 @@
     },
     "remote_ci": {
       "status": "FAIL",
-      "evidence": "PHASE_6_REMOTE_CI.json: run 40802151569, a205a22, funcional PASS, seguridad FINDINGS (200), workflow FAILURE"
+      "evidence": "PHASE_6_REMOTE_CI.json: 40803624843, 9c60045; 206 backend/build/sandbox/SQL PASS, native FINDINGS200, workflow FAILURE"
     },
     "licenses": {
       "status": "BLOCKED",
@@ -49,6 +49,23 @@
     "operator_approval": {
       "status": "NOT_REQUESTED",
       "evidence": "Gates previos sin resolver"
+    }
+  },
+  "scan_receipt": {
+    "generated_at": "2026-10-29T01:55:07.978165+00:00",
+    "inventory": "PASS",
+    "vulnerability_scan": "FINDINGS",
+    "accepted": false,
+    "limits": "Unsigned local receipt; full archive hash and config identity bind the input, not approval. Failures and findings never become clean acceptance.",
+    "image_id": "sha256:fa9f4b309378f501664711203184f416c134e86c3ac6aa0c0bfe20206bd653c9",
+    "archive_sha256": "8b884f6c1053346aa5bf74854930553c8670dd5696e26557045a815385c09011",
+    "findings": 200,
+    "database": {
+      "schemaVersion": "v6.1.10",
+      "from": "https://grype.anchore.io/databases/v6/vulnerability-db_v6.1.10_2026-10-28T00:24:28Z_1793168610.tar.zst?checksum=sha256%3Ab08902b91738f1a9bc7fd61942f331d8e5e76a5df0c0b5f8c17c18bd787ee278",
+      "built": "2026-10-28T06:23:30Z",
+      "path": "/tmp/camera-phase6/scanners/grype-db/6/vulnerability.db",
+      "valid": true
     }
   }
 }

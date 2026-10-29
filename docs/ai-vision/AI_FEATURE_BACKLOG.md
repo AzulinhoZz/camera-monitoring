@@ -204,3 +204,7 @@ Restore entre clústeres independientes y roles añadido; importación offline c
 ## S. Fase 6 — remediación contrastada y runbook (2026-10-28)
 
 [Estado](PHASE_6_REMEDIATION_STATUS.md): 195 backend PASS; gate rechaza DB inválida/antigua/futura, CI real confirma funcional PASS y FINDINGS200. Última base Trixie conserva 200 matches, Bookworm empeora a305 pese a smoke PASS; no adoptadas. Tracker oficial confirma159 matches Debian abiertos por source package. Runbook entregado. Sigue P0 resolver nativos/staging/dispositivo/dataset-hardware/operación y licencias; sin aceptación ficticia ni despliegue.
+
+## T. Refuerzo de controles de fase6 (2026-10-28)
+
+[Entrega](PHASE_6_REINFORCEMENT.md):206 backend PASS, Docker smoke/noexec/caps0/NoNewPrivs1 PASS, gateway rootless/HLS autenticado y RTSP interrupción/recuperación PASS, Compose válido. Gate exige recibo reciente limpio ligado a imagen/archive; scanner no hereda secretos ni filtros, usa config explícito y DB verificada. CI remoto ejecutado: funcional PASS y nativo FINDINGS200, no aprobación. Ninguna nueva función/migración ni datos reales.

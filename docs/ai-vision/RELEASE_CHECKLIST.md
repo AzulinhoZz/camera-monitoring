@@ -32,3 +32,5 @@ Actualización tras publicar entorno: [validación real y hallazgos nativos](PHA
 Estado vigente tras publicación: regresión backend 190 PASS; imagen reconstruida/smoke PASS; Python 70 sin avisos/errores. CI remoto EJECUTADO/FAILURE por escaneo nativo FINDINGS (200 matches/77 High), ya sin bloqueo de red. Supabase settings solo lectura HTTP200; staging sin confirmar. Identidad nueva en PHASE_6_CURRENT_ARTIFACT.json; gate de aceptación no cambia a PASS.
 
 Estado de cierre y remediación vigente: [PHASE_6_REMEDIATION_STATUS.md](PHASE_6_REMEDIATION_STATUS.md). 195 backend PASS; dos bases evaluadas sin mejora (200/305 matches), candidata original conservada, CI remoto funcional PASS/seguridad FAIL. Runbook consolidado; NO_GO continúa.
+
+Refuerzo posterior vigente: [controles y pruebas](PHASE_6_REINFORCEMENT.md).206 backend PASS; recibo de scan ligado a imagen/archive y sujeto a antigüedad, entorno de escáner restringido, cap-drop/no-new-privileges, MediaMTX rootless y tmpfs noexec.200 matches y NO_GO conservados. Configurar MEDIAMTX_UID/GID al propietario del config privado.

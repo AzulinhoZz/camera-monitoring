@@ -50,3 +50,5 @@ Los fallos de seguridad esperados no se silencian con `|| true`. Las ejecuciones
 - Acordar custodia/rotación de claves y RPO/RTO; ensayar recuperación de Storage administrado/DB nueva y conservar recibo. Completar la evidencia faltante de uso/licencias de modelos/datasets.
 
 No hay una corrección segura demostrada que convierta estos requisitos en PASS en el entorno actual. La fase no se marca completa para satisfacer una etiqueta. Candidata retenida e identidad en `PHASE_6_CURRENT_ARTIFACT.json`; todo cambio ha quedado en la rama de trabajo, sin merge, force-push, despliegue, servicios de pago ni modificación de datos reales.
+
+Refuerzo posterior vigente: [controles y pruebas](PHASE_6_REINFORCEMENT.md).206 backend PASS; recibo de scan ligado a imagen/archive y sujeto a antigüedad, entorno de escáner restringido, cap-drop/no-new-privileges, MediaMTX rootless y tmpfs noexec.200 matches y NO_GO conservados. Configurar MEDIAMTX_UID/GID al propietario del config privado.

@@ -53,3 +53,5 @@ Rollback funcional primero: desactivar persistencia/analítica por los controles
 Rollback de migración es independiente: `backend/migrations/rollback/011_vision_rules_and_events.sql` elimina configuración/metadata de visión; requiere exportación previa, mantenimiento y autorización concreta. No ejecutar down en producción como sustituto de backup ni revertir 010 para desactivar visión. Los ensayos de rollback/reapply existentes preservan eventos legacy, pero no son autorización para ejecutarlos sobre datos reales.
 
 Cierre exige recibos enlazados a SHA/artefacto exacto, scan válido y sin hallazgos sin resolver o decisión explícita de riesgo, pruebas administradas/dispositivo/calidad/capacidad, backup operativo y aprobación del operador. Ningún comando de este runbook despliega ni concede esa aprobación.
+
+Refuerzo posterior vigente: [controles y pruebas](PHASE_6_REINFORCEMENT.md).206 backend PASS; recibo de scan ligado a imagen/archive y sujeto a antigüedad, entorno de escáner restringido, cap-drop/no-new-privileges, MediaMTX rootless y tmpfs noexec.200 matches y NO_GO conservados. Configurar MEDIAMTX_UID/GID al propietario del config privado.

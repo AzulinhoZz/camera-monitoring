@@ -11,6 +11,8 @@ FastAPI + Supabase + MediaMTX for local development on macOS.
 5. `curl http://localhost:8000/health/db`
 6. `docker compose ps`
 
+MediaMTX runs without root or Linux capabilities. Set `MEDIAMTX_UID` and `MEDIAMTX_GID` to the owner of `gateway/mediamtx.yml` (defaults: 1000/1000); keep that file private and readable by that owner. On Linux, obtain the IDs with `id -u` and `id -g`.
+
 The `/health/db` endpoint verifies access to the `public.cameras` table. Camera APIs and the Android application are implemented; see the architecture and phase reports under `docs/ai-vision` for their verified scope. Do not expose port 8000 or 8554 publicly. The backend secret must never be shipped in Android.
 
 ## Camera Monitoring AI 2.0
