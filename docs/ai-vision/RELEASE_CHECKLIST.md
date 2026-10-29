@@ -34,3 +34,5 @@ Estado vigente tras publicación: regresión backend 190 PASS; imagen reconstrui
 Estado de cierre y remediación vigente: [PHASE_6_REMEDIATION_STATUS.md](PHASE_6_REMEDIATION_STATUS.md). 195 backend PASS; dos bases evaluadas sin mejora (200/305 matches), candidata original conservada, CI remoto funcional PASS/seguridad FAIL. Runbook consolidado; NO_GO continúa.
 
 Refuerzo posterior vigente: [controles y pruebas](PHASE_6_REINFORCEMENT.md).206 backend PASS; recibo de scan ligado a imagen/archive y sujeto a antigüedad, entorno de escáner restringido, cap-drop/no-new-privileges, MediaMTX rootless y tmpfs noexec.200 matches y NO_GO conservados. Configurar MEDIAMTX_UID/GID al propietario del config privado.
+
+Candidata posterior de fase7: [plan/resultados](PHASE_7_RELEASE_REMEDIATION.md), [manifest](PHASE_7_ACCEPTANCE_MANIFEST.json), [NO_GO](PHASE_7_ACCEPTANCE_RESULT.json).220 backend/build/smoke/SQL/restore PASS; mitigación canónica de cursor y límite JWT sin cambio de dependencias; nativos200 sin resolución, gates externos pendientes. Las identidades de fase6 quedan históricas.

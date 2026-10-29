@@ -1,0 +1,71 @@
+{
+  "image_id": "sha256:610ce8886bc3f1fad159304036c98bf9e0ed583d39acd27ea120d24fc6bef4a0",
+  "archive_sha256": "a8d8897d507be3043fde4dd165f7401bb12566094dbee4c41b01bb12599859e4",
+  "gates": {
+    "regression": {
+      "status": "PASS",
+      "evidence": "220 backend PASS, PHASE_7_BACKEND_TESTS.xml; 12 Android hist\u00f3ricos sin nueva ejecuci\u00f3n"
+    },
+    "database_restore": {
+      "status": "PASS",
+      "evidence": "PHASE_7_REMOTE_CI.json: SQL/RLS/rollback y restore entre cl\u00fasteres PASS en esta ejecuci\u00f3n"
+    },
+    "image_build_smoke": {
+      "status": "PASS",
+      "evidence": "PHASE_7_ARTIFACT.json y PHASE_7_IMAGE_SMOKE.json"
+    },
+    "python_advisories": {
+      "status": "PASS",
+      "evidence": "PHASE_6_CURRENT_PYTHON_REVIEW.json: 70 paquetes, 0 avisos/errores; excluye nativos"
+    },
+    "image_vulnerability_scan": {
+      "status": "FINDINGS",
+      "evidence": "PHASE_7_IMAGE_SCAN.json y PHASE_7_NATIVE_FINDINGS.json: 200 matches, 77 High"
+    },
+    "android_device": {
+      "status": "BLOCKED",
+      "evidence": "Sin dispositivo/emulador autorizado"
+    },
+    "managed_staging": {
+      "status": "BLOCKED",
+      "evidence": "Supabase Auth settings HTTP200 de solo lectura; falta confirmaci\u00f3n de staging y autorizaci\u00f3n de fixtures"
+    },
+    "target_load_and_accuracy": {
+      "status": "BLOCKED",
+      "evidence": "Sin hardware/dataset representativo; objetivo FPS anterior incumplido"
+    },
+    "backup_operations": {
+      "status": "BLOCKED",
+      "evidence": "Restore entre cl\u00fasteres PASS; pendientes custodia de claves, Storage administrado y RPO/RTO"
+    },
+    "remote_ci": {
+      "status": "FAIL",
+      "evidence": "PHASE_7_REMOTE_CI.json: run40810141627, 07ab983; 220 backend/build/smoke/SQL/restore PASS, native FINDINGS200, workflow FAILURE"
+    },
+    "licenses": {
+      "status": "BLOCKED",
+      "evidence": "Inventarios disponibles; pendientes model cards/datasets y aprobaci\u00f3n legal completa"
+    },
+    "operator_approval": {
+      "status": "NOT_REQUESTED",
+      "evidence": "Gates previos sin resolver"
+    }
+  },
+  "scan_receipt": {
+    "generated_at": "2026-10-29T03:06:29.902652+00:00",
+    "inventory": "PASS",
+    "vulnerability_scan": "FINDINGS",
+    "accepted": false,
+    "limits": "Unsigned local receipt; full archive hash and config identity bind the input, not approval. Failures and findings never become clean acceptance.",
+    "image_id": "sha256:610ce8886bc3f1fad159304036c98bf9e0ed583d39acd27ea120d24fc6bef4a0",
+    "archive_sha256": "a8d8897d507be3043fde4dd165f7401bb12566094dbee4c41b01bb12599859e4",
+    "findings": 200,
+    "database": {
+      "schemaVersion": "v6.1.10",
+      "from": "https://grype.anchore.io/databases/v6/vulnerability-db_v6.1.10_2026-10-28T00:24:28Z_1793168610.tar.zst?checksum=sha256%3Ab08902b91738f1a9bc7fd61942f331d8e5e76a5df0c0b5f8c17c18bd787ee278",
+      "built": "2026-10-28T06:23:30Z",
+      "path": "/tmp/camera-phase6/scanners/grype-db/6/vulnerability.db",
+      "valid": true
+    }
+  }
+}

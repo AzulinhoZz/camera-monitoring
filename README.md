@@ -22,3 +22,5 @@ The development implementation includes scoped vision rules/events, review and e
 Phase 6 hardening is in progress: see the [initial hardening report](docs/ai-vision/PHASE_6_HARDENING_AND_RELEASE.md) and [release checklist](docs/ai-vision/RELEASE_CHECKLIST.md). The reviewed CI snapshot targets Python 3.12/Linux x86_64; it does not approve a production image or deployment.
 
 The release candidate, image archive/SBOM and acceptance verdict are described in [phase 6 delivery](docs/ai-vision/PHASE_6_DELIVERY_AND_ACCEPTANCE.md). A successful build is not production approval; the readiness command returns NO_GO for unresolved gates.
+
+The authorized follow-up [release remediation phase](docs/ai-vision/PHASE_7_RELEASE_REMEDIATION.md) begins with canonical cursor validation and bounded stream-token parsing. Production remains NO_GO until the native findings and external acceptance gates are resolved.

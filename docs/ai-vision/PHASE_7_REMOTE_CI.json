@@ -1,0 +1,80 @@
+{
+  "run_id": 40810141627,
+  "url": "https://github.com/AzulinhoZz/camera-monitoring/actions/runs/40810141627",
+  "source_commit": "07ab983f8e960522ee6766c0a72b5c03c3ed959b",
+  "status": "completed",
+  "conclusion": "failure",
+  "steps": [
+    {
+      "name": "Set up job",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "name": "Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "name": "Run actions/setup-python@6d4fd22b20465ccc0f7354476588e8df7c9ca0e0",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "name": "Install reviewed binary-only snapshots",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "name": "Offline backend regression",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "name": "Runtime closure and offline release image",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "name": "Disposable PostgreSQL isolation and rollback",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "name": "Inventory and advisory snapshot",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "name": "Full image inventory and vulnerability gate",
+      "status": "completed",
+      "conclusion": "failure"
+    },
+    {
+      "name": "Run actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "name": "Post Run actions/setup-python@6d4fd22b20465ccc0f7354476588e8df7c9ca0e0",
+      "status": "completed",
+      "conclusion": "skipped"
+    },
+    {
+      "name": "Post Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "name": "Complete job",
+      "status": "completed",
+      "conclusion": "success"
+    }
+  ],
+  "log_sha256": "b64ccbdbc63e5885514467d6e7df5f19dbf3915275016e58209b265519f18706",
+  "result_lines": [
+    "2026-10-29T03:06:05.1168201Z 220 passed, 5 warnings in 12.57s",
+    "2026-10-29T03:08:26.4496770Z {\"generated_at\": \"2026-10-29T03:07:08.924435+00:00\", \"inventory\": \"PASS\", \"vulnerability_scan\": \"FINDINGS\", \"accepted\": false, \"limits\": \"Unsigned local receipt; full archive hash and config identity bind the input, not approval. Failures and findings never become clean acceptance.\", \"image_id\": \"sha256:ffb8daf425763548ffcbc8b3b958fec2cfaa0c54ca1b63de4f7d95ce468f0894\", \"archive_sha256\": \"90f266625a24e5052c119dbe5f46735d181c68beb816d2c5fc73491239068c4f\", \"findings\": 200, \"database\": {\"schemaVersion\": \"v6.1.10\", \"from\": \"https://grype.anchore.io/databases/v6/vulnerability-db_v6.1.10_2026-10-28T00:24:28Z_1793168610.tar.zst?checksum=sha256%3Ab08902b91738f1a9bc7fd61942f331d8e5e76a5df0c0b5f8c17c18bd787ee278\", \"built\": \"2026-10-28T06:23:30Z\", \"path\": \"/home/runner/work/_temp/vision-scan-cache/grype-db/6/vulnerability.db\", \"valid\": true}}"
+  ],
+  "limits": "Remote functional PASS does not override native FINDINGS or approve the local candidate."
+}

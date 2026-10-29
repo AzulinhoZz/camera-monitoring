@@ -39,3 +39,17 @@ Verificación inicial: `SUPABASE_URL= SUPABASE_SECRET_KEY= FIREBASE_CREDENTIALS_
 R1 mitiga entradas de aplicación relacionadas con avisos de Base64 de Python (CVE-2025-12781/CVE-2026-3446); no parchea CPython ni elimina matches del scanner. FFmpeg/Debian y el resto de avisos siguen requiriendo remediación. La API/worker mantienen sandbox, autorización vigente y privacidad. Para rollback de este incremento revertir sus cambios de código conservando DB/media; no ejecutar down ni borrar evidencias. Un rollback reintroduciría aceptación de alias de cursor y quitaría el límite JWT, y debe evaluarse por ese efecto.
 
 Las escrituras en Supabase siguen pendientes de confirmar un staging aislado. Configurar una clave o autorizar esta fase no identifica ese proyecto como staging. Dispositivo/dataset/hardware y acuerdos operativos continúan pendientes; no se marcan PASS por pruebas sintéticas.
+
+## Nueva candidata local
+
+Implementación `07ab983f8e960522ee6766c0a72b5c03c3ed959b`. Build offline con los mismos65 pins runtime y66 wheels revisados PASS. [Identidad/proveniencia](PHASE_7_ARTIFACT.json), [smoke](PHASE_7_IMAGE_SMOKE.json), [SBOM](PHASE_7_IMAGE_SBOM.cdx.json), [scan](PHASE_7_IMAGE_SCAN.json), [delta nativo](PHASE_7_NATIVE_DELTA.json). La imagen de fase6 se conserva como histórica; no se atribuye su hash a este código.
+
+Imagen `sha256:610ce8886bc3f1fad159304036c98bf9e0ed583d39acd27ea120d24fc6bef4a0`, archive `/tmp/camera-phase7/candidate.tar`, SHA256 `a8d8897d507be3043fde4dd165f7401bb12566094dbee4c41b01bb12599859e4`. No publicada en registry ni desplegada. El tar temporal no entra en Git.
+
+Smoke real PASS: API uvicorn y autorización negativa, inferencia YOLOX CPU, SIGTERM, UID65534/read-only/network none/CapEff0/NoNewPrivs1 y ejecución nativa en tmpfs denegada. En esta ejecución:40 frames recibidos,26 recording/3 inference consumidos, capture_dropped0; un open_timeout inicial con reconexión y posterior salud/inferencia. Se registra la recuperación, sin atribuir una causa demostrada ni presentar esas muestras como benchmark de exactitud/FPS objetivo.
+
+Escaneo con DB válida y recibo ligado a esta candidata: FINDINGS200 (77 High), sin matches añadidos ni retirados. El gate `check_release_readiness.py --manifest docs/ai-vision/PHASE_7_ACCEPTANCE_MANIFEST.json` conserva NO_GO. R1 queda validada localmente como mitigación de aplicación; R2–R5 pendientes. La fase7 no se declara completa.
+
+## CI remoto del incremento
+
+[Workflow40810141627](https://github.com/AzulinhoZz/camera-monitoring/actions/runs/40810141627), commit `07ab983f8e960522ee6766c0a72b5c03c3ed959b`:220 backend PASS, build/smoke e integración SQL/RLS/rollback/restore PASS; seguridad FINDINGS200, workflow FAILURE. [Recibo](PHASE_7_REMOTE_CI.json). Se conserva el fallo de seguridad; R1 no implica aceptación global ni cierre de R2.

@@ -1,0 +1,13 @@
+{
+  "previous_matches": 200,
+  "current_matches": 200,
+  "removed": [],
+  "added": [],
+  "severity": {
+    "High": 77,
+    "Medium": 66,
+    "Negligible": 47,
+    "Low": 10
+  },
+  "limits": "Application mitigations do not change native package versions or close these scanner matches."
+}

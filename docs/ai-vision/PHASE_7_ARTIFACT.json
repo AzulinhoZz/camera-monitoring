@@ -1,0 +1,14 @@
+{
+  "image_id": "sha256:610ce8886bc3f1fad159304036c98bf9e0ed583d39acd27ea120d24fc6bef4a0",
+  "archive_sha256": "a8d8897d507be3043fde4dd165f7401bb12566094dbee4c41b01bb12599859e4",
+  "archive": "/tmp/camera-phase7/candidate.tar",
+  "bytes": 479570432,
+  "source_commit": "07ab983f8e960522ee6766c0a72b5c03c3ed959b",
+  "application_tree": "70c27b65bb958d83f512d13ffe1f29a2dc910707",
+  "input_sha256": {
+    "backend/Dockerfile": "a6f30e11a20e18dd785c109285d56236d71384625b24e7b3407243afa9819e9a",
+    "backend/requirements-runtime.lock": "958aff0df6cba4c3668e3a23876fe8535b84a96fe12fc581f8b72fc12e7653cd",
+    "backend/requirements-tooling.lock": "5e1aae2eba2f2ff755eb90cfbcb05a092dd34137ee311f108c05c1edae79751b"
+  },
+  "limits": "New local candidate, not published as an image or deployed. Input identity is not an approval/signature."
+}
