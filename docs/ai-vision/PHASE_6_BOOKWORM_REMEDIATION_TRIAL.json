@@ -1,0 +1,42 @@
+{
+  "base": "python:3.12-slim-bookworm@sha256:e697c81897302a4c4333bade000d98038fbb21eb064f8ee1fd42d02ebcd9d337",
+  "official_source_commit": "3d7e95597e56a415d9e4abc0f15877e005d2cb2e",
+  "official_dockerfile_sha256": "c5b5d689d289cbeaa6f808d6a72cfee89ad41a067863e54dc8e7aa719990dae2",
+  "candidate_image": "sha256:6cffd869bc4a8898d0aeec534308855c621647ff5348d09a1eb62f971e2ba2d0",
+  "matches": 305,
+  "severity": {
+    "Negligible": 87,
+    "High": 99,
+    "Medium": 103,
+    "Critical": 3,
+    "Low": 13
+  },
+  "smoke": {
+    "result": "PASS",
+    "image_id": "sha256:6cffd869bc4a8898d0aeec534308855c621647ff5348d09a1eb62f971e2ba2d0",
+    "uid": "65534:65534",
+    "network": "none",
+    "read_only": true,
+    "api_health": true,
+    "real_uvicorn_startup_and_sigterm": true,
+    "unconfigured_db_denied": true,
+    "anonymous_events_denied": true,
+    "native_inference": true,
+    "sigterm_stopped": true,
+    "healthy_snapshots": 3,
+    "last_counts": {
+      "connection_attempts": 1,
+      "capture_dropped": 0,
+      "frames_received": 100,
+      "recording_sampled": 67,
+      "inference_sampled": 7,
+      "recording_consumed": 67,
+      "inference_consumed": 7,
+      "decoder_exits": 1
+    },
+    "scope": "generated synthetic input only; not model accuracy or managed integration"
+  },
+  "report_sha256": "3e067e839928d22d80fb3f88c3d4a7bf78d1ed454ac01ea5ad8a9267489f0355",
+  "adopted": false,
+  "reason": "305 matches versus 200 in retained candidate. Functional smoke PASS does not establish security acceptance."
+}

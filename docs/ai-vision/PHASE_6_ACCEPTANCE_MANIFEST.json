@@ -4,7 +4,7 @@
   "gates": {
     "regression": {
       "status": "PASS",
-      "evidence": "190 backend en instancia publicada; PHASE_6_BACKEND_TESTS.xml; 12 Android hist\u00f3ricos, sin nueva ejecuci\u00f3n Android"
+      "evidence": "195 backend, PHASE_6_BACKEND_TESTS.xml; 12 Android hist\u00f3ricos, sin dispositivo"
     },
     "database_restore": {
       "status": "PASS",
@@ -40,7 +40,7 @@
     },
     "remote_ci": {
       "status": "FAIL",
-      "evidence": "PHASE_6_REMOTE_CI.json: 40797915828, eefe3ba; funcional PASS, seguridad FINDINGS (200), workflow FAILURE"
+      "evidence": "PHASE_6_REMOTE_CI.json: run 40802151569, a205a22, funcional PASS, seguridad FINDINGS (200), workflow FAILURE"
     },
     "licenses": {
       "status": "BLOCKED",

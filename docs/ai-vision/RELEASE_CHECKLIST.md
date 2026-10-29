@@ -30,3 +30,5 @@ Actualización posterior: [resolución de bloqueos](PHASE_6_BLOCKER_RESOLUTION.m
 Actualización tras publicar entorno: [validación real y hallazgos nativos](PHASE_6_PUBLISHED_VALIDATION.md). Conectividad y secretos disponibles; Supabase solo lectura HTTP200, CI remoto ejecutado. Scan nativo FINDINGS (200 matches); NO_GO continúa.
 
 Estado vigente tras publicación: regresión backend 190 PASS; imagen reconstruida/smoke PASS; Python 70 sin avisos/errores. CI remoto EJECUTADO/FAILURE por escaneo nativo FINDINGS (200 matches/77 High), ya sin bloqueo de red. Supabase settings solo lectura HTTP200; staging sin confirmar. Identidad nueva en PHASE_6_CURRENT_ARTIFACT.json; gate de aceptación no cambia a PASS.
+
+Estado de cierre y remediación vigente: [PHASE_6_REMEDIATION_STATUS.md](PHASE_6_REMEDIATION_STATUS.md). 195 backend PASS; dos bases evaluadas sin mejora (200/305 matches), candidata original conservada, CI remoto funcional PASS/seguridad FAIL. Runbook consolidado; NO_GO continúa.

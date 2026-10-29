@@ -200,3 +200,7 @@ Restore entre clústeres independientes y roles añadido; importación offline c
 ## R. Fase 6 — entorno publicado y primer CI remoto (2026-10-28)
 
 [Validación](PHASE_6_PUBLISHED_VALIDATION.md): configuración activa, Supabase solo lectura HTTP200, rama de trabajo publicada, CI remoto funcional PASS y seguridad FINDINGS. Imagen reconstruida offline/smoke PASS, 190 backend PASS, PyPI 70 sin avisos/errores. Grype con DB actual identifica 200 matches (77 High), no se ocultan ni se aceptan. Corrección atómica de ejecutables del runner. Prioridad P0: triage/remediación de nativos y gates externos; release sigue NO_GO.
+
+## S. Fase 6 — remediación contrastada y runbook (2026-10-28)
+
+[Estado](PHASE_6_REMEDIATION_STATUS.md): 195 backend PASS; gate rechaza DB inválida/antigua/futura, CI real confirma funcional PASS y FINDINGS200. Última base Trixie conserva 200 matches, Bookworm empeora a305 pese a smoke PASS; no adoptadas. Tracker oficial confirma159 matches Debian abiertos por source package. Runbook entregado. Sigue P0 resolver nativos/staging/dispositivo/dataset-hardware/operación y licencias; sin aceptación ficticia ni despliegue.

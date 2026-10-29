@@ -1,7 +1,7 @@
 {
-  "run_id": 40797915828,
-  "url": "https://github.com/AzulinhoZz/camera-monitoring/actions/runs/40797915828",
-  "head_sha": "eefe3ba5d66f1ad998434086bc138caccd90d517",
+  "run_id": 40802151569,
+  "url": "https://github.com/AzulinhoZz/camera-monitoring/actions/runs/40802151569",
+  "head_sha": "a205a22c0ab91796c0e506772b2d90d5ed5127e9",
   "status": "completed",
   "conclusion": "failure",
   "steps": [
@@ -71,9 +71,9 @@
       "conclusion": "success"
     }
   ],
-  "log_sha256": "04134342ddd4d7b0364921cfd4d73cd09922f845f0c9b8e4a175b7cd7c2207dd",
+  "log_sha256": "689c7423842cc0d5ca1df53f654d2c16e6120ca4d0a95b4b0a206d27d04c137d",
   "native_scan_status_lines": [
-    "2026-10-29T01:05:17.6436693Z {\"inventory\": \"PASS\", \"vulnerability_scan\": \"FINDINGS\", \"accepted\": false, \"limits\": \"A scanner failure, missing DB or finding is never converted into clean acceptance.\", \"findings\": 200}"
+    "2026-10-29T01:46:07.3289825Z {\"inventory\": \"PASS\", \"vulnerability_scan\": \"FINDINGS\", \"accepted\": false, \"limits\": \"A scanner failure, missing DB or finding is never converted into clean acceptance.\", \"findings\": 200}"
   ],
-  "limits": "Workflow executed; failure is not acceptance. Source SHA explicit; documentation commits may follow."
+  "limits": "Runtime source unchanged; hardening runner tests included. FAIL is not release approval."
 }
