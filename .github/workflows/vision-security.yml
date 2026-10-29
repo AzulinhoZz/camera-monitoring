@@ -34,11 +34,23 @@ jobs:
           python -m pip check
       - name: Offline backend regression
         run: python -m pytest -q backend --disable-warnings --junitxml=artifacts/backend-tests.xml
+      - name: Runtime closure and offline release image
+        run: |
+          python backend/scripts/build_runtime_lock.py --output artifacts/runtime.lock
+          cmp backend/requirements-runtime.lock artifacts/runtime.lock
+          python backend/scripts/prepare_release_wheels.py --output "$RUNNER_TEMP/vision-wheels"
+          docker build --platform linux/amd64 --network none --build-context wheels="$RUNNER_TEMP/vision-wheels" -t camera-monitoring:ci backend
+          python backend/scripts/download_vision_model.py --output "$RUNNER_TEMP/yolox_s.onnx"
+          python backend/scripts/validate_release_image.py --image camera-monitoring:ci --model "$RUNNER_TEMP/yolox_s.onnx" --output artifacts/image-smoke
       - name: Disposable PostgreSQL isolation and rollback
         run: python backend/scripts/validate_database_security.py
       - name: Inventory and advisory snapshot
         if: always()
         run: python backend/scripts/release_inventory.py --output artifacts/inventory --pypi
+      - name: Full image inventory and vulnerability gate
+        run: |
+          docker save -o "$RUNNER_TEMP/vision-image.tar" camera-monitoring:ci
+          python backend/scripts/scan_release_image.py --archive "$RUNNER_TEMP/vision-image.tar" --cache "$RUNNER_TEMP/vision-scan-cache" --output artifacts/image-scan
       - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7
         if: always()
         with:

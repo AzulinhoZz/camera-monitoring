@@ -95,6 +95,10 @@ def main():
         finally:
             if holder.poll() is None:holder.terminate();holder.communicate(timeout=5)
         print("PASS: concurrent organization change blocked until atomic grant transaction completes")
+        from backup_restore_fixture import run as restore_fixture
+        restore_directory=tempfile.mkdtemp(prefix='camera-phase6-restore-')
+        restore_fixture(name,restore_directory)
+        print('Encrypted backup/restore fixture artifacts:',restore_directory)
     except subprocess.CalledProcessError as exc:
         # SQL fixtures are synthetic, and this runner never has production bindings.
         raise RuntimeError(exc.stderr or "disposable SQL command failed") from None

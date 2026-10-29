@@ -1,0 +1,32 @@
+import org.gradle.api.artifacts.component.ModuleComponentIdentifier
+import java.security.MessageDigest
+import groovy.json.JsonOutput
+allprojects {
+    afterEvaluate { p ->
+        if (p.path == ':app') {
+            p.tasks.register('exportPhase6Inventory') {
+                doLast {
+                    def rows=[]
+                    ['debugRuntimeClasspath','releaseRuntimeClasspath'].each { configName ->
+                        def cfg=p.configurations.getByName(configName)
+                        cfg.incoming.artifactView {}.artifacts.artifacts.each { artifact ->
+                            def id=artifact.id.componentIdentifier
+                            if (id instanceof ModuleComponentIdentifier) {
+                                def digest=MessageDigest.getInstance('SHA-256')
+                                artifact.file.withInputStream { stream ->
+                                    byte[] buffer=new byte[65536];int read
+                                    while ((read=stream.read(buffer))>0) digest.update(buffer,0,read)
+                                }
+                                rows << [group:id.group,name:id.module,version:id.version,
+                                    configuration:configName,filename:artifact.file.name,sha256:digest.digest().encodeHex().toString()]
+                            }
+                        }
+                    }
+                    def destination=new File(p.findProperty('releaseInventoryOutput') ?: p.layout.buildDirectory.file('reports/release-inventory/runtime-artifacts.json').get().asFile.path)
+                    destination.parentFile.mkdirs()
+                    destination.text=JsonOutput.prettyPrint(JsonOutput.toJson(rows.sort { a,b -> (a.group+':'+a.name+':'+a.configuration) <=> (b.group+':'+b.name+':'+b.configuration) }))
+                }
+            }
+        }
+    }
+}

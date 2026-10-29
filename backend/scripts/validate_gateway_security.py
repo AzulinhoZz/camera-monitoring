@@ -110,11 +110,13 @@ def main():
             original = Path(__file__).resolve().parents[2] / "gateway/mediamtx.yml"
             config.write_text(original.read_text().replace("hlsVariant: mpegts", f"hlsVariant: {args.variant}") + "\nhlsSegmentDuration: 1s\n")
             callback = f"http://gateway:{os.environ['MEDIAMTX_GATEWAY_SECRET']}@host.docker.internal:{server.server_port}/auth/mediamtx"
-            subprocess.run(["docker", "run", "--rm", "-d", "--name", name,
+            subprocess.run(["docker", "create", "--name", name,
                             "--add-host", "host.docker.internal:host-gateway", "-p", "127.0.0.1::8554", "-p", "127.0.0.1::8888",
-                            "-e", "MTX_AUTHHTTPADDRESS=" + callback, "-e", "MTX_HLSCDNSECRET=" + os.environ["MEDIAMTX_HLS_SECRET"], "--mount", f"type=bind,src={config},dst=/mediamtx.yml,readonly", IMAGE],
+                            "-e", "MTX_AUTHHTTPADDRESS=" + callback, "-e", "MTX_HLSCDNSECRET=" + os.environ["MEDIAMTX_HLS_SECRET"], IMAGE],
                            check=True, capture_output=True)
             created = True
+            subprocess.run(['docker','cp',str(config),name+':/mediamtx.yml'],check=True,capture_output=True)
+            subprocess.run(['docker','start',name],check=True,capture_output=True)
             def port(which):
                 value = subprocess.run(["docker", "port", name, which], check=True, capture_output=True, text=True).stdout.strip()
                 return int(value.rsplit(":", 1)[1])
@@ -159,7 +161,7 @@ def main():
     finally:
         if publisher and publisher.poll() is None:
             publisher.terminate(); publisher.wait(5)
-        if created: subprocess.run(["docker", "stop", name], check=True, capture_output=True)
+        if created: subprocess.run(["docker", "rm", "-f", name], check=False, capture_output=True)
         server.shutdown(); server.server_close(); thread.join(2)
 
 

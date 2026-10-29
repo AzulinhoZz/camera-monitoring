@@ -1,9 +1,13 @@
 services:
   vision-worker:
+    platform: linux/amd64
     # Explicit demo profile: no credentials, production data or network access.
     profiles: [vision]
     image: camera-monitoring-vision-worker:dev
-    build: ./backend
+    build:
+      context: ./backend
+      additional_contexts:
+        wheels: ${VISION_WHEELHOUSE:-/tmp/camera-vision-wheels}
     command: [python, -m, app.vision, --config, /config/vision.json]
     environment:
       CAMERA_LEASE_DIRECTORY: /run/camera-leases

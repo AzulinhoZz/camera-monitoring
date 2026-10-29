@@ -1,8 +1,12 @@
 # Explicit demo: synthetic inputs, no network, no models, no production activation.
 services:
   vision-fleet:
+    platform: linux/amd64
     profiles: [vision-fleet]
-    build: ./backend
+    build:
+      context: ./backend
+      additional_contexts:
+        wheels: ${VISION_WHEELHOUSE:-/tmp/camera-vision-wheels}
     command: [python, -m, app.vision.fleet, --config, /code/vision-fleet.example.json, --cpu-slots, "2", --memory-mib, "768", --camera-memory-mib, "384", --health-file, /tmp/vision-fleet-health.json]
     network_mode: none
     read_only: true

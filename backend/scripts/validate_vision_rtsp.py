@@ -33,11 +33,12 @@ def main():
     worker = publisher = None
     created = False
     try:
-        subprocess.run(["docker", "run", "--rm", "-d", "--name", name,
-                        "-p", "127.0.0.1::8554", "--mount",
-                        f"type=bind,src={gateway},dst=/mediamtx.yml,readonly", IMAGE],
+        subprocess.run(["docker", "create", "--name", name,
+                        "-p", "127.0.0.1::8554", IMAGE],
                        check=True, capture_output=True)
         created = True
+        subprocess.run(['docker','cp',str(gateway),name+':/mediamtx.yml'],check=True,capture_output=True)
+        subprocess.run(['docker','start',name],check=True,capture_output=True)
         binding = subprocess.run(["docker", "port", name, "8554/tcp"], check=True,
                                  capture_output=True, text=True).stdout.strip()
         port = int(binding.rsplit(":", 1)[1])
@@ -91,7 +92,7 @@ def main():
             publisher.terminate()
             publisher.wait(5)
         if created:
-            subprocess.run(["docker", "stop", name], check=True, capture_output=True)
+            subprocess.run(["docker", "rm", "-f", name], check=False, capture_output=True)
 
 
 if __name__ == "__main__":

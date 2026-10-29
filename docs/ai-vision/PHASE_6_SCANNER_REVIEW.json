@@ -1,0 +1,24 @@
+[
+  {
+    "tool": "syft",
+    "version": "1.55.0",
+    "source_commit": "f15c3343e29dfb20cf6d82c820e7090b49808c96",
+    "tag": "v1.55.0",
+    "status": "verified download",
+    "license": "Apache-2.0",
+    "license_sha256": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4",
+    "sha256": "bb65249542db5fedeeb4d3f9b018b75e7264dbfbbb10486f044581a92f90490d",
+    "asset": "syft_1.55.0_linux_amd64.tar.gz"
+  },
+  {
+    "tool": "grype",
+    "version": "0.121.0",
+    "source_commit": "afe2742527d98d822da06c9f32eed86fe3d193e0",
+    "tag": "v0.121.0",
+    "status": "verified download",
+    "license": "Apache-2.0",
+    "license_sha256": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4",
+    "sha256": "64e07133d3486115de647a66581461dccf5c732748a0a3119077395565f15519",
+    "asset": "grype_0.121.0_linux_amd64.tar.gz"
+  }
+]

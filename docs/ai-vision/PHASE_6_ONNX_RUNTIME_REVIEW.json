@@ -1,0 +1,12 @@
+{
+  "name": "onnxruntime",
+  "version": "1.31.1",
+  "source_commit": "6af1a932e2286d5c58166085d24c68783033edee",
+  "license": "MIT",
+  "license_sha256": "2f07c72751aed99790b8a4869cf2311df85a860b22ded05fa22803587a48922c",
+  "sha256": "1f3dea47f2f0e5117c2404cea7d21fd253ae7836a3bf167a501cdfbb2600d536",
+  "wheel": "onnxruntime-1.31.1-cp312-cp312-manylinux_2_28_x86_64.whl",
+  "url": "https://files.pythonhosted.org/packages/eb/27/c6a823bac55b2977bea2027c3ec9393a2c1002cb9a09eb40354563e02730/onnxruntime-1.31.1-cp312-cp312-manylinux_2_28_x86_64.whl",
+  "vulnerabilities": [],
+  "scope": "isolated CPU evaluation only, not application dependency; no complete native scan"
+}

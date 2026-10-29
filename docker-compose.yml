@@ -1,6 +1,10 @@
 services:
   api:
-    build: ./backend
+    platform: linux/amd64
+    build:
+      context: ./backend
+      additional_contexts:
+        wheels: ${VISION_WHEELHOUSE:-/tmp/camera-vision-wheels}
     ports:
       - "127.0.0.1:8000:8000"
     environment:

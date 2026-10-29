@@ -1,16 +1,21 @@
-FROM python:3.12-slim
+# Frozen official base observed during phase 5; OS scan remains a release gate.
+FROM python:3.12-slim@sha256:12316debbfb86890f6b2d825820612741ba527ad5a44e3902759141d572bfe8f
 WORKDIR /code
-RUN mkdir -p /run/camera-leases && chmod 1777 /run/camera-leases
-COPY requirements.txt .
-# Optional public CA bundle for environments with a trusted TLS egress proxy.
-# Mounted only during build; no verification bypass and no credentials in image.
-RUN --mount=type=secret,id=package_ca \
-    if [ -f /run/secrets/package_ca ]; then \
-        PIP_CERT=/run/secrets/package_ca pip install --no-cache-dir -r requirements.txt; \
-    else pip install --no-cache-dir -r requirements.txt; fi
-COPY --chown=65534:65534 app ./app
-COPY --chown=65534:65534 migrations ./migrations
-COPY --chown=65534:65534 vision-worker.example.json /config/vision.json
-COPY --chown=65534:65534 vision-detection.example.json /config/detection.json
-COPY --chown=65534:65534 licenses /licenses
-CMD ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8000", "--reload"]
+ENV PYTHONDONTWRITEBYTECODE=1 PYTHONUNBUFFERED=1
+# One application layer avoids repeated full snapshots on constrained builders.
+# Only the reviewed runtime assets below leave the readonly build-context mount.
+RUN --mount=type=bind,target=/src,readonly \
+    --mount=type=bind,from=wheels,target=/wheels,readonly \
+    pip install --no-index --find-links=/wheels --no-cache-dir --only-binary=:all: --require-hashes -r /src/requirements-tooling.lock && \
+    pip install --no-index --find-links=/wheels --no-cache-dir --only-binary=:all: --require-hashes -r /src/requirements-runtime.lock && \
+    pip check && \
+    mkdir -p /config /licenses /run/camera-leases && chmod 1777 /run/camera-leases && \
+    cp -R /src/app /code/app && cp -R /src/migrations /code/migrations && \
+    cp -R /src/licenses/. /licenses/ && \
+    cp /src/vision-worker.example.json /config/vision.json && \
+    cp /src/vision-detection.example.json /config/detection.json && \
+    cp /src/vision-fleet.example.json /config/fleet.json && \
+    cp /src/requirements-runtime.lock /src/requirements-tooling.lock /code/ && \
+    chown -R 65534:65534 /code /config /licenses
+USER 65534:65534
+CMD ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8000"]
