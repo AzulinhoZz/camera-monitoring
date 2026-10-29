@@ -1,0 +1,79 @@
+{
+  "run_id": 40797915828,
+  "url": "https://github.com/AzulinhoZz/camera-monitoring/actions/runs/40797915828",
+  "head_sha": "eefe3ba5d66f1ad998434086bc138caccd90d517",
+  "status": "completed",
+  "conclusion": "failure",
+  "steps": [
+    {
+      "name": "Set up job",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "name": "Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "name": "Run actions/setup-python@6d4fd22b20465ccc0f7354476588e8df7c9ca0e0",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "name": "Install reviewed binary-only snapshots",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "name": "Offline backend regression",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "name": "Runtime closure and offline release image",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "name": "Disposable PostgreSQL isolation and rollback",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "name": "Inventory and advisory snapshot",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "name": "Full image inventory and vulnerability gate",
+      "status": "completed",
+      "conclusion": "failure"
+    },
+    {
+      "name": "Run actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "name": "Post Run actions/setup-python@6d4fd22b20465ccc0f7354476588e8df7c9ca0e0",
+      "status": "completed",
+      "conclusion": "skipped"
+    },
+    {
+      "name": "Post Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "name": "Complete job",
+      "status": "completed",
+      "conclusion": "success"
+    }
+  ],
+  "log_sha256": "04134342ddd4d7b0364921cfd4d73cd09922f845f0c9b8e4a175b7cd7c2207dd",
+  "native_scan_status_lines": [
+    "2026-10-29T01:05:17.6436693Z {\"inventory\": \"PASS\", \"vulnerability_scan\": \"FINDINGS\", \"accepted\": false, \"limits\": \"A scanner failure, missing DB or finding is never converted into clean acceptance.\", \"findings\": 200}"
+  ],
+  "limits": "Workflow executed; failure is not acceptance. Source SHA explicit; documentation commits may follow."
+}

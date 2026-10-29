@@ -26,3 +26,7 @@ No habilitar alertas sensibles por defecto. No ejecutar down sobre datos reales 
 Evidencia final local y límites: [entrega técnica](PHASE_6_DELIVERY_AND_ACCEPTANCE.md). Backup fixture no sustituye recuperación operativa; inventario no equivale a scan limpio. Resultado automatizado de gates: NO_GO.
 
 Actualización posterior: [resolución de bloqueos](PHASE_6_BLOCKER_RESOLUTION.md), restore entre clústeres e importación offline Grype preparada; aceptación global sigue NO_GO.
+
+Actualización tras publicar entorno: [validación real y hallazgos nativos](PHASE_6_PUBLISHED_VALIDATION.md). Conectividad y secretos disponibles; Supabase solo lectura HTTP200, CI remoto ejecutado. Scan nativo FINDINGS (200 matches); NO_GO continúa.
+
+Estado vigente tras publicación: regresión backend 190 PASS; imagen reconstruida/smoke PASS; Python 70 sin avisos/errores. CI remoto EJECUTADO/FAILURE por escaneo nativo FINDINGS (200 matches/77 High), ya sin bloqueo de red. Supabase settings solo lectura HTTP200; staging sin confirmar. Identidad nueva en PHASE_6_CURRENT_ARTIFACT.json; gate de aceptación no cambia a PASS.

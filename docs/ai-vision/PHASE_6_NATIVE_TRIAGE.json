@@ -1,0 +1,299 @@
+{
+  "matches": 200,
+  "unique_vulnerability_ids": 108,
+  "severity": {
+    "High": 77,
+    "Medium": 66,
+    "Negligible": 47,
+    "Low": 10
+  },
+  "fix_states": {
+    "fixed": 20,
+    "": 21,
+    "wont-fix": 112,
+    "not-fixed": 47
+  },
+  "components": [
+    {
+      "name": "apt",
+      "version": "3.0.3",
+      "type": "deb",
+      "matches": 0,
+      "ids": []
+    },
+    {
+      "name": "bsdutils",
+      "version": "1:2.41.5-0+deb13u1",
+      "type": "deb",
+      "matches": 0,
+      "ids": []
+    },
+    {
+      "name": "coreutils",
+      "version": "9.7-3",
+      "type": "deb",
+      "matches": 0,
+      "ids": []
+    },
+    {
+      "name": "dash",
+      "version": "0.5.12-12",
+      "type": "deb",
+      "matches": 0,
+      "ids": []
+    },
+    {
+      "name": "diffutils",
+      "version": "1:3.10-4",
+      "type": "deb",
+      "matches": 0,
+      "ids": []
+    },
+    {
+      "name": "ffmpeg",
+      "version": "8.1.1",
+      "type": "binary",
+      "matches": 0,
+      "ids": []
+    },
+    {
+      "name": "gcc-14-base",
+      "version": "14.2.0-19",
+      "type": "deb",
+      "matches": 0,
+      "ids": []
+    },
+    {
+      "name": "libacl1",
+      "version": "2.3.2-2+b1",
+      "type": "deb",
+      "matches": 0,
+      "ids": []
+    },
+    {
+      "name": "libapt-pkg7.0",
+      "version": "3.0.3",
+      "type": "deb",
+      "matches": 0,
+      "ids": []
+    },
+    {
+      "name": "libattr1",
+      "version": "1:2.5.2-3",
+      "type": "deb",
+      "matches": 0,
+      "ids": []
+    },
+    {
+      "name": "libblkid1",
+      "version": "2.41.5-0+deb13u1",
+      "type": "deb",
+      "matches": 0,
+      "ids": []
+    },
+    {
+      "name": "libbz2-1.0",
+      "version": "1.0.8-6",
+      "type": "deb",
+      "matches": 0,
+      "ids": []
+    },
+    {
+      "name": "libc-bin",
+      "version": "2.41-12+deb13u4",
+      "type": "deb",
+      "matches": 0,
+      "ids": []
+    },
+    {
+      "name": "libc6",
+      "version": "2.41-12+deb13u4",
+      "type": "deb",
+      "matches": 0,
+      "ids": []
+    },
+    {
+      "name": "libgcc-s1",
+      "version": "14.2.0-19",
+      "type": "deb",
+      "matches": 0,
+      "ids": []
+    },
+    {
+      "name": "liblastlog2-2",
+      "version": "2.41.5-0+deb13u1",
+      "type": "deb",
+      "matches": 0,
+      "ids": []
+    },
+    {
+      "name": "libmount1",
+      "version": "2.41.5-0+deb13u1",
+      "type": "deb",
+      "matches": 0,
+      "ids": []
+    },
+    {
+      "name": "libncursesw6",
+      "version": "6.5+20250216-2",
+      "type": "deb",
+      "matches": 0,
+      "ids": []
+    },
+    {
+      "name": "libpam-modules",
+      "version": "1.7.0-5",
+      "type": "deb",
+      "matches": 0,
+      "ids": []
+    },
+    {
+      "name": "libpam-modules-bin",
+      "version": "1.7.0-5",
+      "type": "deb",
+      "matches": 0,
+      "ids": []
+    },
+    {
+      "name": "libpam-runtime",
+      "version": "1.7.0-5",
+      "type": "deb",
+      "matches": 0,
+      "ids": []
+    },
+    {
+      "name": "libpam0g",
+      "version": "1.7.0-5",
+      "type": "deb",
+      "matches": 0,
+      "ids": []
+    },
+    {
+      "name": "libsmartcols1",
+      "version": "2.41.5-0+deb13u1",
+      "type": "deb",
+      "matches": 0,
+      "ids": []
+    },
+    {
+      "name": "libsqlite3-0",
+      "version": "3.46.1-7+deb13u2",
+      "type": "deb",
+      "matches": 0,
+      "ids": []
+    },
+    {
+      "name": "libstdc++6",
+      "version": "14.2.0-19",
+      "type": "deb",
+      "matches": 0,
+      "ids": []
+    },
+    {
+      "name": "libsystemd0",
+      "version": "257.13-1~deb13u1",
+      "type": "deb",
+      "matches": 0,
+      "ids": []
+    },
+    {
+      "name": "libtinfo6",
+      "version": "6.5+20250216-2",
+      "type": "deb",
+      "matches": 0,
+      "ids": []
+    },
+    {
+      "name": "libudev1",
+      "version": "257.13-1~deb13u1",
+      "type": "deb",
+      "matches": 0,
+      "ids": []
+    },
+    {
+      "name": "libuuid1",
+      "version": "2.41.5-0+deb13u1",
+      "type": "deb",
+      "matches": 0,
+      "ids": []
+    },
+    {
+      "name": "login",
+      "version": "1:4.16.0-2+really2.41.5-0+deb13u1",
+      "type": "deb",
+      "matches": 0,
+      "ids": []
+    },
+    {
+      "name": "login.defs",
+      "version": "1:4.17.4-2",
+      "type": "deb",
+      "matches": 0,
+      "ids": []
+    },
+    {
+      "name": "mount",
+      "version": "2.41.5-0+deb13u1",
+      "type": "deb",
+      "matches": 0,
+      "ids": []
+    },
+    {
+      "name": "ncurses-base",
+      "version": "6.5+20250216-2",
+      "type": "deb",
+      "matches": 0,
+      "ids": []
+    },
+    {
+      "name": "ncurses-bin",
+      "version": "6.5+20250216-2",
+      "type": "deb",
+      "matches": 0,
+      "ids": []
+    },
+    {
+      "name": "passwd",
+      "version": "1:4.17.4-2",
+      "type": "deb",
+      "matches": 0,
+      "ids": []
+    },
+    {
+      "name": "perl-base",
+      "version": "5.40.1-6+deb13u1",
+      "type": "deb",
+      "matches": 0,
+      "ids": []
+    },
+    {
+      "name": "python",
+      "version": "3.12.16",
+      "type": "binary",
+      "matches": 0,
+      "ids": []
+    },
+    {
+      "name": "tar",
+      "version": "1.35+dfsg-3.1",
+      "type": "deb",
+      "matches": 0,
+      "ids": []
+    },
+    {
+      "name": "util-linux",
+      "version": "2.41.5-0+deb13u1",
+      "type": "deb",
+      "matches": 0,
+      "ids": []
+    },
+    {
+      "name": "zlib1g",
+      "version": "1:1.3.dfsg+really1.3.1-1+b1",
+      "type": "deb",
+      "matches": 0,
+      "ids": []
+    }
+  ],
+  "limits": "Scanner matches require advisory/context triage. No suppressions or accepted risk exceptions. No clean result."
+}

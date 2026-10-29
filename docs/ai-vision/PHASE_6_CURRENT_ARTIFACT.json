@@ -1,0 +1,9 @@
+{
+  "image_id": "sha256:fa9f4b309378f501664711203184f416c134e86c3ac6aa0c0bfe20206bd653c9",
+  "archive": "/tmp/camera-phase6/candidate.tar",
+  "sha256": "8b884f6c1053346aa5bf74854930553c8670dd5696e26557045a815385c09011",
+  "bytes": 479566848,
+  "source_commit": "f6746ad039d6276dca6449539e62a117e9f599c1",
+  "application_changed": false,
+  "limits": "New build after environment publication; not byte-identical to historical candidate."
+}

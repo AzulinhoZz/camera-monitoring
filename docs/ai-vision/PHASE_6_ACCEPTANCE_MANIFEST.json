@@ -1,10 +1,10 @@
 {
-  "image_id": "sha256:3d76be0c3a1fbfadd32d75dc28b2899d076f9870b806ebb5d3120b0f87471db7",
-  "archive_sha256": "ba340d96b51da01d0ad4fabfeb6b967046bec282ef09c99e2dcd40e696174888",
+  "image_id": "sha256:fa9f4b309378f501664711203184f416c134e86c3ac6aa0c0bfe20206bd653c9",
+  "archive_sha256": "8b884f6c1053346aa5bf74854930553c8670dd5696e26557045a815385c09011",
   "gates": {
     "regression": {
       "status": "PASS",
-      "evidence": "189 backend actuales y 12 Android de entrega previa; PHASE_6_BLOCKER_RESOLUTION.md"
+      "evidence": "190 backend en instancia publicada; PHASE_6_BACKEND_TESTS.xml; 12 Android hist\u00f3ricos, sin nueva ejecuci\u00f3n Android"
     },
     "database_restore": {
       "status": "PASS",
@@ -12,15 +12,15 @@
     },
     "image_build_smoke": {
       "status": "PASS",
-      "evidence": "PHASE_6_IMAGE_SMOKE.json"
+      "evidence": "PHASE_6_CURRENT_ARTIFACT.json y PHASE_6_CURRENT_IMAGE_SMOKE.json"
     },
     "python_advisories": {
       "status": "PASS",
-      "evidence": "PHASE_6_PYTHON_REVIEW.json: snapshot PyPI, no escaneo nativo"
+      "evidence": "PHASE_6_CURRENT_PYTHON_REVIEW.json: 70 paquetes, 0 avisos/errores; excluye nativos"
     },
     "image_vulnerability_scan": {
-      "status": "BLOCKED",
-      "evidence": "PHASE_6_IMAGE_SCAN.json: DB Grype HTTP 403"
+      "status": "FINDINGS",
+      "evidence": "PHASE_6_NATIVE_FINDINGS.json: 200 coincidencias, 77 High; DB v\u00e1lida de 2026-10-28"
     },
     "android_device": {
       "status": "BLOCKED",
@@ -28,7 +28,7 @@
     },
     "managed_staging": {
       "status": "BLOCKED",
-      "evidence": "Secreto declarado en configuraci\u00f3n pero no disponible en proceso actual; identificaci\u00f3n staging pendiente"
+      "evidence": "Supabase Auth settings HTTP200 de solo lectura; falta confirmaci\u00f3n de staging y autorizaci\u00f3n de fixtures"
     },
     "target_load_and_accuracy": {
       "status": "BLOCKED",
@@ -39,8 +39,8 @@
       "evidence": "Restore entre cl\u00fasteres PASS; pendientes custodia de claves, Storage administrado y RPO/RTO"
     },
     "remote_ci": {
-      "status": "BLOCKED",
-      "evidence": "PHASE_6_ENVIRONMENT_CONTINUATION.json: Git read y gh auth PASS; API Actions Forbidden, red pendiente de aplicar"
+      "status": "FAIL",
+      "evidence": "PHASE_6_REMOTE_CI.json: 40797915828, eefe3ba; funcional PASS, seguridad FINDINGS (200), workflow FAILURE"
     },
     "licenses": {
       "status": "BLOCKED",

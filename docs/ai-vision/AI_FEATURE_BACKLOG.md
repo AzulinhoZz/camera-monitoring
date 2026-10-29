@@ -196,3 +196,7 @@ Pendiente: CI remoto, escaneos OS/nativo/Android y SBOM completo, imagen release
 ## Q. Resolución local de bloqueos de fase 6 (2026-10-28)
 
 Restore entre clústeres independientes y roles añadido; importación offline con checksum para Grype preparada, sin base oficial disponible. 189 tests backend PASS. Red oficial 403, GitHub inválido y recursos externos ausentes comprobados de nuevo. [Evidencia y requisitos concretos](PHASE_6_BLOCKER_RESOLUTION.md). No se cierran gates externos ni aceptación operativa por inferencia.
+
+## R. Fase 6 — entorno publicado y primer CI remoto (2026-10-28)
+
+[Validación](PHASE_6_PUBLISHED_VALIDATION.md): configuración activa, Supabase solo lectura HTTP200, rama de trabajo publicada, CI remoto funcional PASS y seguridad FINDINGS. Imagen reconstruida offline/smoke PASS, 190 backend PASS, PyPI 70 sin avisos/errores. Grype con DB actual identifica 200 matches (77 High), no se ocultan ni se aceptan. Corrección atómica de ejecutables del runner. Prioridad P0: triage/remediación de nativos y gates externos; release sigue NO_GO.

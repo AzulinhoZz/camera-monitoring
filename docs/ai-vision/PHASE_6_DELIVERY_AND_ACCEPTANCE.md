@@ -52,3 +52,5 @@ Runbooks existentes siguen vigentes; no rotar credenciales ni restaurar/borrar d
 Compose combinado validado con `.env.example` y secretos ficticios (symlink temporal retirado), sin iniciar servicios. YAML revisado: nueve pasos, permisos contents:read y acciones fijadas por SHA; JSON y `git diff --check` válidos. Implementación y revisiones: commit `0ae8188`. Evidencia unitaria versionada: `PHASE_6_BACKEND_TESTS.xml` y `PHASE_6_ANDROID_TESTS.json`.
 
 Actualización posterior: [resolución de bloqueos](PHASE_6_BLOCKER_RESOLUTION.md), restore entre clústeres e importación offline Grype preparada; aceptación global sigue NO_GO.
+
+Actualización tras publicar entorno: [validación real y hallazgos nativos](PHASE_6_PUBLISHED_VALIDATION.md). Conectividad y secretos disponibles; Supabase solo lectura HTTP200, CI remoto ejecutado. Scan nativo FINDINGS (200 matches); NO_GO continúa.

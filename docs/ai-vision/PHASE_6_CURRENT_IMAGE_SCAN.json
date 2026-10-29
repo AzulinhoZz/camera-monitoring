@@ -1,0 +1,7 @@
+{
+  "inventory": "PASS",
+  "vulnerability_scan": "FINDINGS",
+  "accepted": false,
+  "limits": "A scanner failure, missing DB or finding is never converted into clean acceptance.",
+  "findings": 200
+}
