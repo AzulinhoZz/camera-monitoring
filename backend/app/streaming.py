@@ -6,6 +6,7 @@ from datetime import datetime, timedelta, timezone
 import jwt
 
 STREAM_TTL_SECONDS = 60
+MAX_STREAM_TOKEN_LENGTH = 8192
 
 
 def stream_path(camera_id):
@@ -34,6 +35,8 @@ def issue_stream(user_id, camera):
 
 
 def verify_stream(token, path):
+    if not isinstance(token,(str,bytes)) or not 0<len(token)<=MAX_STREAM_TOKEN_LENGTH:
+        raise ValueError("invalid stream token size")
     claims = jwt.decode(token, signing_key(), algorithms=["HS256"], audience="camera-stream",
                         issuer="camera-monitoring", options={"require": ["exp", "iat", "sub", "camera_id", "path", "owner_id"]})
     if "organization_id" not in claims:

@@ -208,3 +208,7 @@ Restore entre clústeres independientes y roles añadido; importación offline c
 ## T. Refuerzo de controles de fase6 (2026-10-28)
 
 [Entrega](PHASE_6_REINFORCEMENT.md):206 backend PASS, Docker smoke/noexec/caps0/NoNewPrivs1 PASS, gateway rootless/HLS autenticado y RTSP interrupción/recuperación PASS, Compose válido. Gate exige recibo reciente limpio ligado a imagen/archive; scanner no hereda secretos ni filtros, usa config explícito y DB verificada. CI remoto ejecutado: funcional PASS y nativo FINDINGS200, no aprobación. Ninguna nueva función/migración ni datos reales.
+
+## U. Fase7 autorizada — remediación y validación de release (2026-10-28)
+
+El usuario autoriza la fase posterior propuesta; extensión del plan original. [Plan y primer incremento](PHASE_7_RELEASE_REMEDIATION.md): R1 corrige alias Base64 del cursor y acota entrada al JWT sin duplicar canonicalización que PyJWT2.15.1 ya protege.220 backend PASS, sin dependencias/migraciones/Android ni producción. R2 nativos, R3 staging, R4 dispositivo/calidad/carga y R5 operación siguen pendientes. Fase7 iniciada, no completada; NO_GO vigente, sin cambiar los criterios de fase6.

@@ -3,6 +3,7 @@ import base64
 from collections import Counter
 from datetime import datetime, timezone
 import json
+import re
 from uuid import UUID
 
 from fastapi import HTTPException
@@ -22,9 +23,12 @@ def encode_cursor(record):
 
 def decode_cursor(value):
     try:
-        if len(value) > 512:
+        if not isinstance(value,str) or not 0<len(value)<=512 or not re.fullmatch(r'[A-Za-z0-9_-]+={0,2}',value):
             raise ValueError('cursor size')
-        payload = json.loads(base64.b64decode(value, altchars=b'-_', validate=True))
+        decoded=base64.b64decode(value, altchars=b'-_', validate=True)
+        if base64.urlsafe_b64encode(decoded).decode('ascii')!=value:
+            raise ValueError('noncanonical cursor')
+        payload = json.loads(decoded)
         if set(payload) != {'time', 'id'} or not isinstance(payload['time'], str):
             raise ValueError('cursor fields')
         return utc(datetime.fromisoformat(payload['time'].replace('Z', '+00:00'))).isoformat(), str(UUID(payload['id']))

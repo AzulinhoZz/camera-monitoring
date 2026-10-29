@@ -1,0 +1,41 @@
+# Fase 7 autorizada — remediación y validación de release
+
+2026-10-28, America/Mexico_City. Extensión autorizada por el usuario después de la fase6; el plan maestro original no incluía esta fase. **Iniciada, no completada. Aceptación productiva NO_GO.** No se modifican los criterios originales ni se aprueban excepciones por empezar una fase nueva.
+
+## Inventario y alcance
+
+Existe: API/app/visión, RLS y permisos, evidencias/retención, locks/SBOM, CI remoto, gate estricto con recibos y sandbox reforzado. Parcial: mitigación de exposición a fallos nativos y pruebas administradas. Falta: resolución de200 matches (77 High), staging confirmado, dispositivo, dataset/hardware, recuperación operativa y evidencia faltante de derechos/modelos. Dos bases oficiales alternativas ya probadas no reducen hallazgos. Se conservan candidata e informes históricos de fase6.
+
+Orden de trabajo: corregir entradas explotables/controlables en aplicación; verificar correcciones nativas compatibles; validar staging y dispositivo/calidad/carga; completar operación y repetir gates. Sin nuevas funcionalidades de producto, servicios de pago, producción, merge ni cambios a main.
+
+## Backlog verificable
+
+| Historia | Trabajo | Criterio de aceptación |
+| --- | --- | --- |
+| R1 — Base64/cursor y límite JWT | Confirmar call paths y formatos ambiguos; corregir parsers propios y limitar entrada antes de crypto | Cursores emitidos conservan roundtrip/paginación/ACL; aliases/padding no canónico rechazados422; tokens normales/expiración/revocación preservados; token excesivo no llega al decoder |
+| R2 — componentes nativos | Contrastar source/version/advisory, evaluar distribución/build compatible con hashes/licencias/toolchain revisados | Bibliotecas realmente corregidas y SBOM/scan ligados a nueva candidata; no cambiar .so a mano ni ocultar coincidencias |
+| R3 — integración administrada | Staging explícitamente identificado/autorizado, Auth/Storage/PostgREST y drift | Fixtures sintéticos acotados por organización, negativos/expiración/revocación/cleanup propio; sin tocar datos anteriores |
+| R4 — dispositivo y calidad/capacidad | Android real/runner, vídeos autorizados/anotados y hardware destino | UI/permisos/TTL/red, métricas por escenario y soak; no inferir exactitud de geometría sintética |
+| R5 — recuperación/aceptación | Custodia de claves, Storage+DB, RPO/RTO y documentos de modelos/datasets | Restore aislado medido, permisos/media/protección iguales, CI verde y aprobación explícita tras gates |
+
+## R1 — primer incremento
+
+Antes de editar se verificó el código real: `event_timeline.decode_cursor` llama base64.b64decode con altchars y validate=True; aun así acepta bits de padding no canónicos. Reproducción local con cursor sintético: alias y original decodifican a los mismos bytes y ambos se aceptaban. Los valores después se normalizan UTC/UUID y el scope de cámara se filtra por solicitud; se corrige ambigüedad de representación, sin atribuir una escalación de permisos demostrada.
+
+Se comprobó también `jwt.api_jws._decode_base64url_segment` de PyJWT2.15.1 instalado: ya restringe el alfabeto y compara la recodificación. La reproducción con firma de padding alterada fue rechazada con DecodeError. No se inventa un fallo adicional ni se copia el verificador JWT: se conserva PyJWT y se añade únicamente un límite de8192 caracteres/bytes antes de invocarlo.
+
+Cambios:
+
+- `backend/app/event_timeline.py`: formato URL-safe explícito, entrada string no vacía de hasta512 caracteres y roundtrip canónico antes de JSON. No cambia el formato de encode_cursor ni los filtros/permisos.
+- `backend/app/streaming.py`: rechazo de token vacío/excesivo o tipo distinto de str/bytes antes de signing_key/jwt.decode. Los tokens que emite el servicio siguen funcionando; el límite no sustituye límites de body/header del servidor.
+- `backend/app/tests/test_release_remediation.py`: alias de padding con bytes equivalentes, entradas mal formadas/alfabeto/tipos, token excesivo antes del decoder y protección de canonicalización ya existente en PyJWT.
+
+Sin dependencias, modelos, migraciones, contratos de DB, cambios Android ni activación de alertas. Riesgo de compatibilidad: clientes que fabriquen cursores no canónicos reciben422; el cursor del servidor sigue siendo opaco y canónico. Tokens emitidos propios son muy inferiores al límite; no se cambia el validador de tokens Supabase externos.
+
+Verificación inicial: `SUPABASE_URL= SUPABASE_SECRET_KEY= FIREBASE_CREDENTIALS_PATH= GOOGLE_APPLICATION_CREDENTIALS= OMP_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1 .venv/bin/python -m pytest -q backend --junitxml=/tmp/camera-phase7-tests.xml`: **220 PASS**, cinco warnings,15.69s. Build/smoke/scan de nueva candidata y CI remoto se registran al terminar, no se presumen aprobados.
+
+## Seguridad y operación
+
+R1 mitiga entradas de aplicación relacionadas con avisos de Base64 de Python (CVE-2025-12781/CVE-2026-3446); no parchea CPython ni elimina matches del scanner. FFmpeg/Debian y el resto de avisos siguen requiriendo remediación. La API/worker mantienen sandbox, autorización vigente y privacidad. Para rollback de este incremento revertir sus cambios de código conservando DB/media; no ejecutar down ni borrar evidencias. Un rollback reintroduciría aceptación de alias de cursor y quitaría el límite JWT, y debe evaluarse por ese efecto.
+
+Las escrituras en Supabase siguen pendientes de confirmar un staging aislado. Configurar una clave o autorizar esta fase no identifica ese proyecto como staging. Dispositivo/dataset/hardware y acuerdos operativos continúan pendientes; no se marcan PASS por pruebas sintéticas.
