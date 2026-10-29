@@ -1,0 +1,18 @@
+{
+  "generated_at": "2026-10-29T05:13:31.925708+00:00",
+  "status": "PASS_MAVEN_SNAPSHOT",
+  "accepted": true,
+  "deploy_authorized": false,
+  "scope": "Maven advisory matches from resolved graph; .so version/native analysis and device behavior not certified",
+  "apk_sha256": "98b4a0ca676feb3f5ee75d003414cbcc49d26cd609764193824416f88c8f8746",
+  "sbom_sha256": "b2c571643abed4014e6bdd620f7d8fb52c38392284eba101b5eaf4283d9e80ff",
+  "inventory_sha256": "a125daf5b2bea239122730a5a442e6422b0f7877be851b1b96257ff80a8c7247",
+  "findings": 0,
+  "database": {
+    "schemaVersion": "v6.1.10",
+    "from": "https://grype.anchore.io/databases/v6/vulnerability-db_v6.1.10_2026-10-28T00:24:28Z_1793168610.tar.zst?checksum=sha256%3Ab08902b91738f1a9bc7fd61942f331d8e5e76a5df0c0b5f8c17c18bd787ee278",
+    "built": "2026-10-28T06:23:30Z",
+    "path": "/home/runner/work/_temp/android-scan-cache/grype-db/6/vulnerability.db",
+    "valid": true
+  }
+}

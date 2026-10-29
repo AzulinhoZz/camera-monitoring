@@ -1,0 +1,17 @@
+{
+  "generated_at": "2026-10-29T05:10:24.352241+00:00",
+  "inventory": "PASS",
+  "vulnerability_scan": "FINDINGS",
+  "accepted": false,
+  "limits": "Unsigned local receipt; full archive hash and config identity bind the input, not approval. Failures and findings never become clean acceptance.",
+  "image_id": "sha256:0d474e82b11552f6c143562cfc1539b97bd19a5fa2cc3f71a40c0294de3d0d4b",
+  "archive_sha256": "7dc7bbc70778633474c8c168147404d8495b7ec24bbb06390bb242408ba84ed0",
+  "findings": 200,
+  "database": {
+    "schemaVersion": "v6.1.10",
+    "from": "https://grype.anchore.io/databases/v6/vulnerability-db_v6.1.10_2026-10-28T00:24:28Z_1793168610.tar.zst?checksum=sha256%3Ab08902b91738f1a9bc7fd61942f331d8e5e76a5df0c0b5f8c17c18bd787ee278",
+    "built": "2026-10-28T06:23:30Z",
+    "path": "/home/runner/work/_temp/vision-scan-cache/grype-db/6/vulnerability.db",
+    "valid": true
+  }
+}

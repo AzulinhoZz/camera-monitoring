@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.cameramonitoring.app.EventTimelineContractTest" tests="2" skipped="0" failures="0" errors="0" timestamp="2026-10-29T04:50:40.916Z" hostname="e7cece4d667c" time="0.219">
+  <properties/>
+  <testcase name="legacyHistoryStillDecodesWithoutPagination" classname="com.cameramonitoring.app.EventTimelineContractTest" time="0.024"/>
+  <testcase name="filtersAndOpaqueCursorAreEncodedAsQueryParameters" classname="com.cameramonitoring.app.EventTimelineContractTest" time="0.192"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

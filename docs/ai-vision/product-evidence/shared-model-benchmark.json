@@ -1,0 +1,242 @@
+{
+  "workload": "synthetic geometric frames 160x120, ONNX input 640x640",
+  "model_version": "opencv-zoo:yolox_s:2022nov:c5c2d13e",
+  "threads": 1,
+  "rss_budget_mib": 1024,
+  "configured_inference_fps": 3.0,
+  "results": [
+    {
+      "cameras": 1,
+      "status": "completed",
+      "wall_seconds": 6.162411139999676,
+      "parent_cpu_seconds": 4.573013106,
+      "peak_summed_rss_mib": 258.3046875,
+      "inference_frames": [
+        18
+      ],
+      "inference_fps_per_camera": [
+        2.9209346132658305
+      ],
+      "inference": [
+        {
+          "model_version": "opencv-zoo:yolox_s:2022nov:c5c2d13e",
+          "processed_frames": 18,
+          "latency_ms": {
+            "samples": 18,
+            "p50": 250.21491899997272,
+            "p95": 255.73350400009076
+          },
+          "counts": {
+            "visible_by_class": {},
+            "tracklets_created_by_class": {},
+            "active_tracklets": 0
+          }
+        }
+      ],
+      "capture": [
+        {
+          "connection_attempts": 1,
+          "capture_dropped": 0,
+          "frames_received": 60,
+          "recording_sampled": 30,
+          "inference_sampled": 18,
+          "recording_consumed": 30,
+          "inference_consumed": 18,
+          "decoder_exits": 1
+        }
+      ]
+    },
+    {
+      "cameras": 2,
+      "status": "completed",
+      "wall_seconds": 6.196368551999967,
+      "parent_cpu_seconds": 5.887934949000001,
+      "peak_summed_rss_mib": 328.625,
+      "inference_frames": [
+        12,
+        12
+      ],
+      "inference_fps_per_camera": [
+        1.9366181819715722,
+        1.9366181819715722
+      ],
+      "inference": [
+        {
+          "model_version": "opencv-zoo:yolox_s:2022nov:c5c2d13e",
+          "processed_frames": 12,
+          "latency_ms": {
+            "samples": 12,
+            "p50": 242.83680700000332,
+            "p95": 249.31710600003498
+          },
+          "counts": {
+            "visible_by_class": {},
+            "tracklets_created_by_class": {},
+            "active_tracklets": 0
+          }
+        },
+        {
+          "model_version": "opencv-zoo:yolox_s:2022nov:c5c2d13e",
+          "processed_frames": 12,
+          "latency_ms": {
+            "samples": 12,
+            "p50": 242.4528569999893,
+            "p95": 243.9213790003123
+          },
+          "counts": {
+            "visible_by_class": {},
+            "tracklets_created_by_class": {},
+            "active_tracklets": 0
+          }
+        }
+      ],
+      "capture": [
+        {
+          "connection_attempts": 1,
+          "capture_dropped": 0,
+          "frames_received": 61,
+          "recording_sampled": 31,
+          "inference_sampled": 19,
+          "recording_consumed": 30,
+          "inference_consumed": 12,
+          "inference_dropped": 5,
+          "decoder_exits": 1
+        },
+        {
+          "connection_attempts": 1,
+          "capture_dropped": 0,
+          "frames_received": 61,
+          "recording_sampled": 30,
+          "inference_sampled": 18,
+          "recording_consumed": 30,
+          "inference_consumed": 12,
+          "inference_dropped": 4,
+          "decoder_exits": 1
+        }
+      ]
+    },
+    {
+      "cameras": 4,
+      "status": "completed",
+      "wall_seconds": 6.234591006999835,
+      "parent_cpu_seconds": 5.940075456999999,
+      "peak_summed_rss_mib": 470.59375,
+      "inference_frames": [
+        6,
+        6,
+        6,
+        6
+      ],
+      "inference_fps_per_camera": [
+        0.9623726710001586,
+        0.9623726710001586,
+        0.9623726710001586,
+        0.9623726710001586
+      ],
+      "inference": [
+        {
+          "model_version": "opencv-zoo:yolox_s:2022nov:c5c2d13e",
+          "processed_frames": 6,
+          "latency_ms": {
+            "samples": 6,
+            "p50": 243.0618289999984,
+            "p95": 247.1898170001623
+          },
+          "counts": {
+            "visible_by_class": {},
+            "tracklets_created_by_class": {},
+            "active_tracklets": 0
+          }
+        },
+        {
+          "model_version": "opencv-zoo:yolox_s:2022nov:c5c2d13e",
+          "processed_frames": 6,
+          "latency_ms": {
+            "samples": 6,
+            "p50": 243.5570889997507,
+            "p95": 248.46204300001773
+          },
+          "counts": {
+            "visible_by_class": {},
+            "tracklets_created_by_class": {},
+            "active_tracklets": 0
+          }
+        },
+        {
+          "model_version": "opencv-zoo:yolox_s:2022nov:c5c2d13e",
+          "processed_frames": 6,
+          "latency_ms": {
+            "samples": 6,
+            "p50": 241.95692200009944,
+            "p95": 247.13565699994433
+          },
+          "counts": {
+            "visible_by_class": {},
+            "tracklets_created_by_class": {},
+            "active_tracklets": 0
+          }
+        },
+        {
+          "model_version": "opencv-zoo:yolox_s:2022nov:c5c2d13e",
+          "processed_frames": 6,
+          "latency_ms": {
+            "samples": 6,
+            "p50": 243.01041699982306,
+            "p95": 247.87093299983098
+          },
+          "counts": {
+            "visible_by_class": {},
+            "tracklets_created_by_class": {},
+            "active_tracklets": 0
+          }
+        }
+      ],
+      "capture": [
+        {
+          "connection_attempts": 1,
+          "capture_dropped": 0,
+          "frames_received": 61,
+          "recording_sampled": 31,
+          "inference_sampled": 19,
+          "recording_consumed": 30,
+          "inference_consumed": 6,
+          "inference_dropped": 11,
+          "decoder_exits": 1
+        },
+        {
+          "connection_attempts": 1,
+          "capture_dropped": 0,
+          "frames_received": 61,
+          "recording_sampled": 30,
+          "inference_sampled": 18,
+          "recording_consumed": 30,
+          "inference_consumed": 6,
+          "inference_dropped": 10,
+          "decoder_exits": 1
+        },
+        {
+          "connection_attempts": 1,
+          "capture_dropped": 0,
+          "frames_received": 61,
+          "recording_sampled": 31,
+          "inference_sampled": 19,
+          "recording_consumed": 30,
+          "inference_consumed": 6,
+          "inference_dropped": 11,
+          "decoder_exits": 1
+        },
+        {
+          "connection_attempts": 1,
+          "capture_dropped": 0,
+          "frames_received": 61,
+          "recording_sampled": 31,
+          "inference_sampled": 19,
+          "recording_consumed": 30,
+          "inference_dropped": 11,
+          "inference_consumed": 6,
+          "decoder_exits": 1
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,64 @@
+{
+  "source_commit": "baa428fa823ab3c08737c6bc9aa738842ccf371e",
+  "command": "python /workspace/.camera-tools/android/build_project.py :app:testDebugUnitTest :app:assembleDebug",
+  "build_result": "PASS",
+  "test_suites": [
+    {
+      "name": "com.cameramonitoring.app.EventTimelineContractTest",
+      "tests": "2",
+      "failures": "0",
+      "errors": "0",
+      "skipped": "0",
+      "time": "0.219"
+    },
+    {
+      "name": "com.cameramonitoring.app.ExampleUnitTest",
+      "tests": "1",
+      "failures": "0",
+      "errors": "0",
+      "skipped": "0",
+      "time": "0.001"
+    },
+    {
+      "name": "com.cameramonitoring.app.ProductReadinessContractTest",
+      "tests": "7",
+      "failures": "0",
+      "errors": "0",
+      "skipped": "0",
+      "time": "1.222"
+    },
+    {
+      "name": "com.cameramonitoring.app.TokenAuthenticatorTest",
+      "tests": "5",
+      "failures": "0",
+      "errors": "0",
+      "skipped": "0",
+      "time": "0.026"
+    },
+    {
+      "name": "com.cameramonitoring.app.VisionDashboardContractTest",
+      "tests": "2",
+      "failures": "0",
+      "errors": "0",
+      "skipped": "0",
+      "time": "0.002"
+    },
+    {
+      "name": "com.cameramonitoring.app.VisionRulesContractTest",
+      "tests": "2",
+      "failures": "0",
+      "errors": "0",
+      "skipped": "0",
+      "time": "0.006"
+    }
+  ],
+  "total_tests": 19,
+  "failures": 0,
+  "apk_sha256": "5ee1a36634234d3bd493a5d7a96f77dd9472927b7ede032bf0d38cdff3dd4386",
+  "apk_bytes": 27427529,
+  "artifact_path": "/workspace/.camera-tools/product/CameraMonitoring-debug-5ee1a366.apk",
+  "versioned_android_source_copy_matches": true,
+  "versioned_android_source_set_sha256": "93e8e8587d365b3e06f36933df4f9c007a50ff109a336e3dfcfb70ad2243ce4e",
+  "runtime": "JDK 25 / Gradle 9.6 / SDK 35 / build-tools 36",
+  "limits": "Debug artifact, emulator-local default API; no release signing or physical device acceptance."
+}

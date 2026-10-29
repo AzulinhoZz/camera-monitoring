@@ -1,0 +1,26 @@
+{
+  "result": "PASS",
+  "scope": "generated data; roles and database restored in independent disposable cluster; local storage directories, not managed Storage",
+  "independent_cluster": true,
+  "globals_restored": true,
+  "role_attributes_equal": true,
+  "database_rows_policies_grants_equal": true,
+  "indexes_equal": true,
+  "protected_reviewed_media_preserved": true,
+  "restored_jpeg_readable": true,
+  "restored_mp4_frames": 10,
+  "owner_read_allowed_stranger_denied": true,
+  "tamper_rejected": true,
+  "encrypted_backup_sha256": "c25e61121ca72017245e262224a4d7627db4d50177a657d9801d2b6883b6bf91",
+  "files_sha256": {
+    "db/database.dump": "f339968aeaa93021b0946a228771c2cb2a4121f770265d51d05b0b9050c28e0c",
+    "db/globals.sql": "6582dde46858d43a1fa0a57f372ec8e86c6b51876f97a82b779441ebf2dcff6d",
+    "storage/motion-evidence/f7210242-a53d-495b-a7d7-26f0e0313ca1/c1000000-0000-0000-0000-000000000001/22ac15df-0a56-4c09-8ecc-c6c9e0f8a6df.jpg": "f994a4764e6922378d1086f60c37e7caa38b422f3285c260d2713629bf04862d",
+    "storage/motion-clips/f7210242-a53d-495b-a7d7-26f0e0313ca1/c1000000-0000-0000-0000-000000000001/22ac15df-0a56-4c09-8ecc-c6c9e0f8a6df.mp4": "bd2c2178c2b6fb3b53a6dcd9e0db1c2410275858de5f29d510934c3a35e74c36"
+  },
+  "elapsed_seconds": 4.3064398229998915,
+  "key_persisted": true,
+  "separate_restore_process": true,
+  "key_permissions": "0600; parent 0700",
+  "limits": "Globals replayed in independent cluster (bootstrap postgres CREATE excluded). Durable fixture key survives in a private local directory; no managed escrow, rotation, Storage or RPO/RTO acceptance."
+}

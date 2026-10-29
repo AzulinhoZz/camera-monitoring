@@ -53,3 +53,7 @@ Escaneo con DB válida y recibo ligado a esta candidata: FINDINGS200 (77 High), 
 ## CI remoto del incremento
 
 [Workflow40810141627](https://github.com/AzulinhoZz/camera-monitoring/actions/runs/40810141627), commit `07ab983f8e960522ee6766c0a72b5c03c3ed959b`:220 backend PASS, build/smoke e integración SQL/RLS/rollback/restore PASS; seguridad FINDINGS200, workflow FAILURE. [Recibo](PHASE_7_REMOTE_CI.json). Se conserva el fallo de seguridad; R1 no implica aceptación global ni cierre de R2.
+
+## R6 — incremento de producto autorizado
+
+La petición de implementar las recomendaciones añade revisión/priorización/búsqueda móvil, seguridad Android (incluido Guava High corregido), herramientas offline de calidad y recuperación y medición fleet. [Entrega verificable](PHASE_7_PRODUCT_DELIVERY.md), [operación](PRODUCT_OPERATIONS.md), [aceptación pendiente](PRODUCT_VALIDATION_MATRIX.md). Nuevos recibos en `product-evidence/` y `PRODUCT_ACCEPTANCE_MANIFEST.json`; no reemplazan la identidad de los artefactos históricos anteriores. Se conserva NO_GO por native200 y gates externos.

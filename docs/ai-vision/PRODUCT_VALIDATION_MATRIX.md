@@ -1,0 +1,20 @@
+# Aceptación externa pendiente
+
+Estado al entregar el incremento: **NO EJECUTADA** para todas las filas siguientes. No equivale a fallo reproducido: faltan entorno, dispositivo/dataset o acuerdo operativo. La compilación/pruebas unitarias, PostgreSQL desechable, benchmarks sintéticos y escáneres ya ejecutados se describen en [la entrega](PHASE_7_PRODUCT_DELIVERY.md).
+
+| Prueba | Preparación necesaria | Evidencia/criterio por registrar |
+| --- | --- | --- |
+| Android visual y accesibilidad | Teléfono o runner de instrumentación compatible, API staging autorizada, cuentas/fixtures propias | Tamaños de fuente/pantalla, rotación, TalkBack, selección de fecha/hora y chips; contenido/error y controles accesibles sin solapamientos. |
+| Navegación y ciclo de vida | Teléfono, varios historiales/streams, medición de red/player | Entrar/salir/background/resume: sin polling/reproducción fuera de pantalla, cancelación correcta, tokens renovados, sin resultados tardíos cruzados ni credenciales en logs. |
+| Evidencia y autorización vigente | Usuarios dueño/ajeno, revocación controlada, URL TTL corta en staging | Apertura permitida al dueño; denegación al ajeno/tras revocación, URL caducada falla; no fallback a URL vieja, reintento seguro y media sin exposición entre cuentas. |
+| Incidente completo y errores | Fixtures propias con clip/thumbnail/revisión/protección; red lenta/cortada | Razón, regla y horario correctos; vídeo pre/post disponible donde exista, spinner termina con error, retry funciona, revisión/protección fallidas conservan historial y valores anteriores. |
+| Contratos API/PostgREST | Staging identificado por operador; esquema revisado e índice012 autorizado | Historial/estadísticas coinciden para cámara/regla/ventana; clientes antiguos conservan contrato; backend antiguo produce error explícito al ignorar filtro; plan y latencia reales antes/después. |
+| Dashboard grande | >1000 pendientes, cámaras sin acceso, conteo exacto ausente en staging | Sin fuga por cámara; resumen incompleto se indica, desconocido no aparece como0, orden y acceso directo24h correctos. |
+| Calidad natural | Vídeos autorizados/anotados y salidas de inferencia enlazadas por SHA/configuración | Calibration/test independientes; precisión/recall y falsas alertas/hora, negativos y tamaños de muestra por día/noche/lluvia/mascotas/sombras/oclusiones. Acordar objetivos por regla antes de evaluar test. |
+| RTSP/substream y carga sostenida | Hardware objetivo y cámaras autorizadas,1/2/4 o concurrencia real | FPS/latencia/CPU/RAM/reconexiones/colas/almacenamiento con grabación y evidencia; substream usado donde configurado, original conservado para evidencia, recuperación de red/cámara/modelo. |
+| Recuperación administrada | Exports consistentes DB+Storage de staging, claves bajo custodia aprobada | Restore aislado, permisos/RLS/grants/índices/objetos/hashes/protección iguales; recuperar clave desde custodia, documentar rotación y medir RPO/RTO acordados. |
+| TLS y APK release | Backend HTTPS autorizado, firma/keystore gestionado fuera del repo | Endpoint/cadena/certificado válidos, cleartext denegado, build release sin logs sensibles, backup/transferencia de sesión denegados; pruebas reales de login/refresh/logout. |
+| Seguridad nativa | Fuentes/builds corregidos y revisados para Debian/FFmpeg/Python | Nueva imagen identificada, SBOM+DB reciente y gate sin findings pendientes; no ignorar matches ni reemplazar `.so` manualmente. Android nativo requiere análisis específico, no basta el gate Maven. |
+| Licencias y aprobación | Model cards/datasets/pesos y responsables operativos | Licencias/uso aprobados y operador revisa gates completos. No solicitar aprobación de producción mientras NO_GO. |
+
+Estas pruebas no se ejecutan automáticamente sobre el proyecto Supabase configurado: una clave presente no demuestra que sea staging. No habilitar alertas sensibles ni usar personas como material de prueba sin autorización aplicable. Los scripts locales no escriben en ese proyecto.

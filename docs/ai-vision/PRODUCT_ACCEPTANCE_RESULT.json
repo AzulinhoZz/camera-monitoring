@@ -1,0 +1,1 @@
+{"decision": "NO_GO", "unresolved": ["android_device", "backup_operations", "image_vulnerability_scan", "licenses", "managed_staging", "operator_approval", "remote_ci", "target_load_and_accuracy", "scan_receipt"], "deploy_authorized": false, "limits": "A locally edited manifest is not an approval or signature. No deployment is performed."}

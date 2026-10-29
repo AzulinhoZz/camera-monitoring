@@ -1,4 +1,4 @@
-# Camera Monitoring MVP — Starter
+# Camera Monitoring AI 2.0 — Development candidate
 
 FastAPI + Supabase + MediaMTX for local development on macOS.
 
@@ -24,3 +24,9 @@ Phase 6 hardening is in progress: see the [initial hardening report](docs/ai-vis
 The release candidate, image archive/SBOM and acceptance verdict are described in [phase 6 delivery](docs/ai-vision/PHASE_6_DELIVERY_AND_ACCEPTANCE.md). A successful build is not production approval; the readiness command returns NO_GO for unresolved gates.
 
 The authorized follow-up [release remediation phase](docs/ai-vision/PHASE_7_RELEASE_REMEDIATION.md) begins with canonical cursor validation and bounded stream-token parsing. Production remains NO_GO until the native findings and external acceptance gates are resolved.
+
+## Product improvements and current acceptance
+
+The [product delivery report](docs/ai-vision/PHASE_7_PRODUCT_DELIVERY.md) records pending-first camera navigation, rule/date/time incident search, safer evidence loading, Android transport hardening, the Guava advisory fix, offline alert scoring, encrypted backup/restore and measured isolated camera capacity. See the [operations guide](docs/ai-vision/PRODUCT_OPERATIONS.md) for reproducible commands and the [external validation matrix](docs/ai-vision/PRODUCT_VALIDATION_MATRIX.md) for device/staging/dataset acceptance still pending.
+
+**Production remains NO_GO:** the backend image scan still reports 200 matches; Android Maven scan is clean for its advisory snapshot only. No deployment or managed-project migration is included.

@@ -1,0 +1,4499 @@
+{
+  "bomFormat": "CycloneDX",
+  "specVersion": "1.6",
+  "version": 1,
+  "components": [
+    {
+      "type": "library",
+      "bom-ref": "pkg:maven/androidx.activity/activity-compose@1.9.1?artifact_sha256=9406657a7540436dfd950533f10dc1c4641f7f48dba4f8d5ad67fa9891fe2eb4",
+      "group": "androidx.activity",
+      "name": "activity-compose",
+      "version": "1.9.1",
+      "purl": "pkg:maven/androidx.activity/activity-compose@1.9.1",
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "9406657a7540436dfd950533f10dc1c4641f7f48dba4f8d5ad67fa9891fe2eb4"
+        }
+      ],
+      "properties": [
+        {
+          "name": "artifact:filename",
+          "value": "activity-compose-1.9.1.aar"
+        },
+        {
+          "name": "gradle:configurations",
+          "value": "debugRuntimeClasspath,releaseRuntimeClasspath"
+        }
+      ],
+      "licenses": [
+        {
+          "license": {
+            "name": "The Apache Software License, Version 2.0"
+          }
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:maven/androidx.activity/activity-ktx@1.9.1?artifact_sha256=9de8f7238206325cfd195c0f8667087646c7057c923a3ff156602da2568d553f",
+      "group": "androidx.activity",
+      "name": "activity-ktx",
+      "version": "1.9.1",
+      "purl": "pkg:maven/androidx.activity/activity-ktx@1.9.1",
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "9de8f7238206325cfd195c0f8667087646c7057c923a3ff156602da2568d553f"
+        }
+      ],
+      "properties": [
+        {
+          "name": "artifact:filename",
+          "value": "activity-ktx-1.9.1.aar"
+        },
+        {
+          "name": "gradle:configurations",
+          "value": "debugRuntimeClasspath,releaseRuntimeClasspath"
+        }
+      ],
+      "licenses": [
+        {
+          "license": {
+            "name": "The Apache Software License, Version 2.0"
+          }
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:maven/androidx.activity/activity@1.9.1?artifact_sha256=39530cfc0b8ff3a593b6c94b42b12780bbae2a8f5ac70e7698c43734861de7f5",
+      "group": "androidx.activity",
+      "name": "activity",
+      "version": "1.9.1",
+      "purl": "pkg:maven/androidx.activity/activity@1.9.1",
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "39530cfc0b8ff3a593b6c94b42b12780bbae2a8f5ac70e7698c43734861de7f5"
+        }
+      ],
+      "properties": [
+        {
+          "name": "artifact:filename",
+          "value": "activity-1.9.1.aar"
+        },
+        {
+          "name": "gradle:configurations",
+          "value": "debugRuntimeClasspath,releaseRuntimeClasspath"
+        }
+      ],
+      "licenses": [
+        {
+          "license": {
+            "name": "The Apache Software License, Version 2.0"
+          }
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:maven/androidx.annotation/annotation-experimental@1.4.1?artifact_sha256=6bd4c7c7476f8260cd3bdbb81183583e93fc9f790c27dea7dc314181cbf87aa0",
+      "group": "androidx.annotation",
+      "name": "annotation-experimental",
+      "version": "1.4.1",
+      "purl": "pkg:maven/androidx.annotation/annotation-experimental@1.4.1",
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "6bd4c7c7476f8260cd3bdbb81183583e93fc9f790c27dea7dc314181cbf87aa0"
+        }
+      ],
+      "properties": [
+        {
+          "name": "artifact:filename",
+          "value": "annotation-experimental-1.4.1.aar"
+        },
+        {
+          "name": "gradle:configurations",
+          "value": "debugRuntimeClasspath,releaseRuntimeClasspath"
+        }
+      ],
+      "licenses": [
+        {
+          "license": {
+            "name": "The Apache Software License, Version 2.0"
+          }
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:maven/androidx.annotation/annotation-jvm@1.9.1?artifact_sha256=1e343917ebf27ba96fe4dc52b1cad7fd32b738fbc6355bb6cd5b3b305d7212d0",
+      "group": "androidx.annotation",
+      "name": "annotation-jvm",
+      "version": "1.9.1",
+      "purl": "pkg:maven/androidx.annotation/annotation-jvm@1.9.1",
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "1e343917ebf27ba96fe4dc52b1cad7fd32b738fbc6355bb6cd5b3b305d7212d0"
+        }
+      ],
+      "properties": [
+        {
+          "name": "artifact:filename",
+          "value": "annotation-jvm-1.9.1.jar"
+        },
+        {
+          "name": "gradle:configurations",
+          "value": "debugRuntimeClasspath,releaseRuntimeClasspath"
+        }
+      ],
+      "licenses": [
+        {
+          "license": {
+            "name": "The Apache Software License, Version 2.0"
+          }
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:maven/androidx.appcompat/appcompat-resources@1.6.1?artifact_sha256=db915dbf49357863de1669ff9fdd8e9008d65fe357af6cce9ae63043ad5f6617",
+      "group": "androidx.appcompat",
+      "name": "appcompat-resources",
+      "version": "1.6.1",
+      "purl": "pkg:maven/androidx.appcompat/appcompat-resources@1.6.1",
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "db915dbf49357863de1669ff9fdd8e9008d65fe357af6cce9ae63043ad5f6617"
+        }
+      ],
+      "properties": [
+        {
+          "name": "artifact:filename",
+          "value": "appcompat-resources-1.6.1.aar"
+        },
+        {
+          "name": "gradle:configurations",
+          "value": "debugRuntimeClasspath,releaseRuntimeClasspath"
+        }
+      ],
+      "licenses": [
+        {
+          "license": {
+            "name": "The Apache Software License, Version 2.0"
+          }
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:maven/androidx.arch.core/core-common@2.2.0?artifact_sha256=65308a06b1c00ee186cb9e19321383f043b993813f1522c47f4a3e3303bdba41",
+      "group": "androidx.arch.core",
+      "name": "core-common",
+      "version": "2.2.0",
+      "purl": "pkg:maven/androidx.arch.core/core-common@2.2.0",
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "65308a06b1c00ee186cb9e19321383f043b993813f1522c47f4a3e3303bdba41"
+        }
+      ],
+      "properties": [
+        {
+          "name": "artifact:filename",
+          "value": "core-common-2.2.0.jar"
+        },
+        {
+          "name": "gradle:configurations",
+          "value": "debugRuntimeClasspath,releaseRuntimeClasspath"
+        }
+      ],
+      "licenses": [
+        {
+          "license": {
+            "name": "The Apache Software License, Version 2.0"
+          }
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:maven/androidx.arch.core/core-runtime@2.2.0?artifact_sha256=a1be5e0caa2b07623862af6ae21b3ab0718123245184d0e30dea81b53f990a47",
+      "group": "androidx.arch.core",
+      "name": "core-runtime",
+      "version": "2.2.0",
+      "purl": "pkg:maven/androidx.arch.core/core-runtime@2.2.0",
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "a1be5e0caa2b07623862af6ae21b3ab0718123245184d0e30dea81b53f990a47"
+        }
+      ],
+      "properties": [
+        {
+          "name": "artifact:filename",
+          "value": "core-runtime-2.2.0.aar"
+        },
+        {
+          "name": "gradle:configurations",
+          "value": "debugRuntimeClasspath,releaseRuntimeClasspath"
+        }
+      ],
+      "licenses": [
+        {
+          "license": {
+            "name": "The Apache Software License, Version 2.0"
+          }
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:maven/androidx.autofill/autofill@1.0.0?artifact_sha256=c9468f56e05006ea151a426c54957cd0799b8b83a579d2846dd22061f33e5ecd",
+      "group": "androidx.autofill",
+      "name": "autofill",
+      "version": "1.0.0",
+      "purl": "pkg:maven/androidx.autofill/autofill@1.0.0",
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "c9468f56e05006ea151a426c54957cd0799b8b83a579d2846dd22061f33e5ecd"
+        }
+      ],
+      "properties": [
+        {
+          "name": "artifact:filename",
+          "value": "autofill-1.0.0.aar"
+        },
+        {
+          "name": "gradle:configurations",
+          "value": "debugRuntimeClasspath,releaseRuntimeClasspath"
+        }
+      ],
+      "licenses": [
+        {
+          "license": {
+            "name": "The Apache Software License, Version 2.0"
+          }
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:maven/androidx.collection/collection-jvm@1.5.0?artifact_sha256=70b35924e4babcdffa37d0e575ee039c56a2d97123342624c48b603233704341",
+      "group": "androidx.collection",
+      "name": "collection-jvm",
+      "version": "1.5.0",
+      "purl": "pkg:maven/androidx.collection/collection-jvm@1.5.0",
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "70b35924e4babcdffa37d0e575ee039c56a2d97123342624c48b603233704341"
+        }
+      ],
+      "properties": [
+        {
+          "name": "artifact:filename",
+          "value": "collection-jvm-1.5.0.jar"
+        },
+        {
+          "name": "gradle:configurations",
+          "value": "debugRuntimeClasspath,releaseRuntimeClasspath"
+        }
+      ],
+      "licenses": [
+        {
+          "license": {
+            "name": "The Apache Software License, Version 2.0"
+          }
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:maven/androidx.collection/collection-ktx@1.5.0?artifact_sha256=939b4a8697640e77d83e4e8b4c4a9d18f8130198c5961194af8dd9db9dc7c353",
+      "group": "androidx.collection",
+      "name": "collection-ktx",
+      "version": "1.5.0",
+      "purl": "pkg:maven/androidx.collection/collection-ktx@1.5.0",
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "939b4a8697640e77d83e4e8b4c4a9d18f8130198c5961194af8dd9db9dc7c353"
+        }
+      ],
+      "properties": [
+        {
+          "name": "artifact:filename",
+          "value": "collection-ktx-1.5.0.jar"
+        },
+        {
+          "name": "gradle:configurations",
+          "value": "debugRuntimeClasspath,releaseRuntimeClasspath"
+        }
+      ],
+      "licenses": [
+        {
+          "license": {
+            "name": "The Apache Software License, Version 2.0"
+          }
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:maven/androidx.compose.animation/animation-android@1.10.4?artifact_sha256=215da14c3e1ada35d4c71177dc6af1a2d50cc473ca4f126f152deae6cb0fc5b6",
+      "group": "androidx.compose.animation",
+      "name": "animation-android",
+      "version": "1.10.4",
+      "purl": "pkg:maven/androidx.compose.animation/animation-android@1.10.4",
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "215da14c3e1ada35d4c71177dc6af1a2d50cc473ca4f126f152deae6cb0fc5b6"
+        }
+      ],
+      "properties": [
+        {
+          "name": "artifact:filename",
+          "value": "animation.aar"
+        },
+        {
+          "name": "gradle:configurations",
+          "value": "debugRuntimeClasspath,releaseRuntimeClasspath"
+        }
+      ],
+      "licenses": [
+        {
+          "license": {
+            "name": "The Apache Software License, Version 2.0"
+          }
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:maven/androidx.compose.animation/animation-core-android@1.10.4?artifact_sha256=05ee8844cca8c8e77fe6a3809472326270a1247b48a4ced590635c928cf80a83",
+      "group": "androidx.compose.animation",
+      "name": "animation-core-android",
+      "version": "1.10.4",
+      "purl": "pkg:maven/androidx.compose.animation/animation-core-android@1.10.4",
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "05ee8844cca8c8e77fe6a3809472326270a1247b48a4ced590635c928cf80a83"
+        }
+      ],
+      "properties": [
+        {
+          "name": "artifact:filename",
+          "value": "animation-core.aar"
+        },
+        {
+          "name": "gradle:configurations",
+          "value": "debugRuntimeClasspath,releaseRuntimeClasspath"
+        }
+      ],
+      "licenses": [
+        {
+          "license": {
+            "name": "The Apache Software License, Version 2.0"
+          }
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:maven/androidx.compose.foundation/foundation-android@1.10.4?artifact_sha256=184c45ff50559af0b00abfd5b5c0224fd0cf25b55c6098a8874bf4b1fb5f9c33",
+      "group": "androidx.compose.foundation",
+      "name": "foundation-android",
+      "version": "1.10.4",
+      "purl": "pkg:maven/androidx.compose.foundation/foundation-android@1.10.4",
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "184c45ff50559af0b00abfd5b5c0224fd0cf25b55c6098a8874bf4b1fb5f9c33"
+        }
+      ],
+      "properties": [
+        {
+          "name": "artifact:filename",
+          "value": "foundation.aar"
+        },
+        {
+          "name": "gradle:configurations",
+          "value": "debugRuntimeClasspath,releaseRuntimeClasspath"
+        }
+      ],
+      "licenses": [
+        {
+          "license": {
+            "name": "The Apache Software License, Version 2.0"
+          }
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:maven/androidx.compose.foundation/foundation-layout-android@1.10.4?artifact_sha256=dbd371f7d041bfd89c55ce5a5dd6d7c60da9641009d2b3e794dd9b5e4f772881",
+      "group": "androidx.compose.foundation",
+      "name": "foundation-layout-android",
+      "version": "1.10.4",
+      "purl": "pkg:maven/androidx.compose.foundation/foundation-layout-android@1.10.4",
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "dbd371f7d041bfd89c55ce5a5dd6d7c60da9641009d2b3e794dd9b5e4f772881"
+        }
+      ],
+      "properties": [
+        {
+          "name": "artifact:filename",
+          "value": "foundation-layout.aar"
+        },
+        {
+          "name": "gradle:configurations",
+          "value": "debugRuntimeClasspath,releaseRuntimeClasspath"
+        }
+      ],
+      "licenses": [
+        {
+          "license": {
+            "name": "The Apache Software License, Version 2.0"
+          }
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:maven/androidx.compose.material3/material3-android@1.4.0?artifact_sha256=3a37e8b36df3822fe1e6059f0f9fafda8800388860477624ac1b9422c418a36e",
+      "group": "androidx.compose.material3",
+      "name": "material3-android",
+      "version": "1.4.0",
+      "purl": "pkg:maven/androidx.compose.material3/material3-android@1.4.0",
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "3a37e8b36df3822fe1e6059f0f9fafda8800388860477624ac1b9422c418a36e"
+        }
+      ],
+      "properties": [
+        {
+          "name": "artifact:filename",
+          "value": "material3.aar"
+        },
+        {
+          "name": "gradle:configurations",
+          "value": "debugRuntimeClasspath,releaseRuntimeClasspath"
+        }
+      ],
+      "licenses": [
+        {
+          "license": {
+            "name": "The Apache Software License, Version 2.0"
+          }
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:maven/androidx.compose.material/material-android@1.10.4?artifact_sha256=1a989502e4d34528c25656899385fab892c7b04a5e8b650131f74df660cacadd",
+      "group": "androidx.compose.material",
+      "name": "material-android",
+      "version": "1.10.4",
+      "purl": "pkg:maven/androidx.compose.material/material-android@1.10.4",
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "1a989502e4d34528c25656899385fab892c7b04a5e8b650131f74df660cacadd"
+        }
+      ],
+      "properties": [
+        {
+          "name": "artifact:filename",
+          "value": "material.aar"
+        },
+        {
+          "name": "gradle:configurations",
+          "value": "debugRuntimeClasspath"
+        }
+      ],
+      "licenses": [
+        {
+          "license": {
+            "name": "The Apache Software License, Version 2.0"
+          }
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:maven/androidx.compose.material/material-icons-core-android@1.7.8?artifact_sha256=332c06b25e662cc417fb087e76b8faa5cb249f4992ffa3360084a3d4ab882284",
+      "group": "androidx.compose.material",
+      "name": "material-icons-core-android",
+      "version": "1.7.8",
+      "purl": "pkg:maven/androidx.compose.material/material-icons-core-android@1.7.8",
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "332c06b25e662cc417fb087e76b8faa5cb249f4992ffa3360084a3d4ab882284"
+        }
+      ],
+      "properties": [
+        {
+          "name": "artifact:filename",
+          "value": "material-icons-core-release.aar"
+        },
+        {
+          "name": "gradle:configurations",
+          "value": "debugRuntimeClasspath,releaseRuntimeClasspath"
+        }
+      ],
+      "licenses": [
+        {
+          "license": {
+            "name": "The Apache Software License, Version 2.0"
+          }
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:maven/androidx.compose.material/material-icons-extended-android@1.7.8?artifact_sha256=64e86269f1106848981dd76f0046f81b46f3bd92efb22645de8fd044c0402b61",
+      "group": "androidx.compose.material",
+      "name": "material-icons-extended-android",
+      "version": "1.7.8",
+      "purl": "pkg:maven/androidx.compose.material/material-icons-extended-android@1.7.8",
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "64e86269f1106848981dd76f0046f81b46f3bd92efb22645de8fd044c0402b61"
+        }
+      ],
+      "properties": [
+        {
+          "name": "artifact:filename",
+          "value": "material-icons-extended-release.aar"
+        },
+        {
+          "name": "gradle:configurations",
+          "value": "debugRuntimeClasspath,releaseRuntimeClasspath"
+        }
+      ],
+      "licenses": [
+        {
+          "license": {
+            "name": "The Apache Software License, Version 2.0"
+          }
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:maven/androidx.compose.material/material-ripple-android@1.10.4?artifact_sha256=35d721595659b108a10d773e62ef409074ae2b08cfe62a73f30576b5abc2ed68",
+      "group": "androidx.compose.material",
+      "name": "material-ripple-android",
+      "version": "1.10.4",
+      "purl": "pkg:maven/androidx.compose.material/material-ripple-android@1.10.4",
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "35d721595659b108a10d773e62ef409074ae2b08cfe62a73f30576b5abc2ed68"
+        }
+      ],
+      "properties": [
+        {
+          "name": "artifact:filename",
+          "value": "material-ripple.aar"
+        },
+        {
+          "name": "gradle:configurations",
+          "value": "debugRuntimeClasspath,releaseRuntimeClasspath"
+        }
+      ],
+      "licenses": [
+        {
+          "license": {
+            "name": "The Apache Software License, Version 2.0"
+          }
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:maven/androidx.compose.runtime/runtime-android@1.10.4?artifact_sha256=14a0ec47c992112cace7f7c2a93d8bd9b800fe20f71cae18a32ddeff9d86a8a2",
+      "group": "androidx.compose.runtime",
+      "name": "runtime-android",
+      "version": "1.10.4",
+      "purl": "pkg:maven/androidx.compose.runtime/runtime-android@1.10.4",
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "14a0ec47c992112cace7f7c2a93d8bd9b800fe20f71cae18a32ddeff9d86a8a2"
+        }
+      ],
+      "properties": [
+        {
+          "name": "artifact:filename",
+          "value": "runtime.aar"
+        },
+        {
+          "name": "gradle:configurations",
+          "value": "debugRuntimeClasspath,releaseRuntimeClasspath"
+        }
+      ],
+      "licenses": [
+        {
+          "license": {
+            "name": "The Apache Software License, Version 2.0"
+          }
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:maven/androidx.compose.runtime/runtime-annotation-android@1.10.4?artifact_sha256=4880671232d48ca5cfe730717e3e78837624e503403bd4433d91581db4e5c253",
+      "group": "androidx.compose.runtime",
+      "name": "runtime-annotation-android",
+      "version": "1.10.4",
+      "purl": "pkg:maven/androidx.compose.runtime/runtime-annotation-android@1.10.4",
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "4880671232d48ca5cfe730717e3e78837624e503403bd4433d91581db4e5c253"
+        }
+      ],
+      "properties": [
+        {
+          "name": "artifact:filename",
+          "value": "runtime-annotation.aar"
+        },
+        {
+          "name": "gradle:configurations",
+          "value": "debugRuntimeClasspath,releaseRuntimeClasspath"
+        }
+      ],
+      "licenses": [
+        {
+          "license": {
+            "name": "The Apache Software License, Version 2.0"
+          }
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:maven/androidx.compose.runtime/runtime-retain-android@1.10.4?artifact_sha256=59ab12402c50581b8b34da40f70009584d2beacdbe78b547b4f1c91938f6fad9",
+      "group": "androidx.compose.runtime",
+      "name": "runtime-retain-android",
+      "version": "1.10.4",
+      "purl": "pkg:maven/androidx.compose.runtime/runtime-retain-android@1.10.4",
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "59ab12402c50581b8b34da40f70009584d2beacdbe78b547b4f1c91938f6fad9"
+        }
+      ],
+      "properties": [
+        {
+          "name": "artifact:filename",
+          "value": "runtime-retain.aar"
+        },
+        {
+          "name": "gradle:configurations",
+          "value": "debugRuntimeClasspath,releaseRuntimeClasspath"
+        }
+      ],
+      "licenses": [
+        {
+          "license": {
+            "name": "The Apache Software License, Version 2.0"
+          }
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:maven/androidx.compose.runtime/runtime-saveable-android@1.10.4?artifact_sha256=ff0862c0a626c1de8524b83bd9ee81ee8aad9b24edeab5a56711ba658e8433bd",
+      "group": "androidx.compose.runtime",
+      "name": "runtime-saveable-android",
+      "version": "1.10.4",
+      "purl": "pkg:maven/androidx.compose.runtime/runtime-saveable-android@1.10.4",
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "ff0862c0a626c1de8524b83bd9ee81ee8aad9b24edeab5a56711ba658e8433bd"
+        }
+      ],
+      "properties": [
+        {
+          "name": "artifact:filename",
+          "value": "runtime-saveable.aar"
+        },
+        {
+          "name": "gradle:configurations",
+          "value": "debugRuntimeClasspath,releaseRuntimeClasspath"
+        }
+      ],
+      "licenses": [
+        {
+          "license": {
+            "name": "The Apache Software License, Version 2.0"
+          }
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:maven/androidx.compose.ui/ui-android@1.10.4?artifact_sha256=b860014180d5cabaa0656e9379b1445cf794ed5a8724457d442e816279a2694f",
+      "group": "androidx.compose.ui",
+      "name": "ui-android",
+      "version": "1.10.4",
+      "purl": "pkg:maven/androidx.compose.ui/ui-android@1.10.4",
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "b860014180d5cabaa0656e9379b1445cf794ed5a8724457d442e816279a2694f"
+        }
+      ],
+      "properties": [
+        {
+          "name": "artifact:filename",
+          "value": "ui.aar"
+        },
+        {
+          "name": "gradle:configurations",
+          "value": "debugRuntimeClasspath,releaseRuntimeClasspath"
+        }
+      ],
+      "licenses": [
+        {
+          "license": {
+            "name": "The Apache Software License, Version 2.0"
+          }
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:maven/androidx.compose.ui/ui-geometry-android@1.10.4?artifact_sha256=ad1c76c7fd6b2964d28ac45862c1e13951aa35114cda1c4eab63bd3ce69b44d8",
+      "group": "androidx.compose.ui",
+      "name": "ui-geometry-android",
+      "version": "1.10.4",
+      "purl": "pkg:maven/androidx.compose.ui/ui-geometry-android@1.10.4",
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "ad1c76c7fd6b2964d28ac45862c1e13951aa35114cda1c4eab63bd3ce69b44d8"
+        }
+      ],
+      "properties": [
+        {
+          "name": "artifact:filename",
+          "value": "ui-geometry.aar"
+        },
+        {
+          "name": "gradle:configurations",
+          "value": "debugRuntimeClasspath,releaseRuntimeClasspath"
+        }
+      ],
+      "licenses": [
+        {
+          "license": {
+            "name": "The Apache Software License, Version 2.0"
+          }
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:maven/androidx.compose.ui/ui-graphics-android@1.10.4?artifact_sha256=d47fb0d1caa62106481948a5af7ba0466f9fa92db3167b8c33cca9543b7f09fa",
+      "group": "androidx.compose.ui",
+      "name": "ui-graphics-android",
+      "version": "1.10.4",
+      "purl": "pkg:maven/androidx.compose.ui/ui-graphics-android@1.10.4",
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "d47fb0d1caa62106481948a5af7ba0466f9fa92db3167b8c33cca9543b7f09fa"
+        }
+      ],
+      "properties": [
+        {
+          "name": "artifact:filename",
+          "value": "ui-graphics.aar"
+        },
+        {
+          "name": "gradle:configurations",
+          "value": "debugRuntimeClasspath,releaseRuntimeClasspath"
+        }
+      ],
+      "licenses": [
+        {
+          "license": {
+            "name": "The Apache Software License, Version 2.0"
+          }
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:maven/androidx.compose.ui/ui-test-manifest@1.10.4?artifact_sha256=05c2bfbd31464de625aeab8c43dae58b390d72767c922afa79380f640b78dd14",
+      "group": "androidx.compose.ui",
+      "name": "ui-test-manifest",
+      "version": "1.10.4",
+      "purl": "pkg:maven/androidx.compose.ui/ui-test-manifest@1.10.4",
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "05c2bfbd31464de625aeab8c43dae58b390d72767c922afa79380f640b78dd14"
+        }
+      ],
+      "properties": [
+        {
+          "name": "artifact:filename",
+          "value": "ui-test-manifest-1.10.4.aar"
+        },
+        {
+          "name": "gradle:configurations",
+          "value": "debugRuntimeClasspath"
+        }
+      ],
+      "licenses": [
+        {
+          "license": {
+            "name": "The Apache Software License, Version 2.0"
+          }
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:maven/androidx.compose.ui/ui-text-android@1.10.4?artifact_sha256=39c6a93a3d4cf18ab255e93ae29fed6d5672e81d30795c3dbb812fc00e670577",
+      "group": "androidx.compose.ui",
+      "name": "ui-text-android",
+      "version": "1.10.4",
+      "purl": "pkg:maven/androidx.compose.ui/ui-text-android@1.10.4",
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "39c6a93a3d4cf18ab255e93ae29fed6d5672e81d30795c3dbb812fc00e670577"
+        }
+      ],
+      "properties": [
+        {
+          "name": "artifact:filename",
+          "value": "ui-text.aar"
+        },
+        {
+          "name": "gradle:configurations",
+          "value": "debugRuntimeClasspath,releaseRuntimeClasspath"
+        }
+      ],
+      "licenses": [
+        {
+          "license": {
+            "name": "The Apache Software License, Version 2.0"
+          }
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:maven/androidx.compose.ui/ui-tooling-android@1.10.4?artifact_sha256=41edf69399401ca786301a86d7435bd373c7f1013d4cc551a98fc4174a5afa98",
+      "group": "androidx.compose.ui",
+      "name": "ui-tooling-android",
+      "version": "1.10.4",
+      "purl": "pkg:maven/androidx.compose.ui/ui-tooling-android@1.10.4",
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "41edf69399401ca786301a86d7435bd373c7f1013d4cc551a98fc4174a5afa98"
+        }
+      ],
+      "properties": [
+        {
+          "name": "artifact:filename",
+          "value": "ui-tooling.aar"
+        },
+        {
+          "name": "gradle:configurations",
+          "value": "debugRuntimeClasspath"
+        }
+      ],
+      "licenses": [
+        {
+          "license": {
+            "name": "The Apache Software License, Version 2.0"
+          }
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:maven/androidx.compose.ui/ui-tooling-data-android@1.10.4?artifact_sha256=e964fea22d292e2ed8cad11286f9a885692810fe00fbc2f004e272383ab9dc0f",
+      "group": "androidx.compose.ui",
+      "name": "ui-tooling-data-android",
+      "version": "1.10.4",
+      "purl": "pkg:maven/androidx.compose.ui/ui-tooling-data-android@1.10.4",
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "e964fea22d292e2ed8cad11286f9a885692810fe00fbc2f004e272383ab9dc0f"
+        }
+      ],
+      "properties": [
+        {
+          "name": "artifact:filename",
+          "value": "ui-tooling-data.aar"
+        },
+        {
+          "name": "gradle:configurations",
+          "value": "debugRuntimeClasspath"
+        }
+      ],
+      "licenses": [
+        {
+          "license": {
+            "name": "The Apache Software License, Version 2.0"
+          }
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:maven/androidx.compose.ui/ui-tooling-preview-android@1.10.4?artifact_sha256=c372e41b9d38b78ae3673d6ef7a95f280f2ab05203a703b2193c83062dea60dd",
+      "group": "androidx.compose.ui",
+      "name": "ui-tooling-preview-android",
+      "version": "1.10.4",
+      "purl": "pkg:maven/androidx.compose.ui/ui-tooling-preview-android@1.10.4",
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "c372e41b9d38b78ae3673d6ef7a95f280f2ab05203a703b2193c83062dea60dd"
+        }
+      ],
+      "properties": [
+        {
+          "name": "artifact:filename",
+          "value": "ui-tooling-preview.aar"
+        },
+        {
+          "name": "gradle:configurations",
+          "value": "debugRuntimeClasspath,releaseRuntimeClasspath"
+        }
+      ],
+      "licenses": [
+        {
+          "license": {
+            "name": "The Apache Software License, Version 2.0"
+          }
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:maven/androidx.compose.ui/ui-unit-android@1.10.4?artifact_sha256=8571829fd05919b8415750e1028dd2b95c2ad7a07421286917268de06e2d55f4",
+      "group": "androidx.compose.ui",
+      "name": "ui-unit-android",
+      "version": "1.10.4",
+      "purl": "pkg:maven/androidx.compose.ui/ui-unit-android@1.10.4",
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "8571829fd05919b8415750e1028dd2b95c2ad7a07421286917268de06e2d55f4"
+        }
+      ],
+      "properties": [
+        {
+          "name": "artifact:filename",
+          "value": "ui-unit.aar"
+        },
+        {
+          "name": "gradle:configurations",
+          "value": "debugRuntimeClasspath,releaseRuntimeClasspath"
+        }
+      ],
+      "licenses": [
+        {
+          "license": {
+            "name": "The Apache Software License, Version 2.0"
+          }
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:maven/androidx.compose.ui/ui-util-android@1.10.4?artifact_sha256=8098bca31a4a9b125c46666926f8f095e60306e2463a4b0883454325bee3461a",
+      "group": "androidx.compose.ui",
+      "name": "ui-util-android",
+      "version": "1.10.4",
+      "purl": "pkg:maven/androidx.compose.ui/ui-util-android@1.10.4",
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "8098bca31a4a9b125c46666926f8f095e60306e2463a4b0883454325bee3461a"
+        }
+      ],
+      "properties": [
+        {
+          "name": "artifact:filename",
+          "value": "ui-util.aar"
+        },
+        {
+          "name": "gradle:configurations",
+          "value": "debugRuntimeClasspath,releaseRuntimeClasspath"
+        }
+      ],
+      "licenses": [
+        {
+          "license": {
+            "name": "The Apache Software License, Version 2.0"
+          }
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:maven/androidx.concurrent/concurrent-futures@1.1.0?artifact_sha256=0ce067c514a0d1049d1bebdf709e344ed3266fe9744275682937cdcb13334e9e",
+      "group": "androidx.concurrent",
+      "name": "concurrent-futures",
+      "version": "1.1.0",
+      "purl": "pkg:maven/androidx.concurrent/concurrent-futures@1.1.0",
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "0ce067c514a0d1049d1bebdf709e344ed3266fe9744275682937cdcb13334e9e"
+        }
+      ],
+      "properties": [
+        {
+          "name": "artifact:filename",
+          "value": "concurrent-futures-1.1.0.jar"
+        },
+        {
+          "name": "gradle:configurations",
+          "value": "debugRuntimeClasspath,releaseRuntimeClasspath"
+        }
+      ],
+      "licenses": [
+        {
+          "license": {
+            "name": "The Apache Software License, Version 2.0"
+          }
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:maven/androidx.core/core-ktx@1.16.0?artifact_sha256=1766dbd82f64a12dcd359ecb6f15f3cf35db4d66d22961a7c51b2ffc6468314c",
+      "group": "androidx.core",
+      "name": "core-ktx",
+      "version": "1.16.0",
+      "purl": "pkg:maven/androidx.core/core-ktx@1.16.0",
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "1766dbd82f64a12dcd359ecb6f15f3cf35db4d66d22961a7c51b2ffc6468314c"
+        }
+      ],
+      "properties": [
+        {
+          "name": "artifact:filename",
+          "value": "core-ktx-1.16.0.aar"
+        },
+        {
+          "name": "gradle:configurations",
+          "value": "debugRuntimeClasspath,releaseRuntimeClasspath"
+        }
+      ],
+      "licenses": [
+        {
+          "license": {
+            "name": "The Apache Software License, Version 2.0"
+          }
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:maven/androidx.core/core-viewtree@1.0.0?artifact_sha256=dc1b678d58ebcf2bfa1587be68ff826694ce3d221251b9ef30d4d4b36297e6de",
+      "group": "androidx.core",
+      "name": "core-viewtree",
+      "version": "1.0.0",
+      "purl": "pkg:maven/androidx.core/core-viewtree@1.0.0",
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "dc1b678d58ebcf2bfa1587be68ff826694ce3d221251b9ef30d4d4b36297e6de"
+        }
+      ],
+      "properties": [
+        {
+          "name": "artifact:filename",
+          "value": "core-viewtree-1.0.0.aar"
+        },
+        {
+          "name": "gradle:configurations",
+          "value": "debugRuntimeClasspath,releaseRuntimeClasspath"
+        }
+      ],
+      "licenses": [
+        {
+          "license": {
+            "name": "The Apache Software License, Version 2.0"
+          }
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:maven/androidx.core/core@1.16.0?artifact_sha256=6bf03d39dbe3744acce227d3b697374c3625aae1025fbec8ad9fd7bd58bce431",
+      "group": "androidx.core",
+      "name": "core",
+      "version": "1.16.0",
+      "purl": "pkg:maven/androidx.core/core@1.16.0",
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "6bf03d39dbe3744acce227d3b697374c3625aae1025fbec8ad9fd7bd58bce431"
+        }
+      ],
+      "properties": [
+        {
+          "name": "artifact:filename",
+          "value": "core-1.16.0.aar"
+        },
+        {
+          "name": "gradle:configurations",
+          "value": "debugRuntimeClasspath,releaseRuntimeClasspath"
+        }
+      ],
+      "licenses": [
+        {
+          "license": {
+            "name": "The Apache Software License, Version 2.0"
+          }
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:maven/androidx.customview/customview-poolingcontainer@1.0.0?artifact_sha256=3584102fc49bf399c56e3b7be4bfe12000c46112320cd8cf85cc0a8f93f3e752",
+      "group": "androidx.customview",
+      "name": "customview-poolingcontainer",
+      "version": "1.0.0",
+      "purl": "pkg:maven/androidx.customview/customview-poolingcontainer@1.0.0",
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "3584102fc49bf399c56e3b7be4bfe12000c46112320cd8cf85cc0a8f93f3e752"
+        }
+      ],
+      "properties": [
+        {
+          "name": "artifact:filename",
+          "value": "customview-poolingcontainer-1.0.0.aar"
+        },
+        {
+          "name": "gradle:configurations",
+          "value": "debugRuntimeClasspath,releaseRuntimeClasspath"
+        }
+      ],
+      "licenses": [
+        {
+          "license": {
+            "name": "The Apache Software License, Version 2.0"
+          }
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:maven/androidx.customview/customview@1.0.0?artifact_sha256=20e5b8f6526a34595a604f56718da81167c0b40a7a94a57daa355663f2594df2",
+      "group": "androidx.customview",
+      "name": "customview",
+      "version": "1.0.0",
+      "purl": "pkg:maven/androidx.customview/customview@1.0.0",
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "20e5b8f6526a34595a604f56718da81167c0b40a7a94a57daa355663f2594df2"
+        }
+      ],
+      "properties": [
+        {
+          "name": "artifact:filename",
+          "value": "customview-1.0.0.aar"
+        },
+        {
+          "name": "gradle:configurations",
+          "value": "debugRuntimeClasspath,releaseRuntimeClasspath"
+        }
+      ],
+      "licenses": [
+        {
+          "license": {
+            "name": "The Apache Software License, Version 2.0"
+          }
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:maven/androidx.documentfile/documentfile@1.0.0?artifact_sha256=865a061ef2fad16522f8433536b8d47208c46ff7c7745197dfa1eeb481869487",
+      "group": "androidx.documentfile",
+      "name": "documentfile",
+      "version": "1.0.0",
+      "purl": "pkg:maven/androidx.documentfile/documentfile@1.0.0",
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "865a061ef2fad16522f8433536b8d47208c46ff7c7745197dfa1eeb481869487"
+        }
+      ],
+      "properties": [
+        {
+          "name": "artifact:filename",
+          "value": "documentfile-1.0.0.aar"
+        },
+        {
+          "name": "gradle:configurations",
+          "value": "debugRuntimeClasspath,releaseRuntimeClasspath"
+        }
+      ],
+      "licenses": [
+        {
+          "license": {
+            "name": "The Apache Software License, Version 2.0"
+          }
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:maven/androidx.dynamicanimation/dynamicanimation@1.0.0?artifact_sha256=ce005162c229bf308d2d5b12fb6cad0874069cbbeaccee63a8193bd08d40de04",
+      "group": "androidx.dynamicanimation",
+      "name": "dynamicanimation",
+      "version": "1.0.0",
+      "purl": "pkg:maven/androidx.dynamicanimation/dynamicanimation@1.0.0",
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "ce005162c229bf308d2d5b12fb6cad0874069cbbeaccee63a8193bd08d40de04"
+        }
+      ],
+      "properties": [
+        {
+          "name": "artifact:filename",
+          "value": "dynamicanimation-1.0.0.aar"
+        },
+        {
+          "name": "gradle:configurations",
+          "value": "debugRuntimeClasspath,releaseRuntimeClasspath"
+        }
+      ],
+      "licenses": [
+        {
+          "license": {
+            "name": "The Apache Software License, Version 2.0"
+          }
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:maven/androidx.emoji2/emoji2@1.4.0?artifact_sha256=433febd3434a45667176c76a64f3f205ca6335a6b544c5b5d57f25a38a375242",
+      "group": "androidx.emoji2",
+      "name": "emoji2",
+      "version": "1.4.0",
+      "purl": "pkg:maven/androidx.emoji2/emoji2@1.4.0",
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "433febd3434a45667176c76a64f3f205ca6335a6b544c5b5d57f25a38a375242"
+        }
+      ],
+      "properties": [
+        {
+          "name": "artifact:filename",
+          "value": "emoji2-1.4.0.aar"
+        },
+        {
+          "name": "gradle:configurations",
+          "value": "debugRuntimeClasspath,releaseRuntimeClasspath"
+        }
+      ],
+      "licenses": [
+        {
+          "license": {
+            "name": "The Apache Software License, Version 2.0"
+          }
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:maven/androidx.exifinterface/exifinterface@1.3.7?artifact_sha256=0e8f1832266c5b0667ad3d3b1098e624e49a09075493a014a7e88af01fd30ad3",
+      "group": "androidx.exifinterface",
+      "name": "exifinterface",
+      "version": "1.3.7",
+      "purl": "pkg:maven/androidx.exifinterface/exifinterface@1.3.7",
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "0e8f1832266c5b0667ad3d3b1098e624e49a09075493a014a7e88af01fd30ad3"
+        }
+      ],
+      "properties": [
+        {
+          "name": "artifact:filename",
+          "value": "exifinterface-1.3.7.aar"
+        },
+        {
+          "name": "gradle:configurations",
+          "value": "debugRuntimeClasspath,releaseRuntimeClasspath"
+        }
+      ],
+      "licenses": [
+        {
+          "license": {
+            "name": "The Apache Software License, Version 2.0"
+          }
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:maven/androidx.fragment/fragment@1.1.0?artifact_sha256=a14c8b8f2153f128e800fbd266a6beab1c283982a29ec570d2cc05d307d81496",
+      "group": "androidx.fragment",
+      "name": "fragment",
+      "version": "1.1.0",
+      "purl": "pkg:maven/androidx.fragment/fragment@1.1.0",
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "a14c8b8f2153f128e800fbd266a6beab1c283982a29ec570d2cc05d307d81496"
+        }
+      ],
+      "properties": [
+        {
+          "name": "artifact:filename",
+          "value": "fragment-1.1.0.aar"
+        },
+        {
+          "name": "gradle:configurations",
+          "value": "debugRuntimeClasspath,releaseRuntimeClasspath"
+        }
+      ],
+      "licenses": [
+        {
+          "license": {
+            "name": "The Apache Software License, Version 2.0"
+          }
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:maven/androidx.graphics/graphics-path@1.0.1?artifact_sha256=8ca4032b6d79b351f0b59ad4b580eddbb9423e1652f7c958830687f1eee2ec03",
+      "group": "androidx.graphics",
+      "name": "graphics-path",
+      "version": "1.0.1",
+      "purl": "pkg:maven/androidx.graphics/graphics-path@1.0.1",
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "8ca4032b6d79b351f0b59ad4b580eddbb9423e1652f7c958830687f1eee2ec03"
+        }
+      ],
+      "properties": [
+        {
+          "name": "artifact:filename",
+          "value": "graphics-path-1.0.1.aar"
+        },
+        {
+          "name": "gradle:configurations",
+          "value": "debugRuntimeClasspath,releaseRuntimeClasspath"
+        }
+      ],
+      "licenses": [
+        {
+          "license": {
+            "name": "The Apache Software License, Version 2.0"
+          }
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:maven/androidx.interpolator/interpolator@1.0.0?artifact_sha256=33193135a64fe21fa2c35eec6688f1a76e512606c0fc83dc1b689e37add7732a",
+      "group": "androidx.interpolator",
+      "name": "interpolator",
+      "version": "1.0.0",
+      "purl": "pkg:maven/androidx.interpolator/interpolator@1.0.0",
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "33193135a64fe21fa2c35eec6688f1a76e512606c0fc83dc1b689e37add7732a"
+        }
+      ],
+      "properties": [
+        {
+          "name": "artifact:filename",
+          "value": "interpolator-1.0.0.aar"
+        },
+        {
+          "name": "gradle:configurations",
+          "value": "debugRuntimeClasspath,releaseRuntimeClasspath"
+        }
+      ],
+      "licenses": [
+        {
+          "license": {
+            "name": "The Apache Software License, Version 2.0"
+          }
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:maven/androidx.legacy/legacy-support-core-utils@1.0.0?artifact_sha256=a7edcf01d5b52b3034073027bc4775b78a4764bb6202bb91d61c829add8dd1c7",
+      "group": "androidx.legacy",
+      "name": "legacy-support-core-utils",
+      "version": "1.0.0",
+      "purl": "pkg:maven/androidx.legacy/legacy-support-core-utils@1.0.0",
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "a7edcf01d5b52b3034073027bc4775b78a4764bb6202bb91d61c829add8dd1c7"
+        }
+      ],
+      "properties": [
+        {
+          "name": "artifact:filename",
+          "value": "legacy-support-core-utils-1.0.0.aar"
+        },
+        {
+          "name": "gradle:configurations",
+          "value": "debugRuntimeClasspath,releaseRuntimeClasspath"
+        }
+      ],
+      "licenses": [
+        {
+          "license": {
+            "name": "The Apache Software License, Version 2.0"
+          }
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:maven/androidx.lifecycle/lifecycle-common-java8@2.9.4?artifact_sha256=497dd84de9f2fd46324f25f9a3af032d3a23d087e87af515c4b19435f6d6a651",
+      "group": "androidx.lifecycle",
+      "name": "lifecycle-common-java8",
+      "version": "2.9.4",
+      "purl": "pkg:maven/androidx.lifecycle/lifecycle-common-java8@2.9.4",
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "497dd84de9f2fd46324f25f9a3af032d3a23d087e87af515c4b19435f6d6a651"
+        }
+      ],
+      "properties": [
+        {
+          "name": "artifact:filename",
+          "value": "lifecycle-common-java8-2.9.4.jar"
+        },
+        {
+          "name": "gradle:configurations",
+          "value": "debugRuntimeClasspath,releaseRuntimeClasspath"
+        }
+      ],
+      "licenses": [
+        {
+          "license": {
+            "name": "The Apache Software License, Version 2.0"
+          }
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:maven/androidx.lifecycle/lifecycle-common-jvm@2.9.4?artifact_sha256=37d89b2101f074ac6c260917dabb185607645ee200aa3018c7c5bde70edcf184",
+      "group": "androidx.lifecycle",
+      "name": "lifecycle-common-jvm",
+      "version": "2.9.4",
+      "purl": "pkg:maven/androidx.lifecycle/lifecycle-common-jvm@2.9.4",
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "37d89b2101f074ac6c260917dabb185607645ee200aa3018c7c5bde70edcf184"
+        }
+      ],
+      "properties": [
+        {
+          "name": "artifact:filename",
+          "value": "lifecycle-common-jvm-2.9.4.jar"
+        },
+        {
+          "name": "gradle:configurations",
+          "value": "debugRuntimeClasspath,releaseRuntimeClasspath"
+        }
+      ],
+      "licenses": [
+        {
+          "license": {
+            "name": "The Apache Software License, Version 2.0"
+          }
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:maven/androidx.lifecycle/lifecycle-livedata-core-ktx@2.9.4?artifact_sha256=f55b7a8d433e9b8163154ccaa42fa2be55c70cd1ede5eeea521a4b4b884dd4fe",
+      "group": "androidx.lifecycle",
+      "name": "lifecycle-livedata-core-ktx",
+      "version": "2.9.4",
+      "purl": "pkg:maven/androidx.lifecycle/lifecycle-livedata-core-ktx@2.9.4",
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "f55b7a8d433e9b8163154ccaa42fa2be55c70cd1ede5eeea521a4b4b884dd4fe"
+        }
+      ],
+      "properties": [
+        {
+          "name": "artifact:filename",
+          "value": "lifecycle-livedata-core-ktx-2.9.4.aar"
+        },
+        {
+          "name": "gradle:configurations",
+          "value": "debugRuntimeClasspath,releaseRuntimeClasspath"
+        }
+      ],
+      "licenses": [
+        {
+          "license": {
+            "name": "The Apache Software License, Version 2.0"
+          }
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:maven/androidx.lifecycle/lifecycle-livedata-core@2.9.4?artifact_sha256=ea866f0c379d1f92837994010ab5ac0a5d5499dbab521efc71b3bc2b497d6ba4",
+      "group": "androidx.lifecycle",
+      "name": "lifecycle-livedata-core",
+      "version": "2.9.4",
+      "purl": "pkg:maven/androidx.lifecycle/lifecycle-livedata-core@2.9.4",
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "ea866f0c379d1f92837994010ab5ac0a5d5499dbab521efc71b3bc2b497d6ba4"
+        }
+      ],
+      "properties": [
+        {
+          "name": "artifact:filename",
+          "value": "lifecycle-livedata-core-2.9.4.aar"
+        },
+        {
+          "name": "gradle:configurations",
+          "value": "debugRuntimeClasspath,releaseRuntimeClasspath"
+        }
+      ],
+      "licenses": [
+        {
+          "license": {
+            "name": "The Apache Software License, Version 2.0"
+          }
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:maven/androidx.lifecycle/lifecycle-livedata@2.9.4?artifact_sha256=f240c2c94a96d4a5eae5d379c2a8589d426a33b989d83ae9f0e01f69502c0181",
+      "group": "androidx.lifecycle",
+      "name": "lifecycle-livedata",
+      "version": "2.9.4",
+      "purl": "pkg:maven/androidx.lifecycle/lifecycle-livedata@2.9.4",
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "f240c2c94a96d4a5eae5d379c2a8589d426a33b989d83ae9f0e01f69502c0181"
+        }
+      ],
+      "properties": [
+        {
+          "name": "artifact:filename",
+          "value": "lifecycle-livedata-2.9.4.aar"
+        },
+        {
+          "name": "gradle:configurations",
+          "value": "debugRuntimeClasspath,releaseRuntimeClasspath"
+        }
+      ],
+      "licenses": [
+        {
+          "license": {
+            "name": "The Apache Software License, Version 2.0"
+          }
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:maven/androidx.lifecycle/lifecycle-process@2.9.4?artifact_sha256=4784b8d083c211e076d9115bfa1737f7e0f62b553e801cf50caa4400e34a95d6",
+      "group": "androidx.lifecycle",
+      "name": "lifecycle-process",
+      "version": "2.9.4",
+      "purl": "pkg:maven/androidx.lifecycle/lifecycle-process@2.9.4",
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "4784b8d083c211e076d9115bfa1737f7e0f62b553e801cf50caa4400e34a95d6"
+        }
+      ],
+      "properties": [
+        {
+          "name": "artifact:filename",
+          "value": "lifecycle-process-2.9.4.aar"
+        },
+        {
+          "name": "gradle:configurations",
+          "value": "debugRuntimeClasspath,releaseRuntimeClasspath"
+        }
+      ],
+      "licenses": [
+        {
+          "license": {
+            "name": "The Apache Software License, Version 2.0"
+          }
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:maven/androidx.lifecycle/lifecycle-runtime-android@2.9.4?artifact_sha256=86f16a1330eb23600ba90d0334b3e1db38d3a30c8b1efcd92ca21aa85afa8173",
+      "group": "androidx.lifecycle",
+      "name": "lifecycle-runtime-android",
+      "version": "2.9.4",
+      "purl": "pkg:maven/androidx.lifecycle/lifecycle-runtime-android@2.9.4",
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "86f16a1330eb23600ba90d0334b3e1db38d3a30c8b1efcd92ca21aa85afa8173"
+        }
+      ],
+      "properties": [
+        {
+          "name": "artifact:filename",
+          "value": "lifecycle-runtime-release.aar"
+        },
+        {
+          "name": "gradle:configurations",
+          "value": "debugRuntimeClasspath,releaseRuntimeClasspath"
+        }
+      ],
+      "licenses": [
+        {
+          "license": {
+            "name": "The Apache Software License, Version 2.0"
+          }
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:maven/androidx.lifecycle/lifecycle-runtime-compose-android@2.9.4?artifact_sha256=b6803f906a89fd85c77df343dd4aeeb349125ca79e12d55d68d4cf42f42231f6",
+      "group": "androidx.lifecycle",
+      "name": "lifecycle-runtime-compose-android",
+      "version": "2.9.4",
+      "purl": "pkg:maven/androidx.lifecycle/lifecycle-runtime-compose-android@2.9.4",
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "b6803f906a89fd85c77df343dd4aeeb349125ca79e12d55d68d4cf42f42231f6"
+        }
+      ],
+      "properties": [
+        {
+          "name": "artifact:filename",
+          "value": "lifecycle-runtime-compose-release.aar"
+        },
+        {
+          "name": "gradle:configurations",
+          "value": "debugRuntimeClasspath,releaseRuntimeClasspath"
+        }
+      ],
+      "licenses": [
+        {
+          "license": {
+            "name": "The Apache Software License, Version 2.0"
+          }
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:maven/androidx.lifecycle/lifecycle-runtime-ktx-android@2.9.4?artifact_sha256=970199c9ed1ac13d620aa8de7f8abbc28ce80653c3ce328d0ac2f15272b56e1b",
+      "group": "androidx.lifecycle",
+      "name": "lifecycle-runtime-ktx-android",
+      "version": "2.9.4",
+      "purl": "pkg:maven/androidx.lifecycle/lifecycle-runtime-ktx-android@2.9.4",
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "970199c9ed1ac13d620aa8de7f8abbc28ce80653c3ce328d0ac2f15272b56e1b"
+        }
+      ],
+      "properties": [
+        {
+          "name": "artifact:filename",
+          "value": "lifecycle-runtime-ktx.aar"
+        },
+        {
+          "name": "gradle:configurations",
+          "value": "debugRuntimeClasspath,releaseRuntimeClasspath"
+        }
+      ],
+      "licenses": [
+        {
+          "license": {
+            "name": "The Apache Software License, Version 2.0"
+          }
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:maven/androidx.lifecycle/lifecycle-viewmodel-android@2.9.4?artifact_sha256=4b236b2e504db5ca5d09334fef05aa8cdc31ee35a433c3aa4d0420efa9613332",
+      "group": "androidx.lifecycle",
+      "name": "lifecycle-viewmodel-android",
+      "version": "2.9.4",
+      "purl": "pkg:maven/androidx.lifecycle/lifecycle-viewmodel-android@2.9.4",
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "4b236b2e504db5ca5d09334fef05aa8cdc31ee35a433c3aa4d0420efa9613332"
+        }
+      ],
+      "properties": [
+        {
+          "name": "artifact:filename",
+          "value": "lifecycle-viewmodel-release.aar"
+        },
+        {
+          "name": "gradle:configurations",
+          "value": "debugRuntimeClasspath,releaseRuntimeClasspath"
+        }
+      ],
+      "licenses": [
+        {
+          "license": {
+            "name": "The Apache Software License, Version 2.0"
+          }
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:maven/androidx.lifecycle/lifecycle-viewmodel-compose-android@2.9.4?artifact_sha256=f7825a08ca661de84044b6891293084bea8fbcc84aa08d8c13a3c558fc5956c9",
+      "group": "androidx.lifecycle",
+      "name": "lifecycle-viewmodel-compose-android",
+      "version": "2.9.4",
+      "purl": "pkg:maven/androidx.lifecycle/lifecycle-viewmodel-compose-android@2.9.4",
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "f7825a08ca661de84044b6891293084bea8fbcc84aa08d8c13a3c558fc5956c9"
+        }
+      ],
+      "properties": [
+        {
+          "name": "artifact:filename",
+          "value": "lifecycle-viewmodel-compose-release.aar"
+        },
+        {
+          "name": "gradle:configurations",
+          "value": "debugRuntimeClasspath,releaseRuntimeClasspath"
+        }
+      ],
+      "licenses": [
+        {
+          "license": {
+            "name": "The Apache Software License, Version 2.0"
+          }
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:maven/androidx.lifecycle/lifecycle-viewmodel-ktx@2.9.4?artifact_sha256=b7d58bb86bb8e2ccc607d1f8570e714810f7cfb3feba37d375ff1646383435a1",
+      "group": "androidx.lifecycle",
+      "name": "lifecycle-viewmodel-ktx",
+      "version": "2.9.4",
+      "purl": "pkg:maven/androidx.lifecycle/lifecycle-viewmodel-ktx@2.9.4",
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "b7d58bb86bb8e2ccc607d1f8570e714810f7cfb3feba37d375ff1646383435a1"
+        }
+      ],
+      "properties": [
+        {
+          "name": "artifact:filename",
+          "value": "lifecycle-viewmodel-ktx-2.9.4.aar"
+        },
+        {
+          "name": "gradle:configurations",
+          "value": "debugRuntimeClasspath,releaseRuntimeClasspath"
+        }
+      ],
+      "licenses": [
+        {
+          "license": {
+            "name": "The Apache Software License, Version 2.0"
+          }
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:maven/androidx.lifecycle/lifecycle-viewmodel-savedstate-android@2.9.4?artifact_sha256=079441c43fa3ff8ea7a02df3b12eec483c3e57583f832cfaff663750527c1421",
+      "group": "androidx.lifecycle",
+      "name": "lifecycle-viewmodel-savedstate-android",
+      "version": "2.9.4",
+      "purl": "pkg:maven/androidx.lifecycle/lifecycle-viewmodel-savedstate-android@2.9.4",
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "079441c43fa3ff8ea7a02df3b12eec483c3e57583f832cfaff663750527c1421"
+        }
+      ],
+      "properties": [
+        {
+          "name": "artifact:filename",
+          "value": "lifecycle-viewmodel-savedstate-release.aar"
+        },
+        {
+          "name": "gradle:configurations",
+          "value": "debugRuntimeClasspath,releaseRuntimeClasspath"
+        }
+      ],
+      "licenses": [
+        {
+          "license": {
+            "name": "The Apache Software License, Version 2.0"
+          }
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:maven/androidx.lifecycle/lifecycle-viewmodel@2.9.4?artifact_sha256=cab404b05d5faed209104a2aef14c0cbb316ab9fabe4a8f037b043e5d2f43435",
+      "group": "androidx.lifecycle",
+      "name": "lifecycle-viewmodel",
+      "version": "2.9.4",
+      "purl": "pkg:maven/androidx.lifecycle/lifecycle-viewmodel@2.9.4",
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "cab404b05d5faed209104a2aef14c0cbb316ab9fabe4a8f037b043e5d2f43435"
+        }
+      ],
+      "properties": [
+        {
+          "name": "artifact:filename",
+          "value": "lifecycle-viewmodel-2.9.4.aar"
+        },
+        {
+          "name": "gradle:configurations",
+          "value": "debugRuntimeClasspath,releaseRuntimeClasspath"
+        }
+      ],
+      "licenses": [
+        {
+          "license": {
+            "name": "The Apache Software License, Version 2.0"
+          }
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:maven/androidx.loader/loader@1.0.0?artifact_sha256=11f735cb3b55c458d470bed9e25254375b518b4b1bad6926783a7026db0f5025",
+      "group": "androidx.loader",
+      "name": "loader",
+      "version": "1.0.0",
+      "purl": "pkg:maven/androidx.loader/loader@1.0.0",
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "11f735cb3b55c458d470bed9e25254375b518b4b1bad6926783a7026db0f5025"
+        }
+      ],
+      "properties": [
+        {
+          "name": "artifact:filename",
+          "value": "loader-1.0.0.aar"
+        },
+        {
+          "name": "gradle:configurations",
+          "value": "debugRuntimeClasspath,releaseRuntimeClasspath"
+        }
+      ],
+      "licenses": [
+        {
+          "license": {
+            "name": "The Apache Software License, Version 2.0"
+          }
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:maven/androidx.localbroadcastmanager/localbroadcastmanager@1.0.0?artifact_sha256=e71c328ceef5c4a7d76f2d86df1b65d65fe2acf868b1a4efd84a3f34336186d8",
+      "group": "androidx.localbroadcastmanager",
+      "name": "localbroadcastmanager",
+      "version": "1.0.0",
+      "purl": "pkg:maven/androidx.localbroadcastmanager/localbroadcastmanager@1.0.0",
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "e71c328ceef5c4a7d76f2d86df1b65d65fe2acf868b1a4efd84a3f34336186d8"
+        }
+      ],
+      "properties": [
+        {
+          "name": "artifact:filename",
+          "value": "localbroadcastmanager-1.0.0.aar"
+        },
+        {
+          "name": "gradle:configurations",
+          "value": "debugRuntimeClasspath,releaseRuntimeClasspath"
+        }
+      ],
+      "licenses": [
+        {
+          "license": {
+            "name": "The Apache Software License, Version 2.0"
+          }
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:maven/androidx.media3/media3-common@1.4.1?artifact_sha256=973e5e7b0ecf8e6c8cd825cab35145b84c56020af7c3ec52815e595ef71baa16",
+      "group": "androidx.media3",
+      "name": "media3-common",
+      "version": "1.4.1",
+      "purl": "pkg:maven/androidx.media3/media3-common@1.4.1",
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "973e5e7b0ecf8e6c8cd825cab35145b84c56020af7c3ec52815e595ef71baa16"
+        }
+      ],
+      "properties": [
+        {
+          "name": "artifact:filename",
+          "value": "media3-common-1.4.1.aar"
+        },
+        {
+          "name": "gradle:configurations",
+          "value": "debugRuntimeClasspath,releaseRuntimeClasspath"
+        }
+      ],
+      "licenses": [
+        {
+          "license": {
+            "name": "The Apache Software License, Version 2.0"
+          }
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:maven/androidx.media3/media3-container@1.4.1?artifact_sha256=65b6d22c96dfb5ce76754b08f5b004ee0dbdbe60793c5eab9f95c1f54f95f4b0",
+      "group": "androidx.media3",
+      "name": "media3-container",
+      "version": "1.4.1",
+      "purl": "pkg:maven/androidx.media3/media3-container@1.4.1",
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "65b6d22c96dfb5ce76754b08f5b004ee0dbdbe60793c5eab9f95c1f54f95f4b0"
+        }
+      ],
+      "properties": [
+        {
+          "name": "artifact:filename",
+          "value": "media3-container-1.4.1.aar"
+        },
+        {
+          "name": "gradle:configurations",
+          "value": "debugRuntimeClasspath,releaseRuntimeClasspath"
+        }
+      ],
+      "licenses": [
+        {
+          "license": {
+            "name": "The Apache Software License, Version 2.0"
+          }
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:maven/androidx.media3/media3-database@1.4.1?artifact_sha256=2170ae6448cd499fc570dafa81e5687ad813995b7c2b7ff6801acaaa9a88bb4a",
+      "group": "androidx.media3",
+      "name": "media3-database",
+      "version": "1.4.1",
+      "purl": "pkg:maven/androidx.media3/media3-database@1.4.1",
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "2170ae6448cd499fc570dafa81e5687ad813995b7c2b7ff6801acaaa9a88bb4a"
+        }
+      ],
+      "properties": [
+        {
+          "name": "artifact:filename",
+          "value": "media3-database-1.4.1.aar"
+        },
+        {
+          "name": "gradle:configurations",
+          "value": "debugRuntimeClasspath,releaseRuntimeClasspath"
+        }
+      ],
+      "licenses": [
+        {
+          "license": {
+            "name": "The Apache Software License, Version 2.0"
+          }
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:maven/androidx.media3/media3-datasource@1.4.1?artifact_sha256=1c0bb41ee88a6bfaf24720bbfe2d29a033abad21c30e0921efbdce6c1fa28842",
+      "group": "androidx.media3",
+      "name": "media3-datasource",
+      "version": "1.4.1",
+      "purl": "pkg:maven/androidx.media3/media3-datasource@1.4.1",
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "1c0bb41ee88a6bfaf24720bbfe2d29a033abad21c30e0921efbdce6c1fa28842"
+        }
+      ],
+      "properties": [
+        {
+          "name": "artifact:filename",
+          "value": "media3-datasource-1.4.1.aar"
+        },
+        {
+          "name": "gradle:configurations",
+          "value": "debugRuntimeClasspath,releaseRuntimeClasspath"
+        }
+      ],
+      "licenses": [
+        {
+          "license": {
+            "name": "The Apache Software License, Version 2.0"
+          }
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:maven/androidx.media3/media3-decoder@1.4.1?artifact_sha256=f7d97c5a39dca3c3c21bc8a70145d931d8633ed0dae89198c370e7b7e3c3f183",
+      "group": "androidx.media3",
+      "name": "media3-decoder",
+      "version": "1.4.1",
+      "purl": "pkg:maven/androidx.media3/media3-decoder@1.4.1",
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "f7d97c5a39dca3c3c21bc8a70145d931d8633ed0dae89198c370e7b7e3c3f183"
+        }
+      ],
+      "properties": [
+        {
+          "name": "artifact:filename",
+          "value": "media3-decoder-1.4.1.aar"
+        },
+        {
+          "name": "gradle:configurations",
+          "value": "debugRuntimeClasspath,releaseRuntimeClasspath"
+        }
+      ],
+      "licenses": [
+        {
+          "license": {
+            "name": "The Apache Software License, Version 2.0"
+          }
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:maven/androidx.media3/media3-exoplayer-hls@1.4.1?artifact_sha256=43546b6b2ef0c2816f5d3af181c2179a5c1bddb9df85b7b84b3428cd37c887de",
+      "group": "androidx.media3",
+      "name": "media3-exoplayer-hls",
+      "version": "1.4.1",
+      "purl": "pkg:maven/androidx.media3/media3-exoplayer-hls@1.4.1",
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "43546b6b2ef0c2816f5d3af181c2179a5c1bddb9df85b7b84b3428cd37c887de"
+        }
+      ],
+      "properties": [
+        {
+          "name": "artifact:filename",
+          "value": "media3-exoplayer-hls-1.4.1.aar"
+        },
+        {
+          "name": "gradle:configurations",
+          "value": "debugRuntimeClasspath,releaseRuntimeClasspath"
+        }
+      ],
+      "licenses": [
+        {
+          "license": {
+            "name": "The Apache Software License, Version 2.0"
+          }
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:maven/androidx.media3/media3-exoplayer@1.4.1?artifact_sha256=66cd0f99209191660823d32c8fc329e383a8a7ff33e0d676632387361abcba70",
+      "group": "androidx.media3",
+      "name": "media3-exoplayer",
+      "version": "1.4.1",
+      "purl": "pkg:maven/androidx.media3/media3-exoplayer@1.4.1",
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "66cd0f99209191660823d32c8fc329e383a8a7ff33e0d676632387361abcba70"
+        }
+      ],
+      "properties": [
+        {
+          "name": "artifact:filename",
+          "value": "media3-exoplayer-1.4.1.aar"
+        },
+        {
+          "name": "gradle:configurations",
+          "value": "debugRuntimeClasspath,releaseRuntimeClasspath"
+        }
+      ],
+      "licenses": [
+        {
+          "license": {
+            "name": "The Apache Software License, Version 2.0"
+          }
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:maven/androidx.media3/media3-extractor@1.4.1?artifact_sha256=1f51e4633e1e6137f0a4b80552afc399e269208b700352f96543d4513be6bf28",
+      "group": "androidx.media3",
+      "name": "media3-extractor",
+      "version": "1.4.1",
+      "purl": "pkg:maven/androidx.media3/media3-extractor@1.4.1",
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "1f51e4633e1e6137f0a4b80552afc399e269208b700352f96543d4513be6bf28"
+        }
+      ],
+      "properties": [
+        {
+          "name": "artifact:filename",
+          "value": "media3-extractor-1.4.1.aar"
+        },
+        {
+          "name": "gradle:configurations",
+          "value": "debugRuntimeClasspath,releaseRuntimeClasspath"
+        }
+      ],
+      "licenses": [
+        {
+          "license": {
+            "name": "The Apache Software License, Version 2.0"
+          }
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:maven/androidx.media3/media3-ui@1.4.1?artifact_sha256=ea604f1a88fe691b1d4dab8ae3a3de110729341629dd69311ee83611e32c97b2",
+      "group": "androidx.media3",
+      "name": "media3-ui",
+      "version": "1.4.1",
+      "purl": "pkg:maven/androidx.media3/media3-ui@1.4.1",
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "ea604f1a88fe691b1d4dab8ae3a3de110729341629dd69311ee83611e32c97b2"
+        }
+      ],
+      "properties": [
+        {
+          "name": "artifact:filename",
+          "value": "media3-ui-1.4.1.aar"
+        },
+        {
+          "name": "gradle:configurations",
+          "value": "debugRuntimeClasspath,releaseRuntimeClasspath"
+        }
+      ],
+      "licenses": [
+        {
+          "license": {
+            "name": "The Apache Software License, Version 2.0"
+          }
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:maven/androidx.media/media@1.7.0?artifact_sha256=81a199ee87c6d3d59fb35f7dbec71b3f1d507128611099b6ac3a4b1c5a0bf1f9",
+      "group": "androidx.media",
+      "name": "media",
+      "version": "1.7.0",
+      "purl": "pkg:maven/androidx.media/media@1.7.0",
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "81a199ee87c6d3d59fb35f7dbec71b3f1d507128611099b6ac3a4b1c5a0bf1f9"
+        }
+      ],
+      "properties": [
+        {
+          "name": "artifact:filename",
+          "value": "media-1.7.0.aar"
+        },
+        {
+          "name": "gradle:configurations",
+          "value": "debugRuntimeClasspath,releaseRuntimeClasspath"
+        }
+      ],
+      "licenses": [
+        {
+          "license": {
+            "name": "The Apache Software License, Version 2.0"
+          }
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:maven/androidx.navigation/navigation-common-ktx@2.8.0?artifact_sha256=328a8d811891ada8ea4ad6c9715f55c435f2b4b9bce3c1c8863b0d8d7e1d0173",
+      "group": "androidx.navigation",
+      "name": "navigation-common-ktx",
+      "version": "2.8.0",
+      "purl": "pkg:maven/androidx.navigation/navigation-common-ktx@2.8.0",
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "328a8d811891ada8ea4ad6c9715f55c435f2b4b9bce3c1c8863b0d8d7e1d0173"
+        }
+      ],
+      "properties": [
+        {
+          "name": "artifact:filename",
+          "value": "navigation-common-ktx-2.8.0.aar"
+        },
+        {
+          "name": "gradle:configurations",
+          "value": "debugRuntimeClasspath,releaseRuntimeClasspath"
+        }
+      ],
+      "licenses": [
+        {
+          "license": {
+            "name": "The Apache Software License, Version 2.0"
+          }
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:maven/androidx.navigation/navigation-common@2.8.0?artifact_sha256=8fdb6996c51d3ee3f2cd0d75da0407781cb2646658090e8416ce617a13a46d6d",
+      "group": "androidx.navigation",
+      "name": "navigation-common",
+      "version": "2.8.0",
+      "purl": "pkg:maven/androidx.navigation/navigation-common@2.8.0",
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "8fdb6996c51d3ee3f2cd0d75da0407781cb2646658090e8416ce617a13a46d6d"
+        }
+      ],
+      "properties": [
+        {
+          "name": "artifact:filename",
+          "value": "navigation-common-2.8.0.aar"
+        },
+        {
+          "name": "gradle:configurations",
+          "value": "debugRuntimeClasspath,releaseRuntimeClasspath"
+        }
+      ],
+      "licenses": [
+        {
+          "license": {
+            "name": "The Apache Software License, Version 2.0"
+          }
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:maven/androidx.navigation/navigation-compose@2.8.0?artifact_sha256=09c4866ed227d75989569a64127ff3800d59317e1f051086c16ca51762b257c2",
+      "group": "androidx.navigation",
+      "name": "navigation-compose",
+      "version": "2.8.0",
+      "purl": "pkg:maven/androidx.navigation/navigation-compose@2.8.0",
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "09c4866ed227d75989569a64127ff3800d59317e1f051086c16ca51762b257c2"
+        }
+      ],
+      "properties": [
+        {
+          "name": "artifact:filename",
+          "value": "navigation-compose-2.8.0.aar"
+        },
+        {
+          "name": "gradle:configurations",
+          "value": "debugRuntimeClasspath,releaseRuntimeClasspath"
+        }
+      ],
+      "licenses": [
+        {
+          "license": {
+            "name": "The Apache Software License, Version 2.0"
+          }
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:maven/androidx.navigation/navigation-runtime-ktx@2.8.0?artifact_sha256=81e65aa0b48dca71216af1801f943b488fef174ec53d886c14f16bd4b1f5c64b",
+      "group": "androidx.navigation",
+      "name": "navigation-runtime-ktx",
+      "version": "2.8.0",
+      "purl": "pkg:maven/androidx.navigation/navigation-runtime-ktx@2.8.0",
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "81e65aa0b48dca71216af1801f943b488fef174ec53d886c14f16bd4b1f5c64b"
+        }
+      ],
+      "properties": [
+        {
+          "name": "artifact:filename",
+          "value": "navigation-runtime-ktx-2.8.0.aar"
+        },
+        {
+          "name": "gradle:configurations",
+          "value": "debugRuntimeClasspath,releaseRuntimeClasspath"
+        }
+      ],
+      "licenses": [
+        {
+          "license": {
+            "name": "The Apache Software License, Version 2.0"
+          }
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:maven/androidx.navigation/navigation-runtime@2.8.0?artifact_sha256=de61b206d6f5fcf50ac1bffffcc21563e784831baa29880b44ad9e4d33d5ba88",
+      "group": "androidx.navigation",
+      "name": "navigation-runtime",
+      "version": "2.8.0",
+      "purl": "pkg:maven/androidx.navigation/navigation-runtime@2.8.0",
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "de61b206d6f5fcf50ac1bffffcc21563e784831baa29880b44ad9e4d33d5ba88"
+        }
+      ],
+      "properties": [
+        {
+          "name": "artifact:filename",
+          "value": "navigation-runtime-2.8.0.aar"
+        },
+        {
+          "name": "gradle:configurations",
+          "value": "debugRuntimeClasspath,releaseRuntimeClasspath"
+        }
+      ],
+      "licenses": [
+        {
+          "license": {
+            "name": "The Apache Software License, Version 2.0"
+          }
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:maven/androidx.print/print@1.0.0?artifact_sha256=1d5c7f3135a1bba661fc373fd72e11eb0a4adbb3396787826dd8e4190d5d9edd",
+      "group": "androidx.print",
+      "name": "print",
+      "version": "1.0.0",
+      "purl": "pkg:maven/androidx.print/print@1.0.0",
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "1d5c7f3135a1bba661fc373fd72e11eb0a4adbb3396787826dd8e4190d5d9edd"
+        }
+      ],
+      "properties": [
+        {
+          "name": "artifact:filename",
+          "value": "print-1.0.0.aar"
+        },
+        {
+          "name": "gradle:configurations",
+          "value": "debugRuntimeClasspath,releaseRuntimeClasspath"
+        }
+      ],
+      "licenses": [
+        {
+          "license": {
+            "name": "The Apache Software License, Version 2.0"
+          }
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:maven/androidx.profileinstaller/profileinstaller@1.4.0?artifact_sha256=d502141fcce902430f62b674c32aecd0f75262e7ee2cd15c74adb617cd13130a",
+      "group": "androidx.profileinstaller",
+      "name": "profileinstaller",
+      "version": "1.4.0",
+      "purl": "pkg:maven/androidx.profileinstaller/profileinstaller@1.4.0",
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "d502141fcce902430f62b674c32aecd0f75262e7ee2cd15c74adb617cd13130a"
+        }
+      ],
+      "properties": [
+        {
+          "name": "artifact:filename",
+          "value": "profileinstaller-1.4.0.aar"
+        },
+        {
+          "name": "gradle:configurations",
+          "value": "debugRuntimeClasspath,releaseRuntimeClasspath"
+        }
+      ],
+      "licenses": [
+        {
+          "license": {
+            "name": "The Apache Software License, Version 2.0"
+          }
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:maven/androidx.recyclerview/recyclerview@1.3.0?artifact_sha256=d65928a00f63589a49e21925412e0f48852f89254b07b03c030d560f91effc88",
+      "group": "androidx.recyclerview",
+      "name": "recyclerview",
+      "version": "1.3.0",
+      "purl": "pkg:maven/androidx.recyclerview/recyclerview@1.3.0",
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "d65928a00f63589a49e21925412e0f48852f89254b07b03c030d560f91effc88"
+        }
+      ],
+      "properties": [
+        {
+          "name": "artifact:filename",
+          "value": "recyclerview-1.3.0.aar"
+        },
+        {
+          "name": "gradle:configurations",
+          "value": "debugRuntimeClasspath,releaseRuntimeClasspath"
+        }
+      ],
+      "licenses": [
+        {
+          "license": {
+            "name": "The Apache Software License, Version 2.0"
+          }
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:maven/androidx.savedstate/savedstate-android@1.3.2?artifact_sha256=1e26f137705596d09d3f4f52559a29026d9a1a6688be7f1a948316a4f1e39b20",
+      "group": "androidx.savedstate",
+      "name": "savedstate-android",
+      "version": "1.3.2",
+      "purl": "pkg:maven/androidx.savedstate/savedstate-android@1.3.2",
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "1e26f137705596d09d3f4f52559a29026d9a1a6688be7f1a948316a4f1e39b20"
+        }
+      ],
+      "properties": [
+        {
+          "name": "artifact:filename",
+          "value": "savedstate-release.aar"
+        },
+        {
+          "name": "gradle:configurations",
+          "value": "debugRuntimeClasspath,releaseRuntimeClasspath"
+        }
+      ],
+      "licenses": [
+        {
+          "license": {
+            "name": "The Apache Software License, Version 2.0"
+          }
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:maven/androidx.savedstate/savedstate-compose-android@1.3.2?artifact_sha256=93426691f25441cc3179494b25f401a8a468aabbee4c40b90c0327413fd65523",
+      "group": "androidx.savedstate",
+      "name": "savedstate-compose-android",
+      "version": "1.3.2",
+      "purl": "pkg:maven/androidx.savedstate/savedstate-compose-android@1.3.2",
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "93426691f25441cc3179494b25f401a8a468aabbee4c40b90c0327413fd65523"
+        }
+      ],
+      "properties": [
+        {
+          "name": "artifact:filename",
+          "value": "savedstate-compose.aar"
+        },
+        {
+          "name": "gradle:configurations",
+          "value": "debugRuntimeClasspath,releaseRuntimeClasspath"
+        }
+      ],
+      "licenses": [
+        {
+          "license": {
+            "name": "The Apache Software License, Version 2.0"
+          }
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:maven/androidx.savedstate/savedstate-ktx@1.3.2?artifact_sha256=1c300732ece8e9d0001fb19cc693b0f77f19e77cdf90ca5c4cd56d5e6951d02b",
+      "group": "androidx.savedstate",
+      "name": "savedstate-ktx",
+      "version": "1.3.2",
+      "purl": "pkg:maven/androidx.savedstate/savedstate-ktx@1.3.2",
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "1c300732ece8e9d0001fb19cc693b0f77f19e77cdf90ca5c4cd56d5e6951d02b"
+        }
+      ],
+      "properties": [
+        {
+          "name": "artifact:filename",
+          "value": "savedstate-ktx-1.3.2.aar"
+        },
+        {
+          "name": "gradle:configurations",
+          "value": "debugRuntimeClasspath,releaseRuntimeClasspath"
+        }
+      ],
+      "licenses": [
+        {
+          "license": {
+            "name": "The Apache Software License, Version 2.0"
+          }
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:maven/androidx.security/security-crypto@1.0.0?artifact_sha256=ceb6fdab1902eba172dc5eacc51a1b3afc70d4f934a0c1ecf83c352fc334e07f",
+      "group": "androidx.security",
+      "name": "security-crypto",
+      "version": "1.0.0",
+      "purl": "pkg:maven/androidx.security/security-crypto@1.0.0",
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "ceb6fdab1902eba172dc5eacc51a1b3afc70d4f934a0c1ecf83c352fc334e07f"
+        }
+      ],
+      "properties": [
+        {
+          "name": "artifact:filename",
+          "value": "security-crypto-1.0.0.aar"
+        },
+        {
+          "name": "gradle:configurations",
+          "value": "debugRuntimeClasspath,releaseRuntimeClasspath"
+        }
+      ],
+      "licenses": [
+        {
+          "license": {
+            "name": "The Apache Software License, Version 2.0"
+          }
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:maven/androidx.startup/startup-runtime@1.1.1?artifact_sha256=e0a6329a371262fe4c450372b70fdaf33b769ef6917094723787cfce896b1dd3",
+      "group": "androidx.startup",
+      "name": "startup-runtime",
+      "version": "1.1.1",
+      "purl": "pkg:maven/androidx.startup/startup-runtime@1.1.1",
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "e0a6329a371262fe4c450372b70fdaf33b769ef6917094723787cfce896b1dd3"
+        }
+      ],
+      "properties": [
+        {
+          "name": "artifact:filename",
+          "value": "startup-runtime-1.1.1.aar"
+        },
+        {
+          "name": "gradle:configurations",
+          "value": "debugRuntimeClasspath,releaseRuntimeClasspath"
+        }
+      ],
+      "licenses": [
+        {
+          "license": {
+            "name": "The Apache Software License, Version 2.0"
+          }
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:maven/androidx.tracing/tracing@1.2.0?artifact_sha256=6faa90390d1fdbf0adb9a99bf99de67b94c6c6f35aea9510593a9d17973736a2",
+      "group": "androidx.tracing",
+      "name": "tracing",
+      "version": "1.2.0",
+      "purl": "pkg:maven/androidx.tracing/tracing@1.2.0",
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "6faa90390d1fdbf0adb9a99bf99de67b94c6c6f35aea9510593a9d17973736a2"
+        }
+      ],
+      "properties": [
+        {
+          "name": "artifact:filename",
+          "value": "tracing-1.2.0.aar"
+        },
+        {
+          "name": "gradle:configurations",
+          "value": "debugRuntimeClasspath,releaseRuntimeClasspath"
+        }
+      ],
+      "licenses": [
+        {
+          "license": {
+            "name": "The Apache Software License, Version 2.0"
+          }
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:maven/androidx.transition/transition@1.6.0?artifact_sha256=248c45e1254d31181d2047b0b01394f09a2e539a5d9e89b773d53c62c96860f6",
+      "group": "androidx.transition",
+      "name": "transition",
+      "version": "1.6.0",
+      "purl": "pkg:maven/androidx.transition/transition@1.6.0",
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "248c45e1254d31181d2047b0b01394f09a2e539a5d9e89b773d53c62c96860f6"
+        }
+      ],
+      "properties": [
+        {
+          "name": "artifact:filename",
+          "value": "transition-1.6.0.aar"
+        },
+        {
+          "name": "gradle:configurations",
+          "value": "debugRuntimeClasspath,releaseRuntimeClasspath"
+        }
+      ],
+      "licenses": [
+        {
+          "license": {
+            "name": "The Apache Software License, Version 2.0"
+          }
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:maven/androidx.vectordrawable/vectordrawable-animated@1.1.0?artifact_sha256=76da2c502371d9c38054df5e2b248d00da87809ed058f3363eae87ce5e2403f8",
+      "group": "androidx.vectordrawable",
+      "name": "vectordrawable-animated",
+      "version": "1.1.0",
+      "purl": "pkg:maven/androidx.vectordrawable/vectordrawable-animated@1.1.0",
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "76da2c502371d9c38054df5e2b248d00da87809ed058f3363eae87ce5e2403f8"
+        }
+      ],
+      "properties": [
+        {
+          "name": "artifact:filename",
+          "value": "vectordrawable-animated-1.1.0.aar"
+        },
+        {
+          "name": "gradle:configurations",
+          "value": "debugRuntimeClasspath,releaseRuntimeClasspath"
+        }
+      ],
+      "licenses": [
+        {
+          "license": {
+            "name": "The Apache Software License, Version 2.0"
+          }
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:maven/androidx.vectordrawable/vectordrawable@1.1.0?artifact_sha256=46fd633ac01b49b7fcabc263bf098c5a8b9e9a69774d234edcca04fb02df8e26",
+      "group": "androidx.vectordrawable",
+      "name": "vectordrawable",
+      "version": "1.1.0",
+      "purl": "pkg:maven/androidx.vectordrawable/vectordrawable@1.1.0",
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "46fd633ac01b49b7fcabc263bf098c5a8b9e9a69774d234edcca04fb02df8e26"
+        }
+      ],
+      "properties": [
+        {
+          "name": "artifact:filename",
+          "value": "vectordrawable-1.1.0.aar"
+        },
+        {
+          "name": "gradle:configurations",
+          "value": "debugRuntimeClasspath,releaseRuntimeClasspath"
+        }
+      ],
+      "licenses": [
+        {
+          "license": {
+            "name": "The Apache Software License, Version 2.0"
+          }
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:maven/androidx.versionedparcelable/versionedparcelable@1.1.1?artifact_sha256=57e8d93260d18d5b9007c9eed3c64ad159de90c8609ebfc74a347cbd514535a4",
+      "group": "androidx.versionedparcelable",
+      "name": "versionedparcelable",
+      "version": "1.1.1",
+      "purl": "pkg:maven/androidx.versionedparcelable/versionedparcelable@1.1.1",
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "57e8d93260d18d5b9007c9eed3c64ad159de90c8609ebfc74a347cbd514535a4"
+        }
+      ],
+      "properties": [
+        {
+          "name": "artifact:filename",
+          "value": "versionedparcelable-1.1.1.aar"
+        },
+        {
+          "name": "gradle:configurations",
+          "value": "debugRuntimeClasspath,releaseRuntimeClasspath"
+        }
+      ],
+      "licenses": [
+        {
+          "license": {
+            "name": "The Apache Software License, Version 2.0"
+          }
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:maven/androidx.viewpager/viewpager@1.0.0?artifact_sha256=147af4e14a1984010d8f155e5e19d781f03c1d70dfed02a8e0d18428b8fc8682",
+      "group": "androidx.viewpager",
+      "name": "viewpager",
+      "version": "1.0.0",
+      "purl": "pkg:maven/androidx.viewpager/viewpager@1.0.0",
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "147af4e14a1984010d8f155e5e19d781f03c1d70dfed02a8e0d18428b8fc8682"
+        }
+      ],
+      "properties": [
+        {
+          "name": "artifact:filename",
+          "value": "viewpager-1.0.0.aar"
+        },
+        {
+          "name": "gradle:configurations",
+          "value": "debugRuntimeClasspath,releaseRuntimeClasspath"
+        }
+      ],
+      "licenses": [
+        {
+          "license": {
+            "name": "The Apache Software License, Version 2.0"
+          }
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:maven/androidx.window/window-core-android@1.5.0?artifact_sha256=d0d50db0756194a6d49a66ad8dafd17b24b4c5fbd8379375056e2eb9bdfeaf22",
+      "group": "androidx.window",
+      "name": "window-core-android",
+      "version": "1.5.0",
+      "purl": "pkg:maven/androidx.window/window-core-android@1.5.0",
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "d0d50db0756194a6d49a66ad8dafd17b24b4c5fbd8379375056e2eb9bdfeaf22"
+        }
+      ],
+      "properties": [
+        {
+          "name": "artifact:filename",
+          "value": "window-core.aar"
+        },
+        {
+          "name": "gradle:configurations",
+          "value": "debugRuntimeClasspath,releaseRuntimeClasspath"
+        }
+      ],
+      "licenses": [
+        {
+          "license": {
+            "name": "The Apache Software License, Version 2.0"
+          }
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:maven/androidx.window/window@1.5.0?artifact_sha256=5de2d48aa578402f46deb5294a955cee62f0c7d8c1840ef626fc7afb8abe22f9",
+      "group": "androidx.window",
+      "name": "window",
+      "version": "1.5.0",
+      "purl": "pkg:maven/androidx.window/window@1.5.0",
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "5de2d48aa578402f46deb5294a955cee62f0c7d8c1840ef626fc7afb8abe22f9"
+        }
+      ],
+      "properties": [
+        {
+          "name": "artifact:filename",
+          "value": "window-1.5.0.aar"
+        },
+        {
+          "name": "gradle:configurations",
+          "value": "debugRuntimeClasspath,releaseRuntimeClasspath"
+        }
+      ],
+      "licenses": [
+        {
+          "license": {
+            "name": "The Apache Software License, Version 2.0"
+          }
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:maven/com.google.accompanist/accompanist-drawablepainter@0.32.0?artifact_sha256=680d27950f91ba186aa14522ad019dad92c702248d110ebdd6c497734abd7da0",
+      "group": "com.google.accompanist",
+      "name": "accompanist-drawablepainter",
+      "version": "0.32.0",
+      "purl": "pkg:maven/com.google.accompanist/accompanist-drawablepainter@0.32.0",
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "680d27950f91ba186aa14522ad019dad92c702248d110ebdd6c497734abd7da0"
+        }
+      ],
+      "properties": [
+        {
+          "name": "artifact:filename",
+          "value": "accompanist-drawablepainter-0.32.0.aar"
+        },
+        {
+          "name": "gradle:configurations",
+          "value": "debugRuntimeClasspath,releaseRuntimeClasspath"
+        }
+      ],
+      "licenses": [
+        {
+          "license": {
+            "name": "The Apache Software License, Version 2.0"
+          }
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:maven/com.google.android.datatransport/transport-api@3.1.0?artifact_sha256=7dafc39f0ea835473366acc346f7e67fc8443f4c645d999c3e987bcad6b88c7b",
+      "group": "com.google.android.datatransport",
+      "name": "transport-api",
+      "version": "3.1.0",
+      "purl": "pkg:maven/com.google.android.datatransport/transport-api@3.1.0",
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "7dafc39f0ea835473366acc346f7e67fc8443f4c645d999c3e987bcad6b88c7b"
+        }
+      ],
+      "properties": [
+        {
+          "name": "artifact:filename",
+          "value": "transport-api-3.1.0.aar"
+        },
+        {
+          "name": "gradle:configurations",
+          "value": "debugRuntimeClasspath,releaseRuntimeClasspath"
+        }
+      ],
+      "licenses": [
+        {
+          "license": {
+            "name": "The Apache Software License, Version 2.0"
+          }
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:maven/com.google.android.datatransport/transport-backend-cct@3.1.9?artifact_sha256=07a32025a65b08ee7e11d14dc539a758b66713f0c1d13900a81599ceadbaf44d",
+      "group": "com.google.android.datatransport",
+      "name": "transport-backend-cct",
+      "version": "3.1.9",
+      "purl": "pkg:maven/com.google.android.datatransport/transport-backend-cct@3.1.9",
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "07a32025a65b08ee7e11d14dc539a758b66713f0c1d13900a81599ceadbaf44d"
+        }
+      ],
+      "properties": [
+        {
+          "name": "artifact:filename",
+          "value": "transport-backend-cct-3.1.9.aar"
+        },
+        {
+          "name": "gradle:configurations",
+          "value": "debugRuntimeClasspath,releaseRuntimeClasspath"
+        }
+      ],
+      "licenses": [
+        {
+          "license": {
+            "name": "The Apache Software License, Version 2.0"
+          }
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:maven/com.google.android.datatransport/transport-runtime@3.1.9?artifact_sha256=41745c5b8f427d24439015b84f651ad420718991867d2afc262c264009b802c1",
+      "group": "com.google.android.datatransport",
+      "name": "transport-runtime",
+      "version": "3.1.9",
+      "purl": "pkg:maven/com.google.android.datatransport/transport-runtime@3.1.9",
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "41745c5b8f427d24439015b84f651ad420718991867d2afc262c264009b802c1"
+        }
+      ],
+      "properties": [
+        {
+          "name": "artifact:filename",
+          "value": "transport-runtime-3.1.9.aar"
+        },
+        {
+          "name": "gradle:configurations",
+          "value": "debugRuntimeClasspath,releaseRuntimeClasspath"
+        }
+      ],
+      "licenses": [
+        {
+          "license": {
+            "name": "The Apache Software License, Version 2.0"
+          }
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:maven/com.google.android.gms/play-services-base@18.0.1?artifact_sha256=2896d76f432be52167295bb9ce45ade25c310aeffc04d28cf8db6a15868e83de",
+      "group": "com.google.android.gms",
+      "name": "play-services-base",
+      "version": "18.0.1",
+      "purl": "pkg:maven/com.google.android.gms/play-services-base@18.0.1",
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "2896d76f432be52167295bb9ce45ade25c310aeffc04d28cf8db6a15868e83de"
+        }
+      ],
+      "properties": [
+        {
+          "name": "artifact:filename",
+          "value": "play-services-base-18.0.1.aar"
+        },
+        {
+          "name": "gradle:configurations",
+          "value": "debugRuntimeClasspath,releaseRuntimeClasspath"
+        }
+      ],
+      "licenses": [
+        {
+          "license": {
+            "name": "Android Software Development Kit License"
+          }
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:maven/com.google.android.gms/play-services-basement@18.3.0?artifact_sha256=6c11ae3eb2dd7f17373f919c4c557a70e4cf891bc0c9b66926a0a6445d654352",
+      "group": "com.google.android.gms",
+      "name": "play-services-basement",
+      "version": "18.3.0",
+      "purl": "pkg:maven/com.google.android.gms/play-services-basement@18.3.0",
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "6c11ae3eb2dd7f17373f919c4c557a70e4cf891bc0c9b66926a0a6445d654352"
+        }
+      ],
+      "properties": [
+        {
+          "name": "artifact:filename",
+          "value": "play-services-basement-18.3.0.aar"
+        },
+        {
+          "name": "gradle:configurations",
+          "value": "debugRuntimeClasspath,releaseRuntimeClasspath"
+        }
+      ],
+      "licenses": [
+        {
+          "license": {
+            "name": "Android Software Development Kit License"
+          }
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:maven/com.google.android.gms/play-services-cloud-messaging@17.2.0?artifact_sha256=27255e7fe9706483816b158db25cf319f6a26a0566feff41597ce8807a350e37",
+      "group": "com.google.android.gms",
+      "name": "play-services-cloud-messaging",
+      "version": "17.2.0",
+      "purl": "pkg:maven/com.google.android.gms/play-services-cloud-messaging@17.2.0",
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "27255e7fe9706483816b158db25cf319f6a26a0566feff41597ce8807a350e37"
+        }
+      ],
+      "properties": [
+        {
+          "name": "artifact:filename",
+          "value": "play-services-cloud-messaging-17.2.0.aar"
+        },
+        {
+          "name": "gradle:configurations",
+          "value": "debugRuntimeClasspath,releaseRuntimeClasspath"
+        }
+      ],
+      "licenses": [
+        {
+          "license": {
+            "name": "Android Software Development Kit License"
+          }
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:maven/com.google.android.gms/play-services-stats@17.0.2?artifact_sha256=dd4314a53f49a378ec146103d36232b96c75454d29526336ccbdf132941764d3",
+      "group": "com.google.android.gms",
+      "name": "play-services-stats",
+      "version": "17.0.2",
+      "purl": "pkg:maven/com.google.android.gms/play-services-stats@17.0.2",
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "dd4314a53f49a378ec146103d36232b96c75454d29526336ccbdf132941764d3"
+        }
+      ],
+      "properties": [
+        {
+          "name": "artifact:filename",
+          "value": "play-services-stats-17.0.2.aar"
+        },
+        {
+          "name": "gradle:configurations",
+          "value": "debugRuntimeClasspath,releaseRuntimeClasspath"
+        }
+      ],
+      "licenses": [
+        {
+          "license": {
+            "name": "Android Software Development Kit License"
+          }
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:maven/com.google.android.gms/play-services-tasks@18.1.0?artifact_sha256=d60575eae39350e6234858bc9d7d775375707ae82a684e6caf7f3e41a12e25a2",
+      "group": "com.google.android.gms",
+      "name": "play-services-tasks",
+      "version": "18.1.0",
+      "purl": "pkg:maven/com.google.android.gms/play-services-tasks@18.1.0",
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "d60575eae39350e6234858bc9d7d775375707ae82a684e6caf7f3e41a12e25a2"
+        }
+      ],
+      "properties": [
+        {
+          "name": "artifact:filename",
+          "value": "play-services-tasks-18.1.0.aar"
+        },
+        {
+          "name": "gradle:configurations",
+          "value": "debugRuntimeClasspath,releaseRuntimeClasspath"
+        }
+      ],
+      "licenses": [
+        {
+          "license": {
+            "name": "Android Software Development Kit License"
+          }
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:maven/com.google.code.gson/gson@2.10.1?artifact_sha256=4241c14a7727c34feea6507ec801318a3d4a90f070e4525681079fb94ee4c593",
+      "group": "com.google.code.gson",
+      "name": "gson",
+      "version": "2.10.1",
+      "purl": "pkg:maven/com.google.code.gson/gson@2.10.1",
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "4241c14a7727c34feea6507ec801318a3d4a90f070e4525681079fb94ee4c593"
+        }
+      ],
+      "properties": [
+        {
+          "name": "artifact:filename",
+          "value": "gson-2.10.1.jar"
+        },
+        {
+          "name": "gradle:configurations",
+          "value": "debugRuntimeClasspath,releaseRuntimeClasspath"
+        }
+      ],
+      "licenses": [
+        {
+          "license": {
+            "name": "Apache-2.0"
+          }
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:maven/com.google.crypto.tink/tink-android@1.5.0?artifact_sha256=4024676e73e41bea07988caad223fadbda93776fd40644c2c494ced8d6c236e9",
+      "group": "com.google.crypto.tink",
+      "name": "tink-android",
+      "version": "1.5.0",
+      "purl": "pkg:maven/com.google.crypto.tink/tink-android@1.5.0",
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "4024676e73e41bea07988caad223fadbda93776fd40644c2c494ced8d6c236e9"
+        }
+      ],
+      "properties": [
+        {
+          "name": "artifact:filename",
+          "value": "tink-android-1.5.0.jar"
+        },
+        {
+          "name": "gradle:configurations",
+          "value": "debugRuntimeClasspath,releaseRuntimeClasspath"
+        }
+      ],
+      "licenses": [
+        {
+          "license": {
+            "name": "Apache License, Version 2.0"
+          }
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:maven/com.google.errorprone/error_prone_annotations@2.26.0?artifact_sha256=53cdfc0beb2d766fe03b78f0b11d020554cd419879d20380c38fa1dcf2ba1b50",
+      "group": "com.google.errorprone",
+      "name": "error_prone_annotations",
+      "version": "2.26.0",
+      "purl": "pkg:maven/com.google.errorprone/error_prone_annotations@2.26.0",
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "53cdfc0beb2d766fe03b78f0b11d020554cd419879d20380c38fa1dcf2ba1b50"
+        }
+      ],
+      "properties": [
+        {
+          "name": "artifact:filename",
+          "value": "error_prone_annotations-2.26.0.jar"
+        },
+        {
+          "name": "gradle:configurations",
+          "value": "debugRuntimeClasspath,releaseRuntimeClasspath"
+        }
+      ],
+      "licenses": [
+        {
+          "license": {
+            "name": "Apache 2.0"
+          }
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:maven/com.google.firebase/firebase-annotations@16.2.0?artifact_sha256=46f6d5dfdd2ccf3c40de897a14bd9779314c3319f44bfd31e7e0a20d935a5e3e",
+      "group": "com.google.firebase",
+      "name": "firebase-annotations",
+      "version": "16.2.0",
+      "purl": "pkg:maven/com.google.firebase/firebase-annotations@16.2.0",
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "46f6d5dfdd2ccf3c40de897a14bd9779314c3319f44bfd31e7e0a20d935a5e3e"
+        }
+      ],
+      "properties": [
+        {
+          "name": "artifact:filename",
+          "value": "firebase-annotations-16.2.0.jar"
+        },
+        {
+          "name": "gradle:configurations",
+          "value": "debugRuntimeClasspath,releaseRuntimeClasspath"
+        }
+      ],
+      "licenses": [
+        {
+          "license": {
+            "name": "The Apache Software License, Version 2.0"
+          }
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:maven/com.google.firebase/firebase-common-ktx@21.0.0?artifact_sha256=25fc80c9bb9ecb1672908718c294afcc4ac1e47473677be060c795e04f120066",
+      "group": "com.google.firebase",
+      "name": "firebase-common-ktx",
+      "version": "21.0.0",
+      "purl": "pkg:maven/com.google.firebase/firebase-common-ktx@21.0.0",
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "25fc80c9bb9ecb1672908718c294afcc4ac1e47473677be060c795e04f120066"
+        }
+      ],
+      "properties": [
+        {
+          "name": "artifact:filename",
+          "value": "firebase-common-ktx-21.0.0.aar"
+        },
+        {
+          "name": "gradle:configurations",
+          "value": "debugRuntimeClasspath,releaseRuntimeClasspath"
+        }
+      ],
+      "licenses": [
+        {
+          "license": {
+            "name": "The Apache Software License, Version 2.0"
+          }
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:maven/com.google.firebase/firebase-common@21.0.0?artifact_sha256=379287d7171371512493681b398e78c341b333cf974ee81a18b1d56e7c2e385d",
+      "group": "com.google.firebase",
+      "name": "firebase-common",
+      "version": "21.0.0",
+      "purl": "pkg:maven/com.google.firebase/firebase-common@21.0.0",
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "379287d7171371512493681b398e78c341b333cf974ee81a18b1d56e7c2e385d"
+        }
+      ],
+      "properties": [
+        {
+          "name": "artifact:filename",
+          "value": "firebase-common-21.0.0.aar"
+        },
+        {
+          "name": "gradle:configurations",
+          "value": "debugRuntimeClasspath,releaseRuntimeClasspath"
+        }
+      ],
+      "licenses": [
+        {
+          "license": {
+            "name": "The Apache Software License, Version 2.0"
+          }
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:maven/com.google.firebase/firebase-components@18.0.0?artifact_sha256=c7c48a3a80f44a499ebd6473bcfc7dd5a45ef523fabe2414a62515ff3c640972",
+      "group": "com.google.firebase",
+      "name": "firebase-components",
+      "version": "18.0.0",
+      "purl": "pkg:maven/com.google.firebase/firebase-components@18.0.0",
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "c7c48a3a80f44a499ebd6473bcfc7dd5a45ef523fabe2414a62515ff3c640972"
+        }
+      ],
+      "properties": [
+        {
+          "name": "artifact:filename",
+          "value": "firebase-components-18.0.0.aar"
+        },
+        {
+          "name": "gradle:configurations",
+          "value": "debugRuntimeClasspath,releaseRuntimeClasspath"
+        }
+      ],
+      "licenses": [
+        {
+          "license": {
+            "name": "The Apache Software License, Version 2.0"
+          }
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:maven/com.google.firebase/firebase-datatransport@18.2.0?artifact_sha256=b2b28f6ba173f5e0c4fe3d36a2d7ee5239c7acbf4143b549ecf031a3485b35bb",
+      "group": "com.google.firebase",
+      "name": "firebase-datatransport",
+      "version": "18.2.0",
+      "purl": "pkg:maven/com.google.firebase/firebase-datatransport@18.2.0",
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "b2b28f6ba173f5e0c4fe3d36a2d7ee5239c7acbf4143b549ecf031a3485b35bb"
+        }
+      ],
+      "properties": [
+        {
+          "name": "artifact:filename",
+          "value": "firebase-datatransport-18.2.0.aar"
+        },
+        {
+          "name": "gradle:configurations",
+          "value": "debugRuntimeClasspath,releaseRuntimeClasspath"
+        }
+      ],
+      "licenses": [
+        {
+          "license": {
+            "name": "The Apache Software License, Version 2.0"
+          }
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:maven/com.google.firebase/firebase-encoders-json@18.0.0?artifact_sha256=80aece7e1ef58957ca2fc1957bc9208ec92a3a9528201331d3c63e3182570f97",
+      "group": "com.google.firebase",
+      "name": "firebase-encoders-json",
+      "version": "18.0.0",
+      "purl": "pkg:maven/com.google.firebase/firebase-encoders-json@18.0.0",
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "80aece7e1ef58957ca2fc1957bc9208ec92a3a9528201331d3c63e3182570f97"
+        }
+      ],
+      "properties": [
+        {
+          "name": "artifact:filename",
+          "value": "firebase-encoders-json-18.0.0.aar"
+        },
+        {
+          "name": "gradle:configurations",
+          "value": "debugRuntimeClasspath,releaseRuntimeClasspath"
+        }
+      ],
+      "licenses": [
+        {
+          "license": {
+            "name": "The Apache Software License, Version 2.0"
+          }
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:maven/com.google.firebase/firebase-encoders-proto@16.0.0?artifact_sha256=293db96a0d1d43f033167881b638d8fde844e4e5495f5101cf52295765295e0e",
+      "group": "com.google.firebase",
+      "name": "firebase-encoders-proto",
+      "version": "16.0.0",
+      "purl": "pkg:maven/com.google.firebase/firebase-encoders-proto@16.0.0",
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "293db96a0d1d43f033167881b638d8fde844e4e5495f5101cf52295765295e0e"
+        }
+      ],
+      "properties": [
+        {
+          "name": "artifact:filename",
+          "value": "firebase-encoders-proto-16.0.0.jar"
+        },
+        {
+          "name": "gradle:configurations",
+          "value": "debugRuntimeClasspath,releaseRuntimeClasspath"
+        }
+      ],
+      "licenses": [
+        {
+          "license": {
+            "name": "The Apache Software License, Version 2.0"
+          }
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:maven/com.google.firebase/firebase-encoders@17.0.0?artifact_sha256=282a5a703f9b7eb56508dde97ea918e95d73318b157050f457f7a86dca750150",
+      "group": "com.google.firebase",
+      "name": "firebase-encoders",
+      "version": "17.0.0",
+      "purl": "pkg:maven/com.google.firebase/firebase-encoders@17.0.0",
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "282a5a703f9b7eb56508dde97ea918e95d73318b157050f457f7a86dca750150"
+        }
+      ],
+      "properties": [
+        {
+          "name": "artifact:filename",
+          "value": "firebase-encoders-17.0.0.jar"
+        },
+        {
+          "name": "gradle:configurations",
+          "value": "debugRuntimeClasspath,releaseRuntimeClasspath"
+        }
+      ],
+      "licenses": [
+        {
+          "license": {
+            "name": "The Apache Software License, Version 2.0"
+          }
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:maven/com.google.firebase/firebase-iid-interop@17.1.0?artifact_sha256=0b7c3721c84b62e70415307239ed4a7f998989084bf2833f90b9f5bea3095a05",
+      "group": "com.google.firebase",
+      "name": "firebase-iid-interop",
+      "version": "17.1.0",
+      "purl": "pkg:maven/com.google.firebase/firebase-iid-interop@17.1.0",
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "0b7c3721c84b62e70415307239ed4a7f998989084bf2833f90b9f5bea3095a05"
+        }
+      ],
+      "properties": [
+        {
+          "name": "artifact:filename",
+          "value": "firebase-iid-interop-17.1.0.aar"
+        },
+        {
+          "name": "gradle:configurations",
+          "value": "debugRuntimeClasspath,releaseRuntimeClasspath"
+        }
+      ],
+      "licenses": [
+        {
+          "license": {
+            "name": "Android Software Development Kit License"
+          }
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:maven/com.google.firebase/firebase-installations-interop@17.1.1?artifact_sha256=fac650680f7921f4ab92f0bb21a09234b12cdaefab2cf70188281d7ea52b8dad",
+      "group": "com.google.firebase",
+      "name": "firebase-installations-interop",
+      "version": "17.1.1",
+      "purl": "pkg:maven/com.google.firebase/firebase-installations-interop@17.1.1",
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "fac650680f7921f4ab92f0bb21a09234b12cdaefab2cf70188281d7ea52b8dad"
+        }
+      ],
+      "properties": [
+        {
+          "name": "artifact:filename",
+          "value": "firebase-installations-interop-17.1.1.aar"
+        },
+        {
+          "name": "gradle:configurations",
+          "value": "debugRuntimeClasspath,releaseRuntimeClasspath"
+        }
+      ],
+      "licenses": [
+        {
+          "license": {
+            "name": "The Apache Software License, Version 2.0"
+          }
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:maven/com.google.firebase/firebase-installations@17.2.0?artifact_sha256=de011e6a3b7961de638f172f2cb66ba304eaa989662a9e2b0f48dff774ccc166",
+      "group": "com.google.firebase",
+      "name": "firebase-installations",
+      "version": "17.2.0",
+      "purl": "pkg:maven/com.google.firebase/firebase-installations@17.2.0",
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "de011e6a3b7961de638f172f2cb66ba304eaa989662a9e2b0f48dff774ccc166"
+        }
+      ],
+      "properties": [
+        {
+          "name": "artifact:filename",
+          "value": "firebase-installations-17.2.0.aar"
+        },
+        {
+          "name": "gradle:configurations",
+          "value": "debugRuntimeClasspath,releaseRuntimeClasspath"
+        }
+      ],
+      "licenses": [
+        {
+          "license": {
+            "name": "The Apache Software License, Version 2.0"
+          }
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:maven/com.google.firebase/firebase-measurement-connector@19.0.0?artifact_sha256=dba74d6bf94647ee397bf7afb2ab07f6fe8d13157e56785fa540a2a13ed82c99",
+      "group": "com.google.firebase",
+      "name": "firebase-measurement-connector",
+      "version": "19.0.0",
+      "purl": "pkg:maven/com.google.firebase/firebase-measurement-connector@19.0.0",
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "dba74d6bf94647ee397bf7afb2ab07f6fe8d13157e56785fa540a2a13ed82c99"
+        }
+      ],
+      "properties": [
+        {
+          "name": "artifact:filename",
+          "value": "firebase-measurement-connector-19.0.0.aar"
+        },
+        {
+          "name": "gradle:configurations",
+          "value": "debugRuntimeClasspath,releaseRuntimeClasspath"
+        }
+      ],
+      "licenses": [
+        {
+          "license": {
+            "name": "Android Software Development Kit License"
+          }
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:maven/com.google.firebase/firebase-messaging-ktx@24.0.0?artifact_sha256=3813e962226fc52a83af81d12f724997039039062f1c74dfddb73458497afb9c",
+      "group": "com.google.firebase",
+      "name": "firebase-messaging-ktx",
+      "version": "24.0.0",
+      "purl": "pkg:maven/com.google.firebase/firebase-messaging-ktx@24.0.0",
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "3813e962226fc52a83af81d12f724997039039062f1c74dfddb73458497afb9c"
+        }
+      ],
+      "properties": [
+        {
+          "name": "artifact:filename",
+          "value": "firebase-messaging-ktx-24.0.0.aar"
+        },
+        {
+          "name": "gradle:configurations",
+          "value": "debugRuntimeClasspath,releaseRuntimeClasspath"
+        }
+      ],
+      "licenses": [
+        {
+          "license": {
+            "name": "The Apache Software License, Version 2.0"
+          }
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:maven/com.google.firebase/firebase-messaging@24.0.0?artifact_sha256=6f22a7905a2d304d28724b0bacaf6717813693ffb7fcdb9cbfd9417881539c35",
+      "group": "com.google.firebase",
+      "name": "firebase-messaging",
+      "version": "24.0.0",
+      "purl": "pkg:maven/com.google.firebase/firebase-messaging@24.0.0",
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "6f22a7905a2d304d28724b0bacaf6717813693ffb7fcdb9cbfd9417881539c35"
+        }
+      ],
+      "properties": [
+        {
+          "name": "artifact:filename",
+          "value": "firebase-messaging-24.0.0.aar"
+        },
+        {
+          "name": "gradle:configurations",
+          "value": "debugRuntimeClasspath,releaseRuntimeClasspath"
+        }
+      ],
+      "licenses": [
+        {
+          "license": {
+            "name": "The Apache Software License, Version 2.0"
+          }
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:maven/com.google.guava/failureaccess@1.0.3?artifact_sha256=cbfc3906b19b8f55dd7cfd6dfe0aa4532e834250d7f080bd8d211a3e246b59cb",
+      "group": "com.google.guava",
+      "name": "failureaccess",
+      "version": "1.0.3",
+      "purl": "pkg:maven/com.google.guava/failureaccess@1.0.3",
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "cbfc3906b19b8f55dd7cfd6dfe0aa4532e834250d7f080bd8d211a3e246b59cb"
+        }
+      ],
+      "properties": [
+        {
+          "name": "artifact:filename",
+          "value": "failureaccess-1.0.3.jar"
+        },
+        {
+          "name": "license-review",
+          "value": "POM metadata missing; manual review required"
+        },
+        {
+          "name": "gradle:configurations",
+          "value": "debugRuntimeClasspath,releaseRuntimeClasspath"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:maven/com.google.guava/guava@33.7.2-android?artifact_sha256=b949fe975a32421c1a2633c07a4f1578b462f2f467668aa0a4023c5ff7c4a808",
+      "group": "com.google.guava",
+      "name": "guava",
+      "version": "33.7.2-android",
+      "purl": "pkg:maven/com.google.guava/guava@33.7.2-android",
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "b949fe975a32421c1a2633c07a4f1578b462f2f467668aa0a4023c5ff7c4a808"
+        }
+      ],
+      "properties": [
+        {
+          "name": "artifact:filename",
+          "value": "guava-33.7.2-android.jar"
+        },
+        {
+          "name": "license-review",
+          "value": "POM metadata missing; manual review required"
+        },
+        {
+          "name": "gradle:configurations",
+          "value": "debugRuntimeClasspath,releaseRuntimeClasspath"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:maven/com.google.guava/listenablefuture@9999.0-empty-to-avoid-conflict-with-guava?artifact_sha256=b372a037d4230aa57fbeffdef30fd6123f9c0c2db85d0aced00c91b974f33f99",
+      "group": "com.google.guava",
+      "name": "listenablefuture",
+      "version": "9999.0-empty-to-avoid-conflict-with-guava",
+      "purl": "pkg:maven/com.google.guava/listenablefuture@9999.0-empty-to-avoid-conflict-with-guava",
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "b372a037d4230aa57fbeffdef30fd6123f9c0c2db85d0aced00c91b974f33f99"
+        }
+      ],
+      "properties": [
+        {
+          "name": "artifact:filename",
+          "value": "listenablefuture-9999.0-empty-to-avoid-conflict-with-guava.jar"
+        },
+        {
+          "name": "license-review",
+          "value": "POM metadata missing; manual review required"
+        },
+        {
+          "name": "gradle:configurations",
+          "value": "debugRuntimeClasspath,releaseRuntimeClasspath"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:maven/com.squareup.okhttp3/logging-interceptor@4.12.0?artifact_sha256=f3e8d5f0903c250c2b55d2f47fcfe008e80634385da8385161c7a63aaed0c74c",
+      "group": "com.squareup.okhttp3",
+      "name": "logging-interceptor",
+      "version": "4.12.0",
+      "purl": "pkg:maven/com.squareup.okhttp3/logging-interceptor@4.12.0",
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "f3e8d5f0903c250c2b55d2f47fcfe008e80634385da8385161c7a63aaed0c74c"
+        }
+      ],
+      "properties": [
+        {
+          "name": "artifact:filename",
+          "value": "logging-interceptor-4.12.0.jar"
+        },
+        {
+          "name": "gradle:configurations",
+          "value": "debugRuntimeClasspath,releaseRuntimeClasspath"
+        }
+      ],
+      "licenses": [
+        {
+          "license": {
+            "name": "The Apache Software License, Version 2.0"
+          }
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:maven/com.squareup.okhttp3/okhttp@4.12.0?artifact_sha256=b1050081b14bb7a3a7e55a4d3ef01b5dcfabc453b4573a4fc019767191d5f4e0",
+      "group": "com.squareup.okhttp3",
+      "name": "okhttp",
+      "version": "4.12.0",
+      "purl": "pkg:maven/com.squareup.okhttp3/okhttp@4.12.0",
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "b1050081b14bb7a3a7e55a4d3ef01b5dcfabc453b4573a4fc019767191d5f4e0"
+        }
+      ],
+      "properties": [
+        {
+          "name": "artifact:filename",
+          "value": "okhttp-4.12.0.jar"
+        },
+        {
+          "name": "gradle:configurations",
+          "value": "debugRuntimeClasspath,releaseRuntimeClasspath"
+        }
+      ],
+      "licenses": [
+        {
+          "license": {
+            "name": "The Apache Software License, Version 2.0"
+          }
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:maven/com.squareup.okio/okio-jvm@3.9.0?artifact_sha256=ddc386ff14bd25d5c934167196eaf45b18de4f28e1c55a4db37ae594cbfd37e4",
+      "group": "com.squareup.okio",
+      "name": "okio-jvm",
+      "version": "3.9.0",
+      "purl": "pkg:maven/com.squareup.okio/okio-jvm@3.9.0",
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "ddc386ff14bd25d5c934167196eaf45b18de4f28e1c55a4db37ae594cbfd37e4"
+        }
+      ],
+      "properties": [
+        {
+          "name": "artifact:filename",
+          "value": "okio-jvm-3.9.0.jar"
+        },
+        {
+          "name": "gradle:configurations",
+          "value": "debugRuntimeClasspath,releaseRuntimeClasspath"
+        }
+      ],
+      "licenses": [
+        {
+          "license": {
+            "name": "The Apache Software License, Version 2.0"
+          }
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:maven/com.squareup.retrofit2/converter-gson@2.11.0?artifact_sha256=3d2b4b668909468465c5776430b57232275d0165513f20fc96b0cfe4aa531326",
+      "group": "com.squareup.retrofit2",
+      "name": "converter-gson",
+      "version": "2.11.0",
+      "purl": "pkg:maven/com.squareup.retrofit2/converter-gson@2.11.0",
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "3d2b4b668909468465c5776430b57232275d0165513f20fc96b0cfe4aa531326"
+        }
+      ],
+      "properties": [
+        {
+          "name": "artifact:filename",
+          "value": "converter-gson-2.11.0.jar"
+        },
+        {
+          "name": "gradle:configurations",
+          "value": "debugRuntimeClasspath,releaseRuntimeClasspath"
+        }
+      ],
+      "licenses": [
+        {
+          "license": {
+            "name": "The Apache Software License, Version 2.0"
+          }
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:maven/com.squareup.retrofit2/retrofit@2.11.0?artifact_sha256=9f4fbbce70728584fbeed38d4061f36d4477e89bca74b4e2ac8aeb6819b0fe43",
+      "group": "com.squareup.retrofit2",
+      "name": "retrofit",
+      "version": "2.11.0",
+      "purl": "pkg:maven/com.squareup.retrofit2/retrofit@2.11.0",
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "9f4fbbce70728584fbeed38d4061f36d4477e89bca74b4e2ac8aeb6819b0fe43"
+        }
+      ],
+      "properties": [
+        {
+          "name": "artifact:filename",
+          "value": "retrofit-2.11.0.jar"
+        },
+        {
+          "name": "gradle:configurations",
+          "value": "debugRuntimeClasspath,releaseRuntimeClasspath"
+        }
+      ],
+      "licenses": [
+        {
+          "license": {
+            "name": "The Apache Software License, Version 2.0"
+          }
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:maven/io.coil-kt/coil-base@2.7.0?artifact_sha256=f45c1e118038266734321f54c3b84ce2d52b491bb00481134724ac33d3d5e2b2",
+      "group": "io.coil-kt",
+      "name": "coil-base",
+      "version": "2.7.0",
+      "purl": "pkg:maven/io.coil-kt/coil-base@2.7.0",
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "f45c1e118038266734321f54c3b84ce2d52b491bb00481134724ac33d3d5e2b2"
+        }
+      ],
+      "properties": [
+        {
+          "name": "artifact:filename",
+          "value": "coil-base-2.7.0.aar"
+        },
+        {
+          "name": "gradle:configurations",
+          "value": "debugRuntimeClasspath,releaseRuntimeClasspath"
+        }
+      ],
+      "licenses": [
+        {
+          "license": {
+            "name": "The Apache License, Version 2.0"
+          }
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:maven/io.coil-kt/coil-compose-base@2.7.0?artifact_sha256=2885960db57beb8a7d521810386f48b98b2c21c0350bfd9d9e80d812d25b2eb1",
+      "group": "io.coil-kt",
+      "name": "coil-compose-base",
+      "version": "2.7.0",
+      "purl": "pkg:maven/io.coil-kt/coil-compose-base@2.7.0",
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "2885960db57beb8a7d521810386f48b98b2c21c0350bfd9d9e80d812d25b2eb1"
+        }
+      ],
+      "properties": [
+        {
+          "name": "artifact:filename",
+          "value": "coil-compose-base-2.7.0.aar"
+        },
+        {
+          "name": "gradle:configurations",
+          "value": "debugRuntimeClasspath,releaseRuntimeClasspath"
+        }
+      ],
+      "licenses": [
+        {
+          "license": {
+            "name": "The Apache License, Version 2.0"
+          }
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:maven/io.coil-kt/coil-compose@2.7.0?artifact_sha256=8d2ead07c9c9a08696be52a03e689a4afe57d57610e7bf9f05fd88893ee76935",
+      "group": "io.coil-kt",
+      "name": "coil-compose",
+      "version": "2.7.0",
+      "purl": "pkg:maven/io.coil-kt/coil-compose@2.7.0",
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "8d2ead07c9c9a08696be52a03e689a4afe57d57610e7bf9f05fd88893ee76935"
+        }
+      ],
+      "properties": [
+        {
+          "name": "artifact:filename",
+          "value": "coil-compose-2.7.0.aar"
+        },
+        {
+          "name": "gradle:configurations",
+          "value": "debugRuntimeClasspath,releaseRuntimeClasspath"
+        }
+      ],
+      "licenses": [
+        {
+          "license": {
+            "name": "The Apache License, Version 2.0"
+          }
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:maven/io.coil-kt/coil@2.7.0?artifact_sha256=6e8e46eb813c7290c5ae9954d43f3ffa022c0500096ed4585801a38262b3f851",
+      "group": "io.coil-kt",
+      "name": "coil",
+      "version": "2.7.0",
+      "purl": "pkg:maven/io.coil-kt/coil@2.7.0",
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "6e8e46eb813c7290c5ae9954d43f3ffa022c0500096ed4585801a38262b3f851"
+        }
+      ],
+      "properties": [
+        {
+          "name": "artifact:filename",
+          "value": "coil-2.7.0.aar"
+        },
+        {
+          "name": "gradle:configurations",
+          "value": "debugRuntimeClasspath,releaseRuntimeClasspath"
+        }
+      ],
+      "licenses": [
+        {
+          "license": {
+            "name": "The Apache License, Version 2.0"
+          }
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:maven/javax.inject/javax.inject@1?artifact_sha256=91c77044a50c481636c32d916fd89c9118a72195390452c81065080f957de7ff",
+      "group": "javax.inject",
+      "name": "javax.inject",
+      "version": "1",
+      "purl": "pkg:maven/javax.inject/javax.inject@1",
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "91c77044a50c481636c32d916fd89c9118a72195390452c81065080f957de7ff"
+        }
+      ],
+      "properties": [
+        {
+          "name": "artifact:filename",
+          "value": "javax.inject-1.jar"
+        },
+        {
+          "name": "gradle:configurations",
+          "value": "debugRuntimeClasspath,releaseRuntimeClasspath"
+        }
+      ],
+      "licenses": [
+        {
+          "license": {
+            "name": "The Apache Software License, Version 2.0"
+          }
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:maven/org.jetbrains.kotlin/kotlin-stdlib-jdk7@1.9.0?artifact_sha256=b7979a7aac94055f0d9f1fd3b47ce5ffe1cb6032a842ba9fbe7186f085289178",
+      "group": "org.jetbrains.kotlin",
+      "name": "kotlin-stdlib-jdk7",
+      "version": "1.9.0",
+      "purl": "pkg:maven/org.jetbrains.kotlin/kotlin-stdlib-jdk7@1.9.0",
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "b7979a7aac94055f0d9f1fd3b47ce5ffe1cb6032a842ba9fbe7186f085289178"
+        }
+      ],
+      "properties": [
+        {
+          "name": "artifact:filename",
+          "value": "kotlin-stdlib-jdk7-1.9.0.jar"
+        },
+        {
+          "name": "gradle:configurations",
+          "value": "debugRuntimeClasspath,releaseRuntimeClasspath"
+        }
+      ],
+      "licenses": [
+        {
+          "license": {
+            "name": "The Apache License, Version 2.0"
+          }
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:maven/org.jetbrains.kotlin/kotlin-stdlib-jdk8@1.9.0?artifact_sha256=a59fa24fdf1ffb594baecdbf0fd10010f977cea10236d487fe3464977a7377fa",
+      "group": "org.jetbrains.kotlin",
+      "name": "kotlin-stdlib-jdk8",
+      "version": "1.9.0",
+      "purl": "pkg:maven/org.jetbrains.kotlin/kotlin-stdlib-jdk8@1.9.0",
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "a59fa24fdf1ffb594baecdbf0fd10010f977cea10236d487fe3464977a7377fa"
+        }
+      ],
+      "properties": [
+        {
+          "name": "artifact:filename",
+          "value": "kotlin-stdlib-jdk8-1.9.0.jar"
+        },
+        {
+          "name": "gradle:configurations",
+          "value": "debugRuntimeClasspath,releaseRuntimeClasspath"
+        }
+      ],
+      "licenses": [
+        {
+          "license": {
+            "name": "The Apache License, Version 2.0"
+          }
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:maven/org.jetbrains.kotlin/kotlin-stdlib@2.2.10?artifact_sha256=9c67cc79efd6b9215b49d2a4308f5f3433537376c7c88e89bdd6729bd096e61a",
+      "group": "org.jetbrains.kotlin",
+      "name": "kotlin-stdlib",
+      "version": "2.2.10",
+      "purl": "pkg:maven/org.jetbrains.kotlin/kotlin-stdlib@2.2.10",
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "9c67cc79efd6b9215b49d2a4308f5f3433537376c7c88e89bdd6729bd096e61a"
+        }
+      ],
+      "properties": [
+        {
+          "name": "artifact:filename",
+          "value": "kotlin-stdlib-2.2.10.jar"
+        },
+        {
+          "name": "gradle:configurations",
+          "value": "debugRuntimeClasspath,releaseRuntimeClasspath"
+        }
+      ],
+      "licenses": [
+        {
+          "license": {
+            "name": "The Apache License, Version 2.0"
+          }
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:maven/org.jetbrains.kotlinx/kotlinx-coroutines-android@1.9.0?artifact_sha256=bd783acd2f9738845d58380f46f45b5cde95d0cb03027d56725338b26bfc4d72",
+      "group": "org.jetbrains.kotlinx",
+      "name": "kotlinx-coroutines-android",
+      "version": "1.9.0",
+      "purl": "pkg:maven/org.jetbrains.kotlinx/kotlinx-coroutines-android@1.9.0",
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "bd783acd2f9738845d58380f46f45b5cde95d0cb03027d56725338b26bfc4d72"
+        }
+      ],
+      "properties": [
+        {
+          "name": "artifact:filename",
+          "value": "kotlinx-coroutines-android-1.9.0.jar"
+        },
+        {
+          "name": "gradle:configurations",
+          "value": "debugRuntimeClasspath,releaseRuntimeClasspath"
+        }
+      ],
+      "licenses": [
+        {
+          "license": {
+            "name": "The Apache Software License, Version 2.0"
+          }
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:maven/org.jetbrains.kotlinx/kotlinx-coroutines-core-jvm@1.9.0?artifact_sha256=ad89c2892235e670f222d819cb3d81188143cb19a05b59df9889ae4269f5c70a",
+      "group": "org.jetbrains.kotlinx",
+      "name": "kotlinx-coroutines-core-jvm",
+      "version": "1.9.0",
+      "purl": "pkg:maven/org.jetbrains.kotlinx/kotlinx-coroutines-core-jvm@1.9.0",
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "ad89c2892235e670f222d819cb3d81188143cb19a05b59df9889ae4269f5c70a"
+        }
+      ],
+      "properties": [
+        {
+          "name": "artifact:filename",
+          "value": "kotlinx-coroutines-core-jvm-1.9.0.jar"
+        },
+        {
+          "name": "gradle:configurations",
+          "value": "debugRuntimeClasspath,releaseRuntimeClasspath"
+        }
+      ],
+      "licenses": [
+        {
+          "license": {
+            "name": "The Apache Software License, Version 2.0"
+          }
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:maven/org.jetbrains.kotlinx/kotlinx-coroutines-play-services@1.9.0?artifact_sha256=4cb6b6321df1664b99fee756de63f6af65ccb4f68936f26cf76c211dea1b23ae",
+      "group": "org.jetbrains.kotlinx",
+      "name": "kotlinx-coroutines-play-services",
+      "version": "1.9.0",
+      "purl": "pkg:maven/org.jetbrains.kotlinx/kotlinx-coroutines-play-services@1.9.0",
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "4cb6b6321df1664b99fee756de63f6af65ccb4f68936f26cf76c211dea1b23ae"
+        }
+      ],
+      "properties": [
+        {
+          "name": "artifact:filename",
+          "value": "kotlinx-coroutines-play-services-1.9.0.jar"
+        },
+        {
+          "name": "gradle:configurations",
+          "value": "debugRuntimeClasspath,releaseRuntimeClasspath"
+        }
+      ],
+      "licenses": [
+        {
+          "license": {
+            "name": "The Apache Software License, Version 2.0"
+          }
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:maven/org.jetbrains.kotlinx/kotlinx-serialization-core-jvm@1.7.3?artifact_sha256=f0adde45864144475385cf4aa7e0b7feb27f61fcf9472665ed98cc971b06b1eb",
+      "group": "org.jetbrains.kotlinx",
+      "name": "kotlinx-serialization-core-jvm",
+      "version": "1.7.3",
+      "purl": "pkg:maven/org.jetbrains.kotlinx/kotlinx-serialization-core-jvm@1.7.3",
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "f0adde45864144475385cf4aa7e0b7feb27f61fcf9472665ed98cc971b06b1eb"
+        }
+      ],
+      "properties": [
+        {
+          "name": "artifact:filename",
+          "value": "kotlinx-serialization-core-jvm-1.7.3.jar"
+        },
+        {
+          "name": "gradle:configurations",
+          "value": "debugRuntimeClasspath,releaseRuntimeClasspath"
+        }
+      ],
+      "licenses": [
+        {
+          "license": {
+            "name": "The Apache Software License, Version 2.0"
+          }
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:maven/org.jetbrains/annotations@23.0.0?artifact_sha256=7b0f19724082cbfcbc66e5abea2b9bc92cf08a1ea11e191933ed43801eb3cd05",
+      "group": "org.jetbrains",
+      "name": "annotations",
+      "version": "23.0.0",
+      "purl": "pkg:maven/org.jetbrains/annotations@23.0.0",
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "7b0f19724082cbfcbc66e5abea2b9bc92cf08a1ea11e191933ed43801eb3cd05"
+        }
+      ],
+      "properties": [
+        {
+          "name": "artifact:filename",
+          "value": "annotations-23.0.0.jar"
+        },
+        {
+          "name": "gradle:configurations",
+          "value": "debugRuntimeClasspath,releaseRuntimeClasspath"
+        }
+      ],
+      "licenses": [
+        {
+          "license": {
+            "name": "The Apache Software License, Version 2.0"
+          }
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:maven/org.jspecify/jspecify@1.0.1?artifact_sha256=070d75f261fe4c5b8202508366715f7f2d4660f88c8ef7e6d3575e48c9683b66",
+      "group": "org.jspecify",
+      "name": "jspecify",
+      "version": "1.0.1",
+      "purl": "pkg:maven/org.jspecify/jspecify@1.0.1",
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "070d75f261fe4c5b8202508366715f7f2d4660f88c8ef7e6d3575e48c9683b66"
+        }
+      ],
+      "properties": [
+        {
+          "name": "artifact:filename",
+          "value": "jspecify-1.0.1.jar"
+        },
+        {
+          "name": "gradle:configurations",
+          "value": "debugRuntimeClasspath,releaseRuntimeClasspath"
+        }
+      ],
+      "licenses": [
+        {
+          "license": {
+            "name": "The Apache License, Version 2.0"
+          }
+        }
+      ]
+    },
+    {
+      "type": "file",
+      "bom-ref": "apk:lib/arm64-v8a/libandroidx.graphics.path.so",
+      "name": "lib/arm64-v8a/libandroidx.graphics.path.so",
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "41e9a793c43a0f4fddb19e33f346bace464f30f888ba7b9eaf96294ea115bfb6"
+        }
+      ],
+      "properties": [
+        {
+          "name": "version-review",
+          "value": "native version not inferred from filename"
+        }
+      ]
+    },
+    {
+      "type": "file",
+      "bom-ref": "apk:lib/armeabi-v7a/libandroidx.graphics.path.so",
+      "name": "lib/armeabi-v7a/libandroidx.graphics.path.so",
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "41399eba6fc2a60f6f14642375c1824f3cf25eb8fec7397d753730a3ceda3e2b"
+        }
+      ],
+      "properties": [
+        {
+          "name": "version-review",
+          "value": "native version not inferred from filename"
+        }
+      ]
+    },
+    {
+      "type": "file",
+      "bom-ref": "apk:lib/x86/libandroidx.graphics.path.so",
+      "name": "lib/x86/libandroidx.graphics.path.so",
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "eb0570b41fd3bff25d8204a967c03bd7550719e768b791f680cc40cbe35f29af"
+        }
+      ],
+      "properties": [
+        {
+          "name": "version-review",
+          "value": "native version not inferred from filename"
+        }
+      ]
+    },
+    {
+      "type": "file",
+      "bom-ref": "apk:lib/x86_64/libandroidx.graphics.path.so",
+      "name": "lib/x86_64/libandroidx.graphics.path.so",
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "4e56c996f13670e70082658de7880c4020eabf4f25e43387f88ed78a713fc9f0"
+        }
+      ],
+      "properties": [
+        {
+          "name": "version-review",
+          "value": "native version not inferred from filename"
+        }
+      ]
+    }
+  ]
+}

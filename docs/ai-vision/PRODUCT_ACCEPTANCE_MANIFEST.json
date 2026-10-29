@@ -1,0 +1,72 @@
+{
+  "source_commit": "baa428fa823ab3c08737c6bc9aa738842ccf371e",
+  "image_id": "sha256:f9b3d4375525918a45c91a536a5521e3547771830b77d73b534015f5e3231491",
+  "archive_sha256": "d35fae9a0b6de2437a4b31a06f3dbbdbc511a49e0ca7095cd22feed9c6b3fe31",
+  "gates": {
+    "regression": {
+      "status": "PASS",
+      "evidence": "product-evidence/239 backend PASS (backend-tests.xml); 19 Android PASS (android-tests.json)."
+    },
+    "database_restore": {
+      "status": "PASS",
+      "evidence": "product-evidence/restore.json: independent disposable cluster, retained private key/separate process, data/roles/RLS/grants/indexes/media equal; migration012 rollback/reapply passed."
+    },
+    "image_build_smoke": {
+      "status": "PASS",
+      "evidence": "product-evidence/image-artifact.json and image-smoke.json; actual image API/native inference/sandbox/SIGTERM passed."
+    },
+    "python_advisories": {
+      "status": "PASS",
+      "evidence": "product-evidence/python-review.json: 70 Python distributions; zero affected packages and lookup errors; excludes OS/bundled native."
+    },
+    "image_vulnerability_scan": {
+      "status": "FINDINGS",
+      "evidence": "product-evidence/image-scan.json and image-findings.json: 200 matches, 77 High. No exceptions."
+    },
+    "android_device": {
+      "status": "BLOCKED",
+      "evidence": "product-evidence/emulator-attempt.json: no physical device test; system image preparation incomplete, no UI runtime test."
+    },
+    "managed_staging": {
+      "status": "BLOCKED",
+      "evidence": "Configured Supabase project not explicitly identified as staging; no managed integration writes performed."
+    },
+    "target_load_and_accuracy": {
+      "status": "BLOCKED",
+      "evidence": "product-evidence/isolated-fleet-benchmark.json meets 2 FPS on synthetic cloud workload only; target hardware, natural annotated videos/scenarios and soak pending."
+    },
+    "backup_operations": {
+      "status": "BLOCKED",
+      "evidence": "product-evidence/Local encrypted independent-cluster restore passed; managed Storage, escrow/rotation and agreed RPO/RTO pending."
+    },
+    "remote_ci": {
+      "status": "FAIL",
+      "evidence": "product-evidence/ci-summary.json and remote-ci.json: final code baa428f, Android SUCCESS (19 tests, Maven0), backend tests239/build/smoke/SQL/restore PASS but native200 gate FAIL; workflow FAILURE."
+    },
+    "licenses": {
+      "status": "BLOCKED",
+      "evidence": "Guava and transitive artifacts/license reviewed; full model/dataset usage documentation and legal acceptance pending."
+    },
+    "operator_approval": {
+      "status": "NOT_REQUESTED",
+      "evidence": "Preceding release gates unresolved; no deployment authorized."
+    }
+  },
+  "scan_receipt": {
+    "generated_at": "2026-10-29T04:28:39.860884+00:00",
+    "inventory": "PASS",
+    "vulnerability_scan": "FINDINGS",
+    "accepted": false,
+    "limits": "Unsigned local receipt; full archive hash and config identity bind the input, not approval. Failures and findings never become clean acceptance.",
+    "image_id": "sha256:f9b3d4375525918a45c91a536a5521e3547771830b77d73b534015f5e3231491",
+    "archive_sha256": "d35fae9a0b6de2437a4b31a06f3dbbdbc511a49e0ca7095cd22feed9c6b3fe31",
+    "findings": 200,
+    "database": {
+      "schemaVersion": "v6.1.10",
+      "from": "https://grype.anchore.io/databases/v6/vulnerability-db_v6.1.10_2026-10-28T00:24:28Z_1793168610.tar.zst?checksum=sha256%3Ab08902b91738f1a9bc7fd61942f331d8e5e76a5df0c0b5f8c17c18bd787ee278",
+      "built": "2026-10-28T06:23:30Z",
+      "path": "/workspace/.camera-tools/scanners/grype-db/6/vulnerability.db",
+      "valid": true
+    }
+  }
+}

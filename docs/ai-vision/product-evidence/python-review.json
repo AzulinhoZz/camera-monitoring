@@ -1,0 +1,1201 @@
+{
+  "generated_at": "2026-10-29T05:14:24.559492+00:00",
+  "scope": "installed Python distributions only; excludes OS, Android, native bundled libraries and model weights",
+  "advisory_source": "PyPI per-version JSON",
+  "packages": 70,
+  "lookup_errors": 0,
+  "affected_packages": 0,
+  "reviews": [
+    {
+      "name": "annotated-doc",
+      "version": "0.0.5",
+      "source": "https://pypi.org/pypi/annotated-doc/0.0.5/json",
+      "vulnerabilities": [],
+      "error": null,
+      "wheel": {
+        "filename": "annotated_doc-0.0.5-py3-none-any.whl",
+        "url": "https://files.pythonhosted.org/packages/3e/30/e900b21425a860e195f32e37657aa1f7c7f2b1bfb26f03ca209b90933c06/annotated_doc-0.0.5-py3-none-any.whl",
+        "digests": {
+          "blake2b_256": "3e30e900b21425a860e195f32e37657aa1f7c7f2b1bfb26f03ca209b90933c06",
+          "md5": "49ccb90689ca81e8b1d283ff4794172b",
+          "sha256": "117bac03a25ede5df5440e855b32d556049ca169ead221505badf432fed4b101"
+        },
+        "size": 5302
+      }
+    },
+    {
+      "name": "annotated-types",
+      "version": "0.8.0",
+      "source": "https://pypi.org/pypi/annotated-types/0.8.0/json",
+      "vulnerabilities": [],
+      "error": null,
+      "wheel": {
+        "filename": "annotated_types-0.8.0-py3-none-any.whl",
+        "url": "https://files.pythonhosted.org/packages/99/91/8acff4f5e50511b911bbccb72b8628a49c68ce14148cd9f6431094859a90/annotated_types-0.8.0-py3-none-any.whl",
+        "digests": {
+          "blake2b_256": "99918acff4f5e50511b911bbccb72b8628a49c68ce14148cd9f6431094859a90",
+          "md5": "1959042ee69ece0a558a30aa700cfc59",
+          "sha256": "f072f4d804ea359e4eaf198b1af7a8b0943881a87f31bb764f8bf219bb9419e0"
+        },
+        "size": 13427
+      }
+    },
+    {
+      "name": "anyio",
+      "version": "4.15.1",
+      "source": "https://pypi.org/pypi/anyio/4.15.1/json",
+      "vulnerabilities": [],
+      "error": null,
+      "wheel": {
+        "filename": "anyio-4.15.1-py3-none-any.whl",
+        "url": "https://files.pythonhosted.org/packages/12/b8/4bd346e22b28902df4d651910f5242c28d84e4a5c2435ca5c3f797ed7e2e/anyio-4.15.1-py3-none-any.whl",
+        "digests": {
+          "blake2b_256": "12b84bd346e22b28902df4d651910f5242c28d84e4a5c2435ca5c3f797ed7e2e",
+          "md5": "c2ab8e46292b23c5d22e66732582dee2",
+          "sha256": "6152fdbbf9a77fdec97731721bebf7c4c44f7c29b424b0065826173efc7ed101"
+        },
+        "size": 132079
+      }
+    },
+    {
+      "name": "cachecontrol",
+      "version": "0.14.4",
+      "source": "https://pypi.org/pypi/cachecontrol/0.14.4/json",
+      "vulnerabilities": [],
+      "error": null,
+      "wheel": {
+        "filename": "cachecontrol-0.14.4-py3-none-any.whl",
+        "url": "https://files.pythonhosted.org/packages/ef/79/c45f2d53efe6ada1110cf6f9fca095e4ff47a0454444aefdde6ac4789179/cachecontrol-0.14.4-py3-none-any.whl",
+        "digests": {
+          "blake2b_256": "ef79c45f2d53efe6ada1110cf6f9fca095e4ff47a0454444aefdde6ac4789179",
+          "md5": "bddb71382f42fb8710d434bf9fd0bbbf",
+          "sha256": "b7ac014ff72ee199b5f8af1de29d60239954f223e948196fa3d84adaffc71d2b"
+        },
+        "size": 22247
+      }
+    },
+    {
+      "name": "certifi",
+      "version": "2026.10.23",
+      "source": "https://pypi.org/pypi/certifi/2026.10.23/json",
+      "vulnerabilities": [],
+      "error": null,
+      "wheel": {
+        "filename": "certifi-2026.10.23-py3-none-any.whl",
+        "url": "https://files.pythonhosted.org/packages/32/d1/a3652fe2c19134d0d15922177821d863cbd7e842d53a21bbe7e8e3a1b5ac/certifi-2026.10.23-py3-none-any.whl",
+        "digests": {
+          "blake2b_256": "32d1a3652fe2c19134d0d15922177821d863cbd7e842d53a21bbe7e8e3a1b5ac",
+          "md5": "f8e2ea95de0d04faf08b80e3535fa148",
+          "sha256": "e9b54de76e530bb6cf0ccd036787103acb58fd42ba930ea8bf948ddbaa2f61d1"
+        },
+        "size": 135082
+      }
+    },
+    {
+      "name": "cffi",
+      "version": "2.1.1",
+      "source": "https://pypi.org/pypi/cffi/2.1.1/json",
+      "vulnerabilities": [],
+      "error": null,
+      "wheel": {
+        "filename": "cffi-2.1.1-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.whl",
+        "url": "https://files.pythonhosted.org/packages/b1/db/dceb9dd5b231e1da801793f8acc9f3c52a7e1afe40bb1aae37e02b0faad5/cffi-2.1.1-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.whl",
+        "digests": {
+          "blake2b_256": "b1dbdceb9dd5b231e1da801793f8acc9f3c52a7e1afe40bb1aae37e02b0faad5",
+          "md5": "fda1989e5b254a2e658883190b6ebed5",
+          "sha256": "c1453022f490d2459a11819d83ad1d586e9ff65a12ac3e705ffebd46d3685dcf"
+        },
+        "size": 221822
+      }
+    },
+    {
+      "name": "charset-normalizer",
+      "version": "3.5.2",
+      "source": "https://pypi.org/pypi/charset-normalizer/3.5.2/json",
+      "vulnerabilities": [],
+      "error": null,
+      "wheel": {
+        "filename": "charset_normalizer-3.5.2-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl",
+        "url": "https://files.pythonhosted.org/packages/7f/c5/38806a25ab5e65fc178f39affeda20858efafede2fce1ffc2556cfc9fe73/charset_normalizer-3.5.2-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl",
+        "digests": {
+          "blake2b_256": "7fc538806a25ab5e65fc178f39affeda20858efafede2fce1ffc2556cfc9fe73",
+          "md5": "4cdd841f3173242ac60686bb3ffa1a8b",
+          "sha256": "3d31298449090ab8d47b7b1b2a555ff73cac7ed438a08b7ac160980c7ebed649"
+        },
+        "size": 257601
+      }
+    },
+    {
+      "name": "click",
+      "version": "8.5.0",
+      "source": "https://pypi.org/pypi/click/8.5.0/json",
+      "vulnerabilities": [],
+      "error": null,
+      "wheel": {
+        "filename": "click-8.5.0-py3-none-any.whl",
+        "url": "https://files.pythonhosted.org/packages/58/50/6c0d534c5f134586a8e1ba4e330569e32f057e33372ae556463212fb4cd3/click-8.5.0-py3-none-any.whl",
+        "digests": {
+          "blake2b_256": "58506c0d534c5f134586a8e1ba4e330569e32f057e33372ae556463212fb4cd3",
+          "md5": "2f0b6de9bc2aa6bd8ff4200bc7d14bbe",
+          "sha256": "255bc9599cf7748b4b1a446ccc735421bd08a2ae529a8b88597d3de5664ee360"
+        },
+        "size": 125251
+      }
+    },
+    {
+      "name": "cryptography",
+      "version": "50.0.2",
+      "source": "https://pypi.org/pypi/cryptography/50.0.2/json",
+      "vulnerabilities": [],
+      "error": null,
+      "wheel": {
+        "filename": "cryptography-50.0.2-cp311-abi3-manylinux_2_34_x86_64.whl",
+        "url": "https://files.pythonhosted.org/packages/d3/69/2c833a049475e0a3444e94c7d0aca0aa51d166374a449b09e92ac98138de/cryptography-50.0.2-cp311-abi3-manylinux_2_34_x86_64.whl",
+        "digests": {
+          "blake2b_256": "d3692c833a049475e0a3444e94c7d0aca0aa51d166374a449b09e92ac98138de",
+          "md5": "101d8521d5fe2181d2d21c689afa4d15",
+          "sha256": "9dab55f57c74c3cad24c323bacbbd04be4705ba6eb0d92e920b1fc4837ed5079"
+        },
+        "size": 4752576
+      }
+    },
+    {
+      "name": "deprecation",
+      "version": "2.1.0",
+      "source": "https://pypi.org/pypi/deprecation/2.1.0/json",
+      "vulnerabilities": [],
+      "error": null,
+      "wheel": {
+        "filename": "deprecation-2.1.0-py2.py3-none-any.whl",
+        "url": "https://files.pythonhosted.org/packages/02/c3/253a89ee03fc9b9682f1541728eb66db7db22148cd94f89ab22528cd1e1b/deprecation-2.1.0-py2.py3-none-any.whl",
+        "digests": {
+          "blake2b_256": "02c3253a89ee03fc9b9682f1541728eb66db7db22148cd94f89ab22528cd1e1b",
+          "md5": "3627168774d8dae8233dff15ff58d3c1",
+          "sha256": "a10811591210e1fb0e768a8c25517cabeabcba6f0bf96564f8ff45189f90b14a"
+        },
+        "size": 11178
+      }
+    },
+    {
+      "name": "fastapi",
+      "version": "0.162.0",
+      "source": "https://pypi.org/pypi/fastapi/0.162.0/json",
+      "vulnerabilities": [],
+      "error": null,
+      "wheel": {
+        "filename": "fastapi-0.162.0-py3-none-any.whl",
+        "url": "https://files.pythonhosted.org/packages/b4/4f/3f2c25c9b43970b5e9a08beb5e04776247edea684ddc0930f4f02f0bb6cb/fastapi-0.162.0-py3-none-any.whl",
+        "digests": {
+          "blake2b_256": "b44f3f2c25c9b43970b5e9a08beb5e04776247edea684ddc0930f4f02f0bb6cb",
+          "md5": "d883830d292663490ed2414fce3f87b4",
+          "sha256": "3785963de305dd09912426cb81f2d230fce98ab3521cdfe97265c8d14983128c"
+        },
+        "size": 148912
+      }
+    },
+    {
+      "name": "firebase-admin",
+      "version": "7.7.0",
+      "source": "https://pypi.org/pypi/firebase-admin/7.7.0/json",
+      "vulnerabilities": [],
+      "error": null,
+      "wheel": {
+        "filename": "firebase_admin-7.7.0-py3-none-any.whl",
+        "url": "https://files.pythonhosted.org/packages/e3/d3/fe159efc61e57acccabc582d6072be77db1534303d823642cccfd0cf51f6/firebase_admin-7.7.0-py3-none-any.whl",
+        "digests": {
+          "blake2b_256": "e3d3fe159efc61e57acccabc582d6072be77db1534303d823642cccfd0cf51f6",
+          "md5": "380dbb6620d237372f94233c83852882",
+          "sha256": "0a341ebbd1f80301fa11034f5e86ab0d0f00dde19253d2ee50cf98be2a7a2f33"
+        },
+        "size": 144495
+      }
+    },
+    {
+      "name": "google-api-core",
+      "version": "2.43.0",
+      "source": "https://pypi.org/pypi/google-api-core/2.43.0/json",
+      "vulnerabilities": [],
+      "error": null,
+      "wheel": {
+        "filename": "google_api_core-2.43.0-py3-none-any.whl",
+        "url": "https://files.pythonhosted.org/packages/63/5e/ea85dbdb29e05a1dab94be7e4c07e5099b7048074f9ededf7d39636a878a/google_api_core-2.43.0-py3-none-any.whl",
+        "digests": {
+          "blake2b_256": "635eea85dbdb29e05a1dab94be7e4c07e5099b7048074f9ededf7d39636a878a",
+          "md5": "cfa3926beb8d48848f86ef7d1a1d9ce8",
+          "sha256": "dd588ae9de5e372be89b87c68b1e1555fe89add1809d623182b773d14f96859a"
+        },
+        "size": 223488
+      }
+    },
+    {
+      "name": "google-auth",
+      "version": "2.62.0",
+      "source": "https://pypi.org/pypi/google-auth/2.62.0/json",
+      "vulnerabilities": [],
+      "error": null,
+      "wheel": {
+        "filename": "google_auth-2.62.0-py3-none-any.whl",
+        "url": "https://files.pythonhosted.org/packages/eb/a3/87fe9b7203ec2e56ea6a57c75e6d632eaf9487c7f7978cdad1d801bee0af/google_auth-2.62.0-py3-none-any.whl",
+        "digests": {
+          "blake2b_256": "eba387fe9b7203ec2e56ea6a57c75e6d632eaf9487c7f7978cdad1d801bee0af",
+          "md5": "2dba1bf7ee581dec8cff57e5719b6eac",
+          "sha256": "4ff4319aeb4ad128409759d397a9fcafad126d0031d241cc0dd6b9a00b43e3f3"
+        },
+        "size": 267911
+      }
+    },
+    {
+      "name": "google-cloud-core",
+      "version": "2.8.0",
+      "source": "https://pypi.org/pypi/google-cloud-core/2.8.0/json",
+      "vulnerabilities": [],
+      "error": null,
+      "wheel": {
+        "filename": "google_cloud_core-2.8.0-py3-none-any.whl",
+        "url": "https://files.pythonhosted.org/packages/12/ed/1b09640a565e5d34d4e517463f65a67a11f9dcdeb6b6e8220f2d06aaf489/google_cloud_core-2.8.0-py3-none-any.whl",
+        "digests": {
+          "blake2b_256": "12ed1b09640a565e5d34d4e517463f65a67a11f9dcdeb6b6e8220f2d06aaf489",
+          "md5": "50f494184faa7f1076f8cf2bd36ca056",
+          "sha256": "e235b0952f7ffe7b9c71a4cf96b506d9cfb557e22557c412f0df9b7068b5d007"
+        },
+        "size": 31048
+      }
+    },
+    {
+      "name": "google-cloud-firestore",
+      "version": "2.34.1",
+      "source": "https://pypi.org/pypi/google-cloud-firestore/2.34.1/json",
+      "vulnerabilities": [],
+      "error": null,
+      "wheel": {
+        "filename": "google_cloud_firestore-2.34.1-py3-none-any.whl",
+        "url": "https://files.pythonhosted.org/packages/e1/88/e064d77571324edaa78f0523620ad7076a74e5848c05d671fe440f665b67/google_cloud_firestore-2.34.1-py3-none-any.whl",
+        "digests": {
+          "blake2b_256": "e188e064d77571324edaa78f0523620ad7076a74e5848c05d671fe440f665b67",
+          "md5": "4899040167ca3d18230def11f430b5c0",
+          "sha256": "6279f049336e49181e8c1d2dbf14e9c0cfb75ddf03c70971adc88fb272cdae29"
+        },
+        "size": 443943
+      }
+    },
+    {
+      "name": "google-cloud-storage",
+      "version": "3.17.1",
+      "source": "https://pypi.org/pypi/google-cloud-storage/3.17.1/json",
+      "vulnerabilities": [],
+      "error": null,
+      "wheel": {
+        "filename": "google_cloud_storage-3.17.1-py3-none-any.whl",
+        "url": "https://files.pythonhosted.org/packages/09/77/4376bb26f24966008a9522c61bae025d7030baabf443f20c4b795fb58308/google_cloud_storage-3.17.1-py3-none-any.whl",
+        "digests": {
+          "blake2b_256": "09774376bb26f24966008a9522c61bae025d7030baabf443f20c4b795fb58308",
+          "md5": "931ecd4295f99a4471c3263a285e657d",
+          "sha256": "287c7919d7bcda710eae6f6b60c756e89140475d9a4daec01b6174e737488ca8"
+        },
+        "size": 345706
+      }
+    },
+    {
+      "name": "google-crc32c",
+      "version": "1.9.0",
+      "source": "https://pypi.org/pypi/google-crc32c/1.9.0/json",
+      "vulnerabilities": [],
+      "error": null,
+      "wheel": {
+        "filename": "google_crc32c-1.9.0-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.whl",
+        "url": "https://files.pythonhosted.org/packages/9e/43/9db03635bb10188d93dcbab9baa2a8670a0da4e868b4370cdbd98d65fed8/google_crc32c-1.9.0-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.whl",
+        "digests": {
+          "blake2b_256": "9e439db03635bb10188d93dcbab9baa2a8670a0da4e868b4370cdbd98d65fed8",
+          "md5": "72ab5976ca8a4efd9e62ac97e60f5c33",
+          "sha256": "3abb18297d9ef0ab120531838be0e6d68c9fa876570e11c229c48f2edac23ce7"
+        },
+        "size": 36347
+      }
+    },
+    {
+      "name": "google-resumable-media",
+      "version": "2.11.0",
+      "source": "https://pypi.org/pypi/google-resumable-media/2.11.0/json",
+      "vulnerabilities": [],
+      "error": null,
+      "wheel": {
+        "filename": "google_resumable_media-2.11.0-py3-none-any.whl",
+        "url": "https://files.pythonhosted.org/packages/5e/2e/4f0a152f2e576e496f31ba1c3c62ed174a8878d06008916a7edc58b1bb28/google_resumable_media-2.11.0-py3-none-any.whl",
+        "digests": {
+          "blake2b_256": "5e2e4f0a152f2e576e496f31ba1c3c62ed174a8878d06008916a7edc58b1bb28",
+          "md5": "03c67a3fc04b8a69b2dd02c2ba2cf079",
+          "sha256": "f43d15e6a7f818f762eaead0f369c551f8275a4179c9d6225d0d259f49b87b5d"
+        },
+        "size": 81515
+      }
+    },
+    {
+      "name": "googleapis-common-protos",
+      "version": "1.76.0",
+      "source": "https://pypi.org/pypi/googleapis-common-protos/1.76.0/json",
+      "vulnerabilities": [],
+      "error": null,
+      "wheel": {
+        "filename": "googleapis_common_protos-1.76.0-py3-none-any.whl",
+        "url": "https://files.pythonhosted.org/packages/05/6d/78dc67a9e779e594b49bf62604034d3a6aa428a55afc729cafda4b7333e1/googleapis_common_protos-1.76.0-py3-none-any.whl",
+        "digests": {
+          "blake2b_256": "056d78dc67a9e779e594b49bf62604034d3a6aa428a55afc729cafda4b7333e1",
+          "md5": "ca960b04d216760a049869b0a20ad462",
+          "sha256": "59e13344a9f3651aa201a03e2bee815a3bf43a4baf1f9ff8a9b62a840ce25fac"
+        },
+        "size": 307707
+      }
+    },
+    {
+      "name": "grpcio",
+      "version": "1.85.0",
+      "source": "https://pypi.org/pypi/grpcio/1.85.0/json",
+      "vulnerabilities": [],
+      "error": null,
+      "wheel": {
+        "filename": "grpcio-1.85.0-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.whl",
+        "url": "https://files.pythonhosted.org/packages/10/1e/4be389b352c79fc6a457ca8bfda6b0b5e8a1e0ed8eaca21f7a2d1a40a7c5/grpcio-1.85.0-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.whl",
+        "digests": {
+          "blake2b_256": "101e4be389b352c79fc6a457ca8bfda6b0b5e8a1e0ed8eaca21f7a2d1a40a7c5",
+          "md5": "f2114aba31e368f2390bf03cb048e1f8",
+          "sha256": "4ddfe8b667889b9be5990ae674b13f0db0a9eb61972306038d0140a1da0f0b87"
+        },
+        "size": 7361507
+      }
+    },
+    {
+      "name": "grpcio-status",
+      "version": "1.85.0",
+      "source": "https://pypi.org/pypi/grpcio-status/1.85.0/json",
+      "vulnerabilities": [],
+      "error": null,
+      "wheel": {
+        "filename": "grpcio_status-1.85.0-py3-none-any.whl",
+        "url": "https://files.pythonhosted.org/packages/97/0d/852497d50c8a627a9102b4256918e1d196c327f817bfc4feb4869a8212c3/grpcio_status-1.85.0-py3-none-any.whl",
+        "digests": {
+          "blake2b_256": "970d852497d50c8a627a9102b4256918e1d196c327f817bfc4feb4869a8212c3",
+          "md5": "2245f7acac750c84d204b61fb8edda3a",
+          "sha256": "f77368f05d20a0c2d5ac26aff71e688b5888256953add52b2d334a67ecd931ce"
+        },
+        "size": 14637
+      }
+    },
+    {
+      "name": "h11",
+      "version": "0.16.0",
+      "source": "https://pypi.org/pypi/h11/0.16.0/json",
+      "vulnerabilities": [],
+      "error": null,
+      "wheel": {
+        "filename": "h11-0.16.0-py3-none-any.whl",
+        "url": "https://files.pythonhosted.org/packages/04/4b/29cac41a4d98d144bf5f6d33995617b185d14b22401f75ca86f384e87ff1/h11-0.16.0-py3-none-any.whl",
+        "digests": {
+          "blake2b_256": "044b29cac41a4d98d144bf5f6d33995617b185d14b22401f75ca86f384e87ff1",
+          "md5": "ab5835960dca6f63c9317c218f646e66",
+          "sha256": "63cf8bbe7522de3bf65932fda1d9c2772064ffb3dae62d55932da54b31cb6c86"
+        },
+        "size": 37515
+      }
+    },
+    {
+      "name": "h2",
+      "version": "4.4.1",
+      "source": "https://pypi.org/pypi/h2/4.4.1/json",
+      "vulnerabilities": [],
+      "error": null,
+      "wheel": {
+        "filename": "h2-4.4.1-py3-none-any.whl",
+        "url": "https://files.pythonhosted.org/packages/7e/22/e85faf23bd72a92d1921e37d674ca56eb298a3c8be31fdecef0ff2b3aaac/h2-4.4.1-py3-none-any.whl",
+        "digests": {
+          "blake2b_256": "7e22e85faf23bd72a92d1921e37d674ca56eb298a3c8be31fdecef0ff2b3aaac",
+          "md5": "1d83ea6e010ca64c13d533dcc50453e4",
+          "sha256": "0e25f1462b23c9cb82d9eb02e28bc706dac2a68cb457c6a0d74d63c8a2a5d0e6"
+        },
+        "size": 62636
+      }
+    },
+    {
+      "name": "hpack",
+      "version": "4.2.0",
+      "source": "https://pypi.org/pypi/hpack/4.2.0/json",
+      "vulnerabilities": [],
+      "error": null,
+      "wheel": {
+        "filename": "hpack-4.2.0-py3-none-any.whl",
+        "url": "https://files.pythonhosted.org/packages/71/b4/4a9fcfb2aef6ba44d9073ecd301443aa00b3dac95de5619f2a7de7ec8a91/hpack-4.2.0-py3-none-any.whl",
+        "digests": {
+          "blake2b_256": "71b44a9fcfb2aef6ba44d9073ecd301443aa00b3dac95de5619f2a7de7ec8a91",
+          "md5": "bcb7631568f74d61ad6129087e8ec291",
+          "sha256": "858ac0b02280fa582b5080d68db0899c62a80375e0e5413a74970c5e518b6986"
+        },
+        "size": 34246
+      }
+    },
+    {
+      "name": "httpcore",
+      "version": "1.0.9",
+      "source": "https://pypi.org/pypi/httpcore/1.0.9/json",
+      "vulnerabilities": [],
+      "error": null,
+      "wheel": {
+        "filename": "httpcore-1.0.9-py3-none-any.whl",
+        "url": "https://files.pythonhosted.org/packages/7e/f5/f66802a942d491edb555dd61e3a9961140fd64c90bce1eafd741609d334d/httpcore-1.0.9-py3-none-any.whl",
+        "digests": {
+          "blake2b_256": "7ef5f66802a942d491edb555dd61e3a9961140fd64c90bce1eafd741609d334d",
+          "md5": "146bed42feef3884ed52b749db3b02ae",
+          "sha256": "2d400746a40668fc9dec9810239072b40b4484b640a8c38fd654a024c7a1bf55"
+        },
+        "size": 78784
+      }
+    },
+    {
+      "name": "httptools",
+      "version": "0.9.0",
+      "source": "https://pypi.org/pypi/httptools/0.9.0/json",
+      "vulnerabilities": [],
+      "error": null,
+      "wheel": {
+        "filename": "httptools-0.9.0-cp312-cp312-manylinux1_x86_64.manylinux_2_28_x86_64.manylinux_2_5_x86_64.whl",
+        "url": "https://files.pythonhosted.org/packages/85/3f/642113e9882f53158ecddf58003d25f18ded2c210ed23bf6eb663d4d51c3/httptools-0.9.0-cp312-cp312-manylinux1_x86_64.manylinux_2_28_x86_64.manylinux_2_5_x86_64.whl",
+        "digests": {
+          "blake2b_256": "853f642113e9882f53158ecddf58003d25f18ded2c210ed23bf6eb663d4d51c3",
+          "md5": "aeb4cc47f3fe75120dafb558da2b23d6",
+          "sha256": "3e3201fe4d46e0d15d7ff9fafc94a605da9eb82d2c5b9837f0368acb325481f1"
+        },
+        "size": 552848
+      }
+    },
+    {
+      "name": "httpx",
+      "version": "0.28.1",
+      "source": "https://pypi.org/pypi/httpx/0.28.1/json",
+      "vulnerabilities": [],
+      "error": null,
+      "wheel": {
+        "filename": "httpx-0.28.1-py3-none-any.whl",
+        "url": "https://files.pythonhosted.org/packages/2a/39/e50c7c3a983047577ee07d2a9e53faf5a69493943ec3f6a384bdc792deb2/httpx-0.28.1-py3-none-any.whl",
+        "digests": {
+          "blake2b_256": "2a39e50c7c3a983047577ee07d2a9e53faf5a69493943ec3f6a384bdc792deb2",
+          "md5": "7cb326b464b75a04aa57954631097aa4",
+          "sha256": "d909fcccc110f8c7faf814ca82a9a4d816bc5a6dbfea25d6591d6985b8ba59ad"
+        },
+        "size": 73517
+      }
+    },
+    {
+      "name": "hyperframe",
+      "version": "6.1.0",
+      "source": "https://pypi.org/pypi/hyperframe/6.1.0/json",
+      "vulnerabilities": [],
+      "error": null,
+      "wheel": {
+        "filename": "hyperframe-6.1.0-py3-none-any.whl",
+        "url": "https://files.pythonhosted.org/packages/48/30/47d0bf6072f7252e6521f3447ccfa40b421b6824517f82854703d0f5a98b/hyperframe-6.1.0-py3-none-any.whl",
+        "digests": {
+          "blake2b_256": "483047d0bf6072f7252e6521f3447ccfa40b421b6824517f82854703d0f5a98b",
+          "md5": "d4e6177f25f170bb0c84728181164ea0",
+          "sha256": "b03380493a519fce58ea5af42e4a42317bf9bd425596f7a0835ffce80f1a42e5"
+        },
+        "size": 13007
+      }
+    },
+    {
+      "name": "idna",
+      "version": "3.20",
+      "source": "https://pypi.org/pypi/idna/3.20/json",
+      "vulnerabilities": [],
+      "error": null,
+      "wheel": {
+        "filename": "idna-3.20-py3-none-any.whl",
+        "url": "https://files.pythonhosted.org/packages/58/a2/bb081bab032533a855d44de1d56f8e8426114ff1ba5d1f07a438a0a654f8/idna-3.20-py3-none-any.whl",
+        "digests": {
+          "blake2b_256": "58a2bb081bab032533a855d44de1d56f8e8426114ff1ba5d1f07a438a0a654f8",
+          "md5": "9481f70139501176693e1833735309ea",
+          "sha256": "ab7ae7122974553370f0bdb919e1a960b2cd1bc1ef0276416d896db81c14582c"
+        },
+        "size": 69583
+      }
+    },
+    {
+      "name": "iniconfig",
+      "version": "2.3.1",
+      "source": "https://pypi.org/pypi/iniconfig/2.3.1/json",
+      "vulnerabilities": [],
+      "error": null,
+      "wheel": {
+        "filename": "iniconfig-2.3.1-py3-none-any.whl",
+        "url": "https://files.pythonhosted.org/packages/56/43/4ca9e49d27a1fcf6bece6f6aec0ea46bb9112489b93d4b688fb415457bdb/iniconfig-2.3.1-py3-none-any.whl",
+        "digests": {
+          "blake2b_256": "56434ca9e49d27a1fcf6bece6f6aec0ea46bb9112489b93d4b688fb415457bdb",
+          "md5": "5167efaac40122c06cd4afffbe7edfa7",
+          "sha256": "9121e2c1fdb355232495be3194c8dfe87ccc2d5dee45947b78e68f499790d7a7"
+        },
+        "size": 7552
+      }
+    },
+    {
+      "name": "msgpack",
+      "version": "1.2.4",
+      "source": "https://pypi.org/pypi/msgpack/1.2.4/json",
+      "vulnerabilities": [],
+      "error": null,
+      "wheel": {
+        "filename": "msgpack-1.2.4-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl",
+        "url": "https://files.pythonhosted.org/packages/1e/d9/f59bd841fc2fd2b74dc50ce85860a6a25f58e588dd48946aeaf2862cf990/msgpack-1.2.4-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl",
+        "digests": {
+          "blake2b_256": "1ed9f59bd841fc2fd2b74dc50ce85860a6a25f58e588dd48946aeaf2862cf990",
+          "md5": "7be921a550f9abec08e2427274a13fff",
+          "sha256": "c4d5bbdbea8f5669b3a734d6c226772804fb120848f99cbe63a0ddee63b049c9"
+        },
+        "size": 475652
+      }
+    },
+    {
+      "name": "multidict",
+      "version": "7.2.1",
+      "source": "https://pypi.org/pypi/multidict/7.2.1/json",
+      "vulnerabilities": [],
+      "error": null,
+      "wheel": {
+        "filename": "multidict-7.2.1-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl",
+        "url": "https://files.pythonhosted.org/packages/43/50/6bd8600b4843f0a9d939e0cc0f4160f4c727bd6c69e4f7e294a1caa93db8/multidict-7.2.1-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl",
+        "digests": {
+          "blake2b_256": "43506bd8600b4843f0a9d939e0cc0f4160f4c727bd6c69e4f7e294a1caa93db8",
+          "md5": "710a407cf969eb2dc627b2a70dc9e94f",
+          "sha256": "1fb8c1a3480c130c3a6422d5f16f3cad6552bf08c2089dd288ba7134649183b5"
+        },
+        "size": 516796
+      }
+    },
+    {
+      "name": "numpy",
+      "version": "2.5.4",
+      "source": "https://pypi.org/pypi/numpy/2.5.4/json",
+      "vulnerabilities": [],
+      "error": null,
+      "wheel": {
+        "filename": "numpy-2.5.4-cp312-cp312-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl",
+        "url": "https://files.pythonhosted.org/packages/43/a3/c799c62e19c337e6d3770b08e475887fb30ce8477d3c09efca6b2f0228a6/numpy-2.5.4-cp312-cp312-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl",
+        "digests": {
+          "blake2b_256": "43a3c799c62e19c337e6d3770b08e475887fb30ce8477d3c09efca6b2f0228a6",
+          "md5": "8e0adea90301d188aea79920463fd58d",
+          "sha256": "fbde6962867ee75b48b0ee29b2b9372ec5d617799dbaf38e82dc0596f2f7738a"
+        },
+        "size": 16727283
+      }
+    },
+    {
+      "name": "opencv-python-headless",
+      "version": "5.0.0.93",
+      "source": "https://pypi.org/pypi/opencv-python-headless/5.0.0.93/json",
+      "vulnerabilities": [],
+      "error": null,
+      "wheel": {
+        "filename": "opencv_python_headless-5.0.0.93-cp37-abi3-manylinux_2_28_x86_64.whl",
+        "url": "https://files.pythonhosted.org/packages/9b/21/f6ef335f6e65724aa78b8d792b48d40a48c381715f1e62f5a5049e09d07e/opencv_python_headless-5.0.0.93-cp37-abi3-manylinux_2_28_x86_64.whl",
+        "digests": {
+          "blake2b_256": "9b21f6ef335f6e65724aa78b8d792b48d40a48c381715f1e62f5a5049e09d07e",
+          "md5": "d5a91b96667d8e4022b4dd01ff912e9f",
+          "sha256": "ed709fdf9aa0bd1f2ed8549e71d19449b03a675bb581eb292285f6861953be37"
+        },
+        "size": 61204038
+      }
+    },
+    {
+      "name": "opentelemetry-api",
+      "version": "1.45.1",
+      "source": "https://pypi.org/pypi/opentelemetry-api/1.45.1/json",
+      "vulnerabilities": [],
+      "error": null,
+      "wheel": {
+        "filename": "opentelemetry_api-1.45.1-py3-none-any.whl",
+        "url": "https://files.pythonhosted.org/packages/1e/41/f7dcf80b81ee8e71c1a2b59f14208bc723edbd89ed027a73b175abf6348e/opentelemetry_api-1.45.1-py3-none-any.whl",
+        "digests": {
+          "blake2b_256": "1e41f7dcf80b81ee8e71c1a2b59f14208bc723edbd89ed027a73b175abf6348e",
+          "md5": "28d429b00698494344186f7342c15689",
+          "sha256": "b31553efa588ae44bc306f863c785c5333a9ecc091248c6ee68b4b6c87fdedfb"
+        },
+        "size": 60256
+      }
+    },
+    {
+      "name": "packaging",
+      "version": "26.3",
+      "source": "https://pypi.org/pypi/packaging/26.3/json",
+      "vulnerabilities": [],
+      "error": null,
+      "wheel": {
+        "filename": "packaging-26.3-py3-none-any.whl",
+        "url": "https://files.pythonhosted.org/packages/63/34/ba1c580383c9eada3711951fef0795c80b829a078d72188184bcab9dd527/packaging-26.3-py3-none-any.whl",
+        "digests": {
+          "blake2b_256": "6334ba1c580383c9eada3711951fef0795c80b829a078d72188184bcab9dd527",
+          "md5": "e5b3bd8ce52e8a8fe1ab400079171a1e",
+          "sha256": "d7193f7c8e4e93f444fde0262bf90af30e16fa0ad0ad44cb553c87339b23cd1c"
+        },
+        "size": 129956
+      }
+    },
+    {
+      "name": "pip",
+      "version": "26.2",
+      "source": "https://pypi.org/pypi/pip/26.2/json",
+      "vulnerabilities": [],
+      "error": null,
+      "wheel": {
+        "filename": "pip-26.2-py3-none-any.whl",
+        "url": "https://files.pythonhosted.org/packages/62/36/a3aed958d60531cb442b7ab4596cda7b3621cfb916f8ae1d6769795c7dc1/pip-26.2-py3-none-any.whl",
+        "digests": {
+          "blake2b_256": "6236a3aed958d60531cb442b7ab4596cda7b3621cfb916f8ae1d6769795c7dc1",
+          "md5": "b9f998163e0f620d64d20f0562b85969",
+          "sha256": "931c303696af6fa3417112103b1cad26890e5a07eccb5b99783700e33f2b8aad"
+        },
+        "size": 1816475
+      }
+    },
+    {
+      "name": "pluggy",
+      "version": "1.7.0",
+      "source": "https://pypi.org/pypi/pluggy/1.7.0/json",
+      "vulnerabilities": [],
+      "error": null,
+      "wheel": {
+        "filename": "pluggy-1.7.0-py3-none-any.whl",
+        "url": "https://files.pythonhosted.org/packages/40/9e/2b38731e0fc536806f16490e1a12d7f0dc2a1235aa8cc07bcc75416a7daa/pluggy-1.7.0-py3-none-any.whl",
+        "digests": {
+          "blake2b_256": "409e2b38731e0fc536806f16490e1a12d7f0dc2a1235aa8cc07bcc75416a7daa",
+          "md5": "db85e75a2bbad677ff37930d8e9870d2",
+          "sha256": "7dd7b0d8832ba3cb632c306926ded123429211b83641b35dc5c41ad2d34f9bec"
+        },
+        "size": 27082
+      }
+    },
+    {
+      "name": "postgrest",
+      "version": "2.33.0",
+      "source": "https://pypi.org/pypi/postgrest/2.33.0/json",
+      "vulnerabilities": [],
+      "error": null,
+      "wheel": {
+        "filename": "postgrest-2.33.0-py3-none-any.whl",
+        "url": "https://files.pythonhosted.org/packages/bb/65/41a44b64da5b4d9c8bb1e6bbc6a0a71ff9315236438cc5c63bf504ececf9/postgrest-2.33.0-py3-none-any.whl",
+        "digests": {
+          "blake2b_256": "bb6541a44b64da5b4d9c8bb1e6bbc6a0a71ff9315236438cc5c63bf504ececf9",
+          "md5": "bf73df0e1848160bfa5226315d09be4e",
+          "sha256": "802bb30028b897f929e8b0b64db20d949b0c1c58e5804bcc7da02faebf2c03ae"
+        },
+        "size": 23870
+      }
+    },
+    {
+      "name": "propcache",
+      "version": "0.5.4",
+      "source": "https://pypi.org/pypi/propcache/0.5.4/json",
+      "vulnerabilities": [],
+      "error": null,
+      "wheel": {
+        "filename": "propcache-0.5.4-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl",
+        "url": "https://files.pythonhosted.org/packages/85/9f/83a07b6ec0e043c050cfdd35fb0cf1b7897b91d554d6eea293740309afe7/propcache-0.5.4-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl",
+        "digests": {
+          "blake2b_256": "859f83a07b6ec0e043c050cfdd35fb0cf1b7897b91d554d6eea293740309afe7",
+          "md5": "65500a5840028baaac05c48568766aa7",
+          "sha256": "2814ecd8e818f487bee4b0f921bc4d1c176cc5fc71ac0f072d0fa67eda4ac14b"
+        },
+        "size": 250424
+      }
+    },
+    {
+      "name": "proto-plus",
+      "version": "1.29.0",
+      "source": "https://pypi.org/pypi/proto-plus/1.29.0/json",
+      "vulnerabilities": [],
+      "error": null,
+      "wheel": {
+        "filename": "proto_plus-1.29.0-py3-none-any.whl",
+        "url": "https://files.pythonhosted.org/packages/b1/05/a3ef5b1161498e7b5a2a60288a9cf41b9149e94555423a43ec536737ac1a/proto_plus-1.29.0-py3-none-any.whl",
+        "digests": {
+          "blake2b_256": "b105a3ef5b1161498e7b5a2a60288a9cf41b9149e94555423a43ec536737ac1a",
+          "md5": "69e023ca5cb599a096a5593d17c0e4e3",
+          "sha256": "8acd070469a7aaf43f440b022ef9757c8cac1a9f866e933f59ae98669ddc6c8b"
+        },
+        "size": 50786
+      }
+    },
+    {
+      "name": "protobuf",
+      "version": "7.36.2",
+      "source": "https://pypi.org/pypi/protobuf/7.36.2/json",
+      "vulnerabilities": [],
+      "error": null,
+      "wheel": {
+        "filename": "protobuf-7.36.2-cp310-abi3-manylinux2014_x86_64.whl",
+        "url": "https://files.pythonhosted.org/packages/db/f3/3996583dd2906297a637af12114deddf7658af6e683fedb83be061983fb5/protobuf-7.36.2-cp310-abi3-manylinux2014_x86_64.whl",
+        "digests": {
+          "blake2b_256": "dbf33996583dd2906297a637af12114deddf7658af6e683fedb83be061983fb5",
+          "md5": "125de643d9665e123257cd2a6769e964",
+          "sha256": "89f23aa53c24553a2416fd4fd1ec06f74fa42b14b546d8883128813f775bbfd2"
+        },
+        "size": 343223
+      }
+    },
+    {
+      "name": "pyasn1",
+      "version": "0.6.4",
+      "source": "https://pypi.org/pypi/pyasn1/0.6.4/json",
+      "vulnerabilities": [],
+      "error": null,
+      "wheel": {
+        "filename": "pyasn1-0.6.4-py3-none-any.whl",
+        "url": "https://files.pythonhosted.org/packages/9a/3b/6163796d69c3977d1e4287bea4a6979161cbbdd170ebb430511e8e1999ce/pyasn1-0.6.4-py3-none-any.whl",
+        "digests": {
+          "blake2b_256": "9a3b6163796d69c3977d1e4287bea4a6979161cbbdd170ebb430511e8e1999ce",
+          "md5": "7bb1d3aae9f3644c8d6020a1ed0766dc",
+          "sha256": "deda9277cfd454080ec40b207fb6df82206a3a2688735233cdcd8d3d565f088b"
+        },
+        "size": 84410
+      }
+    },
+    {
+      "name": "pyasn1-modules",
+      "version": "0.4.2",
+      "source": "https://pypi.org/pypi/pyasn1-modules/0.4.2/json",
+      "vulnerabilities": [],
+      "error": null,
+      "wheel": {
+        "filename": "pyasn1_modules-0.4.2-py3-none-any.whl",
+        "url": "https://files.pythonhosted.org/packages/47/8d/d529b5d697919ba8c11ad626e835d4039be708a35b0d22de83a269a6682c/pyasn1_modules-0.4.2-py3-none-any.whl",
+        "digests": {
+          "blake2b_256": "478dd529b5d697919ba8c11ad626e835d4039be708a35b0d22de83a269a6682c",
+          "md5": "692245a75ce1da1a3443be3003d8b468",
+          "sha256": "29253a9207ce32b64c3ac6600edc75368f98473906e8fd1043bd6b5b1de2c14a"
+        },
+        "size": 181259
+      }
+    },
+    {
+      "name": "pycparser",
+      "version": "3.12",
+      "source": "https://pypi.org/pypi/pycparser/3.12/json",
+      "vulnerabilities": [],
+      "error": null,
+      "wheel": {
+        "filename": "pycparser-3.12-py3-none-any.whl",
+        "url": "https://files.pythonhosted.org/packages/b6/ae/315bbeee126a769cbde43cf4908acb4b40408d8bf8bbf334dd7368d8dadf/pycparser-3.12-py3-none-any.whl",
+        "digests": {
+          "blake2b_256": "b6ae315bbeee126a769cbde43cf4908acb4b40408d8bf8bbf334dd7368d8dadf",
+          "md5": "ebf4e3d1e0fa02252a54e60fb71988e5",
+          "sha256": "a076f3f489b39b43ed13563a1dafe42447445bec2e294154ec5c57fcdda4c85e"
+        },
+        "size": 62600
+      }
+    },
+    {
+      "name": "pydantic",
+      "version": "2.14.1",
+      "source": "https://pypi.org/pypi/pydantic/2.14.1/json",
+      "vulnerabilities": [],
+      "error": null,
+      "wheel": {
+        "filename": "pydantic-2.14.1-py3-none-any.whl",
+        "url": "https://files.pythonhosted.org/packages/35/ea/a56b9fe5066f3537b7882f77e9c5dfb26d8c2eefdaed9b5fc73d57b4dc22/pydantic-2.14.1-py3-none-any.whl",
+        "digests": {
+          "blake2b_256": "35eaa56b9fe5066f3537b7882f77e9c5dfb26d8c2eefdaed9b5fc73d57b4dc22",
+          "md5": "a18d2045917164658772b7ac95fc1910",
+          "sha256": "9195d967ec791692a04438115466764fb8b9a27b31f14a760437694f40d6b454"
+        },
+        "size": 488106
+      }
+    },
+    {
+      "name": "pydantic-core",
+      "version": "2.50.1",
+      "source": "https://pypi.org/pypi/pydantic-core/2.50.1/json",
+      "vulnerabilities": [],
+      "error": null,
+      "wheel": {
+        "filename": "pydantic_core-2.50.1-cp312-cp312-manylinux_2_17_x86_64.manylinux2014_x86_64.whl",
+        "url": "https://files.pythonhosted.org/packages/90/24/48cd98388e4ac2c08d0800af36d15413db15e20387f1038123a2c86cb2f6/pydantic_core-2.50.1-cp312-cp312-manylinux_2_17_x86_64.manylinux2014_x86_64.whl",
+        "digests": {
+          "blake2b_256": "902448cd98388e4ac2c08d0800af36d15413db15e20387f1038123a2c86cb2f6",
+          "md5": "e1f5ff07cd0680f99712fa8dcc585edb",
+          "sha256": "93ba4e9d8210d941c200431a56b2c0400b131865947903937ed3ec5404307d2e"
+        },
+        "size": 2160157
+      }
+    },
+    {
+      "name": "pygments",
+      "version": "2.21.0",
+      "source": "https://pypi.org/pypi/pygments/2.21.0/json",
+      "vulnerabilities": [],
+      "error": null,
+      "wheel": {
+        "filename": "pygments-2.21.0-py3-none-any.whl",
+        "url": "https://files.pythonhosted.org/packages/71/46/17f022dd3e953bf20a04a028a21ec746d942f8d2af30fa0f124fa0e6a684/pygments-2.21.0-py3-none-any.whl",
+        "digests": {
+          "blake2b_256": "714617f022dd3e953bf20a04a028a21ec746d942f8d2af30fa0f124fa0e6a684",
+          "md5": "eaaa46b6eef9ba4d6abd73d4f45be371",
+          "sha256": "2363c69b61c4a97c838da3b130dcd6468f4848992b21a82f2a63ec34377137d9"
+        },
+        "size": 1250147
+      }
+    },
+    {
+      "name": "pyjwt",
+      "version": "2.15.1",
+      "source": "https://pypi.org/pypi/pyjwt/2.15.1/json",
+      "vulnerabilities": [],
+      "error": null,
+      "wheel": {
+        "filename": "pyjwt-2.15.1-py3-none-any.whl",
+        "url": "https://files.pythonhosted.org/packages/50/ca/44de4e75f8aadc457f0634be3b542815078ded46dca30efb960edeecad6e/pyjwt-2.15.1-py3-none-any.whl",
+        "digests": {
+          "blake2b_256": "50ca44de4e75f8aadc457f0634be3b542815078ded46dca30efb960edeecad6e",
+          "md5": "926cc7e28279513ebd670c59f7cafd4c",
+          "sha256": "42d59d631f7768a1028a64c7ff581a9bf7519804daf91fc5b6c56e30eec5e193"
+        },
+        "size": 33860
+      }
+    },
+    {
+      "name": "pytest",
+      "version": "9.1.1",
+      "source": "https://pypi.org/pypi/pytest/9.1.1/json",
+      "vulnerabilities": [],
+      "error": null,
+      "wheel": {
+        "filename": "pytest-9.1.1-py3-none-any.whl",
+        "url": "https://files.pythonhosted.org/packages/24/25/1de2678b631f5a49215c6c96fff41ba892b0a34df68d6d80292b1b48aa7f/pytest-9.1.1-py3-none-any.whl",
+        "digests": {
+          "blake2b_256": "24251de2678b631f5a49215c6c96fff41ba892b0a34df68d6d80292b1b48aa7f",
+          "md5": "fd1dd7f62af8bb92733c0d20bcff497e",
+          "sha256": "37a86b45efb9a47a61a36449063e8e18d0cab3161329fc099eb21783169c4f0c"
+        },
+        "size": 386536
+      }
+    },
+    {
+      "name": "python-dotenv",
+      "version": "1.2.4",
+      "source": "https://pypi.org/pypi/python-dotenv/1.2.4/json",
+      "vulnerabilities": [],
+      "error": null,
+      "wheel": {
+        "filename": "python_dotenv-1.2.4-py3-none-any.whl",
+        "url": "https://files.pythonhosted.org/packages/60/d1/38f3a3405989a89ac18390803e70c6ad7c7760da4f9b83cbeca0c44a0c72/python_dotenv-1.2.4-py3-none-any.whl",
+        "digests": {
+          "blake2b_256": "60d138f3a3405989a89ac18390803e70c6ad7c7760da4f9b83cbeca0c44a0c72",
+          "md5": "fc1378d45185a1b19e9f05a9b20cc5fd",
+          "sha256": "42269a8a5b3fd54ffa6f3d84b18abed50064717576b4ecf03dc4a55d8aa04fdc"
+        },
+        "size": 23266
+      }
+    },
+    {
+      "name": "python-multipart",
+      "version": "0.0.32",
+      "source": "https://pypi.org/pypi/python-multipart/0.0.32/json",
+      "vulnerabilities": [],
+      "error": null,
+      "wheel": {
+        "filename": "python_multipart-0.0.32-py3-none-any.whl",
+        "url": "https://files.pythonhosted.org/packages/e1/04/e8135ebd1ad02c56ec633277529b2602ff99ff634be76cdba5744cf554fd/python_multipart-0.0.32-py3-none-any.whl",
+        "digests": {
+          "blake2b_256": "e104e8135ebd1ad02c56ec633277529b2602ff99ff634be76cdba5744cf554fd",
+          "md5": "9e4fe7cdd370288895f27b876342d3d1",
+          "sha256": "ff6d3f776f16878c894e52e107296ffc890e913c611b1a4ec6c44e2821fe2e23"
+        },
+        "size": 30042
+      }
+    },
+    {
+      "name": "pyyaml",
+      "version": "6.0.3",
+      "source": "https://pypi.org/pypi/pyyaml/6.0.3/json",
+      "vulnerabilities": [],
+      "error": null,
+      "wheel": {
+        "filename": "pyyaml-6.0.3-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl",
+        "url": "https://files.pythonhosted.org/packages/8b/9d/b3589d3877982d4f2329302ef98a8026e7f4443c765c46cfecc8858c6b4b/pyyaml-6.0.3-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl",
+        "digests": {
+          "blake2b_256": "8b9db3589d3877982d4f2329302ef98a8026e7f4443c765c46cfecc8858c6b4b",
+          "md5": "b3baaa03751fc90073221c5ec847048e",
+          "sha256": "ba1cc08a7ccde2d2ec775841541641e4548226580ab850948cbfda66a1befcdc"
+        },
+        "size": 807870
+      }
+    },
+    {
+      "name": "realtime",
+      "version": "2.33.0",
+      "source": "https://pypi.org/pypi/realtime/2.33.0/json",
+      "vulnerabilities": [],
+      "error": null,
+      "wheel": {
+        "filename": "realtime-2.33.0-py3-none-any.whl",
+        "url": "https://files.pythonhosted.org/packages/5a/d6/4a5c8b6b12104816d9205732c1cb649f47e75367e36c06eba6bdd54e9b77/realtime-2.33.0-py3-none-any.whl",
+        "digests": {
+          "blake2b_256": "5ad64a5c8b6b12104816d9205732c1cb649f47e75367e36c06eba6bdd54e9b77",
+          "md5": "6b7fcddbdcdaa7c4df3daf55ab7a7a47",
+          "sha256": "da94bb2e6e33859d1aece87656444498a1f7a5ca1c3484a84aa4a23f8940deec"
+        },
+        "size": 24158
+      }
+    },
+    {
+      "name": "requests",
+      "version": "2.34.2",
+      "source": "https://pypi.org/pypi/requests/2.34.2/json",
+      "vulnerabilities": [],
+      "error": null,
+      "wheel": {
+        "filename": "requests-2.34.2-py3-none-any.whl",
+        "url": "https://files.pythonhosted.org/packages/a0/f4/c67b0b3f1b9245e8d266f0f112c500d50e5b4e83cb6f3b71b6528104182a/requests-2.34.2-py3-none-any.whl",
+        "digests": {
+          "blake2b_256": "a0f4c67b0b3f1b9245e8d266f0f112c500d50e5b4e83cb6f3b71b6528104182a",
+          "md5": "cc4287951c320ff794e5e183c7a91f85",
+          "sha256": "2a0d60c172f83ac6ab31e4554906c0f3b3588d37b5cb939b1c061f4907e278e0"
+        },
+        "size": 73075
+      }
+    },
+    {
+      "name": "starlette",
+      "version": "1.10.0",
+      "source": "https://pypi.org/pypi/starlette/1.10.0/json",
+      "vulnerabilities": [],
+      "error": null,
+      "wheel": {
+        "filename": "starlette-1.10.0-py3-none-any.whl",
+        "url": "https://files.pythonhosted.org/packages/88/2e/947cfe02def9371c07cd5bf5b6b61c829e9aecb9904db02a66cfafbc1eec/starlette-1.10.0-py3-none-any.whl",
+        "digests": {
+          "blake2b_256": "882e947cfe02def9371c07cd5bf5b6b61c829e9aecb9904db02a66cfafbc1eec",
+          "md5": "dd6953136a05400c96edb875194d50cd",
+          "sha256": "478c0ab3b4ced6e82719849c118fa406f0278a3499c1a898cd15cd31bdc38ce4"
+        },
+        "size": 80571
+      }
+    },
+    {
+      "name": "storage3",
+      "version": "2.33.0",
+      "source": "https://pypi.org/pypi/storage3/2.33.0/json",
+      "vulnerabilities": [],
+      "error": null,
+      "wheel": {
+        "filename": "storage3-2.33.0-py3-none-any.whl",
+        "url": "https://files.pythonhosted.org/packages/5c/78/98ff52ddd24177ca72e0bbc7527fc8391df187304f32de2421d20b55f1b2/storage3-2.33.0-py3-none-any.whl",
+        "digests": {
+          "blake2b_256": "5c7898ff52ddd24177ca72e0bbc7527fc8391df187304f32de2421d20b55f1b2",
+          "md5": "6132366f4ad58f7c6cb1393f6e577444",
+          "sha256": "6e357ea7328961bcecc02a35fac8fae555b0c4b6b02ff553a956824693fd4cec"
+        },
+        "size": 28469
+      }
+    },
+    {
+      "name": "strenum",
+      "version": "0.4.15",
+      "source": "https://pypi.org/pypi/strenum/0.4.15/json",
+      "vulnerabilities": [],
+      "error": null,
+      "wheel": {
+        "filename": "StrEnum-0.4.15-py3-none-any.whl",
+        "url": "https://files.pythonhosted.org/packages/81/69/297302c5f5f59c862faa31e6cb9a4cd74721cd1e052b38e464c5b402df8b/StrEnum-0.4.15-py3-none-any.whl",
+        "digests": {
+          "blake2b_256": "8169297302c5f5f59c862faa31e6cb9a4cd74721cd1e052b38e464c5b402df8b",
+          "md5": "47a901c7ac420ca5c0524f1dd3b8ec35",
+          "sha256": "a30cda4af7cc6b5bf52c8055bc4bf4b2b6b14a93b574626da33df53cf7740659"
+        },
+        "size": 8851
+      }
+    },
+    {
+      "name": "supabase",
+      "version": "2.33.0",
+      "source": "https://pypi.org/pypi/supabase/2.33.0/json",
+      "vulnerabilities": [],
+      "error": null,
+      "wheel": {
+        "filename": "supabase-2.33.0-py3-none-any.whl",
+        "url": "https://files.pythonhosted.org/packages/8d/48/1a8f57fdaf882f1dcd7836352e33829c1d455c6cfc387d2b0fb1e99ffdb6/supabase-2.33.0-py3-none-any.whl",
+        "digests": {
+          "blake2b_256": "8d481a8f57fdaf882f1dcd7836352e33829c1d455c6cfc387d2b0fb1e99ffdb6",
+          "md5": "eb5878d28546ad7697cc977c0912760c",
+          "sha256": "57c3aeeac3d612321deac8176b935077a7643461c8df4bf28722c2024c87ccc6"
+        },
+        "size": 16753
+      }
+    },
+    {
+      "name": "supabase-auth",
+      "version": "2.33.0",
+      "source": "https://pypi.org/pypi/supabase-auth/2.33.0/json",
+      "vulnerabilities": [],
+      "error": null,
+      "wheel": {
+        "filename": "supabase_auth-2.33.0-py3-none-any.whl",
+        "url": "https://files.pythonhosted.org/packages/f5/cd/8fadb81917823bf416290fad4e652f44357572b52c8ce86be0d26bd19dab/supabase_auth-2.33.0-py3-none-any.whl",
+        "digests": {
+          "blake2b_256": "f5cd8fadb81917823bf416290fad4e652f44357572b52c8ce86be0d26bd19dab",
+          "md5": "92eafed7d8fd1add6326b215694c9842",
+          "sha256": "d48f361309cb5e8eeb7babfd0f326e1a81870f27a0ba15f94194fbab13153f5c"
+        },
+        "size": 48534
+      }
+    },
+    {
+      "name": "supabase-functions",
+      "version": "2.33.0",
+      "source": "https://pypi.org/pypi/supabase-functions/2.33.0/json",
+      "vulnerabilities": [],
+      "error": null,
+      "wheel": {
+        "filename": "supabase_functions-2.33.0-py3-none-any.whl",
+        "url": "https://files.pythonhosted.org/packages/55/4e/30a13a3b58a97828faaf9df2af0947f9ff4a2585289dcd17b2c95f6d2c72/supabase_functions-2.33.0-py3-none-any.whl",
+        "digests": {
+          "blake2b_256": "554e30a13a3b58a97828faaf9df2af0947f9ff4a2585289dcd17b2c95f6d2c72",
+          "md5": "0cccfe1ceaca6d06069cc58284f105d0",
+          "sha256": "3a8531f5ac7519535fb0032fa4490220d49d338e83608d38d1b178e9c7999414"
+        },
+        "size": 9269
+      }
+    },
+    {
+      "name": "typing-extensions",
+      "version": "4.16.0",
+      "source": "https://pypi.org/pypi/typing-extensions/4.16.0/json",
+      "vulnerabilities": [],
+      "error": null,
+      "wheel": {
+        "filename": "typing_extensions-4.16.0-py3-none-any.whl",
+        "url": "https://files.pythonhosted.org/packages/49/d3/b8441a820a491ddfc024b0b0cf0393375b75ea13866d9c66727e54c2fc80/typing_extensions-4.16.0-py3-none-any.whl",
+        "digests": {
+          "blake2b_256": "49d3b8441a820a491ddfc024b0b0cf0393375b75ea13866d9c66727e54c2fc80",
+          "md5": "aaa249e7f620bbcecbcbf2b7b11fbd12",
+          "sha256": "481caa481374e813c1b176ada14e97f1f67a4539ce9cfeb3f350d78d6370c2e8"
+        },
+        "size": 45571
+      }
+    },
+    {
+      "name": "typing-inspection",
+      "version": "0.4.4",
+      "source": "https://pypi.org/pypi/typing-inspection/0.4.4/json",
+      "vulnerabilities": [],
+      "error": null,
+      "wheel": {
+        "filename": "typing_inspection-0.4.4-py3-none-any.whl",
+        "url": "https://files.pythonhosted.org/packages/67/81/4add07e5172b7ac40d8ed5ff580409a7801a4fe26d529bdd915401dabfbe/typing_inspection-0.4.4-py3-none-any.whl",
+        "digests": {
+          "blake2b_256": "67814add07e5172b7ac40d8ed5ff580409a7801a4fe26d529bdd915401dabfbe",
+          "md5": "edd203f0c9665a1325ef0e986a2daeae",
+          "sha256": "65b8397ba37ccbce054456aaccddfc91e6e3083c92824df348d96ca832f3f147"
+        },
+        "size": 14750
+      }
+    },
+    {
+      "name": "urllib3",
+      "version": "2.8.0",
+      "source": "https://pypi.org/pypi/urllib3/2.8.0/json",
+      "vulnerabilities": [],
+      "error": null,
+      "wheel": {
+        "filename": "urllib3-2.8.0-py3-none-any.whl",
+        "url": "https://files.pythonhosted.org/packages/92/9d/c4e665119135114480843e7ab388fa94d8480650450e6f8e26b70d323a4c/urllib3-2.8.0-py3-none-any.whl",
+        "digests": {
+          "blake2b_256": "929dc4e665119135114480843e7ab388fa94d8480650450e6f8e26b70d323a4c",
+          "md5": "e6e9d40fb009e4a52290209506d8d4d4",
+          "sha256": "0cf3cae568d36aa9576b28dfb35f11328f1cb974ca7647d9475ebb86c75ac6e3"
+        },
+        "size": 135717
+      }
+    },
+    {
+      "name": "uvicorn",
+      "version": "0.54.0",
+      "source": "https://pypi.org/pypi/uvicorn/0.54.0/json",
+      "vulnerabilities": [],
+      "error": null,
+      "wheel": {
+        "filename": "uvicorn-0.54.0-py3-none-any.whl",
+        "url": "https://files.pythonhosted.org/packages/38/0c/b54a4fdd7f90a3af8b02ebc9ce6712c2c208b7926a2f7bad95c33ebbe943/uvicorn-0.54.0-py3-none-any.whl",
+        "digests": {
+          "blake2b_256": "380cb54a4fdd7f90a3af8b02ebc9ce6712c2c208b7926a2f7bad95c33ebbe943",
+          "md5": "7ed5c9785881c9a98e060a491275fa2a",
+          "sha256": "505bdb0f318731d45f1f712071fc781a8981f6847a31c902c9f5e652d4f67faf"
+        },
+        "size": 87427
+      }
+    },
+    {
+      "name": "uvloop",
+      "version": "0.23.0",
+      "source": "https://pypi.org/pypi/uvloop/0.23.0/json",
+      "vulnerabilities": [],
+      "error": null,
+      "wheel": {
+        "filename": "uvloop-0.23.0-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl",
+        "url": "https://files.pythonhosted.org/packages/51/27/c1d2f9fa977f8f42ea294604166df10e0027e6dc6cd17f85ede386c9bf36/uvloop-0.23.0-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl",
+        "digests": {
+          "blake2b_256": "5127c1d2f9fa977f8f42ea294604166df10e0027e6dc6cd17f85ede386c9bf36",
+          "md5": "21fdccc1f29f0a535815e24d441aa94c",
+          "sha256": "090865d8ce7a03986755a3ce711b7dd0d4b44eb14ab74368b717f3fad1180208"
+        },
+        "size": 4532597
+      }
+    },
+    {
+      "name": "watchfiles",
+      "version": "1.3.0",
+      "source": "https://pypi.org/pypi/watchfiles/1.3.0/json",
+      "vulnerabilities": [],
+      "error": null,
+      "wheel": {
+        "filename": "watchfiles-1.3.0-cp310-abi3-manylinux_2_17_x86_64.manylinux2014_x86_64.whl",
+        "url": "https://files.pythonhosted.org/packages/8a/cf/e3ad894ed5909a7c44b0707e89bc25d19a3d78b3a7aec846119443b6ae56/watchfiles-1.3.0-cp310-abi3-manylinux_2_17_x86_64.manylinux2014_x86_64.whl",
+        "digests": {
+          "blake2b_256": "8acfe3ad894ed5909a7c44b0707e89bc25d19a3d78b3a7aec846119443b6ae56",
+          "md5": "40361a33df1a98321c9de0fb13a729a2",
+          "sha256": "b5768b49e426fd5b550b012c866db347cdf15c398ef98dc557b6e6b72fa74cd1"
+        },
+        "size": 458353
+      }
+    },
+    {
+      "name": "websockets",
+      "version": "15.0.1",
+      "source": "https://pypi.org/pypi/websockets/15.0.1/json",
+      "vulnerabilities": [],
+      "error": null,
+      "wheel": {
+        "filename": "websockets-15.0.1-cp312-cp312-manylinux_2_5_x86_64.manylinux1_x86_64.manylinux_2_17_x86_64.manylinux2014_x86_64.whl",
+        "url": "https://files.pythonhosted.org/packages/14/8f/aa61f528fba38578ec553c145857a181384c72b98156f858ca5c8e82d9d3/websockets-15.0.1-cp312-cp312-manylinux_2_5_x86_64.manylinux1_x86_64.manylinux_2_17_x86_64.manylinux2014_x86_64.whl",
+        "digests": {
+          "blake2b_256": "148faa61f528fba38578ec553c145857a181384c72b98156f858ca5c8e82d9d3",
+          "md5": "ef1e8410eafd746ecbc6d824c26154cf",
+          "sha256": "64dee438fed052b52e4f98f76c5790513235efaa1ef7f3f2192c392cd7c91b65"
+        },
+        "size": 182523
+      }
+    },
+    {
+      "name": "yarl",
+      "version": "1.25.1",
+      "source": "https://pypi.org/pypi/yarl/1.25.1/json",
+      "vulnerabilities": [],
+      "error": null,
+      "wheel": {
+        "filename": "yarl-1.25.1-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl",
+        "url": "https://files.pythonhosted.org/packages/bc/7b/ca212cbe170ac8b96e45317ecbcf9c3c3ecf0cdec98d5b088a9c4088929b/yarl-1.25.1-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl",
+        "digests": {
+          "blake2b_256": "bc7bca212cbe170ac8b96e45317ecbcf9c3c3ecf0cdec98d5b088a9c4088929b",
+          "md5": "ef36aed0b67f88c828f3b5d5112bdfb1",
+          "sha256": "c6f117789d22dce188e5754e8bc65b7e6ebf8cb73963b9fa761f672a5883769d"
+        },
+        "size": 117050
+      }
+    }
+  ],
+  "limits": "Metadata license declarations need legal review; an empty advisory list does not prove absence of vulnerabilities. Published wheel hashes do not verify installed bytes."
+}

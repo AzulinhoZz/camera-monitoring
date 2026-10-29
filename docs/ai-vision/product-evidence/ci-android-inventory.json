@@ -1,0 +1,33 @@
+{
+  "resolved_artifact_rows": 286,
+  "distinct_maven_artifacts": 143,
+  "configurations": [
+    "debugRuntimeClasspath",
+    "releaseRuntimeClasspath"
+  ],
+  "apk_sha256": "98b4a0ca676feb3f5ee75d003414cbcc49d26cd609764193824416f88c8f8746",
+  "apk_bytes": 25419993,
+  "native_libraries": [
+    {
+      "name": "lib/arm64-v8a/libandroidx.graphics.path.so",
+      "sha256": "41e9a793c43a0f4fddb19e33f346bace464f30f888ba7b9eaf96294ea115bfb6",
+      "bytes": 10096
+    },
+    {
+      "name": "lib/armeabi-v7a/libandroidx.graphics.path.so",
+      "sha256": "41399eba6fc2a60f6f14642375c1824f3cf25eb8fec7397d753730a3ceda3e2b",
+      "bytes": 7252
+    },
+    {
+      "name": "lib/x86/libandroidx.graphics.path.so",
+      "sha256": "eb0570b41fd3bff25d8204a967c03bd7550719e768b791f680cc40cbe35f29af",
+      "bytes": 9284
+    },
+    {
+      "name": "lib/x86_64/libandroidx.graphics.path.so",
+      "sha256": "4e56c996f13670e70082658de7880c4020eabf4f25e43387f88ed78a713fc9f0",
+      "bytes": 10760
+    }
+  ],
+  "scope": "resolved cached artifacts and debug APK only; no complete native/Maven vulnerability or legal audit, not a device test"
+}

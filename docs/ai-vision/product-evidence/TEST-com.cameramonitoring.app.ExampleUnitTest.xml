@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.cameramonitoring.app.ExampleUnitTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2026-10-29T04:50:41.136Z" hostname="e7cece4d667c" time="0.001">
+  <properties/>
+  <testcase name="addition_isCorrect" classname="com.cameramonitoring.app.ExampleUnitTest" time="0.001"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

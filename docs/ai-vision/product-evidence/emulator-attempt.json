@@ -1,0 +1,7 @@
+{
+  "result": "NOT_RUN",
+  "physical_device": "NOT_RUN",
+  "kvm_available": false,
+  "preparation": "Official emulator binary verified against SDK metadata. System image download stopped after approximately five minutes; incomplete image was not executed. No emulator boot, install or UI validation performed.",
+  "limits": "Build/unit tests and CI do not certify rendering, playback or lifecycle behavior on device."
+}

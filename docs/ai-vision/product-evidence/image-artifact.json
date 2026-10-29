@@ -1,0 +1,11 @@
+{
+  "build_source_commit": "7efd1ef0b5b34e5994e19fb0efb305da7a28a1bf",
+  "verified_against_commit": "baa428fa823ab3c08737c6bc9aa738842ccf371e",
+  "image_inputs_unchanged": true,
+  "image_id": "sha256:f9b3d4375525918a45c91a536a5521e3547771830b77d73b534015f5e3231491",
+  "archive_sha256": "d35fae9a0b6de2437a4b31a06f3dbbdbc511a49e0ca7095cd22feed9c6b3fe31",
+  "archive_bytes": 479584256,
+  "archive_path": "/workspace/.camera-tools/product/candidate.tar",
+  "published": false,
+  "deployed": false
+}

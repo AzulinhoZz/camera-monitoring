@@ -1,0 +1,13 @@
+{
+  "scope": "Maven PURL advisory matches from resolved debug/release graph; native .so versions are not inferred or certified",
+  "accepted": false,
+  "status": "FINDINGS",
+  "findings": 1,
+  "database": {
+    "schemaVersion": "v6.1.10",
+    "from": "https://grype.anchore.io/databases/v6/vulnerability-db_v6.1.10_2026-10-28T00:24:28Z_1793168610.tar.zst?checksum=sha256%3Ab08902b91738f1a9bc7fd61942f331d8e5e76a5df0c0b5f8c17c18bd787ee278",
+    "built": "2026-10-28T06:23:30Z",
+    "path": "/workspace/.camera-tools/scanners/grype-db/6/vulnerability.db",
+    "valid": true
+  }
+}

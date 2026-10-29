@@ -1,0 +1,80 @@
+{
+  "scope": "current cloud host; synthetic frames; isolated camera groups with one CPU slot each; not target-hardware soak or natural accuracy",
+  "configured_inference_fps": 3,
+  "pose_enabled": false,
+  "production_accessed": false,
+  "results": [
+    {
+      "cameras": 1,
+      "status": "MEASURED",
+      "exit_code": 0,
+      "peak_group_rss_mib": 271.2734375,
+      "per_camera": {
+        "00000000-0000-0000-0000-000000000001": {
+          "inference_fps": 2.9575504523312457,
+          "inference_frames": 34,
+          "capture_fps": 9.916885698876783,
+          "inference_dropped": 0
+        }
+      },
+      "target_fps": 2,
+      "meets_fps_target": true
+    },
+    {
+      "cameras": 2,
+      "status": "MEASURED",
+      "exit_code": 0,
+      "peak_group_rss_mib": 541.16796875,
+      "per_camera": {
+        "00000000-0000-0000-0000-000000000002": {
+          "inference_fps": 2.951171525666249,
+          "inference_frames": 33,
+          "capture_fps": 9.926388683594137,
+          "inference_dropped": 0
+        },
+        "00000000-0000-0000-0000-000000000001": {
+          "inference_fps": 2.959375840731773,
+          "inference_frames": 33,
+          "capture_fps": 9.954091244238578,
+          "inference_dropped": 0
+        }
+      },
+      "target_fps": 2,
+      "meets_fps_target": true
+    },
+    {
+      "cameras": 4,
+      "status": "MEASURED",
+      "exit_code": 0,
+      "peak_group_rss_mib": 1083.6328125,
+      "per_camera": {
+        "00000000-0000-0000-0000-000000000002": {
+          "inference_fps": 2.9837648091268103,
+          "inference_frames": 34,
+          "capture_fps": 9.916969629415737,
+          "inference_dropped": 0
+        },
+        "00000000-0000-0000-0000-000000000001": {
+          "inference_fps": 2.9475509319462505,
+          "inference_frames": 34,
+          "capture_fps": 9.88332193828807,
+          "inference_dropped": 0
+        },
+        "00000000-0000-0000-0000-000000000004": {
+          "inference_fps": 2.9530201342281877,
+          "inference_frames": 33,
+          "capture_fps": 9.93307639711319,
+          "inference_dropped": 0
+        },
+        "00000000-0000-0000-0000-000000000003": {
+          "inference_fps": 2.9460185425872973,
+          "inference_frames": 34,
+          "capture_fps": 9.877524701660244,
+          "inference_dropped": 0
+        }
+      },
+      "target_fps": 2,
+      "meets_fps_target": true
+    }
+  ]
+}

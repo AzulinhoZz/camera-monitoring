@@ -212,3 +212,9 @@ Restore entre clústeres independientes y roles añadido; importación offline c
 ## U. Fase7 autorizada — remediación y validación de release (2026-10-28)
 
 El usuario autoriza la fase posterior propuesta; extensión del plan original. [Plan y primer incremento](PHASE_7_RELEASE_REMEDIATION.md): R1 corrige alias Base64 del cursor y acota entrada al JWT sin duplicar canonicalización que PyJWT2.15.1 ya protege.220 backend PASS, sin dependencias/migraciones/Android ni producción. R2 nativos, R3 staging, R4 dispositivo/calidad/carga y R5 operación siguen pendientes. Fase7 iniciada, no completada; NO_GO vigente, sin cambiar los criterios de fase6.
+
+## Incremento de producto autorizado — 2026-10-29 UTC
+
+Implementado/verificado en entorno controlado: resumen autorizado de pendientes24h; filtro por regla/zona IA y fecha/hora; carga progresiva de evidencia con autorización fresca; mejoras de navegación/cancelación/errores Android; HTTPS release, backup/logging privados y Guava corregido; diagnósticos técnicos, evaluación offline, backup cifrado y restore entre procesos/clústeres con índices; CI Android y gate Maven ligados al APK. [Detalle, recibos y riesgos](PHASE_7_PRODUCT_DELIVERY.md).
+
+Pendiente de aceptación, no cerrado: native200; integración staging; dispositivo/UI/TTL; precisión natural por escenario y hardware/soak destino; Storage administrado/custodia/rotación/RPO/RTO; modelos/datasets/licencias y operador. [Matriz pendiente](PRODUCT_VALIDATION_MATRIX.md). No se declara fase7 completa ni se elevan herramientas de medición a una mejora de precisión demostrada.

@@ -1,0 +1,15 @@
+{
+  "cases": [
+    {
+      "case": "http-denied",
+      "exit_code": 1,
+      "expected_success": false
+    },
+    {
+      "case": "https-accepted",
+      "exit_code": 0,
+      "expected_success": true
+    }
+  ],
+  "scope": "format policy only; no API contacted and no release APK produced"
+}

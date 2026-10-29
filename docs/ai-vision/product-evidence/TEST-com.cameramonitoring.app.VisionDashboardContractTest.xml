@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.cameramonitoring.app.VisionDashboardContractTest" tests="2" skipped="0" failures="0" errors="0" timestamp="2026-10-29T04:50:42.391Z" hostname="e7cece4d667c" time="0.002">
+  <properties/>
+  <testcase name="previewExpiresAndNeverCrossesCameraScope" classname="com.cameramonitoring.app.VisionDashboardContractTest" time="0.001"/>
+  <testcase name="unavailableStatusHasNoPreviewAndWindowStatisticsAreSeparateFromPage" classname="com.cameramonitoring.app.VisionDashboardContractTest" time="0.001"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

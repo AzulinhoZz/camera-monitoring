@@ -1,0 +1,21 @@
+{
+  "run_id": 40821700021,
+  "url": "https://github.com/AzulinhoZz/camera-monitoring/actions/runs/40821700021",
+  "source_commit": "baa428fa823ab3c08737c6bc9aa738842ccf371e",
+  "overall": "failure",
+  "backend_tests": 239,
+  "backend_test_failures": 0,
+  "android_tests": 19,
+  "android_test_failures": 0,
+  "android_job": "success",
+  "backend_job": "failure",
+  "backend_failed_step": "Full image inventory and vulnerability gate",
+  "native_matches": 200,
+  "android_maven_matches": 0,
+  "python_review": {
+    "packages": 70,
+    "lookup_errors": 0,
+    "affected_packages": 0
+  },
+  "limits": "CI artifacts have their own hashes; do not substitute CI image/APK identity for locally scanned artifacts. No deployment performed."
+}

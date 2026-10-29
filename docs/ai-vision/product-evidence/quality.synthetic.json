@@ -1,0 +1,93 @@
+{
+  "dataset_kind": "synthetic",
+  "split": "calibration",
+  "threshold": 0.5,
+  "not_evaluated_scenarios": [
+    "occlusion",
+    "other",
+    "pets",
+    "rain",
+    "shadows"
+  ],
+  "metrics": {
+    "all": {
+      "tp": 1,
+      "fp": 2,
+      "fn": 0,
+      "precision": 0.3333333333333333,
+      "recall": 1.0,
+      "f1": 0.5,
+      "video_hours": 0.03333333333333333,
+      "false_alerts_per_video_hour": 60.0
+    },
+    "day": {
+      "tp": 1,
+      "fp": 1,
+      "fn": 0,
+      "precision": 0.5,
+      "recall": 1.0,
+      "f1": 0.6666666666666666,
+      "video_hours": 0.016666666666666666,
+      "false_alerts_per_video_hour": 60.0
+    },
+    "night": {
+      "tp": 0,
+      "fp": 1,
+      "fn": 0,
+      "precision": 0.0,
+      "recall": null,
+      "f1": 0.0,
+      "video_hours": 0.016666666666666666,
+      "false_alerts_per_video_hour": 60.0
+    }
+  },
+  "negative_only_false_alerts_per_hour": 60.0,
+  "limits": "One-to-one event-window comparison of supplied outputs, not frame mAP or model execution. Rights are operator-declared. No deployment/config changes.",
+  "input_sha256": "3c0061315b6ba9f88dfe5c3b5197f606e2da9095f3489cc485e90579d702d10d",
+  "calibration_curve": [
+    {
+      "tp": 1,
+      "fp": 2,
+      "fn": 0,
+      "precision": 0.3333333333333333,
+      "recall": 1.0,
+      "f1": 0.5,
+      "video_hours": 0.03333333333333333,
+      "false_alerts_per_video_hour": 60.0,
+      "threshold": 0.3
+    },
+    {
+      "tp": 1,
+      "fp": 2,
+      "fn": 0,
+      "precision": 0.3333333333333333,
+      "recall": 1.0,
+      "f1": 0.5,
+      "video_hours": 0.03333333333333333,
+      "false_alerts_per_video_hour": 60.0,
+      "threshold": 0.5
+    },
+    {
+      "tp": 1,
+      "fp": 0,
+      "fn": 0,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "video_hours": 0.03333333333333333,
+      "false_alerts_per_video_hour": 0.0,
+      "threshold": 0.7
+    },
+    {
+      "tp": 1,
+      "fp": 0,
+      "fn": 0,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "video_hours": 0.03333333333333333,
+      "false_alerts_per_video_hour": 0.0,
+      "threshold": 0.9
+    }
+  ]
+}
