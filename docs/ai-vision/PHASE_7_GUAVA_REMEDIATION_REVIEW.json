@@ -1,0 +1,34 @@
+{
+  "component": "com.google.guava:guava",
+  "previous": "33.0.0-android",
+  "version": "33.7.2-android",
+  "advisory": "GHSA-xxph-c9ww-hj94 / CVE-2026-102554",
+  "upstream_fix_commit": "b931fe9d6d5cf00bc55714ad3308d086f71850fe",
+  "license": "Apache-2.0",
+  "license_source": "https://raw.githubusercontent.com/google/guava/b931fe9d6d5cf00bc55714ad3308d086f71850fe/LICENSE",
+  "license_sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30",
+  "artifacts": [
+    {
+      "url": "https://repo.maven.apache.org/maven2/com/google/guava/guava/33.7.2-android/guava-33.7.2-android.pom",
+      "bytes": 9982,
+      "sha1_official": "2e3c1c2d0554a43bd8fc033a777049a963cc20c4",
+      "sha256": "f7f6481d044bb0c3fd94f8be74a703c61dce54bc5d6c84bdcec9c1d9bfa27f1d"
+    },
+    {
+      "url": "https://repo.maven.apache.org/maven2/com/google/guava/guava/33.7.2-android/guava-33.7.2-android.jar",
+      "bytes": 2982159,
+      "sha1_official": "0e601df8fa35293ad4fa7c6ec4522152d304eb41",
+      "sha256": "b949fe975a32421c1a2633c07a4f1578b462f2f467668aa0a4023c5ff7c4a808"
+    },
+    {
+      "url": "https://repo.maven.apache.org/maven2/com/google/guava/guava-parent/33.7.2-android/guava-parent-33.7.2-android.pom",
+      "bytes": 30330,
+      "sha1_official": "9091f2040724ad92c3d38c50918ae63dd3dd29da",
+      "sha256": "336126e77147a7bb849750b972f53870577b7427e0ff37d68aca1d1a728a6eb2"
+    }
+  ],
+  "scope": "Maven official HTTPS plus published SHA1 verified; SHA256 recorded. Android public API compatibility and resolved transitives validated by build/tests/SCA after integration.",
+  "jar_license_notice_entries": [
+    "META-INF/LICENSE"
+  ]
+}

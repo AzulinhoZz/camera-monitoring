@@ -59,6 +59,12 @@ android {
 }
 
 dependencies {
+    constraints {
+        implementation("com.google.guava:guava:33.7.2-android") {
+            version { strictly("33.7.2-android") }
+            because("GHSA-xxph-c9ww-hj94: use the reviewed patched Android variant")
+        }
+    }
     implementation(platform(libs.androidx.compose.bom))
     implementation(libs.androidx.activity.compose)
     implementation(libs.androidx.compose.material3)

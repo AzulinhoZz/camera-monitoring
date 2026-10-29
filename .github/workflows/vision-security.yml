@@ -58,3 +58,44 @@ jobs:
           path: artifacts/
           if-no-files-found: warn
           retention-days: 7
+
+  android:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    env:
+      SUPABASE_URL: ''
+      SUPABASE_SECRET_KEY: ''
+      FIREBASE_CREDENTIALS_PATH: ''
+      GOOGLE_APPLICATION_CREDENTIALS: ''
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@6d4fd22b20465ccc0f7354476588e8df7c9ca0e0
+        with:
+          python-version: '3.12'
+      - name: Build and test Android with the runner JDK 25 and SDK
+        run: |
+          export JAVA_HOME="${JAVA_HOME_25_X64:?Runner JDK 25 required}"
+          cd android
+          bash gradlew :app:testDebugUnitTest :app:assembleDebug --no-daemon --max-workers=2
+          if bash gradlew :app:validateReleaseEndpoint -PcameraApiBaseUrl=http://10.0.2.2:8000/ --offline --no-daemon --max-workers=2; then
+            echo "HTTP release endpoint was unexpectedly accepted"
+            exit 1
+          fi
+          bash gradlew :app:validateReleaseEndpoint -PcameraApiBaseUrl=https://staging.example.invalid/ --offline --no-daemon --max-workers=2
+          bash gradlew :app:exportPhase6Inventory -I gradle/release-inventory.gradle -PreleaseInventoryOutput="$GITHUB_WORKSPACE/artifacts/android/resolved.json" --no-daemon --max-workers=2 --no-configuration-cache
+      - name: APK inventory and Maven vulnerability gate
+        run: |
+          python backend/scripts/android_inventory.py --resolved artifacts/android/resolved.json --apk android/app/build/outputs/apk/debug/app-debug.apk --pom-cache "$HOME/.gradle/caches/modules-2/files-2.1" --output artifacts/android/inventory
+          python backend/scripts/scan_android_dependencies.py --sbom artifacts/android/inventory/android.cdx.json --inventory artifacts/android/inventory/android-inventory.json --apk android/app/build/outputs/apk/debug/app-debug.apk --cache "$RUNNER_TEMP/android-scan-cache" --output artifacts/android/scan
+      - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9
+        if: always()
+        with:
+          name: android-product-evidence
+          path: |
+            artifacts/android/
+            android/app/build/test-results/testDebugUnitTest/
+            android/app/build/outputs/apk/debug/app-debug.apk
+          if-no-files-found: warn
+          retention-days: 7

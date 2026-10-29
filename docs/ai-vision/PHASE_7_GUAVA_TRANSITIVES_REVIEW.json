@@ -1,0 +1,115 @@
+{
+  "components": [
+    {
+      "group": "com.google.guava",
+      "name": "guava",
+      "version": "33.7.2-android",
+      "licenses": [
+        "Apache License, Version 2.0"
+      ],
+      "artifacts": [
+        {
+          "url": "https://repo.maven.apache.org/maven2/com/google/guava/guava/33.7.2-android/guava-33.7.2-android.pom",
+          "sha1_official": "2e3c1c2d0554a43bd8fc033a777049a963cc20c4",
+          "sha256": "f7f6481d044bb0c3fd94f8be74a703c61dce54bc5d6c84bdcec9c1d9bfa27f1d",
+          "bytes": 9982
+        },
+        {
+          "url": "https://repo.maven.apache.org/maven2/com/google/guava/guava/33.7.2-android/guava-33.7.2-android.jar",
+          "sha1_official": "0e601df8fa35293ad4fa7c6ec4522152d304eb41",
+          "sha256": "b949fe975a32421c1a2633c07a4f1578b462f2f467668aa0a4023c5ff7c4a808",
+          "bytes": 2982159
+        }
+      ]
+    },
+    {
+      "group": "com.google.guava",
+      "name": "failureaccess",
+      "version": "1.0.3",
+      "licenses": [
+        "Apache License, Version 2.0"
+      ],
+      "artifacts": [
+        {
+          "url": "https://repo.maven.apache.org/maven2/com/google/guava/failureaccess/1.0.3/failureaccess-1.0.3.pom",
+          "sha1_official": "12732d7aa78945d26029ab0dd54d5f824b6fe740",
+          "sha256": "c54beff37f6d42d43e14722d54a522c9ad51ef97fc5b79277e62a3ebf882f3bb",
+          "bytes": 5560
+        },
+        {
+          "url": "https://repo.maven.apache.org/maven2/com/google/guava/failureaccess/1.0.3/failureaccess-1.0.3.jar",
+          "sha1_official": "aeaffd00d57023a2c947393ed251f0354f0985fc",
+          "sha256": "cbfc3906b19b8f55dd7cfd6dfe0aa4532e834250d7f080bd8d211a3e246b59cb",
+          "bytes": 10763
+        }
+      ]
+    },
+    {
+      "group": "org.jspecify",
+      "name": "jspecify",
+      "version": "1.0.1",
+      "licenses": [
+        "The Apache License, Version 2.0"
+      ],
+      "artifacts": [
+        {
+          "url": "https://repo.maven.apache.org/maven2/org/jspecify/jspecify/1.0.1/jspecify-1.0.1.pom",
+          "sha1_official": "ab61e6616aa6f3f37e963d065085cc1b176dbefc",
+          "sha256": "55b38bf1a7b1d8ea518cf2f4f3ae9aaa236e61bbf0b6bd31ffb49753a059dd5e",
+          "bytes": 1937
+        },
+        {
+          "url": "https://repo.maven.apache.org/maven2/org/jspecify/jspecify/1.0.1/jspecify-1.0.1.jar",
+          "sha1_official": "3d60fd98eb8ade73004f4195c37b6317e02cf3d7",
+          "sha256": "070d75f261fe4c5b8202508366715f7f2d4660f88c8ef7e6d3575e48c9683b66",
+          "bytes": 3064
+        }
+      ]
+    },
+    {
+      "group": "com.google.errorprone",
+      "name": "error_prone_annotations",
+      "version": "2.50.0",
+      "licenses": [
+        "Apache 2.0"
+      ],
+      "artifacts": [
+        {
+          "url": "https://repo.maven.apache.org/maven2/com/google/errorprone/error_prone_annotations/2.50.0/error_prone_annotations-2.50.0.pom",
+          "sha1_official": "99e2454fb122cc003933b3db9779b347517caa90",
+          "sha256": "71a0680d277324bab46bec4b00f6f111c1b794a931d0d8cda79bcb9246982f92",
+          "bytes": 4252
+        },
+        {
+          "url": "https://repo.maven.apache.org/maven2/com/google/errorprone/error_prone_annotations/2.50.0/error_prone_annotations-2.50.0.jar",
+          "sha1_official": "74ba43e49ab1184d41634af2ef0047e82c4064b0",
+          "sha256": "4667724877f1d37a689202da191e23efa7657c62eef93ccdac406eccfe5cdd0a",
+          "bytes": 20252
+        }
+      ]
+    },
+    {
+      "group": "com.google.j2objc",
+      "name": "j2objc-annotations",
+      "version": "3.1",
+      "licenses": [
+        "Apache License, Version 2.0"
+      ],
+      "artifacts": [
+        {
+          "url": "https://repo.maven.apache.org/maven2/com/google/j2objc/j2objc-annotations/3.1/j2objc-annotations-3.1.pom",
+          "sha1_official": "9b801c234cf6d618dc7bd025bbb0dc833c4c529e",
+          "sha256": "14570838500034fc1b47c8205ce1c9d6b255c1ccdd2d1afdcdcbf75e89b24a33",
+          "bytes": 5420
+        },
+        {
+          "url": "https://repo.maven.apache.org/maven2/com/google/j2objc/j2objc-annotations/3.1/j2objc-annotations-3.1.jar",
+          "sha1_official": "a892ca9507839bbdb900d64310ac98256cab992f",
+          "sha256": "84d3a150518485f8140ea99b8a985656749629f6433c92b80c75b36aba3b099b",
+          "bytes": 16762
+        }
+      ]
+    }
+  ],
+  "scope": "Pre-integration official Maven artifacts and inherited POM licenses; pinned hashes reviewed before build."
+}
