@@ -13,6 +13,38 @@ import tempfile
 from urllib.request import urlopen
 
 
+def archive_identity(path):
+    digest=hashlib.sha256()
+    with path.open('rb') as source:
+        for chunk in iter(lambda:source.read(1024*1024),b''):digest.update(chunk)
+    with tarfile.open(path) as bundle:
+        members=bundle.getmembers()
+        if len({m.name for m in members})!=len(members):raise ValueError('duplicate archive paths')
+        def read(name):
+            member=bundle.getmember(name)
+            if not member.isfile() or member.size>2*1024*1024:raise ValueError('invalid image metadata')
+            return bundle.extractfile(member).read()
+        manifest=json.loads(read('manifest.json'))
+        if not isinstance(manifest,list) or len(manifest)!=1:raise ValueError('single image archive required')
+        config=manifest[0]['Config']
+        if not re.fullmatch(r'(?:blobs/sha256/)?[a-f0-9]{64}(?:\.json)?',config):raise ValueError('invalid config path')
+        config_digest=hashlib.sha256(read(config)).hexdigest()
+        if Path(config).name.removesuffix('.json')!=config_digest:raise ValueError('config digest mismatch')
+    return {'image_id':'sha256:'+config_digest,'archive_sha256':digest.hexdigest()}
+
+
+def scanner_environment(cache):
+    # Supply transport/TLS configuration, never application credentials or
+    # ambient scanner overrides that could suppress findings.
+    allowed={'PATH','HTTP_PROXY','HTTPS_PROXY','ALL_PROXY','NO_PROXY','http_proxy','https_proxy',
+             'all_proxy','no_proxy','SSL_CERT_FILE','SSL_CERT_DIR','REQUESTS_CA_BUNDLE','CURL_CA_BUNDLE','LANG','LC_ALL','TZ'}
+    env={key:value for key,value in os.environ.items() if key in allowed}
+    home=cache/'home';home.mkdir(mode=0o700,exist_ok=True)
+    env.update(HOME=str(home),XDG_CACHE_HOME=str(cache/'xdg'),
+               SYFT_CHECK_FOR_APP_UPDATE='false',GRYPE_CHECK_FOR_APP_UPDATE='false')
+    return env
+
+
 def acquire(record, cache):
     tool=record['tool'];version=record['version']
     if tool not in ('syft','grype'):raise ValueError('unapproved scanner')
@@ -75,25 +107,33 @@ def main():
     if cache.is_symlink() or cache.stat().st_uid!=os.getuid() or cache.stat().st_mode&0o077:p.error('scanner cache must be private and owned by this UID')
     archive=Path(a.archive).resolve(strict=True)
     records=json.loads((Path(__file__).resolve().parents[2]/'docs/ai-vision/PHASE_6_SCANNER_REVIEW.json').read_text())
-    report={'inventory':'NOT_RUN','vulnerability_scan':'BLOCKED','accepted':False,'limits':'A scanner failure, missing DB or finding is never converted into clean acceptance.'}
-    env=os.environ|{'SYFT_CHECK_FOR_APP_UPDATE':'false','GRYPE_CHECK_FOR_APP_UPDATE':'false',
-        'XDG_CACHE_HOME':str(cache),'GRYPE_DB_CACHE_DIR':str(cache/'grype-db'),'GRYPE_DB_MAX_ALLOWED_BUILT_AGE':'72h'}
+    report={'generated_at':datetime.now(timezone.utc).isoformat(),'inventory':'NOT_RUN','vulnerability_scan':'BLOCKED','accepted':False,'limits':'Unsigned local receipt; full archive hash and config identity bind the input, not approval. Failures and findings never become clean acceptance.'}
+    env=scanner_environment(cache)
+    # Explicit configs prevent a checkout .grype.yaml or inherited GRYPE_*
+    # variables from silently excluding vulnerable packages.
+    grype_config=output/'grype-config.json'
+    grype_config.write_text(json.dumps({'check-for-app-update':False,'only-fixed':False,'only-notfixed':False,
+        'ignore-wontfix':'','ignore':[],'exclude':[],
+        'db':{'cache-dir':str(cache/'grype-db'),'auto-update':not bool(a.db_archive),
+              'validate-age':True,'max-allowed-built-age':'72h','validate-by-hash-on-start':True}}))
+    syft_config=output/'syft-config.json';syft_config.write_text(json.dumps({'check-for-app-update':False}))
     try:
+        report.update(archive_identity(archive))
         executables={r['tool']:acquire(r,cache) for r in records}
         with (output/'syft.log').open('w') as log:
-            subprocess.run([str(executables['syft']),'docker-archive:'+str(archive),'-o','cyclonedx-json='+str(output/'image.cdx.json')],env=env,stdout=log,stderr=log,timeout=180,check=True)
+            subprocess.run([str(executables['syft']),'-c',str(syft_config),'docker-archive:'+str(archive),'-o','cyclonedx-json='+str(output/'image.cdx.json')],env=env,stdout=log,stderr=log,timeout=180,check=True)
         report['inventory']='PASS'
         if a.db_archive:
             database=verify_database_archive(a.db_archive,a.db_sha256)
-            env['GRYPE_DB_AUTO_UPDATE']='false'
             with (output/'db-import.log').open('w') as log:
-                subprocess.run([str(executables['grype']),'db','import',str(database)],env=env,stdout=log,stderr=log,timeout=180,check=True)
+                subprocess.run([str(executables['grype']),'-c',str(grype_config),'db','import',str(database)],env=env,stdout=log,stderr=log,timeout=180,check=True)
             report['database_source']={'mode':'offline','sha256':a.db_sha256,'limits':'Integrity verified; official origin requires trusted out-of-band metadata.'}
         with (output/'grype.log').open('w') as log:
-            result=subprocess.run([str(executables['grype']),'sbom:'+str(output/'image.cdx.json'),'-o','json','--file',str(output/'vulnerabilities.json')],env=env,stdout=log,stderr=log,timeout=180)
+            result=subprocess.run([str(executables['grype']),'-c',str(grype_config),'sbom:'+str(output/'image.cdx.json'),'-o','json','--file',str(output/'vulnerabilities.json')],env=env,stdout=log,stderr=log,timeout=180)
         if result.returncode==0:
             findings=json.loads((output/'vulnerabilities.json').read_text())
             count=verified_match_count(findings);report.update(vulnerability_scan='PASS' if count==0 else 'FINDINGS',findings=count,accepted=count==0)
+            report['database']=findings['descriptor']['db']['status']
         else:report['reason']='Grype failed; inspect log and provide an accessible, fresh official DB. No clean result.'
     except Exception as exc:
         report['reason']=type(exc).__name__+': scanner execution incomplete'

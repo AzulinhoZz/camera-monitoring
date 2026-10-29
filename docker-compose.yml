@@ -14,8 +14,13 @@ services:
       - ./backend/app:/code/app
     env_file:
       - .env
+    cap_drop: [ALL]
+    security_opt: ["no-new-privileges:true"]
+    pids_limit: 128
     restart: unless-stopped
   mediamtx:
+    # Match the owner of the private bind-mounted configuration; no DAC override.
+    user: "${MEDIAMTX_UID:-1000}:${MEDIAMTX_GID:-1000}"
     image: bluenviron/mediamtx@sha256:59e43552f3be43695b70c19424dc2a42fcec18075f88d91561a24ac5d70a586c
     environment:
       MTX_HLSCDNSECRET: "${MEDIAMTX_HLS_SECRET:?Set private HLS upstream secret}"
@@ -24,6 +29,9 @@ services:
       - "127.0.0.1:8554:8554"
     volumes:
       - ./gateway/mediamtx.yml:/mediamtx.yml:ro
+    cap_drop: [ALL]
+    security_opt: ["no-new-privileges:true"]
+    pids_limit: 128
     restart: unless-stopped
 
 volumes:

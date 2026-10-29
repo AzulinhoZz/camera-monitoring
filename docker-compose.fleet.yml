@@ -10,6 +10,8 @@ services:
     command: [python, -m, app.vision.fleet, --config, /code/vision-fleet.example.json, --cpu-slots, "2", --memory-mib, "768", --camera-memory-mib, "384", --health-file, /tmp/vision-fleet-health.json]
     network_mode: none
     read_only: true
+    cap_drop: [ALL]
+    security_opt: ["no-new-privileges:true"]
     user: "65534:65534"
     environment:
       CAMERA_LEASE_DIRECTORY: /run/camera-leases
@@ -17,7 +19,7 @@ services:
       - capture-leases:/run/camera-leases
       - ./backend/vision-fleet.example.json:/code/vision-fleet.example.json:ro
     tmpfs:
-      - /tmp:size=128m,mode=1777
+      - /tmp:size=128m,mode=1777,noexec,nosuid,nodev
     cpus: 2.0
     mem_limit: 1024m
     pids_limit: 96

@@ -74,3 +74,69 @@ def test_scanner_never_accepts_empty_results_with_invalid_database(issue):
     if issue=='missing':document['descriptor']['db']={}
     with pytest.raises((ValueError,KeyError)):check(document,now)
     assert check({'matches':[], 'descriptor':{'db':{'status':{'valid':True,'built':now.isoformat()}}}},now)==0
+
+
+def test_scanners_do_not_receive_application_secrets_or_suppression_overrides(tmp_path,monkeypatch):
+    monkeypatch.setenv('SUPABASE_SECRET_KEY','fixture-secret')
+    monkeypatch.setenv('GH_TOKEN','fixture-token')
+    monkeypatch.setenv('GRYPE_IGNORE_WONTFIX','true')
+    monkeypatch.setenv('SYFT_EXCLUDE','**')
+    env=runpy.run_path(str(TOOLS/'scan_release_image.py'))['scanner_environment'](tmp_path)
+    assert not {'SUPABASE_SECRET_KEY','GH_TOKEN','GRYPE_IGNORE_WONTFIX','SYFT_EXCLUDE'} & env.keys()
+    assert env['XDG_CACHE_HOME']==str(tmp_path/'xdg')
+
+
+def clean_release_manifest():
+    from datetime import datetime,timezone
+    module=runpy.run_path(str(TOOLS/'check_release_readiness.py'))
+    identity={'image_id':'sha256:'+'a'*64,'archive_sha256':'b'*64}
+    now=datetime.now(timezone.utc).isoformat()
+    return module,dict(identity,gates={name:{'status':'PASS','evidence':'reviewed fixture'} for name in module['REQUIRED']},
+        scan_receipt=dict(identity,inventory='PASS',vulnerability_scan='PASS',accepted=True,findings=0,generated_at=now,database={'valid':True,'built':now}))
+
+
+@pytest.mark.parametrize('issue',['missing','identity','archive','findings','stale','blank_evidence','malformed_gate','invalid_db'])
+def test_acceptance_rejects_forged_or_mismatched_receipts(issue):
+    from datetime import datetime,timezone,timedelta
+    module,document=clean_release_manifest()
+    assert module['verdict'](document)['decision']=='GO_FOR_REVIEW'
+    assert module['verdict'](document)['deploy_authorized'] is False
+    if issue=='missing':document.pop('scan_receipt')
+    if issue=='identity':document['scan_receipt']['image_id']='sha256:'+'c'*64
+    if issue=='archive':document['scan_receipt']['archive_sha256']='d'*64
+    if issue=='findings':document['scan_receipt']['findings']=1
+    if issue=='stale':document['scan_receipt']['generated_at']=(datetime.now(timezone.utc)-timedelta(hours=25)).isoformat()
+    if issue=='blank_evidence':document['gates']['licenses']['evidence']='   '
+    if issue=='malformed_gate':document['gates']['licenses']=[]
+    if issue=='invalid_db':document['scan_receipt']['database']['valid']=False
+    assert module['verdict'](document)['decision']=='NO_GO'
+
+
+def test_archive_identity_rejects_replaced_config_and_ambiguous_image(tmp_path):
+    import hashlib
+    import io
+    import tarfile
+    identify=runpy.run_path(str(TOOLS/'scan_release_image.py'))['archive_identity']
+    config=b'{"fixture":true}';digest=hashlib.sha256(config).hexdigest()
+    target=tmp_path/'candidate.tar'
+    def build(contents,multiple=False):
+        with tarfile.open(target,'w') as bundle:
+            manifest=[{'Config':digest+'.json'}]*(2 if multiple else 1)
+            for name,data in [('manifest.json',json.dumps(manifest).encode()),(digest+'.json',contents)]:
+                member=tarfile.TarInfo(name);member.size=len(data);bundle.addfile(member,io.BytesIO(data))
+    build(config)
+    assert identify(target)['image_id']=='sha256:'+digest
+    build(b'replaced')
+    with pytest.raises(ValueError):identify(target)
+    build(config,True)
+    with pytest.raises(ValueError):identify(target)
+
+
+def test_acceptance_validation_still_applies_with_python_optimization(tmp_path):
+    import subprocess
+    import sys
+    module,document=clean_release_manifest()
+    document['scan_receipt']['archive_sha256']='c'*64
+    manifest=tmp_path/'manifest.json';manifest.write_text(json.dumps(document))
+    result=subprocess.run([sys.executable,'-O',str(TOOLS/'check_release_readiness.py'),'--manifest',str(manifest)],capture_output=True,text=True)
+    assert result.returncode==1 and json.loads(result.stdout)['decision']=='NO_GO'

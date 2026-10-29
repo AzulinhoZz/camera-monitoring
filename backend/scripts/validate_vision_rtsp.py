@@ -1,5 +1,6 @@
 """Local-only RTSP fault smoke. Requires Docker + ffmpeg; never opens real cameras."""
 import json
+import os
 import subprocess
 import sys
 import tempfile
@@ -33,11 +34,13 @@ def main():
     worker = publisher = None
     created = False
     try:
-        subprocess.run(["docker", "create", "--name", name,
+        subprocess.run(["docker", "create", "--name", name, "--cap-drop", "ALL",
+                            "--security-opt", "no-new-privileges", "--pids-limit", "128",
+                            "--user", f"{os.getuid()}:{os.getgid()}",
                         "-p", "127.0.0.1::8554", IMAGE],
                        check=True, capture_output=True)
         created = True
-        subprocess.run(['docker','cp',str(gateway),name+':/mediamtx.yml'],check=True,capture_output=True)
+        subprocess.run(['docker','cp','-a',str(gateway),name+':/mediamtx.yml'],check=True,capture_output=True)
         subprocess.run(['docker','start',name],check=True,capture_output=True)
         binding = subprocess.run(["docker", "port", name, "8554/tcp"], check=True,
                                  capture_output=True, text=True).stdout.strip()
