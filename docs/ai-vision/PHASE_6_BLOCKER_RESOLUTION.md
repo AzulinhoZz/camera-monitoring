@@ -50,3 +50,11 @@ Sin cambios a runtime de aplicación, main o datos productivos; sin push, merge 
 Durante la repetición endurecida se detectó una carrera de arranque: pg_isready por socket aceptaba el servidor temporal de inicialización antes de su cierre. Se cambió a comprobación TCP 127.0.0.1, como en el runner fuente. El fallo queda registrado en `/tmp/camera-phase6/independent-restore-final.log`; no se oculta con una aprobación automática.
 
 La repetición final tras corregir la carrera pasó, incluidos atributos de roles, RLS/grants, media y aislamiento; ningún contenedor de pruebas quedó activo.
+
+## Continuación tras configurar secretos (2026-10-28)
+
+El usuario confirma configuración segura fuera del chat. Comprobación actual: `git ls-remote origin HEAD` PASS y `gh auth status` PASS. La lectura de una rama específica falló porque no se acreditó su existencia remota; no demuestra fallo de autenticación. No se mantiene el diagnóstico anterior de token inválido como estado actual. La API Actions sigue devolviendo Forbidden y el proxy niega CONNECT a la base Grype (403).
+
+El borrador contiene el binding SUPABASE_SECRET_KEY para el host del proyecto conocido. El proceso actual aún no recibe SUPABASE_SECRET_KEY ni SUPABASE_URL. No se pide otro secreto ni se imprime su valor. Se guardó la variable URL y la lista de red ampliada con api.github.com, grype.anchore.io y toolbox-data.anchore.io, conservando los destinos explícitos y de presets existentes. No se cambiaron install_script/start_skill ni bindings de secretos. El guardado respondió `saved`, `requires_publish: true`; no aplica ni publica la configuración en la instancia actual por sí mismo.
+
+La siguiente operación es aplicar/publicar esa configuración desde el entorno y volver a comprobar su propagación. Después se podrá ejecutar el scan y consultar Actions; las pruebas administradas siguen limitadas a un proyecto identificado explícitamente como staging. No hubo consultas ni escrituras a Supabase, push, workflow remoto o despliegue. Evidencia: `PHASE_6_ENVIRONMENT_CONTINUATION.json`. Las 189 pruebas del incremento anterior no se repiten para un cambio exclusivamente documental/configuración; no se presentan como ejecución nueva.

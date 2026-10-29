@@ -28,7 +28,7 @@
     },
     "managed_staging": {
       "status": "BLOCKED",
-      "evidence": "Sin proyecto staging autorizado"
+      "evidence": "Secreto declarado en configuraci\u00f3n pero no disponible en proceso actual; identificaci\u00f3n staging pendiente"
     },
     "target_load_and_accuracy": {
       "status": "BLOCKED",
@@ -40,7 +40,7 @@
     },
     "remote_ci": {
       "status": "BLOCKED",
-      "evidence": "PHASE_6_BLOCKER_RECHECK.json: auth inv\u00e1lida y API bloqueada por proxy"
+      "evidence": "PHASE_6_ENVIRONMENT_CONTINUATION.json: Git read y gh auth PASS; API Actions Forbidden, red pendiente de aplicar"
     },
     "licenses": {
       "status": "BLOCKED",
