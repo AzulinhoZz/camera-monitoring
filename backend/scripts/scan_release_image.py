@@ -1,5 +1,6 @@
 """Review-pinned external scanners. A missing vulnerability DB is BLOCKED, never PASS."""
 import argparse
+from datetime import datetime, timezone, timedelta
 import hashlib
 import json
 import os
@@ -51,6 +52,20 @@ def verify_database_archive(path, expected):
     return path
 
 
+def verified_match_count(findings, now=None):
+    """A successful process exit alone does not establish database validity."""
+    matches=findings.get('matches')
+    status=findings.get('descriptor',{}).get('db',{}).get('status',{})
+    if not isinstance(matches,list) or status.get('valid') is not True or status.get('error'):
+        raise ValueError('incomplete scanner result or invalid database')
+    built=datetime.fromisoformat(status['built'].replace('Z','+00:00'))
+    if built.tzinfo is None:raise ValueError('database timestamp lacks timezone')
+    age=(now or datetime.now(timezone.utc))-built
+    if age>timedelta(hours=72) or age < -timedelta(hours=1):
+        raise ValueError('database age outside allowed window')
+    return len(matches)
+
+
 def main():
     p=argparse.ArgumentParser(description=__doc__);p.add_argument('--archive',required=True);p.add_argument('--output',required=True);p.add_argument('--cache',required=True);p.add_argument('--db-archive');p.add_argument('--db-sha256');a=p.parse_args()
     if bool(a.db_archive)!=bool(a.db_sha256):p.error('--db-archive and official --db-sha256 are required together')
@@ -78,9 +93,7 @@ def main():
             result=subprocess.run([str(executables['grype']),'sbom:'+str(output/'image.cdx.json'),'-o','json','--file',str(output/'vulnerabilities.json')],env=env,stdout=log,stderr=log,timeout=180)
         if result.returncode==0:
             findings=json.loads((output/'vulnerabilities.json').read_text())
-            if not isinstance(findings.get('matches'),list) or not isinstance(findings.get('descriptor',{}).get('db'),dict) or findings['descriptor']['db'].get('error'):
-                raise ValueError('incomplete scanner result')
-            count=len(findings['matches']);report.update(vulnerability_scan='PASS' if count==0 else 'FINDINGS',findings=count,accepted=count==0)
+            count=verified_match_count(findings);report.update(vulnerability_scan='PASS' if count==0 else 'FINDINGS',findings=count,accepted=count==0)
         else:report['reason']='Grype failed; inspect log and provide an accessible, fresh official DB. No clean result.'
     except Exception as exc:
         report['reason']=type(exc).__name__+': scanner execution incomplete'

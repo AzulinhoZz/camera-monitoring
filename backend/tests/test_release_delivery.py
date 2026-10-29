@@ -58,3 +58,19 @@ def test_scanner_refresh_keeps_existing_reader_inode(tmp_path):
         assert existing_reader.read()==b'old'
     assert result.read_bytes()==b'new'
     assert result.stat().st_mode&0o777==0o700
+
+
+@pytest.mark.parametrize('issue',['missing','invalid','error','stale','future'])
+def test_scanner_never_accepts_empty_results_with_invalid_database(issue):
+    from datetime import datetime, timezone, timedelta
+    check=runpy.run_path(str(TOOLS/'scan_release_image.py'))['verified_match_count']
+    now=datetime.now(timezone.utc)
+    status={'valid':True,'built':now.isoformat()}
+    if issue=='invalid':status['valid']=False
+    if issue=='error':status['error']='fixture validation failed'
+    if issue=='stale':status['built']=(now-timedelta(hours=73)).isoformat()
+    if issue=='future':status['built']=(now+timedelta(hours=2)).isoformat()
+    document={'matches':[],'descriptor':{'db':{'status':status}}}
+    if issue=='missing':document['descriptor']['db']={}
+    with pytest.raises((ValueError,KeyError)):check(document,now)
+    assert check({'matches':[], 'descriptor':{'db':{'status':{'valid':True,'built':now.isoformat()}}}},now)==0
