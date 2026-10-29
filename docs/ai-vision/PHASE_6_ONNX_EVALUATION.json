@@ -1,0 +1,59 @@
+{
+  "result": "PASS",
+  "model_sha256": "c5c2d13e59ae883e6af3b45daea64af4833a4951c92d116ec270d9ddbe998063",
+  "onnxruntime": "1.31.1",
+  "providers": [
+    "CPUExecutionProvider"
+  ],
+  "one_cpu_affinity": true,
+  "results": [
+    {
+      "fixture": "generated_geometry",
+      "engine": "opencv",
+      "samples": 10,
+      "latency_ms": {
+        "p50": 567.6630575035233,
+        "p95": 964.9534670024877
+      },
+      "detections": 0
+    },
+    {
+      "fixture": "generated_geometry",
+      "engine": "onnxruntime_cpu",
+      "samples": 10,
+      "latency_ms": {
+        "p50": 226.66871651017573,
+        "p95": 267.24017299420666
+      },
+      "detections": 0
+    },
+    {
+      "fixture": "public_body_fixture",
+      "engine": "opencv",
+      "samples": 10,
+      "latency_ms": {
+        "p50": 476.51240899722325,
+        "p95": 1343.674057003227
+      },
+      "detections": 1
+    },
+    {
+      "fixture": "public_body_fixture",
+      "engine": "onnxruntime_cpu",
+      "samples": 10,
+      "latency_ms": {
+        "p50": 192.10006500361487,
+        "p95": 222.0045290014241
+      },
+      "detections": 1
+    }
+  ],
+  "combined_process_resources": {
+    "pid": 109731,
+    "cpu_seconds": 21.02,
+    "rss_bytes": 378912768
+  },
+  "scope": "two permitted frames only, identical adapter preprocessing/NMS; confidence and coordinates agree within .01. Not a natural dataset accuracy, exclusive memory, multicamera or GPU benchmark.",
+  "production_runtime_changed": false,
+  "decision": "keep OpenCV until native scan, representative dataset and target pipeline acceptance"
+}

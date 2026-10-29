@@ -1,0 +1,7 @@
+{
+  "inventory": "PASS",
+  "vulnerability_scan": "BLOCKED",
+  "accepted": false,
+  "limits": "A scanner failure, missing DB or finding is never converted into clean acceptance.",
+  "reason": "Grype failed; inspect log and provide an accessible, fresh official DB. No clean result."
+}

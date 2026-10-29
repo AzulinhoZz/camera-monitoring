@@ -84,3 +84,8 @@ Rollback de este incremento: revertir commits en orden inverso y retirar workflo
 ## Evidencia del cierre de este incremento
 
 Recibo: [PHASE_6_INITIAL_VALIDATION.json](PHASE_6_INITIAL_VALIDATION.json); revisión de 25 distribuciones del runtime opcional: [PHASE_6_POSE_REVIEW.json](PHASE_6_POSE_REVIEW.json), cero errores/avisos en PyPI. Commits reales: `095e202` controles privados/tooling/fixture SQL y `43a33bc` locks/inventario/CI. Rama `feat/ai-vision-platform`. El commit documental se entrega en el reporte final; no se inventa aquí. La fase 6 sigue abierta según checklist, sin autorización de release.
+
+
+## Entrega posterior
+
+El estado inicial se amplía con [la entrega técnica candidata](PHASE_6_DELIVERY_AND_ACCEPTANCE.md). Build real, smoke, inventarios y restore local completados; aceptación global continúa NO_GO por los bloqueos documentados.

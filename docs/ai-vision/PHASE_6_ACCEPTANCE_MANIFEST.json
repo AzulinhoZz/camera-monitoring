@@ -1,0 +1,54 @@
+{
+  "image_id": "sha256:3d76be0c3a1fbfadd32d75dc28b2899d076f9870b806ebb5d3120b0f87471db7",
+  "archive_sha256": "ba340d96b51da01d0ad4fabfeb6b967046bec282ef09c99e2dcd40e696174888",
+  "gates": {
+    "regression": {
+      "status": "PASS",
+      "evidence": "188 backend y 12 Android; PHASE_6_DELIVERY_AND_ACCEPTANCE.md"
+    },
+    "database_restore": {
+      "status": "PASS",
+      "evidence": "PHASE_6_RESTORE.json: fixture aislado, alcance limitado"
+    },
+    "image_build_smoke": {
+      "status": "PASS",
+      "evidence": "PHASE_6_IMAGE_SMOKE.json"
+    },
+    "python_advisories": {
+      "status": "PASS",
+      "evidence": "PHASE_6_PYTHON_REVIEW.json: snapshot PyPI, no escaneo nativo"
+    },
+    "image_vulnerability_scan": {
+      "status": "BLOCKED",
+      "evidence": "PHASE_6_IMAGE_SCAN.json: DB Grype HTTP 403"
+    },
+    "android_device": {
+      "status": "BLOCKED",
+      "evidence": "Sin dispositivo/emulador autorizado"
+    },
+    "managed_staging": {
+      "status": "BLOCKED",
+      "evidence": "Sin proyecto staging autorizado"
+    },
+    "target_load_and_accuracy": {
+      "status": "BLOCKED",
+      "evidence": "Sin hardware/dataset representativo; objetivo FPS anterior incumplido"
+    },
+    "backup_operations": {
+      "status": "BLOCKED",
+      "evidence": "Faltan key escrow, Storage administrado, cluster nuevo y RPO/RTO"
+    },
+    "remote_ci": {
+      "status": "BLOCKED",
+      "evidence": "gh auth status: GH_TOKEN inv\u00e1lido; no ejecuci\u00f3n remota"
+    },
+    "licenses": {
+      "status": "BLOCKED",
+      "evidence": "Inventarios disponibles; pendientes model cards/datasets y aprobaci\u00f3n legal completa"
+    },
+    "operator_approval": {
+      "status": "NOT_REQUESTED",
+      "evidence": "Gates previos sin resolver"
+    }
+  }
+}

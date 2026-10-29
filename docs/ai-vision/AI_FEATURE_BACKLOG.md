@@ -187,3 +187,8 @@ Fase 5 completada como implementación funcional controlada. Gates de release pe
 Validación: 183 backend en venv limpio desde 69 wheels con hashes; 70 distribuciones sin avisos ni errores en snapshot PyPI (no escaneo nativo completo); PostgreSQL desechable/RLS/concurrencia/media/retención/rollback PASS; runtime pose idempotente verificado. Timeout inicial de reconexión registrado, caso aislado y repetición completa pasan; no se declara causa demostrada ni se oculta el fallo.
 
 Pendiente: CI remoto, escaneos OS/nativo/Android y SBOM completo, imagen release por falta de disco, staging administrado, equipo/dispositivo, soak/red/PTS/precisión, backup/restore y aceptación final. ONNX Runtime/GPU solo evaluación posterior al baseline y auditoría; no instalado. Fase 6 iniciada, no terminada ni release aprobado. Sin migraciones/datos reales/push/merge/despliegue.
+
+
+## P. Fase 6 — entrega técnica candidata (2026-10-28)
+
+[Informe verificable](PHASE_6_DELIVERY_AND_ACCEPTANCE.md): 188 tests backend, 12 Android, imagen runtime fijada construida offline y probada, SQL/restore AES-GCM aislado, RTSP/reconexión y gateway HLS reales, SBOM imagen/Android y evaluación ONNX CPU sin integración productiva. Supera bloqueo anterior de build/disco. Grype no pudo descargar DB (403), GitHub tiene credencial inválida; staging/dispositivo/dataset/hardware/operación backup/licencias pendientes. Entrega técnica local realizada; fase 6 íntegra y release NO_GO, sin push/merge/despliegue. No reinterpretar pruebas de laboratorio como aceptación externa.

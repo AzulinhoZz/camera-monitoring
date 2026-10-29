@@ -1,0 +1,12 @@
+{
+  "image_id": "sha256:3d76be0c3a1fbfadd32d75dc28b2899d076f9870b806ebb5d3120b0f87471db7",
+  "archive": "/tmp/camera-phase6/camera-monitoring-phase6.tar",
+  "sha256": "ba340d96b51da01d0ad4fabfeb6b967046bec282ef09c99e2dcd40e696174888",
+  "bytes": 479566848,
+  "config_verified": true,
+  "compressed_archive": {
+    "path": "/tmp/camera-phase6/camera-monitoring-phase6.tar.gz",
+    "bytes": 161696702,
+    "sha256": "da44d5b97765f4c07da31a245327f29aa900429d1e699206e8c6cf29a2a46435"
+  }
+}

@@ -1,0 +1,25 @@
+{
+  "result": "PASS",
+  "image_id": "sha256:3d76be0c3a1fbfadd32d75dc28b2899d076f9870b806ebb5d3120b0f87471db7",
+  "uid": "65534:65534",
+  "network": "none",
+  "read_only": true,
+  "api_health": true,
+  "real_uvicorn_startup_and_sigterm": true,
+  "unconfigured_db_denied": true,
+  "anonymous_events_denied": true,
+  "native_inference": true,
+  "sigterm_stopped": true,
+  "healthy_snapshots": 3,
+  "last_counts": {
+    "connection_attempts": 1,
+    "capture_dropped": 0,
+    "frames_received": 113,
+    "recording_sampled": 75,
+    "inference_sampled": 8,
+    "recording_consumed": 75,
+    "inference_consumed": 8,
+    "decoder_exits": 1
+  },
+  "scope": "generated synthetic input only; not model accuracy or managed integration"
+}

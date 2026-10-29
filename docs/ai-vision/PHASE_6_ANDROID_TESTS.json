@@ -1,0 +1,8 @@
+{
+  "tests": 12,
+  "failures": 0,
+  "errors": 0,
+  "skipped": 0,
+  "source": "offline Gradle :app:testDebugUnitTest --rerun :app:assembleDebug",
+  "device_tested": false
+}
