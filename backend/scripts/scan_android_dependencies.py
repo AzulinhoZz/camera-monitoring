@@ -29,7 +29,11 @@ def main():
     try:
         sbom=Path(a.sbom);inventory=Path(a.inventory);apk=Path(a.apk)
         if sbom.stat().st_size>16*1024*1024 or inventory.stat().st_size>2*1024*1024 or apk.stat().st_size>1024**3:raise ValueError('artifact budget')
-        expected=json.loads(inventory.read_text());apk_sha=digest(apk)
+        expected=json.loads(inventory.read_text());bom=json.loads(sbom.read_text());apk_sha=digest(apk)
+        components=bom.get('components',[])
+        maven=[item for item in components if item.get('type')=='library' and item.get('purl','').startswith('pkg:maven/')]
+        if bom.get('bomFormat')!='CycloneDX' or not maven or type(expected.get('distinct_maven_artifacts')) is not int or len(maven)!=expected['distinct_maven_artifacts']:
+            raise ValueError('empty or incomplete Maven inventory')
         if apk_sha!=expected['apk_sha256']:raise ValueError('APK/inventory identity mismatch')
         report.update(apk_sha256=apk_sha,sbom_sha256=digest(sbom),inventory_sha256=digest(inventory))
         review=json.loads((Path(__file__).resolve().parents[2]/'docs/ai-vision/PHASE_6_SCANNER_REVIEW.json').read_text())
