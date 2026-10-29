@@ -32,3 +32,12 @@ def test_release_cannot_pass_with_missing_or_blocked_gates(missing):
     gates[missing]={'status':'BLOCKED','evidence':'fixture'}
     result=module['verdict']({'gates':gates,'image_id':'fixture','archive_sha256':'fixture'})
     assert result['decision']=='NO_GO' and missing in result['unresolved'] and result['deploy_authorized'] is False
+
+
+def test_offline_database_rejects_mismatch_and_requires_trusted_digest(tmp_path):
+    import hashlib
+    verify=runpy.run_path(str(TOOLS/'scan_release_image.py'))['verify_database_archive']
+    archive=tmp_path/'database.tar.zst';archive.write_bytes(b'fixture, not an actual database')
+    with pytest.raises(ValueError):verify(archive,'a'*64)
+    with pytest.raises(ValueError):verify(archive,'')
+    assert verify(archive,hashlib.sha256(archive.read_bytes()).hexdigest())==archive.resolve()

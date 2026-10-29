@@ -5,6 +5,7 @@ import json
 import os
 from pathlib import Path
 import platform
+import re
 import subprocess
 import tarfile
 from urllib.request import urlopen
@@ -27,8 +28,23 @@ def acquire(record, cache):
     return executable
 
 
+def verify_database_archive(path, expected):
+    """Integrity only: expected digest must come from trusted official metadata."""
+    if not re.fullmatch(r'[a-f0-9]{64}',expected or ''):
+        raise ValueError('official SHA-256 required')
+    path=Path(path).resolve(strict=True)
+    if not path.is_file() or not 0<path.stat().st_size<=1024*1024*1024:
+        raise ValueError('database archive size/type')
+    digest=hashlib.sha256()
+    with path.open('rb') as stream:
+        for chunk in iter(lambda:stream.read(1024*1024),b''):digest.update(chunk)
+    if digest.hexdigest()!=expected:raise ValueError('database archive integrity')
+    return path
+
+
 def main():
-    p=argparse.ArgumentParser(description=__doc__);p.add_argument('--archive',required=True);p.add_argument('--output',required=True);p.add_argument('--cache',required=True);a=p.parse_args()
+    p=argparse.ArgumentParser(description=__doc__);p.add_argument('--archive',required=True);p.add_argument('--output',required=True);p.add_argument('--cache',required=True);p.add_argument('--db-archive');p.add_argument('--db-sha256');a=p.parse_args()
+    if bool(a.db_archive)!=bool(a.db_sha256):p.error('--db-archive and official --db-sha256 are required together')
     if platform.system()!='Linux' or platform.machine()!='x86_64':p.error('reviewed scanners target Linux x86_64')
     output=Path(a.output);output.mkdir(parents=True,mode=0o700,exist_ok=True)
     cache=Path(a.cache);cache.mkdir(parents=True,mode=0o700,exist_ok=True)
@@ -43,6 +59,12 @@ def main():
         with (output/'syft.log').open('w') as log:
             subprocess.run([str(executables['syft']),'docker-archive:'+str(archive),'-o','cyclonedx-json='+str(output/'image.cdx.json')],env=env,stdout=log,stderr=log,timeout=180,check=True)
         report['inventory']='PASS'
+        if a.db_archive:
+            database=verify_database_archive(a.db_archive,a.db_sha256)
+            env['GRYPE_DB_AUTO_UPDATE']='false'
+            with (output/'db-import.log').open('w') as log:
+                subprocess.run([str(executables['grype']),'db','import',str(database)],env=env,stdout=log,stderr=log,timeout=180,check=True)
+            report['database_source']={'mode':'offline','sha256':a.db_sha256,'limits':'Integrity verified; official origin requires trusted out-of-band metadata.'}
         with (output/'grype.log').open('w') as log:
             result=subprocess.run([str(executables['grype']),'sbom:'+str(output/'image.cdx.json'),'-o','json','--file',str(output/'vulnerabilities.json')],env=env,stdout=log,stderr=log,timeout=180)
         if result.returncode==0:

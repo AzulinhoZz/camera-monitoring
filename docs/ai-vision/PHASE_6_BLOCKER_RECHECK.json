@@ -1,0 +1,18 @@
+{
+  "date": "2026-10-28",
+  "timezone": "America/Mexico_City",
+  "network_permission_granted": true,
+  "official_db_https": "BLOCKED: proxy CONNECT 403",
+  "official_db_hosts": [
+    "grype.anchore.io",
+    "toolbox-data.anchore.io"
+  ],
+  "github_api_https": "BLOCKED: proxy CONNECT 403",
+  "github_auth": "INVALID",
+  "supabase_url_configured": false,
+  "supabase_secret_configured": false,
+  "kvm_available": false,
+  "adb_available": false,
+  "offline_database_import": "NOT_RUN: official database unavailable",
+  "deploy_authorized": false
+}

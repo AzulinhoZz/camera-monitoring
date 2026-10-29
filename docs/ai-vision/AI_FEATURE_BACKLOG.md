@@ -192,3 +192,7 @@ Pendiente: CI remoto, escaneos OS/nativo/Android y SBOM completo, imagen release
 ## P. Fase 6 — entrega técnica candidata (2026-10-28)
 
 [Informe verificable](PHASE_6_DELIVERY_AND_ACCEPTANCE.md): 188 tests backend, 12 Android, imagen runtime fijada construida offline y probada, SQL/restore AES-GCM aislado, RTSP/reconexión y gateway HLS reales, SBOM imagen/Android y evaluación ONNX CPU sin integración productiva. Supera bloqueo anterior de build/disco. Grype no pudo descargar DB (403), GitHub tiene credencial inválida; staging/dispositivo/dataset/hardware/operación backup/licencias pendientes. Entrega técnica local realizada; fase 6 íntegra y release NO_GO, sin push/merge/despliegue. No reinterpretar pruebas de laboratorio como aceptación externa.
+
+## Q. Resolución local de bloqueos de fase 6 (2026-10-28)
+
+Restore entre clústeres independientes y roles añadido; importación offline con checksum para Grype preparada, sin base oficial disponible. 189 tests backend PASS. Red oficial 403, GitHub inválido y recursos externos ausentes comprobados de nuevo. [Evidencia y requisitos concretos](PHASE_6_BLOCKER_RESOLUTION.md). No se cierran gates externos ni aceptación operativa por inferencia.

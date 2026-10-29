@@ -24,3 +24,5 @@ Marcar solo con evidencia vinculada al SHA/artefacto exacto; histórico no equiv
 No habilitar alertas sensibles por defecto. No ejecutar down sobre datos reales como sustituto de un plan de recuperación. Mantener separados staging/producción, fuentes sintéticas y cámaras de usuarios.
 
 Evidencia final local y límites: [entrega técnica](PHASE_6_DELIVERY_AND_ACCEPTANCE.md). Backup fixture no sustituye recuperación operativa; inventario no equivale a scan limpio. Resultado automatizado de gates: NO_GO.
+
+Actualización posterior: [resolución de bloqueos](PHASE_6_BLOCKER_RESOLUTION.md), restore entre clústeres e importación offline Grype preparada; aceptación global sigue NO_GO.

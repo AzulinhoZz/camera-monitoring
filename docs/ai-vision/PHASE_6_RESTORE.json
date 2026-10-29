@@ -1,20 +1,23 @@
 {
   "result": "PASS",
-  "scope": "generated data; new database in same disposable cluster; local storage directories, not managed Storage",
+  "scope": "generated data; roles and database restored in independent disposable cluster; local storage directories, not managed Storage",
+  "independent_cluster": true,
+  "globals_restored": true,
+  "role_attributes_equal": true,
   "database_rows_policies_grants_equal": true,
   "protected_reviewed_media_preserved": true,
   "restored_jpeg_readable": true,
   "restored_mp4_frames": 10,
   "owner_read_allowed_stranger_denied": true,
   "tamper_rejected": true,
-  "encrypted_backup_sha256": "1fe42d1a034f44fefca015fd9978881af5997afdd4f48bda1e2dd4bc8d738a6a",
+  "encrypted_backup_sha256": "3d62c5161b9b8b4bedfe844144bc306376d8613aae9d1b1ccd15c327e3d0a2f7",
   "files_sha256": {
-    "db/database.dump": "8beb1ce0206d19a0b178650f3142c9662d036513466db0bc3514c79695914328",
-    "db/globals.sql": "9345c7ec5b0e9ca5dd8326a36d7dd473f522553f3e95f0d4baa882c28863edc8",
-    "storage/motion-evidence/f7210242-a53d-495b-a7d7-26f0e0313ca1/c1000000-0000-0000-0000-000000000001/5a1cc5be-964b-4686-a668-453dc66f20ac.jpg": "f994a4764e6922378d1086f60c37e7caa38b422f3285c260d2713629bf04862d",
-    "storage/motion-clips/f7210242-a53d-495b-a7d7-26f0e0313ca1/c1000000-0000-0000-0000-000000000001/5a1cc5be-964b-4686-a668-453dc66f20ac.mp4": "bd2c2178c2b6fb3b53a6dcd9e0db1c2410275858de5f29d510934c3a35e74c36"
+    "db/database.dump": "a6ebfefb0e9e9ff1a617660174900d7c83008052570eaf4e0d214873925e2106",
+    "db/globals.sql": "92194b7663e5192ef258191b6329aebbcc90b5d9bbe3cbbc7476611e64ad84fe",
+    "storage/motion-evidence/f7210242-a53d-495b-a7d7-26f0e0313ca1/c1000000-0000-0000-0000-000000000001/cae71aea-e6b0-4f56-9ea2-f098d6f1bf20.jpg": "f994a4764e6922378d1086f60c37e7caa38b422f3285c260d2713629bf04862d",
+    "storage/motion-clips/f7210242-a53d-495b-a7d7-26f0e0313ca1/c1000000-0000-0000-0000-000000000001/cae71aea-e6b0-4f56-9ea2-f098d6f1bf20.mp4": "bd2c2178c2b6fb3b53a6dcd9e0db1c2410275858de5f29d510934c3a35e74c36"
   },
-  "elapsed_seconds": 2.500805704999948,
+  "elapsed_seconds": 9.897886722988915,
   "key_persisted": false,
-  "limits": "Globals backed up but roles already exist in same cluster. In-memory key is discarded; encrypted fixture is not usable as a future operational backup. No RPO/RTO acceptance."
+  "limits": "Globals replayed in independent cluster (bootstrap postgres CREATE excluded). In-memory key is discarded; encrypted fixture is not usable as a future operational backup. No RPO/RTO acceptance."
 }

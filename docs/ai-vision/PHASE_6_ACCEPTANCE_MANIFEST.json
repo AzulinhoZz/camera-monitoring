@@ -4,11 +4,11 @@
   "gates": {
     "regression": {
       "status": "PASS",
-      "evidence": "188 backend y 12 Android; PHASE_6_DELIVERY_AND_ACCEPTANCE.md"
+      "evidence": "189 backend actuales y 12 Android de entrega previa; PHASE_6_BLOCKER_RESOLUTION.md"
     },
     "database_restore": {
       "status": "PASS",
-      "evidence": "PHASE_6_RESTORE.json: fixture aislado, alcance limitado"
+      "evidence": "PHASE_6_RESTORE.json: roles/DB en cl\u00faster independiente, fixture aislado"
     },
     "image_build_smoke": {
       "status": "PASS",
@@ -36,11 +36,11 @@
     },
     "backup_operations": {
       "status": "BLOCKED",
-      "evidence": "Faltan key escrow, Storage administrado, cluster nuevo y RPO/RTO"
+      "evidence": "Restore entre cl\u00fasteres PASS; pendientes custodia de claves, Storage administrado y RPO/RTO"
     },
     "remote_ci": {
       "status": "BLOCKED",
-      "evidence": "gh auth status: GH_TOKEN inv\u00e1lido; no ejecuci\u00f3n remota"
+      "evidence": "PHASE_6_BLOCKER_RECHECK.json: auth inv\u00e1lida y API bloqueada por proxy"
     },
     "licenses": {
       "status": "BLOCKED",

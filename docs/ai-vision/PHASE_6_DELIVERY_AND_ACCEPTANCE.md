@@ -50,3 +50,5 @@ Runbooks existentes siguen vigentes; no rotar credenciales ni restaurar/borrar d
 ## Revisión de configuración y commits
 
 Compose combinado validado con `.env.example` y secretos ficticios (symlink temporal retirado), sin iniciar servicios. YAML revisado: nueve pasos, permisos contents:read y acciones fijadas por SHA; JSON y `git diff --check` válidos. Implementación y revisiones: commit `0ae8188`. Evidencia unitaria versionada: `PHASE_6_BACKEND_TESTS.xml` y `PHASE_6_ANDROID_TESTS.json`.
+
+Actualización posterior: [resolución de bloqueos](PHASE_6_BLOCKER_RESOLUTION.md), restore entre clústeres e importación offline Grype preparada; aceptación global sigue NO_GO.
