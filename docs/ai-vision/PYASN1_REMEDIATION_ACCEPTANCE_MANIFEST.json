@@ -1,0 +1,72 @@
+{
+  "source_commit": "6a49ec694f1e61bf8c231271b8c6daa4f143baa3",
+  "image_id": "sha256:496e636cfbe3c913b3a5a0531ce41e1b131f24b173fcb569d9434b317d198a5d",
+  "archive_sha256": "d5845180ff97715862e8db98c318a7aa4ecfe7b8e89dba800fc2b01b89716b9c",
+  "gates": {
+    "regression": {
+      "status": "PASS",
+      "evidence": "pyasn1-remediation-2026-11-04/backend-tests.xml and ci-summary.json:247 backend PASS local and CI;19 Android unit PASS in current CI. No device test."
+    },
+    "database_restore": {
+      "status": "PASS",
+      "evidence": "pyasn1-remediation-2026-11-04/ci-database.txt and remote-ci.json: current CI SQL/RLS/rollback/independent-cluster encrypted restore PASS, generated fixtures only."
+    },
+    "image_build_smoke": {
+      "status": "PASS",
+      "evidence": "pyasn1-remediation-2026-11-04/artifact.json and image-smoke.json: new offline image API/YOLOX/sandbox/SIGTERM passed."
+    },
+    "python_advisories": {
+      "status": "PASS",
+      "evidence": "pyasn1-remediation-2026-11-04/python-review.json:70 installed distributions,0 affected,0 lookup errors; pyasn1 version0.6.5 reviewed and installed by hash."
+    },
+    "image_vulnerability_scan": {
+      "status": "FINDINGS",
+      "evidence": "pyasn1-remediation-2026-11-04/image-scan.json:221 matches,82 High; fresh DB; exactly4 pyasn1 matches removed and0 added."
+    },
+    "android_device": {
+      "status": "BLOCKED",
+      "evidence": "User explicitly chose cloud-only validation. No device test claimed; acceptance gate remains unresolved."
+    },
+    "managed_staging": {
+      "status": "BLOCKED",
+      "evidence": "User confirmed staging/synthetic fixtures; current read-only preflight still fails at transport before writes. No fixtures created."
+    },
+    "target_load_and_accuracy": {
+      "status": "BLOCKED",
+      "evidence": "product-evidence/isolated-fleet-benchmark.json meets 2 FPS on synthetic cloud workload only; target hardware, natural annotated videos/scenarios and soak pending."
+    },
+    "backup_operations": {
+      "status": "BLOCKED",
+      "evidence": "product-evidence/Local encrypted independent-cluster restore passed; managed Storage, escrow/rotation and agreed RPO/RTO pending."
+    },
+    "remote_ci": {
+      "status": "FAIL",
+      "evidence": "pyasn1-remediation-2026-11-04/remote-ci.json and ci-summary.json: run41928690218, code6a49ec6; Android SUCCESS19 tests/Maven0; backend247/build/smoke/SQL/restore/PyPI PASS; native221 gate FAIL; workflow FAILURE."
+    },
+    "licenses": {
+      "status": "BLOCKED",
+      "evidence": "Guava and transitive artifacts/license reviewed; full model/dataset usage documentation and legal acceptance pending."
+    },
+    "operator_approval": {
+      "status": "NOT_REQUESTED",
+      "evidence": "Preceding release gates unresolved; no deployment authorized."
+    }
+  },
+  "scan_receipt": {
+    "generated_at": "2026-11-04T22:49:40.912986+00:00",
+    "inventory": "PASS",
+    "vulnerability_scan": "FINDINGS",
+    "accepted": false,
+    "limits": "Unsigned local receipt; full archive hash and config identity bind the input, not approval. Failures and findings never become clean acceptance.",
+    "image_id": "sha256:496e636cfbe3c913b3a5a0531ce41e1b131f24b173fcb569d9434b317d198a5d",
+    "archive_sha256": "d5845180ff97715862e8db98c318a7aa4ecfe7b8e89dba800fc2b01b89716b9c",
+    "findings": 221,
+    "database": {
+      "schemaVersion": "v6.1.10",
+      "from": "https://grype.anchore.io/databases/v6/vulnerability-db_v6.1.10_2026-11-04T00:19:46Z_1793773259.tar.zst?checksum=sha256%3Aed08c5e32eb299ebc83b87ab05b23debd749b55c30cf73281ec4223851b5f896",
+      "built": "2026-11-04T06:20:59Z",
+      "path": "/workspace/.camera-tools/scanners/grype-db/6/vulnerability.db",
+      "valid": true
+    }
+  }
+}

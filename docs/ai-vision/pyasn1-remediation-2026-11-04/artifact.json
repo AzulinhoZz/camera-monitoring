@@ -1,0 +1,16 @@
+{
+  "source_commit": "6a49ec694f1e61bf8c231271b8c6daa4f143baa3",
+  "image_tag": "camera-monitoring-pyasn1:review",
+  "image_id": "sha256:496e636cfbe3c913b3a5a0531ce41e1b131f24b173fcb569d9434b317d198a5d",
+  "archive_sha256": "d5845180ff97715862e8db98c318a7aa4ecfe7b8e89dba800fc2b01b89716b9c",
+  "archive_bytes": 479588864,
+  "archive_path": "/workspace/.camera-tools/pyasn1-remediation/candidate.tar",
+  "build_command": "BUILDX_CONFIG=/workspace/.camera-tools/buildx docker buildx build --platform linux/amd64 --network none --build-context wheels=/workspace/.camera-tools/release-wheels -t camera-monitoring-pyasn1:review --load backend",
+  "network_during_runtime_install": "none",
+  "verified_wheels": 66,
+  "runtime_distributions": 65,
+  "pyasn1_version_in_image_sbom": "0.6.5",
+  "pip_check": "PASS",
+  "published_to_registry": false,
+  "deployed": false
+}

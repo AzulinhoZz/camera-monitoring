@@ -1,0 +1,6 @@
+{
+  "operation": "GET auth settings",
+  "writes_performed": false,
+  "status": "TRANSPORT_BLOCKED",
+  "proxy_connect_http_403": true
+}

@@ -34,3 +34,7 @@ The [product delivery report](docs/ai-vision/PHASE_7_PRODUCT_DELIVERY.md) record
 ## Security revalidation — 2026-11-04
 
 [Current revalidation](docs/ai-vision/REVALIDATION_2026_11_04.md): 243 backend and19 Android unit tests passed; device smoke APK compiled but not executed. Fresh scans found225 backend image matches and four advisories in pyasn10.6.4; Android Maven snapshot remains0. Staging was explicitly confirmed, but its HTTPS preflight is blocked by the runtime proxy. Production remains NO_GO.
+
+## pyasn1 remediation — 2026-11-04
+
+[Reviewed patch and validation](docs/ai-vision/PYASN1_REMEDIATION_2026_11_04.md): pyasn1 is pinned to0.6.5 by hash;247 backend tests pass and the installed Python advisory snapshot has0 affected packages. New image build/smoke pass; native findings decrease225→221 (82 High), removing exactly the four pyasn1 advisories. Production remains NO_GO; staging is still blocked by proxy CONNECT403, and device testing remains outside the current cloud-only scope.

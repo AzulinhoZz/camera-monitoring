@@ -1,0 +1,17 @@
+{
+  "scope": "small nested constructed OCTET STRING; correctness only, not a CPU-exhaustion benchmark",
+  "before": {
+    "version": "0.6.4",
+    "decoded_hex": "040141040142",
+    "expected_hex": "4142",
+    "logical_value_correct": false,
+    "rest_empty": true
+  },
+  "after": {
+    "version": "0.6.5",
+    "decoded_hex": "4142",
+    "expected_hex": "4142",
+    "logical_value_correct": true,
+    "rest_empty": true
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "run_id": 41928690218,
+  "source_commit": "6a49ec694f1e61bf8c231271b8c6daa4f143baa3",
+  "overall": "failure",
+  "backend_tests": 247,
+  "android_tests": 19,
+  "android_test_failures": 0,
+  "android_maven_matches": 0,
+  "backend_python_packages": 70,
+  "backend_python_affected_packages": 0,
+  "backend_native_matches": 221,
+  "backend_failed_step": "Full image inventory and vulnerability gate",
+  "database_step": "PASS",
+  "limits": "Each CI image/APK is identified by its own scan receipt; no local hash is substituted. No managed staging or physical device run."
+}

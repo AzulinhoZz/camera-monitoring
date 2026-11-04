@@ -222,3 +222,7 @@ Pendiente de aceptación, no cerrado: native200; integración staging; dispositi
 ## Revalidación del 4 de noviembre de 2026
 
 [Recibos y preparación](REVALIDATION_2026_11_04.md): seguridad renovada (native225/High86, pyasn1 afectado por4 avisos; Maven Android0),243 backend y19 Android unitarias PASS. Dos casos instrumentados nuevos compilados, NO EJECUTADOS. Staging autorizado explícitamente por usuario; CONNECT403 impide iniciar fixtures. Pendiente prioritario: corregir pyasn1 tras revisión y renovar locks/build/scan; revisar24 matches con fix disponible; resolver conectividad staging y dispositivo QA sin limpiar datos reales. No se cierra R2–R5 ni aceptación de producción.
+
+## Remediación pyasn1 aplicada — 4 de noviembre de2026
+
+[Entrega del parche](PYASN1_REMEDIATION_2026_11_04.md):0.6.4→0.6.5, wheel/licencia/diff revisados, locks/hash y revisión actual de wheels sincronizados,247 backend PASS, nueva imagen/smoke PASS, PyPI0 afectados. Los cuatro avisos pyasn1 salen del scan y quedan221 matches/82 High. Comprobación de staging repetida: CONNECT403 antes de toda escritura. Pendientes: demás componentes nativos, conectividad/aceptación administrada y gates externos; teléfono no ejecutado conforme a alcance nube. No cerrar aceptación global ni R2 por este parche.

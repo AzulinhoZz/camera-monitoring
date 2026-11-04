@@ -1,0 +1,30 @@
+{
+  "before": 225,
+  "after": 221,
+  "removed": [
+    [
+      "GHSA-9m75-vc3g-4x39",
+      "pkg:pypi/pyasn1@0.6.4"
+    ],
+    [
+      "GHSA-fm9c-5rcf-2q5p",
+      "pkg:pypi/pyasn1@0.6.4"
+    ],
+    [
+      "GHSA-mm57-4v3p-rchx",
+      "pkg:pypi/pyasn1@0.6.4"
+    ],
+    [
+      "GHSA-2qm8-x737-gmw5",
+      "pkg:pypi/pyasn1@0.6.4"
+    ]
+  ],
+  "added": [],
+  "severity": {
+    "High": 82,
+    "Medium": 80,
+    "Negligible": 47,
+    "Low": 12
+  },
+  "unique_ids": 122
+}
