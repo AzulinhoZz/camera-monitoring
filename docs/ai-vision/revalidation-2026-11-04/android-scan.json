@@ -1,0 +1,18 @@
+{
+  "generated_at": "2026-11-04T22:08:36.810098+00:00",
+  "status": "PASS_MAVEN_SNAPSHOT",
+  "accepted": true,
+  "deploy_authorized": false,
+  "scope": "Maven advisory matches from resolved graph; .so version/native analysis and device behavior not certified",
+  "apk_sha256": "5ee1a36634234d3bd493a5d7a96f77dd9472927b7ede032bf0d38cdff3dd4386",
+  "sbom_sha256": "b2c571643abed4014e6bdd620f7d8fb52c38392284eba101b5eaf4283d9e80ff",
+  "inventory_sha256": "311850954203a4b0f0076743c5c39f67868abeb39fac01221ae6cafd52b069a0",
+  "findings": 0,
+  "database": {
+    "schemaVersion": "v6.1.10",
+    "from": "https://grype.anchore.io/databases/v6/vulnerability-db_v6.1.10_2026-11-04T00:19:46Z_1793773259.tar.zst?checksum=sha256%3Aed08c5e32eb299ebc83b87ab05b23debd749b55c30cf73281ec4223851b5f896",
+    "built": "2026-11-04T06:20:59Z",
+    "path": "/workspace/.camera-tools/scanners/grype-db/6/vulnerability.db",
+    "valid": true
+  }
+}

@@ -1,0 +1,11 @@
+{
+  "backend_command": "pytest -q backend",
+  "backend_result": "243 PASS,5 warnings,11.87 seconds",
+  "android_unit_command": "testDebugUnitTest --rerun",
+  "android_unit_result": "BUILD SUCCESSFUL in14s; task executed",
+  "android_build_command": "testDebugUnitTest assembleDebug assembleDebugAndroidTest",
+  "android_build_result": "BUILD SUCCESSFUL in14s after adding instrumented cases",
+  "connected_tests": "NOT_RUN",
+  "staging_writes": false,
+  "remote_ci": "NOT_RUN"
+}

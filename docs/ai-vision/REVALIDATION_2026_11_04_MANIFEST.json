@@ -1,0 +1,72 @@
+{
+  "source_commit": "4e1fa1bd03113735e548864e8675d35dddb37453",
+  "image_id": "sha256:f9b3d4375525918a45c91a536a5521e3547771830b77d73b534015f5e3231491",
+  "archive_sha256": "d35fae9a0b6de2437a4b31a06f3dbbdbc511a49e0ca7095cd22feed9c6b3fe31",
+  "gates": {
+    "regression": {
+      "status": "PASS",
+      "evidence": "revalidation-2026-11-04/backend-tests.xml: 243 PASS; android-validation.json: 19 unit tests PASS; instrumentation compiled only."
+    },
+    "database_restore": {
+      "status": "PASS",
+      "evidence": "product-evidence/restore.json: independent disposable cluster, retained private key/separate process, data/roles/RLS/grants/indexes/media equal; migration012 rollback/reapply passed."
+    },
+    "image_build_smoke": {
+      "status": "PASS",
+      "evidence": "product-evidence/image-artifact.json and image-smoke.json; actual image API/native inference/sandbox/SIGTERM passed."
+    },
+    "python_advisories": {
+      "status": "FINDINGS",
+      "evidence": "revalidation-2026-11-04/python-review.json:70 packages,0 lookup errors,1 affected package (pyasn10.6.4),4 advisories fixed_in0.6.5. No update installed."
+    },
+    "image_vulnerability_scan": {
+      "status": "FINDINGS",
+      "evidence": "revalidation-2026-11-04/image-scan.json:225 matches,86 High, fresh official database, same bound image/archive."
+    },
+    "android_device": {
+      "status": "BLOCKED",
+      "evidence": "App/test APK compiled; two new signed-out navigation cases prepared. No device execution; adb/KVM/USB prerequisites unavailable."
+    },
+    "managed_staging": {
+      "status": "BLOCKED",
+      "evidence": "User confirmed staging and synthetic-data authorization on 2026-11-04. Read-only preflight blocked by proxy CONNECT HTTP403 before service; no fixtures created or cleanup needed."
+    },
+    "target_load_and_accuracy": {
+      "status": "BLOCKED",
+      "evidence": "product-evidence/isolated-fleet-benchmark.json meets 2 FPS on synthetic cloud workload only; target hardware, natural annotated videos/scenarios and soak pending."
+    },
+    "backup_operations": {
+      "status": "BLOCKED",
+      "evidence": "product-evidence/Local encrypted independent-cluster restore passed; managed Storage, escrow/rotation and agreed RPO/RTO pending."
+    },
+    "remote_ci": {
+      "status": "NOT_RUN",
+      "evidence": "This revalidation used local tools; previous remote CI receipt is historical and not attributed to this source."
+    },
+    "licenses": {
+      "status": "BLOCKED",
+      "evidence": "Guava and transitive artifacts/license reviewed; full model/dataset usage documentation and legal acceptance pending."
+    },
+    "operator_approval": {
+      "status": "NOT_REQUESTED",
+      "evidence": "Preceding release gates unresolved; no deployment authorized."
+    }
+  },
+  "scan_receipt": {
+    "generated_at": "2026-11-04T22:05:33.917183+00:00",
+    "inventory": "PASS",
+    "vulnerability_scan": "FINDINGS",
+    "accepted": false,
+    "limits": "Unsigned local receipt; full archive hash and config identity bind the input, not approval. Failures and findings never become clean acceptance.",
+    "image_id": "sha256:f9b3d4375525918a45c91a536a5521e3547771830b77d73b534015f5e3231491",
+    "archive_sha256": "d35fae9a0b6de2437a4b31a06f3dbbdbc511a49e0ca7095cd22feed9c6b3fe31",
+    "findings": 225,
+    "database": {
+      "schemaVersion": "v6.1.10",
+      "from": "https://grype.anchore.io/databases/v6/vulnerability-db_v6.1.10_2026-11-04T00:19:46Z_1793773259.tar.zst?checksum=sha256%3Aed08c5e32eb299ebc83b87ab05b23debd749b55c30cf73281ec4223851b5f896",
+      "built": "2026-11-04T06:20:59Z",
+      "path": "/workspace/.camera-tools/scanners/grype-db/6/vulnerability.db",
+      "valid": true
+    }
+  }
+}

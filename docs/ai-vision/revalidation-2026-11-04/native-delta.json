@@ -1,0 +1,22 @@
+{
+  "same_image_scanned": true,
+  "previous_matches": 200,
+  "current_matches": 225,
+  "unique_vulnerability_ids": 126,
+  "added_matches": 26,
+  "removed_matches": 1,
+  "identity_comparison": "advisory id plus package purl, or name/version; multiset comparison",
+  "severity": {
+    "High": 86,
+    "Medium": 80,
+    "Negligible": 47,
+    "Low": 12
+  },
+  "fix_state": {
+    "fixed": 24,
+    "": 21,
+    "wont-fix": 133,
+    "not-fixed": 47
+  },
+  "limits": "A fixed state is advisory metadata, not proof that an updated compatible runtime has been built or accepted."
+}

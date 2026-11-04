@@ -30,3 +30,7 @@ The authorized follow-up [release remediation phase](docs/ai-vision/PHASE_7_RELE
 The [product delivery report](docs/ai-vision/PHASE_7_PRODUCT_DELIVERY.md) records pending-first camera navigation, rule/date/time incident search, safer evidence loading, Android transport hardening, the Guava advisory fix, offline alert scoring, encrypted backup/restore and measured isolated camera capacity. See the [operations guide](docs/ai-vision/PRODUCT_OPERATIONS.md) for reproducible commands and the [external validation matrix](docs/ai-vision/PRODUCT_VALIDATION_MATRIX.md) for device/staging/dataset acceptance still pending.
 
 **Production remains NO_GO:** the backend image scan still reports 200 matches; Android Maven scan is clean for its advisory snapshot only. No deployment or managed-project migration is included.
+
+## Security revalidation — 2026-11-04
+
+[Current revalidation](docs/ai-vision/REVALIDATION_2026_11_04.md): 243 backend and19 Android unit tests passed; device smoke APK compiled but not executed. Fresh scans found225 backend image matches and four advisories in pyasn10.6.4; Android Maven snapshot remains0. Staging was explicitly confirmed, but its HTTPS preflight is blocked by the runtime proxy. Production remains NO_GO.

@@ -1,0 +1,23 @@
+{
+  "source_commit": "4e1fa1bd03113735e548864e8675d35dddb37453",
+  "build": "PASS",
+  "unit_tests": 19,
+  "unit_failures": 0,
+  "instrumentation_build": "PASS",
+  "instrumentation_executed": false,
+  "new_instrumented_cases": 2,
+  "existing_instrumented_cases": 1,
+  "device_status": "BLOCKED: adb attempts to create readonly /home/agent/.android; no USB device bus or KVM exposed. No device runtime acceptance.",
+  "artifacts": {
+    "app": {
+      "sha256": "5ee1a36634234d3bd493a5d7a96f77dd9472927b7ede032bf0d38cdff3dd4386",
+      "bytes": 27427529,
+      "path": "/workspace/.camera-tools/android/project/app/build/outputs/apk/debug/app-debug.apk"
+    },
+    "instrumentation": {
+      "sha256": "c1bddeee6b1c8aa36aa407cf56ca3f13d48978c1f0dfa4842b75d5f69ee12d81",
+      "bytes": 1091168,
+      "path": "/workspace/.camera-tools/android/project/app/build/outputs/apk/androidTest/debug/app-debug-androidTest.apk"
+    }
+  }
+}

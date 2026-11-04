@@ -1,0 +1,232 @@
+{
+  "scope": "Review candidates only; no dependency changes made",
+  "matches": [
+    {
+      "id": "CVE-2026-8461",
+      "package": "ffmpeg",
+      "installed_version": "8.1.1",
+      "severity": "High",
+      "fix_versions": [
+        "8.1.2"
+      ]
+    },
+    {
+      "id": "CVE-2025-12781",
+      "package": "python",
+      "installed_version": "3.12.16",
+      "severity": "Medium",
+      "fix_versions": [
+        "3.13.10",
+        "3.14.1",
+        "3.15.0a2"
+      ]
+    },
+    {
+      "id": "GHSA-9m75-vc3g-4x39",
+      "package": "pyasn1",
+      "installed_version": "0.6.4",
+      "severity": "High",
+      "fix_versions": [
+        "0.6.5"
+      ]
+    },
+    {
+      "id": "CVE-2026-107695",
+      "package": "ffmpeg",
+      "installed_version": "8.1.1",
+      "severity": "High",
+      "fix_versions": [
+        "8.1.3"
+      ]
+    },
+    {
+      "id": "GHSA-fm9c-5rcf-2q5p",
+      "package": "pyasn1",
+      "installed_version": "0.6.4",
+      "severity": "High",
+      "fix_versions": [
+        "0.6.5"
+      ]
+    },
+    {
+      "id": "GHSA-mm57-4v3p-rchx",
+      "package": "pyasn1",
+      "installed_version": "0.6.4",
+      "severity": "High",
+      "fix_versions": [
+        "0.6.5"
+      ]
+    },
+    {
+      "id": "GHSA-2qm8-x737-gmw5",
+      "package": "pyasn1",
+      "installed_version": "0.6.4",
+      "severity": "High",
+      "fix_versions": [
+        "0.6.5"
+      ]
+    },
+    {
+      "id": "CVE-2025-15366",
+      "package": "python",
+      "installed_version": "3.12.16",
+      "severity": "Medium",
+      "fix_versions": [
+        "3.13.15",
+        "3.14.7",
+        "3.15.0a6"
+      ]
+    },
+    {
+      "id": "CVE-2025-15367",
+      "package": "python",
+      "installed_version": "3.12.16",
+      "severity": "Medium",
+      "fix_versions": [
+        "3.15.0a6"
+      ]
+    },
+    {
+      "id": "CVE-2026-70632",
+      "package": "ffmpeg",
+      "installed_version": "8.1.1",
+      "severity": "High",
+      "fix_versions": [
+        "9"
+      ]
+    },
+    {
+      "id": "CVE-2026-107697",
+      "package": "ffmpeg",
+      "installed_version": "8.1.1",
+      "severity": "Medium",
+      "fix_versions": [
+        "8.1.3"
+      ]
+    },
+    {
+      "id": "CVE-2026-70628",
+      "package": "ffmpeg",
+      "installed_version": "8.1.1",
+      "severity": "High",
+      "fix_versions": [
+        "9"
+      ]
+    },
+    {
+      "id": "CVE-2026-3446",
+      "package": "python",
+      "installed_version": "3.12.16",
+      "severity": "Medium",
+      "fix_versions": [
+        "3.13.13",
+        "3.14.4",
+        "3.15.0a8"
+      ]
+    },
+    {
+      "id": "CVE-2026-70631",
+      "package": "ffmpeg",
+      "installed_version": "8.1.1",
+      "severity": "Medium",
+      "fix_versions": [
+        "9"
+      ]
+    },
+    {
+      "id": "CVE-2026-52296",
+      "package": "ffmpeg",
+      "installed_version": "8.1.1",
+      "severity": "High",
+      "fix_versions": [
+        "9.0"
+      ]
+    },
+    {
+      "id": "CVE-2026-70629",
+      "package": "ffmpeg",
+      "installed_version": "8.1.1",
+      "severity": "Medium",
+      "fix_versions": [
+        "9"
+      ]
+    },
+    {
+      "id": "CVE-2026-70630",
+      "package": "ffmpeg",
+      "installed_version": "8.1.1",
+      "severity": "Medium",
+      "fix_versions": [
+        "9"
+      ]
+    },
+    {
+      "id": "CVE-2026-6019",
+      "package": "python",
+      "installed_version": "3.12.16",
+      "severity": "Medium",
+      "fix_versions": [
+        "3.13.14",
+        "3.14.5rc1",
+        "3.15.0b1"
+      ]
+    },
+    {
+      "id": "CVE-2026-103995",
+      "package": "python",
+      "installed_version": "3.12.16",
+      "severity": "Low",
+      "fix_versions": [
+        "3.16.0"
+      ]
+    },
+    {
+      "id": "CVE-2026-52295",
+      "package": "ffmpeg",
+      "installed_version": "8.1.1",
+      "severity": "Medium",
+      "fix_versions": [
+        "9.0"
+      ]
+    },
+    {
+      "id": "CVE-2026-96611",
+      "package": "ffmpeg",
+      "installed_version": "8.1.1",
+      "severity": "High",
+      "fix_versions": [
+        "9.0"
+      ]
+    },
+    {
+      "id": "CVE-2026-52297",
+      "package": "ffmpeg",
+      "installed_version": "8.1.1",
+      "severity": "High",
+      "fix_versions": [
+        "9.0"
+      ]
+    },
+    {
+      "id": "CVE-2026-107660",
+      "package": "ffmpeg",
+      "installed_version": "8.1.1",
+      "severity": "Medium",
+      "fix_versions": [
+        "8.1.3",
+        "9.0.2"
+      ]
+    },
+    {
+      "id": "CVE-2026-3479",
+      "package": "python",
+      "installed_version": "3.12.16",
+      "severity": "Negligible",
+      "fix_versions": [
+        "3.13.13",
+        "3.14.4",
+        "3.15.0a8"
+      ]
+    }
+  ]
+}

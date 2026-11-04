@@ -218,3 +218,7 @@ El usuario autoriza la fase posterior propuesta; extensión del plan original. [
 Implementado/verificado en entorno controlado: resumen autorizado de pendientes24h; filtro por regla/zona IA y fecha/hora; carga progresiva de evidencia con autorización fresca; mejoras de navegación/cancelación/errores Android; HTTPS release, backup/logging privados y Guava corregido; diagnósticos técnicos, evaluación offline, backup cifrado y restore entre procesos/clústeres con índices; CI Android y gate Maven ligados al APK. [Detalle, recibos y riesgos](PHASE_7_PRODUCT_DELIVERY.md).
 
 Pendiente de aceptación, no cerrado: native200; integración staging; dispositivo/UI/TTL; precisión natural por escenario y hardware/soak destino; Storage administrado/custodia/rotación/RPO/RTO; modelos/datasets/licencias y operador. [Matriz pendiente](PRODUCT_VALIDATION_MATRIX.md). No se declara fase7 completa ni se elevan herramientas de medición a una mejora de precisión demostrada.
+
+## Revalidación del 4 de noviembre de 2026
+
+[Recibos y preparación](REVALIDATION_2026_11_04.md): seguridad renovada (native225/High86, pyasn1 afectado por4 avisos; Maven Android0),243 backend y19 Android unitarias PASS. Dos casos instrumentados nuevos compilados, NO EJECUTADOS. Staging autorizado explícitamente por usuario; CONNECT403 impide iniciar fixtures. Pendiente prioritario: corregir pyasn1 tras revisión y renovar locks/build/scan; revisar24 matches con fix disponible; resolver conectividad staging y dispositivo QA sin limpiar datos reales. No se cierra R2–R5 ni aceptación de producción.

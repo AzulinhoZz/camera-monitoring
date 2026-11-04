@@ -1,0 +1,14 @@
+{
+  "generated_at": "2026-11-04T22:10:01.023134+00:00",
+  "status": "BLOCKED",
+  "writes_performed": false,
+  "checks": [
+    {
+      "name": "auth_settings",
+      "status": "BLOCKED",
+      "reason": "transport_error"
+    }
+  ],
+  "limits": "Read-only connectivity/schema probe, not Auth/RLS/Storage/device acceptance.",
+  "project_ref_sha256": "3d79410150a744804274ced285834f209ed0df143e57c81f6f58cbc6506a76ca"
+}

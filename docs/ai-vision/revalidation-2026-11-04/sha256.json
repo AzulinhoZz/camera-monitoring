@@ -1,0 +1,19 @@
+{
+  "TEST-com.cameramonitoring.app.EventTimelineContractTest.xml": "7d31584e29ca69977decbe2390d3c4475778c1dbab42d9b82390168207363182",
+  "TEST-com.cameramonitoring.app.ExampleUnitTest.xml": "aa3ca1c916fb49be1855e962082c6aadaa54d66e8aa7f9b42723cc075b8e3051",
+  "TEST-com.cameramonitoring.app.ProductReadinessContractTest.xml": "7e75891e021f22e3925888eff5c21f561f164795de22c374cb536feb47abbb81",
+  "TEST-com.cameramonitoring.app.TokenAuthenticatorTest.xml": "41422e695b7f3ec6bee5bb1628f610af5f190ed5b37c982b07de47481ff237a7",
+  "TEST-com.cameramonitoring.app.VisionDashboardContractTest.xml": "7d656ac1064a41ee5de5f7318f0b2e7ed7bbd12a91aa3f6415b1d61be3163df9",
+  "TEST-com.cameramonitoring.app.VisionRulesContractTest.xml": "ccb78a332da2ef7e011dcac494f009e2b9e7aafb0acc77ad225e28c4e82ce1c0",
+  "android-findings.json": "557223e2c6cc285ce9648b7b1ab55e0aeedaadb1ef58468f3a761e2f278dec7d",
+  "android-scan.json": "4476f0928f9e1f9b0d712cad3eadb0bae572e83e3466b107cdeb0e9e4897ba8f",
+  "android-validation.json": "f1e7862a741912cb7f09640fb6dc0af8ffaa3c9d6039c4455095de955cf252ec",
+  "backend-tests.xml": "5b3f143520de013336ebb6929dfde34e2428d985bf9f2057666f02b169ead487",
+  "build-commands.json": "d3b3b074a9036476a57718f57ebfa47f4e22a5827a65ad0818335bac45823ed8",
+  "image-findings.json": "7f1bfd12e2d77f56e9e0af569a6d9444bb0b404f4f7863c03ced5cbe71115ea4",
+  "image-scan.json": "a6bcd1ecbfc4c93a181ace950deb12f04658652bc0abe1634c4776880b4c0c7e",
+  "native-delta.json": "80515604a61864a2afd239dae85684f50479c3659f5347987babbfb60f662110",
+  "native-remediation-candidates.json": "278d93601b37aec951ea98eced582a71c3fbba4b77d2bf85c8e8f50662240dbd",
+  "python-review.json": "e271ea7dc88dca1d531838c941aa41f6b06e3a768e335a133bfce2e435874f16",
+  "staging-preflight.json": "fcfcc2421a1b70c7edb78efeeffdb8436389c543c9a41e38644a6385f6240939"
+}

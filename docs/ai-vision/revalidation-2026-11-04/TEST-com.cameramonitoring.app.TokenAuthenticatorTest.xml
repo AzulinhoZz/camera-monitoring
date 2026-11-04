@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.cameramonitoring.app.TokenAuthenticatorTest" tests="5" skipped="0" failures="0" errors="0" timestamp="2026-11-04T22:12:04.368Z" hostname="0811a3d16978" time="0.055">
+  <properties/>
+  <testcase name="testRenovacionFallida" classname="com.cameramonitoring.app.TokenAuthenticatorTest" time="0.022"/>
+  <testcase name="testTokenCaducadoRenovacionExitosa" classname="com.cameramonitoring.app.TokenAuthenticatorTest" time="0.009"/>
+  <testcase name="testTokenVigente" classname="com.cameramonitoring.app.TokenAuthenticatorTest" time="0.005"/>
+  <testcase name="testLogin401NoDisparaRenovacion" classname="com.cameramonitoring.app.TokenAuthenticatorTest" time="0.004"/>
+  <testcase name="testMultiplePeticionesSimultaneas" classname="com.cameramonitoring.app.TokenAuthenticatorTest" time="0.014"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>
