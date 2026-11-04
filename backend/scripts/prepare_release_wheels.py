@@ -16,7 +16,7 @@ from urllib.request import urlopen
 
 
 def locked_artifacts(root):
-    reviews=json.loads((root/'docs/ai-vision/PHASE_6_PYTHON_REVIEW.json').read_text())['reviews']
+    reviews=json.loads((root/'docs/ai-vision/RELEASE_PYTHON_REVIEW.json').read_text())['reviews']
     records={r['name']:(r['version'],r['wheel']) for r in reviews}
     tooling=json.loads((root/'docs/ai-vision/PHASE_6_TOOLING_REVIEW.json').read_text())
     records['pip']=(tooling['version'],{'filename':tooling['filename'],'url':tooling['url'],
