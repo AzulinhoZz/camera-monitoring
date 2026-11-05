@@ -1,0 +1,120 @@
+{
+  "reviewed_at": "2026-11-05T00:07:04.187501+00:00",
+  "selected_base": "cgr.dev/chainguard/wolfi-base@sha256:771146c2dfc880902a185f060c3db5571473c46b267edd98c3119c83068dfb61",
+  "image_recipe_source": "https://github.com/chainguard-images/images/tree/main/images/wolfi-base",
+  "image_recipe_license": "Apache-2.0",
+  "python_runtime": "3.13.18 (vendor package3.13.18_git20261030-r0)",
+  "python_license": "PSF-2.0",
+  "target": "Linux AMD64 CPython3.13",
+  "python_package_versions_changed": false,
+  "abi_wheels_rebound": [
+    {
+      "name": "cffi",
+      "before": "cffi-2.1.1-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.whl",
+      "after": "cffi-2.1.1-cp313-cp313-manylinux2014_x86_64.manylinux_2_17_x86_64.whl"
+    },
+    {
+      "name": "charset-normalizer",
+      "before": "charset_normalizer-3.5.2-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl",
+      "after": "charset_normalizer-3.5.2-cp313-cp313-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl"
+    },
+    {
+      "name": "google-crc32c",
+      "before": "google_crc32c-1.9.0-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.whl",
+      "after": "google_crc32c-1.9.0-cp313-cp313-manylinux2014_x86_64.manylinux_2_17_x86_64.whl"
+    },
+    {
+      "name": "grpcio",
+      "before": "grpcio-1.85.0-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.whl",
+      "after": "grpcio-1.85.0-cp313-cp313-manylinux2014_x86_64.manylinux_2_17_x86_64.whl"
+    },
+    {
+      "name": "httptools",
+      "before": "httptools-0.9.0-cp312-cp312-manylinux1_x86_64.manylinux_2_28_x86_64.manylinux_2_5_x86_64.whl",
+      "after": "httptools-0.9.0-cp313-cp313-manylinux1_x86_64.manylinux_2_28_x86_64.manylinux_2_5_x86_64.whl"
+    },
+    {
+      "name": "msgpack",
+      "before": "msgpack-1.2.4-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl",
+      "after": "msgpack-1.2.4-cp313-cp313-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl"
+    },
+    {
+      "name": "multidict",
+      "before": "multidict-7.2.1-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl",
+      "after": "multidict-7.2.1-cp313-cp313-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl"
+    },
+    {
+      "name": "numpy",
+      "before": "numpy-2.5.4-cp312-cp312-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl",
+      "after": "numpy-2.5.4-cp313-cp313-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl"
+    },
+    {
+      "name": "propcache",
+      "before": "propcache-0.5.4-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl",
+      "after": "propcache-0.5.4-cp313-cp313-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl"
+    },
+    {
+      "name": "pydantic-core",
+      "before": "pydantic_core-2.50.1-cp312-cp312-manylinux_2_17_x86_64.manylinux2014_x86_64.whl",
+      "after": "pydantic_core-2.50.1-cp313-cp313-manylinux_2_17_x86_64.manylinux2014_x86_64.whl"
+    },
+    {
+      "name": "pyyaml",
+      "before": "pyyaml-6.0.3-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl",
+      "after": "pyyaml-6.0.3-cp313-cp313-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl"
+    },
+    {
+      "name": "uvloop",
+      "before": "uvloop-0.23.0-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl",
+      "after": "uvloop-0.23.0-cp313-cp313-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl"
+    },
+    {
+      "name": "websockets",
+      "before": "websockets-15.0.1-cp312-cp312-manylinux_2_5_x86_64.manylinux1_x86_64.manylinux_2_17_x86_64.manylinux2014_x86_64.whl",
+      "after": "websockets-15.0.1-cp313-cp313-manylinux_2_5_x86_64.manylinux1_x86_64.manylinux_2_17_x86_64.manylinux2014_x86_64.whl"
+    },
+    {
+      "name": "yarl",
+      "before": "yarl-1.25.1-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl",
+      "after": "yarl-1.25.1-cp313-cp313-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl"
+    }
+  ],
+  "package_authentication": {
+    "exit_code": 0,
+    "index_sha256": "72f4e7ad6d9560bf2ed730318192b333c2c5579468ee913ca72f74e59c986eff",
+    "index_bytes": 7425489,
+    "packages": 16,
+    "network": "none",
+    "allow_untrusted": false
+  },
+  "retained_components": "Same65 Python runtime distributions including OpenCV5.0.0.93/FFmpeg8.1.1 and pyasn1 patched0.6.5; no manual shared-library replacement. Dedicated optional pose interpreter remains3.12.",
+  "alternatives": {
+    "debian313": {
+      "base": "python:3.13-slim-trixie@sha256:ae14d4ce8771606477a81446e7ef429edd6762305fc50c84507c1041fa8285d1",
+      "findings": 216,
+      "tested_backend": 251,
+      "scope": "trial with reviewed APT3.0.4/tzdata2026f; not selected as final base"
+    },
+    "public_python_latest": {
+      "base": "cgr.dev/chainguard/python@sha256:31dd69d84fe5235fe18f8ceb5b76620e6f44a0ce1f9b0d3a46c491576f8b453b",
+      "python": "3.15.2",
+      "adopted": false,
+      "reason": "Frozen PyYAML6.0.3 has no cp315 wheel; selected package-based3.13 instead."
+    },
+    "system_opencv": {
+      "version": "4.12.0-r2",
+      "adopted": false,
+      "reason": "C++ package does not supply the required Python/FFmpeg integration; public Python wheel preserved."
+    },
+    "ffmpeg_source": {
+      "tag": "n9.0.2",
+      "tag_signature_verified_by_github": true,
+      "tag_object": "ce8f11b9fac4cd7ccfb41ca7c01bc17f5cda8cc3",
+      "commit": "946fcce07b6dcd0331c8cc609192aeff5e1924f8",
+      "source_archive_sha256": "c8a74e6eff0d38850403ee8eff3a95721984b45a3cd25f92b8905886571fc1be",
+      "license": "LGPL2.1+ with GPL/nonfree optional configurations requiring separate review",
+      "installed": false,
+      "reason": "No updated maintained OpenCV Python wheel; source build/integration has not been executed or certified."
+    }
+  }
+}

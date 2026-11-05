@@ -5,6 +5,7 @@ services:
       context: ./backend
       additional_contexts:
         wheels: ${VISION_WHEELHOUSE:-/tmp/camera-vision-wheels}
+        osupdates: ${VISION_OS_PACKAGES:-/tmp/camera-os-packages}
     ports:
       - "127.0.0.1:8000:8000"
     environment:

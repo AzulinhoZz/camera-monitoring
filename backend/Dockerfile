@@ -1,5 +1,13 @@
-# Frozen official base observed during phase 5; OS scan remains a release gate.
-FROM python:3.12-slim@sha256:12316debbfb86890f6b2d825820612741ba527ad5a44e3902759141d572bfe8f
+# Reviewed public Wolfi base; native findings remain a release gate.
+FROM cgr.dev/chainguard/wolfi-base@sha256:771146c2dfc880902a185f060c3db5571473c46b267edd98c3119c83068dfb61
+USER 0:0
+# Packages are authenticated against the frozen upstream signed index, then pinned by SHA256.
+RUN --mount=type=bind,from=osupdates,target=/os-updates,readonly \
+    (cd /os-updates && sha256sum -c SHA256SUMS) && \
+    set -- && while IFS= read -r constraint; do set -- "$@" "$constraint"; done < /os-updates/world.txt && \
+    apk --no-network --no-cache --repositories-file /dev/null --repository /os-updates add "$@" && \
+    python3.13 -m venv /venv
+ENV PATH=/venv/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
 WORKDIR /code
 ENV PYTHONDONTWRITEBYTECODE=1 PYTHONUNBUFFERED=1
 # One application layer avoids repeated full snapshots on constrained builders.

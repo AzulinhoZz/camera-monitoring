@@ -8,3 +8,7 @@ See YOLOX-OpenCV-Zoo-Apache-2.0.txt for the upstream license.
 The ONNX artifact is not bundled; its separately downloaded copy must retain
 this notice/license when redistributed. No Ultralytics or ByteTrack code/weights
 are included. The temporal IoU tracker is an independent implementation.
+
+Runtime platform: public Chainguard/Wolfi image pinned by OCI digest.
+Image recipes: https://github.com/chainguard-images/images (Apache-2.0).
+Underlying operating-system packages retain their individual PSF/BSD/MIT/MPL/GPL/LGPL/public-domain and GCC-runtime-exception terms; see OS_PACKAGES_REVIEW.json and vendor package/source notices. No endorsement is implied.

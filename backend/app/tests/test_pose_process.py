@@ -39,7 +39,7 @@ def test_native_request_timeout_kills_only_owned_child(tmp_path):
 import socket,sys,time,json
 s=socket.socket(fileno=int(sys.argv[3]))
 s.recv(4096)
-s.sendall((json.dumps({{'ready':True,'model_version':MODEL_VERSION}})+'\\n').encode())
+s.sendall((json.dumps({{'ready':True,'model_version':{MODEL_VERSION!r}}})+'\\n').encode())
 s.recv(4096)
 time.sleep(30)
 ''')
@@ -50,6 +50,7 @@ time.sleep(30)
     try:
         assert client.infer(frame) is None
         assert time.monotonic()-started<5 and client.process is None
+        assert client.metrics['starts']==1  # Ready handshake completed; failure is a request timeout.
         assert client.metrics['failed']==1
         assert client.infer(frame) is None and client.metrics['backoff_skipped']==1
         with pytest.raises(ValueError):client.infer(Frame(SCOPE.model_copy(update={'owner_id':uuid4()}),frame.session_id,2,frame.timestamp,0.,0.,frame.pixels))

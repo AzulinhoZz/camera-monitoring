@@ -8,6 +8,7 @@ services:
       context: ./backend
       additional_contexts:
         wheels: ${VISION_WHEELHOUSE:-/tmp/camera-vision-wheels}
+        osupdates: ${VISION_OS_PACKAGES:-/tmp/camera-os-packages}
     command: [python, -m, app.vision, --config, /config/vision.json]
     environment:
       CAMERA_LEASE_DIRECTORY: /run/camera-leases

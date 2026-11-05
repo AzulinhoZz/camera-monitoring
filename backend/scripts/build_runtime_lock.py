@@ -32,14 +32,14 @@ def runtime_names(roots):
 
 def main():
     parser=argparse.ArgumentParser(description=__doc__);parser.add_argument('--output',required=True);args=parser.parse_args()
-    if sys.version_info[:2]!=(3,12) or sys.platform!='linux' or platform.machine()!='x86_64':
-        parser.error('runtime snapshot target is Python3.12 Linux x86_64')
+    if sys.version_info[:2]!=(3,13) or sys.platform!='linux' or platform.machine()!='x86_64':
+        parser.error('runtime snapshot target is Python3.13 Linux x86_64')
     backend=Path(__file__).resolve().parents[1]
     roots=[s.strip() for s in (backend/'requirements.txt').read_text().splitlines() if s.strip() and not s.startswith('#')]
     names=runtime_names(roots)
     locked={canonicalize_name(line.split('==')[0]):line for line in (backend/'requirements-ci.lock').read_text().splitlines() if line and not line.startswith('#')}
     if names-locked.keys():raise ValueError('runtime dependency missing from reviewed hash lock')
-    Path(args.output).write_text('# Runtime closure of reviewed CI snapshot; Python3.12 Linux x86_64 only.\n'+ '\n'.join(locked[n] for n in sorted(names))+'\n')
+    Path(args.output).write_text('# Runtime closure of reviewed CI snapshot; Python3.13 Linux x86_64 only.\n'+ '\n'.join(locked[n] for n in sorted(names))+'\n')
     print(f'{len(names)} reviewed runtime distributions; no test-only packages')
 
 if __name__=='__main__':main()

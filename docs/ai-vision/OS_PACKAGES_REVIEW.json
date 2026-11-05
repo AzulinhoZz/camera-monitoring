@@ -1,0 +1,559 @@
+{
+  "base": "cgr.dev/chainguard/wolfi-base@sha256:771146c2dfc880902a185f060c3db5571473c46b267edd98c3119c83068dfb61",
+  "repository": "https://apk.cgr.dev/chainguard",
+  "roots": {
+    "python-3.13": "3.13.18_git20261030-r0",
+    "libstdc++": "16.2.0-r2",
+    "tzdata": "2026f-r0"
+  },
+  "packages": [
+    {
+      "package": "gdbm",
+      "version": "1.26-r9",
+      "filename": "gdbm-1.26-r9.apk",
+      "url": "https://apk.cgr.dev/chainguard/x86_64/gdbm-1.26-r9.apk",
+      "bytes": 289760,
+      "sha256": "20acccdc729df98cb3c088eeea3f84080596c0b23a9809f82da7ee977473ed12",
+      "license": "GPL-3.0-or-later",
+      "apk_control_checksum": "Q1+OpsdmzH2i87yrQzTUkS0smKEPg=",
+      "source_package": "gdbm",
+      "source_recipe_commit": "bdc197227f39597f43727c03854efbb4e834c5ef"
+    },
+    {
+      "package": "libbz2-1",
+      "version": "1.0.8-r30",
+      "filename": "libbz2-1-1.0.8-r30.apk",
+      "url": "https://apk.cgr.dev/chainguard/x86_64/libbz2-1-1.0.8-r30.apk",
+      "bytes": 59582,
+      "sha256": "f3cd974cbff13c551edd28e13bb65c01938f01483fd9d2af03646c6ba2fec8c8",
+      "license": "MPL-2.0 AND MIT",
+      "apk_control_checksum": "Q1uJUw7U9e/1Jwt+vRSM5r8xKMJBE=",
+      "source_package": "bzip2",
+      "source_recipe_commit": "f353805867a3059d7018cceac9746da7c23634fe"
+    },
+    {
+      "package": "libexpat1",
+      "version": "2.10.0-r1",
+      "filename": "libexpat1-2.10.0-r1.apk",
+      "url": "https://apk.cgr.dev/chainguard/x86_64/libexpat1-2.10.0-r1.apk",
+      "bytes": 121940,
+      "sha256": "c2e5e062faaa066ef15752a4fb55fdae07c8c16e98b251d0b49651041ed6965f",
+      "license": "MIT",
+      "apk_control_checksum": "Q1/qFHF88NrKvQQcegKi7sppEYI5M=",
+      "source_package": "expat",
+      "source_recipe_commit": "5aeb575ed7ca64fb21dfda042e170d08f1654bbc"
+    },
+    {
+      "package": "libffi",
+      "version": "3.8.0-r2",
+      "filename": "libffi-3.8.0-r2.apk",
+      "url": "https://apk.cgr.dev/chainguard/x86_64/libffi-3.8.0-r2.apk",
+      "bytes": 47462,
+      "sha256": "93fe2f937802653775e8537c7a2840c6de8a1d83c396559be200c0d5d86375f6",
+      "license": "MIT",
+      "apk_control_checksum": "Q1Xv/AsO+lsjORCxdKxyfkMMLLkO0=",
+      "source_package": "libffi",
+      "source_recipe_commit": "aaa2344b75ef8b19889f087c91e10b11f191e15c"
+    },
+    {
+      "package": "libstdc++",
+      "version": "16.2.0-r2",
+      "filename": "libstdc++-16.2.0-r2.apk",
+      "url": "https://apk.cgr.dev/chainguard/x86_64/libstdc++-16.2.0-r2.apk",
+      "bytes": 1267168,
+      "sha256": "91d46dc63af715208b8d1424909f4df7e30cbc2321afaa9dcd412476e0297ebd",
+      "license": "GPL-3.0-or-later WITH GCC-exception-3.1",
+      "apk_control_checksum": "Q1TDYeh0Iq9Fjbp5cPck+zZfmDn14=",
+      "source_package": "gcc",
+      "source_recipe_commit": "1a8a06e57ab63d92834a9467dd0eaa5d54ade3b0"
+    },
+    {
+      "package": "libuuid",
+      "version": "2.42.4-r2",
+      "filename": "libuuid-2.42.4-r2.apk",
+      "url": "https://apk.cgr.dev/chainguard/x86_64/libuuid-2.42.4-r2.apk",
+      "bytes": 39968,
+      "sha256": "a3a7119c1dc97372b1ee41fd7d18cf5d2953c5d85bd126ce791d3a2be8ca4a81",
+      "license": "GPL-3.0-or-later AND GPL-2.0-or-later AND GPL-2.0-only AND GPL-1.0-only AND LGPL-2.1-or-later AND BSD-1-Clause AND BSD-2-Clause AND BSD-3-Clause AND BSD-4-Clause-UC AND MIT AND CC-PDDC",
+      "apk_control_checksum": "Q1RMgxwtEheWi8izRUHv/oGNNwqKA=",
+      "source_package": "util-linux",
+      "source_recipe_commit": "8298ba7be686605b03c1943f22ccf5a0640e0042"
+    },
+    {
+      "package": "mpdecimal",
+      "version": "4.0.1-r6",
+      "filename": "mpdecimal-4.0.1-r6.apk",
+      "url": "https://apk.cgr.dev/chainguard/x86_64/mpdecimal-4.0.1-r6.apk",
+      "bytes": 135908,
+      "sha256": "1d8cbdf4a1a99910af28dfaad19643a3604159f9decb380c0e39166bd0c812e8",
+      "license": "BSD-2-Clause",
+      "apk_control_checksum": "Q1kpDYLUMV5sHuT7URRwDjYUwBYp8=",
+      "source_package": "mpdecimal",
+      "source_recipe_commit": "491b184c82ef2868d73a46a98997db789342ff15"
+    },
+    {
+      "package": "ncurses",
+      "version": "6.6.20261031-r0",
+      "filename": "ncurses-6.6.20261031-r0.apk",
+      "url": "https://apk.cgr.dev/chainguard/x86_64/ncurses-6.6.20261031-r0.apk",
+      "bytes": 632291,
+      "sha256": "fa790001688f4229106589cd6b51a9475663c1b029c65b0ae0e852149869ae0d",
+      "license": "MIT",
+      "apk_control_checksum": "Q1gW25Kb9fqmel5hPO4cWZedYPvDw=",
+      "source_package": "ncurses",
+      "source_recipe_commit": "1e23bef29f698095b9e2a213402d2af2ce6d65e8"
+    },
+    {
+      "package": "ncurses-terminfo-base",
+      "version": "6.6.20261031-r0",
+      "filename": "ncurses-terminfo-base-6.6.20261031-r0.apk",
+      "url": "https://apk.cgr.dev/chainguard/x86_64/ncurses-terminfo-base-6.6.20261031-r0.apk",
+      "bytes": 122153,
+      "sha256": "ca983c16e5a6ecf07d5fb0268fe48369f2153074108fb28378159dc86af1ab39",
+      "license": "MIT",
+      "apk_control_checksum": "Q1k7ds1A74ij4vql3+aeD2h5i3Koo=",
+      "source_package": "ncurses",
+      "source_recipe_commit": "1e23bef29f698095b9e2a213402d2af2ce6d65e8"
+    },
+    {
+      "package": "py3-pip-wheel",
+      "version": "26.2.2-r2",
+      "filename": "py3-pip-wheel-26.2.2-r2.apk",
+      "url": "https://apk.cgr.dev/chainguard/x86_64/py3-pip-wheel-26.2.2-r2.apk",
+      "bytes": 1845334,
+      "sha256": "623147e8782f0e9353f75759a32a4c9a9674ecddaaf934eaa89fcdf7354a45d6",
+      "license": "MIT",
+      "apk_control_checksum": "Q1BWb5vwrbg4NJu9UjvsQh38ETTAc=",
+      "source_package": "py3-pip",
+      "source_recipe_commit": "58b78718f8e8947523a1ad3eb0deb82aee6911d7"
+    },
+    {
+      "package": "python-3.13",
+      "version": "3.13.18_git20261030-r0",
+      "filename": "python-3.13-3.13.18_git20261030-r0.apk",
+      "url": "https://apk.cgr.dev/chainguard/x86_64/python-3.13-3.13.18_git20261030-r0.apk",
+      "bytes": 21311,
+      "sha256": "6f5b46f8f1cae4ae060d93bb0c81590989550047ffe9dc2633c2f26b78c0d19b",
+      "license": "PSF-2.0",
+      "apk_control_checksum": "Q16+GjgxgFwpPmlfC5TgAFpJAv8a8=",
+      "source_package": "python-3.13",
+      "source_recipe_commit": "52a27d12b5ebd918e282db0e2ff573eec6e57aeb"
+    },
+    {
+      "package": "python-3.13-base",
+      "version": "3.13.18_git20261030-r0",
+      "filename": "python-3.13-base-3.13.18_git20261030-r0.apk",
+      "url": "https://apk.cgr.dev/chainguard/x86_64/python-3.13-base-3.13.18_git20261030-r0.apk",
+      "bytes": 12193399,
+      "sha256": "bf8587b0322d2a65db13ffee47914b708746fb43c65e317b300ab5daa3394e14",
+      "license": "PSF-2.0",
+      "apk_control_checksum": "Q1yuZA9mpbE6eI8dMSydhUXWkgIhk=",
+      "source_package": "python-3.13",
+      "source_recipe_commit": "52a27d12b5ebd918e282db0e2ff573eec6e57aeb"
+    },
+    {
+      "package": "readline",
+      "version": "8.3-r3",
+      "filename": "readline-8.3-r3.apk",
+      "url": "https://apk.cgr.dev/chainguard/x86_64/readline-8.3-r3.apk",
+      "bytes": 349087,
+      "sha256": "bc694bcbfcf3d3d48c890b2701714269c9c0851a85c44bb5bf38347e4999f80b",
+      "license": "GPL-3.0-or-later",
+      "apk_control_checksum": "Q1DpD7gaJW7NfhS6UXgOqJ/d9LlBc=",
+      "source_package": "readline",
+      "source_recipe_commit": "20a5359ac0a7a6aca23efa343f0f29c8d3ea1453"
+    },
+    {
+      "package": "sqlite-libs",
+      "version": "3.54.1-r0",
+      "filename": "sqlite-libs-3.54.1-r0.apk",
+      "url": "https://apk.cgr.dev/chainguard/x86_64/sqlite-libs-3.54.1-r0.apk",
+      "bytes": 989586,
+      "sha256": "5ea68a7dad00791dbc5eff42aad9022b0984f82e271058811a4d72181e450144",
+      "license": "blessing",
+      "apk_control_checksum": "Q1VRLw0RR5HoAu1uTfKALfMDoAMco=",
+      "source_package": "sqlite",
+      "source_recipe_commit": "b0ca8c95606371be2557980059c10b34df30fa9f"
+    },
+    {
+      "package": "tzdata",
+      "version": "2026f-r0",
+      "filename": "tzdata-2026f-r0.apk",
+      "url": "https://apk.cgr.dev/chainguard/x86_64/tzdata-2026f-r0.apk",
+      "bytes": 386493,
+      "sha256": "9da7dba0dfb4db14f08ef88c4124e51b09f4f0803c45524fa5ee6d901a3c472c",
+      "license": "CC-PDDC",
+      "apk_control_checksum": "Q1WMaR+kGyCy9U6Y9VZAYskvvVveE=",
+      "source_package": "tzdata",
+      "source_recipe_commit": "b01ceefc114cf44ccb6d35f405795435f98bf0c2"
+    },
+    {
+      "package": "xz",
+      "version": "5.8.4-r1",
+      "filename": "xz-5.8.4-r1.apk",
+      "url": "https://apk.cgr.dev/chainguard/x86_64/xz-5.8.4-r1.apk",
+      "bytes": 407246,
+      "sha256": "cc5f7eb6691f74e422eefc8c5bf23de7260fdc98a62edc5419a3be4b8954b6b7",
+      "license": "GPL-3.0-or-later",
+      "apk_control_checksum": "Q1LyyjHbT9tm1oWo6nH6SZGi+F8jo=",
+      "source_package": "xz",
+      "source_recipe_commit": "5aeb575ed7ca64fb21dfda042e170d08f1654bbc"
+    }
+  ],
+  "installed_package_inventory": [
+    {
+      "C": "Q1Mu4S4nmI0FiN2FLlKa6zQgsS04w=",
+      "P": "apk-tools",
+      "V": "2.14.13-r0",
+      "S": "194134",
+      "L": "GPL-2.0-only",
+      "o": "apk-tools",
+      "c": "ba8add7343cc5fbc6ca4206d6ce70465bfdad24a",
+      "D": "ca-certificates-bundle merged-sbin so:ld-linux-x86-64.so.2 so:libc.so.6 so:libcrypto.so.4 so:libssl.so.4 so:libz.so.1 wolfi-baselayout"
+    },
+    {
+      "C": "Q1nJ0RNPYKE/6p9+1WgdqC1lA0JnM=",
+      "P": "busybox",
+      "V": "1.38.0-r3",
+      "S": "436005",
+      "L": "GPL-2.0-only",
+      "o": "busybox",
+      "c": "59d45eb49286129d8d21b2469befa3b55be4719b",
+      "D": "merged-bin merged-sbin merged-usrsbin so:ld-linux-x86-64.so.2 so:libc.so.6 so:libcrypt.so.1 so:libm.so.6 wolfi-baselayout"
+    },
+    {
+      "C": "Q19P7fzB945PuRaQEnzg9napiRzKE=",
+      "P": "ca-certificates-bundle",
+      "V": "20261020-r0",
+      "S": "118541",
+      "L": "MPL-2.0 AND MIT",
+      "o": "ca-certificates",
+      "c": "8061afafa65af5a9026707a8880e14120dd6f4a0",
+      "D": "merged-usrsbin wolfi-baselayout"
+    },
+    {
+      "C": "Q1+OpsdmzH2i87yrQzTUkS0smKEPg=",
+      "P": "gdbm",
+      "V": "1.26-r9",
+      "S": "289760",
+      "L": "GPL-3.0-or-later",
+      "o": "gdbm",
+      "c": "bdc197227f39597f43727c03854efbb4e834c5ef",
+      "D": "so:ld-linux-x86-64.so.2 so:libc.so.6"
+    },
+    {
+      "C": "Q1DBDsZ6yhBPYsa/V7pltJ5OXPtPs=",
+      "P": "glibc-2.44",
+      "V": "2.44-r13",
+      "S": "3168783",
+      "L": "LGPL-2.1-or-later",
+      "o": "glibc-2.44",
+      "c": "e56b3f33a6e7ea76029947d68ce17227fd1fe841",
+      "D": "!musl glibc-2.44-locale-posix ld-linux-2.44=2.44-r13 libgcc merged-lib merged-sbin merged-usrsbin so:ld-linux-x86-64.so.2 wolfi-baselayout"
+    },
+    {
+      "C": "Q1TfI55+eRQkOMi4FXiVIteycJ8do=",
+      "P": "glibc-2.44-locale-posix",
+      "V": "2.44-r13",
+      "S": "99278",
+      "L": "LGPL-2.1-or-later",
+      "o": "glibc-2.44",
+      "c": "e56b3f33a6e7ea76029947d68ce17227fd1fe841",
+      "D": "merged-lib merged-sbin merged-usrsbin wolfi-baselayout"
+    },
+    {
+      "C": "Q1uAfRmX2ZNzQOk3Hk8fZ4OzQ5i6M=",
+      "P": "ld-linux-2.44",
+      "V": "2.44-r13",
+      "S": "163191",
+      "L": "LGPL-2.1-or-later",
+      "o": "glibc-2.44",
+      "c": "e56b3f33a6e7ea76029947d68ce17227fd1fe841",
+      "D": "glibc-2.44=2.44-r13 merged-lib merged-sbin merged-usrsbin wolfi-baselayout"
+    },
+    {
+      "C": "Q1d6173SiBWI/3ZTJ9usIqKVhqlNQ=",
+      "P": "libbrotlicommon1",
+      "V": "1.2.1-r3",
+      "S": "85956",
+      "L": "MIT",
+      "o": "brotli",
+      "c": "f5ef816d1cb2bd0e165a402c4e8a4c4622464bf3",
+      "D": "so:libc.so.6"
+    },
+    {
+      "C": "Q1SxcpNPM7TTnimjuCfB+KWbRChZ4=",
+      "P": "libbrotlidec1",
+      "V": "1.2.1-r3",
+      "S": "49256",
+      "L": "MIT",
+      "o": "brotli",
+      "c": "f5ef816d1cb2bd0e165a402c4e8a4c4622464bf3",
+      "D": "so:libbrotlicommon.so.1 so:libc.so.6"
+    },
+    {
+      "C": "Q1ct7hg38j5fftUTCqmF8s60d3nwA=",
+      "P": "libbrotlienc1",
+      "V": "1.2.1-r3",
+      "S": "448579",
+      "L": "MIT",
+      "o": "brotli",
+      "c": "f5ef816d1cb2bd0e165a402c4e8a4c4622464bf3",
+      "D": "so:libbrotlicommon.so.1 so:libc.so.6 so:libm.so.6"
+    },
+    {
+      "C": "Q1uJUw7U9e/1Jwt+vRSM5r8xKMJBE=",
+      "P": "libbz2-1",
+      "V": "1.0.8-r30",
+      "S": "59582",
+      "L": "MPL-2.0 AND MIT",
+      "o": "bzip2",
+      "c": "f353805867a3059d7018cceac9746da7c23634fe",
+      "D": "so:libc.so.6"
+    },
+    {
+      "C": "Q1SR5C380WjSTDaptA94C2rZ9FL6g=",
+      "P": "libcrypt1-2.44",
+      "V": "2.44-r13",
+      "S": "24184",
+      "L": "LGPL-2.1-or-later",
+      "o": "glibc-2.44",
+      "c": "e56b3f33a6e7ea76029947d68ce17227fd1fe841",
+      "D": "glibc-2.44=2.44-r13 libxcrypt merged-lib merged-sbin merged-usrsbin wolfi-baselayout"
+    },
+    {
+      "C": "Q1/qFHF88NrKvQQcegKi7sppEYI5M=",
+      "P": "libexpat1",
+      "V": "2.10.0-r1",
+      "S": "121940",
+      "L": "MIT",
+      "o": "expat",
+      "c": "5aeb575ed7ca64fb21dfda042e170d08f1654bbc",
+      "D": "so:libc.so.6"
+    },
+    {
+      "C": "Q1Xv/AsO+lsjORCxdKxyfkMMLLkO0=",
+      "P": "libffi",
+      "V": "3.8.0-r2",
+      "S": "47462",
+      "L": "MIT",
+      "o": "libffi",
+      "c": "aaa2344b75ef8b19889f087c91e10b11f191e15c",
+      "D": "so:libc.so.6"
+    },
+    {
+      "C": "Q1ZiXgGGwe5h6UXD0/Zbd/7LKBpkw=",
+      "P": "libgcc",
+      "V": "16.2.0-r2",
+      "S": "112648",
+      "L": "GPL-3.0-or-later WITH GCC-exception-3.1",
+      "o": "gcc",
+      "c": "1a8a06e57ab63d92834a9467dd0eaa5d54ade3b0",
+      "D": "so:ld-linux-x86-64.so.2 so:libc.so.6"
+    },
+    {
+      "C": "Q1TDYeh0Iq9Fjbp5cPck+zZfmDn14=",
+      "P": "libstdc++",
+      "V": "16.2.0-r2",
+      "S": "1267168",
+      "L": "GPL-3.0-or-later WITH GCC-exception-3.1",
+      "o": "gcc",
+      "c": "1a8a06e57ab63d92834a9467dd0eaa5d54ade3b0",
+      "D": "so:ld-linux-x86-64.so.2 so:libc.so.6 so:libgcc_s.so.1 so:libm.so.6"
+    },
+    {
+      "C": "Q1RMgxwtEheWi8izRUHv/oGNNwqKA=",
+      "P": "libuuid",
+      "V": "2.42.4-r2",
+      "S": "39968",
+      "L": "GPL-3.0-or-later AND GPL-2.0-or-later AND GPL-2.0-only AND GPL-1.0-only AND LGPL-2.1-or-later AND BSD-1-Clause AND BSD-2-Clause AND BSD-3-Clause AND BSD-4-Clause-UC AND MIT AND CC-PDDC",
+      "o": "util-linux",
+      "c": "8298ba7be686605b03c1943f22ccf5a0640e0042",
+      "D": "merged-bin merged-sbin merged-usrsbin so:libc.so.6 wolfi-baselayout"
+    },
+    {
+      "C": "Q1diKLxLE0tFGcnJjX6QyNJcZtPEk=",
+      "P": "libxcrypt",
+      "V": "4.5.2-r7",
+      "S": "114002",
+      "L": "GPL-2.0-or-later AND LGPL-2.1-or-later",
+      "o": "libxcrypt",
+      "c": "f5ef816d1cb2bd0e165a402c4e8a4c4622464bf3"
+    },
+    {
+      "C": "Q1kpDYLUMV5sHuT7URRwDjYUwBYp8=",
+      "P": "mpdecimal",
+      "V": "4.0.1-r6",
+      "S": "135908",
+      "L": "BSD-2-Clause",
+      "o": "mpdecimal",
+      "c": "491b184c82ef2868d73a46a98997db789342ff15",
+      "D": "so:ld-linux-x86-64.so.2 so:libc.so.6 so:libgcc_s.so.1 so:libm.so.6 so:libstdc++.so.6"
+    },
+    {
+      "C": "Q1gW25Kb9fqmel5hPO4cWZedYPvDw=",
+      "P": "ncurses",
+      "V": "6.6.20261031-r0",
+      "S": "632291",
+      "L": "MIT",
+      "o": "ncurses",
+      "c": "1e23bef29f698095b9e2a213402d2af2ce6d65e8",
+      "D": "ncurses-terminfo-base=6.6.20261031-r0 so:ld-linux-x86-64.so.2 so:libc.so.6"
+    },
+    {
+      "C": "Q1k7ds1A74ij4vql3+aeD2h5i3Koo=",
+      "P": "ncurses-terminfo-base",
+      "V": "6.6.20261031-r0",
+      "S": "122153",
+      "L": "MIT",
+      "o": "ncurses",
+      "c": "1e23bef29f698095b9e2a213402d2af2ce6d65e8"
+    },
+    {
+      "C": "Q1W9piTcgyubhrducJCMM7+qErDxo=",
+      "P": "openssl-4.0-libcrypto",
+      "V": "4.0.3-r8",
+      "S": "2403081",
+      "L": "Apache-2.0",
+      "o": "openssl-4.0",
+      "c": "53fb2f6751f832fa61ddba06cb8a40dbba5f409f",
+      "D": "openssl-provider-legacy-allowed so:libbrotlidec.so.1 so:libbrotlienc.so.1 so:libc.so.6"
+    },
+    {
+      "C": "Q1arwi4n4L3VZ3S8YJ6P4WwY/7JjY=",
+      "P": "openssl-4.0-libssl",
+      "V": "4.0.3-r8",
+      "S": "575950",
+      "L": "Apache-2.0",
+      "o": "openssl-4.0",
+      "c": "53fb2f6751f832fa61ddba06cb8a40dbba5f409f",
+      "D": "so:libc.so.6 so:libcrypto.so.4"
+    },
+    {
+      "C": "Q1K5CR6PVd/wWU++lG1SG1MRrQkJA=",
+      "P": "openssl-provider-legacy-allowed",
+      "V": "4.1.0-r0",
+      "S": "364302",
+      "L": "Apache-2.0",
+      "o": "openssl-provider-legacy-allowed",
+      "c": "aeae4801330be6fd269d5ed5640dc37b58ccab09",
+      "D": "so:libc.so.6"
+    },
+    {
+      "C": "Q1BWb5vwrbg4NJu9UjvsQh38ETTAc=",
+      "P": "py3-pip-wheel",
+      "V": "26.2.2-r2",
+      "S": "1845334",
+      "L": "MIT",
+      "o": "py3-pip",
+      "c": "58b78718f8e8947523a1ad3eb0deb82aee6911d7"
+    },
+    {
+      "C": "Q16+GjgxgFwpPmlfC5TgAFpJAv8a8=",
+      "P": "python-3.13",
+      "V": "3.13.18_git20261030-r0",
+      "S": "21311",
+      "L": "PSF-2.0",
+      "o": "python-3.13",
+      "c": "52a27d12b5ebd918e282db0e2ff573eec6e57aeb",
+      "D": "python-3.13-base=3.13.18_git20261030-r0"
+    },
+    {
+      "C": "Q1yuZA9mpbE6eI8dMSydhUXWkgIhk=",
+      "P": "python-3.13-base",
+      "V": "3.13.18_git20261030-r0",
+      "S": "12193399",
+      "L": "PSF-2.0",
+      "o": "python-3.13",
+      "c": "52a27d12b5ebd918e282db0e2ff573eec6e57aeb",
+      "D": "py3-pip-wheel so:ld-linux-x86-64.so.2 so:libbz2.so.1 so:libc.so.6 so:libcrypto.so.4 so:libexpat.so.1 so:libffi.so.8 so:libgdbm.so.6 so:libgdbm_compat.so.4 so:liblzma.so.5 so:libm.so.6 so:libmpdec.so.4 so:libncursesw.so.6 so:libpanelw.so.6 so:libreadline.so.8 so:libsqlite3.so.0 so:libssl.so.4 so:libtinfo.so.6 so:libuuid.so.1 so:libz.so.1"
+    },
+    {
+      "C": "Q1DpD7gaJW7NfhS6UXgOqJ/d9LlBc=",
+      "P": "readline",
+      "V": "8.3-r3",
+      "S": "349087",
+      "L": "GPL-3.0-or-later",
+      "o": "readline",
+      "c": "20a5359ac0a7a6aca23efa343f0f29c8d3ea1453",
+      "D": "so:libc.so.6 so:libtinfo.so.6"
+    },
+    {
+      "C": "Q1VRLw0RR5HoAu1uTfKALfMDoAMco=",
+      "P": "sqlite-libs",
+      "V": "3.54.1-r0",
+      "S": "989586",
+      "L": "blessing",
+      "o": "sqlite",
+      "c": "b0ca8c95606371be2557980059c10b34df30fa9f",
+      "D": "so:libc.so.6 so:libm.so.6"
+    },
+    {
+      "C": "Q1WMaR+kGyCy9U6Y9VZAYskvvVveE=",
+      "P": "tzdata",
+      "V": "2026f-r0",
+      "S": "386493",
+      "L": "CC-PDDC",
+      "o": "tzdata",
+      "c": "b01ceefc114cf44ccb6d35f405795435f98bf0c2"
+    },
+    {
+      "C": "Q16Ctc7TvokDUPOi+0TkHCeSmryh0=",
+      "P": "wolfi-base",
+      "V": "1-r7",
+      "S": "1816",
+      "L": "MIT",
+      "o": "wolfi-base",
+      "c": "c80c31b811557bc8724fcb901bdcc09615fcf4fc",
+      "D": "apk-tools busybox wolfi-keys"
+    },
+    {
+      "C": "Q1W4ff78hzbtDn6J9JJRRwbjKmKR4=",
+      "P": "wolfi-baselayout",
+      "V": "20230201-r31",
+      "S": "14592",
+      "L": "MIT",
+      "o": "wolfi-baselayout",
+      "c": "ed415005c84750f03c4a9252137813734a224ae7",
+      "D": "ca-certificates-bundle"
+    },
+    {
+      "C": "Q1pjSE0onslwptVuXi4b8BfLXGXXw=",
+      "P": "wolfi-keys",
+      "V": "1-r14",
+      "S": "3939",
+      "L": "MIT",
+      "o": "wolfi-keys",
+      "c": "e723835f288b5f24b0697499d0e8e83dddbcff45"
+    },
+    {
+      "C": "Q1LyyjHbT9tm1oWo6nH6SZGi+F8jo=",
+      "P": "xz",
+      "V": "5.8.4-r1",
+      "S": "407246",
+      "L": "GPL-3.0-or-later",
+      "o": "xz",
+      "c": "5aeb575ed7ca64fb21dfda042e170d08f1654bbc",
+      "D": "so:ld-linux-x86-64.so.2 so:libc.so.6"
+    },
+    {
+      "C": "Q1Ub6dKp3Ta9ickOJCrZu6zbJa70s=",
+      "P": "zlib",
+      "V": "1.3.2.1_rc20260921-r1",
+      "S": "74708",
+      "L": "MPL-2.0 AND MIT",
+      "o": "zlib",
+      "c": "b262a212e6dc1ede25cb1c613ec6590a209aaef5",
+      "D": "merged-lib so:libc.so.6 wolfi-baselayout"
+    }
+  ],
+  "package_count": 16,
+  "architecture": "x86_64",
+  "index": {
+    "sha256": "72f4e7ad6d9560bf2ed730318192b333c2c5579468ee913ca72f74e59c986eff",
+    "bytes": 7425489,
+    "source_url": "https://apk.cgr.dev/chainguard/x86_64/APKINDEX.tar.gz"
+  },
+  "authentication": "Frozen upstream signed APKINDEX verified by the pinned base keyring; package checksums authenticated by that index, plus separately pinned full-archive SHA256. Individual archive signature checking is not the repository authentication model. No allow-untrusted flag.",
+  "license_review": "Selected package license declarations inspected; standard PSF/BSD/MIT/MPL/public-domain/GPL/LGPL and GCC-runtime-exception terms. No new multimedia codec or model license. Upstream/source and package notices retained; redistribution/legal acceptance remains separate."
+}

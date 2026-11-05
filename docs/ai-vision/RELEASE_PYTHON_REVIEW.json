@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-04T22:48:35.845331+00:00",
+  "generated_at": "2026-11-04T23:09:52.185152+00:00",
   "scope": "installed Python distributions only; excludes OS, Android, native bundled libraries and model weights",
   "advisory_source": "PyPI per-version JSON",
   "packages": 70,
@@ -98,14 +98,14 @@
       "vulnerabilities": [],
       "error": null,
       "wheel": {
-        "filename": "cffi-2.1.1-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.whl",
-        "url": "https://files.pythonhosted.org/packages/b1/db/dceb9dd5b231e1da801793f8acc9f3c52a7e1afe40bb1aae37e02b0faad5/cffi-2.1.1-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.whl",
+        "filename": "cffi-2.1.1-cp313-cp313-manylinux2014_x86_64.manylinux_2_17_x86_64.whl",
+        "url": "https://files.pythonhosted.org/packages/95/95/86342356ff5953b3fb06f7ef7c5bee212d45e770abc7218d451b9148313c/cffi-2.1.1-cp313-cp313-manylinux2014_x86_64.manylinux_2_17_x86_64.whl",
         "digests": {
-          "blake2b_256": "b1dbdceb9dd5b231e1da801793f8acc9f3c52a7e1afe40bb1aae37e02b0faad5",
-          "md5": "fda1989e5b254a2e658883190b6ebed5",
-          "sha256": "c1453022f490d2459a11819d83ad1d586e9ff65a12ac3e705ffebd46d3685dcf"
+          "blake2b_256": "959586342356ff5953b3fb06f7ef7c5bee212d45e770abc7218d451b9148313c",
+          "md5": "dc7213eacba93af24e09a6da8298932b",
+          "sha256": "a931079504ecc49efed7744c476a5c343a92fabf66dec2db95edb1b2fdc770e2"
         },
-        "size": 221822
+        "size": 221824
       }
     },
     {
@@ -115,14 +115,14 @@
       "vulnerabilities": [],
       "error": null,
       "wheel": {
-        "filename": "charset_normalizer-3.5.2-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl",
-        "url": "https://files.pythonhosted.org/packages/7f/c5/38806a25ab5e65fc178f39affeda20858efafede2fce1ffc2556cfc9fe73/charset_normalizer-3.5.2-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl",
+        "filename": "charset_normalizer-3.5.2-cp313-cp313-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl",
+        "url": "https://files.pythonhosted.org/packages/4b/85/41d27f234b82e47c167a5f6c0f62501dc0c640585ff4aba79e08a390336a/charset_normalizer-3.5.2-cp313-cp313-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl",
         "digests": {
-          "blake2b_256": "7fc538806a25ab5e65fc178f39affeda20858efafede2fce1ffc2556cfc9fe73",
-          "md5": "4cdd841f3173242ac60686bb3ffa1a8b",
-          "sha256": "3d31298449090ab8d47b7b1b2a555ff73cac7ed438a08b7ac160980c7ebed649"
+          "blake2b_256": "4b8541d27f234b82e47c167a5f6c0f62501dc0c640585ff4aba79e08a390336a",
+          "md5": "185859fdbe82199be7a4bcb221c1e9cc",
+          "sha256": "7218e8f32b0956cfcd048fd42d9d5779809745ca1d86113ca56f66e7ae1549c4"
         },
-        "size": 257601
+        "size": 254660
       }
     },
     {
@@ -302,14 +302,14 @@
       "vulnerabilities": [],
       "error": null,
       "wheel": {
-        "filename": "google_crc32c-1.9.0-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.whl",
-        "url": "https://files.pythonhosted.org/packages/9e/43/9db03635bb10188d93dcbab9baa2a8670a0da4e868b4370cdbd98d65fed8/google_crc32c-1.9.0-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.whl",
+        "filename": "google_crc32c-1.9.0-cp313-cp313-manylinux2014_x86_64.manylinux_2_17_x86_64.whl",
+        "url": "https://files.pythonhosted.org/packages/fd/b6/e76e80fed5f2558273c7839e622f98095c9b36c719c7147e38e3c055cb70/google_crc32c-1.9.0-cp313-cp313-manylinux2014_x86_64.manylinux_2_17_x86_64.whl",
         "digests": {
-          "blake2b_256": "9e439db03635bb10188d93dcbab9baa2a8670a0da4e868b4370cdbd98d65fed8",
-          "md5": "72ab5976ca8a4efd9e62ac97e60f5c33",
-          "sha256": "3abb18297d9ef0ab120531838be0e6d68c9fa876570e11c229c48f2edac23ce7"
+          "blake2b_256": "fdb6e76e80fed5f2558273c7839e622f98095c9b36c719c7147e38e3c055cb70",
+          "md5": "ce774ef52564b5405b9adacb6b45b194",
+          "sha256": "0568b17ed90ac596f29400d99e243fd0cc6276766183def888d1bf8d1dc13827"
         },
-        "size": 36347
+        "size": 36350
       }
     },
     {
@@ -353,14 +353,14 @@
       "vulnerabilities": [],
       "error": null,
       "wheel": {
-        "filename": "grpcio-1.85.0-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.whl",
-        "url": "https://files.pythonhosted.org/packages/10/1e/4be389b352c79fc6a457ca8bfda6b0b5e8a1e0ed8eaca21f7a2d1a40a7c5/grpcio-1.85.0-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.whl",
+        "filename": "grpcio-1.85.0-cp313-cp313-manylinux2014_x86_64.manylinux_2_17_x86_64.whl",
+        "url": "https://files.pythonhosted.org/packages/4f/34/66004b96b4adbe49f72bd48bd3aaa9a72f459ef28c259ea0622283f9ea4f/grpcio-1.85.0-cp313-cp313-manylinux2014_x86_64.manylinux_2_17_x86_64.whl",
         "digests": {
-          "blake2b_256": "101e4be389b352c79fc6a457ca8bfda6b0b5e8a1e0ed8eaca21f7a2d1a40a7c5",
-          "md5": "f2114aba31e368f2390bf03cb048e1f8",
-          "sha256": "4ddfe8b667889b9be5990ae674b13f0db0a9eb61972306038d0140a1da0f0b87"
+          "blake2b_256": "4f3466004b96b4adbe49f72bd48bd3aaa9a72f459ef28c259ea0622283f9ea4f",
+          "md5": "b3f50409673203f71a9bf35cdd8cc37c",
+          "sha256": "55cee7cfe71b29f6b377681936f9a5f35e59f5c941a4d84e2712cb309753e7a9"
         },
-        "size": 7361507
+        "size": 7362610
       }
     },
     {
@@ -455,14 +455,14 @@
       "vulnerabilities": [],
       "error": null,
       "wheel": {
-        "filename": "httptools-0.9.0-cp312-cp312-manylinux1_x86_64.manylinux_2_28_x86_64.manylinux_2_5_x86_64.whl",
-        "url": "https://files.pythonhosted.org/packages/85/3f/642113e9882f53158ecddf58003d25f18ded2c210ed23bf6eb663d4d51c3/httptools-0.9.0-cp312-cp312-manylinux1_x86_64.manylinux_2_28_x86_64.manylinux_2_5_x86_64.whl",
+        "filename": "httptools-0.9.0-cp313-cp313-manylinux1_x86_64.manylinux_2_28_x86_64.manylinux_2_5_x86_64.whl",
+        "url": "https://files.pythonhosted.org/packages/79/f6/0caa51b077492a7306bdbd9dfb907a2246985f0aed1fe2d086255921848b/httptools-0.9.0-cp313-cp313-manylinux1_x86_64.manylinux_2_28_x86_64.manylinux_2_5_x86_64.whl",
         "digests": {
-          "blake2b_256": "853f642113e9882f53158ecddf58003d25f18ded2c210ed23bf6eb663d4d51c3",
-          "md5": "aeb4cc47f3fe75120dafb558da2b23d6",
-          "sha256": "3e3201fe4d46e0d15d7ff9fafc94a605da9eb82d2c5b9837f0368acb325481f1"
+          "blake2b_256": "79f60caa51b077492a7306bdbd9dfb907a2246985f0aed1fe2d086255921848b",
+          "md5": "dddb0d233a5450014ba69c098e54ddf9",
+          "sha256": "088de1738e1af624466a01c35d652dbe6fb825be887c76d68aa850621d81db88"
         },
-        "size": 552848
+        "size": 520112
       }
     },
     {
@@ -540,14 +540,14 @@
       "vulnerabilities": [],
       "error": null,
       "wheel": {
-        "filename": "msgpack-1.2.4-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl",
-        "url": "https://files.pythonhosted.org/packages/1e/d9/f59bd841fc2fd2b74dc50ce85860a6a25f58e588dd48946aeaf2862cf990/msgpack-1.2.4-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl",
+        "filename": "msgpack-1.2.4-cp313-cp313-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl",
+        "url": "https://files.pythonhosted.org/packages/c9/94/562e0733593a780c70b0b18994f30c205149f7f9f4efbe3e9b00b88612c5/msgpack-1.2.4-cp313-cp313-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl",
         "digests": {
-          "blake2b_256": "1ed9f59bd841fc2fd2b74dc50ce85860a6a25f58e588dd48946aeaf2862cf990",
-          "md5": "7be921a550f9abec08e2427274a13fff",
-          "sha256": "c4d5bbdbea8f5669b3a734d6c226772804fb120848f99cbe63a0ddee63b049c9"
+          "blake2b_256": "c994562e0733593a780c70b0b18994f30c205149f7f9f4efbe3e9b00b88612c5",
+          "md5": "0ba38c14e3031b05c6f74618552a5541",
+          "sha256": "7fabd415c41e62006c6641fcdf5b3e866f581c4e11c58328c0d0f69584b9577d"
         },
-        "size": 475652
+        "size": 469262
       }
     },
     {
@@ -557,14 +557,14 @@
       "vulnerabilities": [],
       "error": null,
       "wheel": {
-        "filename": "multidict-7.2.1-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl",
-        "url": "https://files.pythonhosted.org/packages/43/50/6bd8600b4843f0a9d939e0cc0f4160f4c727bd6c69e4f7e294a1caa93db8/multidict-7.2.1-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl",
+        "filename": "multidict-7.2.1-cp313-cp313-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl",
+        "url": "https://files.pythonhosted.org/packages/8f/85/15918b8f73aeb770c534f22b7dac256dc70b6fc7aa0571856c82b17bf3c5/multidict-7.2.1-cp313-cp313-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl",
         "digests": {
-          "blake2b_256": "43506bd8600b4843f0a9d939e0cc0f4160f4c727bd6c69e4f7e294a1caa93db8",
-          "md5": "710a407cf969eb2dc627b2a70dc9e94f",
-          "sha256": "1fb8c1a3480c130c3a6422d5f16f3cad6552bf08c2089dd288ba7134649183b5"
+          "blake2b_256": "8f8515918b8f73aeb770c534f22b7dac256dc70b6fc7aa0571856c82b17bf3c5",
+          "md5": "83fc6911332b8c7a9371bc94e4062bb5",
+          "sha256": "cd69c99affd1b4debc1f9a53058ea6e3a9b34f2e733840bb45891666cd8ede0a"
         },
-        "size": 516796
+        "size": 516056
       }
     },
     {
@@ -574,14 +574,14 @@
       "vulnerabilities": [],
       "error": null,
       "wheel": {
-        "filename": "numpy-2.5.4-cp312-cp312-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl",
-        "url": "https://files.pythonhosted.org/packages/43/a3/c799c62e19c337e6d3770b08e475887fb30ce8477d3c09efca6b2f0228a6/numpy-2.5.4-cp312-cp312-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl",
+        "filename": "numpy-2.5.4-cp313-cp313-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl",
+        "url": "https://files.pythonhosted.org/packages/da/24/3bd070f3269dc609d8f26b2643f62ef91bb415841c0b294805aaf7fe06da/numpy-2.5.4-cp313-cp313-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl",
         "digests": {
-          "blake2b_256": "43a3c799c62e19c337e6d3770b08e475887fb30ce8477d3c09efca6b2f0228a6",
-          "md5": "8e0adea90301d188aea79920463fd58d",
-          "sha256": "fbde6962867ee75b48b0ee29b2b9372ec5d617799dbaf38e82dc0596f2f7738a"
+          "blake2b_256": "da243bd070f3269dc609d8f26b2643f62ef91bb415841c0b294805aaf7fe06da",
+          "md5": "ec51f1a963c47438a33b54c6f325797c",
+          "sha256": "6ffa07666f8da0eef81d149934a626d0d95fbd6838432a33e66245423a9062c0"
         },
-        "size": 16727283
+        "size": 16718044
       }
     },
     {
@@ -693,14 +693,14 @@
       "vulnerabilities": [],
       "error": null,
       "wheel": {
-        "filename": "propcache-0.5.4-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl",
-        "url": "https://files.pythonhosted.org/packages/85/9f/83a07b6ec0e043c050cfdd35fb0cf1b7897b91d554d6eea293740309afe7/propcache-0.5.4-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl",
+        "filename": "propcache-0.5.4-cp313-cp313-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl",
+        "url": "https://files.pythonhosted.org/packages/ed/74/08e6c1faf26ee2732023a3828787ba535557122774f4a386b1f715cbd8e0/propcache-0.5.4-cp313-cp313-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl",
         "digests": {
-          "blake2b_256": "859f83a07b6ec0e043c050cfdd35fb0cf1b7897b91d554d6eea293740309afe7",
-          "md5": "65500a5840028baaac05c48568766aa7",
-          "sha256": "2814ecd8e818f487bee4b0f921bc4d1c176cc5fc71ac0f072d0fa67eda4ac14b"
+          "blake2b_256": "ed7408e6c1faf26ee2732023a3828787ba535557122774f4a386b1f715cbd8e0",
+          "md5": "0ee2144238f3b2c52ebc411ac2e90dee",
+          "sha256": "f85915e00dcb1cd9f2f890ead064ed40a27df06f0db65be427b29482ae357572"
         },
-        "size": 250424
+        "size": 234316
       }
     },
     {
@@ -812,14 +812,14 @@
       "vulnerabilities": [],
       "error": null,
       "wheel": {
-        "filename": "pydantic_core-2.50.1-cp312-cp312-manylinux_2_17_x86_64.manylinux2014_x86_64.whl",
-        "url": "https://files.pythonhosted.org/packages/90/24/48cd98388e4ac2c08d0800af36d15413db15e20387f1038123a2c86cb2f6/pydantic_core-2.50.1-cp312-cp312-manylinux_2_17_x86_64.manylinux2014_x86_64.whl",
+        "filename": "pydantic_core-2.50.1-cp313-cp313-manylinux_2_17_x86_64.manylinux2014_x86_64.whl",
+        "url": "https://files.pythonhosted.org/packages/1c/bc/d79d000e5203ebef39af839f2ce77a777fcad6e08ad26af9a2fcd114ffc8/pydantic_core-2.50.1-cp313-cp313-manylinux_2_17_x86_64.manylinux2014_x86_64.whl",
         "digests": {
-          "blake2b_256": "902448cd98388e4ac2c08d0800af36d15413db15e20387f1038123a2c86cb2f6",
-          "md5": "e1f5ff07cd0680f99712fa8dcc585edb",
-          "sha256": "93ba4e9d8210d941c200431a56b2c0400b131865947903937ed3ec5404307d2e"
+          "blake2b_256": "1cbcd79d000e5203ebef39af839f2ce77a777fcad6e08ad26af9a2fcd114ffc8",
+          "md5": "47413350d87671fc161689c32a2776f9",
+          "sha256": "17e722e156d0444ecaefbe640bdb60928752bf2013e2b7a11cdb099aaae19bec"
         },
-        "size": 2160157
+        "size": 2158402
       }
     },
     {
@@ -914,14 +914,14 @@
       "vulnerabilities": [],
       "error": null,
       "wheel": {
-        "filename": "pyyaml-6.0.3-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl",
-        "url": "https://files.pythonhosted.org/packages/8b/9d/b3589d3877982d4f2329302ef98a8026e7f4443c765c46cfecc8858c6b4b/pyyaml-6.0.3-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl",
+        "filename": "pyyaml-6.0.3-cp313-cp313-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl",
+        "url": "https://files.pythonhosted.org/packages/74/27/e5b8f34d02d9995b80abcef563ea1f8b56d20134d8f4e5e81733b1feceb2/pyyaml-6.0.3-cp313-cp313-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl",
         "digests": {
-          "blake2b_256": "8b9db3589d3877982d4f2329302ef98a8026e7f4443c765c46cfecc8858c6b4b",
-          "md5": "b3baaa03751fc90073221c5ec847048e",
-          "sha256": "ba1cc08a7ccde2d2ec775841541641e4548226580ab850948cbfda66a1befcdc"
+          "blake2b_256": "7427e5b8f34d02d9995b80abcef563ea1f8b56d20134d8f4e5e81733b1feceb2",
+          "md5": "ab5da0476f067ac63bc4a57d0fa6a169",
+          "sha256": "0f29edc409a6392443abf94b9cf89ce99889a1dd5376d94316ae5145dfedd5d6"
         },
-        "size": 807870
+        "size": 801626
       }
     },
     {
@@ -1135,14 +1135,14 @@
       "vulnerabilities": [],
       "error": null,
       "wheel": {
-        "filename": "uvloop-0.23.0-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl",
-        "url": "https://files.pythonhosted.org/packages/51/27/c1d2f9fa977f8f42ea294604166df10e0027e6dc6cd17f85ede386c9bf36/uvloop-0.23.0-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl",
+        "filename": "uvloop-0.23.0-cp313-cp313-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl",
+        "url": "https://files.pythonhosted.org/packages/98/54/b12915bebbf99d7ae0796211e7f5977b95f069830dca45dc1a346d84125d/uvloop-0.23.0-cp313-cp313-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl",
         "digests": {
-          "blake2b_256": "5127c1d2f9fa977f8f42ea294604166df10e0027e6dc6cd17f85ede386c9bf36",
-          "md5": "21fdccc1f29f0a535815e24d441aa94c",
-          "sha256": "090865d8ce7a03986755a3ce711b7dd0d4b44eb14ab74368b717f3fad1180208"
+          "blake2b_256": "9854b12915bebbf99d7ae0796211e7f5977b95f069830dca45dc1a346d84125d",
+          "md5": "506e001c2f27e60e59ae190e8deddb93",
+          "sha256": "e2cba180d6451822763eda8364f342435a873bcfb3849cbd82fdeca248ca65eb"
         },
-        "size": 4532597
+        "size": 4480449
       }
     },
     {
@@ -1169,14 +1169,14 @@
       "vulnerabilities": [],
       "error": null,
       "wheel": {
-        "filename": "websockets-15.0.1-cp312-cp312-manylinux_2_5_x86_64.manylinux1_x86_64.manylinux_2_17_x86_64.manylinux2014_x86_64.whl",
-        "url": "https://files.pythonhosted.org/packages/14/8f/aa61f528fba38578ec553c145857a181384c72b98156f858ca5c8e82d9d3/websockets-15.0.1-cp312-cp312-manylinux_2_5_x86_64.manylinux1_x86_64.manylinux_2_17_x86_64.manylinux2014_x86_64.whl",
+        "filename": "websockets-15.0.1-cp313-cp313-manylinux_2_5_x86_64.manylinux1_x86_64.manylinux_2_17_x86_64.manylinux2014_x86_64.whl",
+        "url": "https://files.pythonhosted.org/packages/ff/b2/83a6ddf56cdcbad4e3d841fcc55d6ba7d19aeb89c50f24dd7e859ec0805f/websockets-15.0.1-cp313-cp313-manylinux_2_5_x86_64.manylinux1_x86_64.manylinux_2_17_x86_64.manylinux2014_x86_64.whl",
         "digests": {
-          "blake2b_256": "148faa61f528fba38578ec553c145857a181384c72b98156f858ca5c8e82d9d3",
-          "md5": "ef1e8410eafd746ecbc6d824c26154cf",
-          "sha256": "64dee438fed052b52e4f98f76c5790513235efaa1ef7f3f2192c392cd7c91b65"
+          "blake2b_256": "ffb283a6ddf56cdcbad4e3d841fcc55d6ba7d19aeb89c50f24dd7e859ec0805f",
+          "md5": "31186c05abc70fd681ed5c2b26a789b4",
+          "sha256": "0f3c1e2ab208db911594ae5b4f79addeb3501604a165019dd221c0bdcabe4db8"
         },
-        "size": 182523
+        "size": 182496
       }
     },
     {
@@ -1186,16 +1186,17 @@
       "vulnerabilities": [],
       "error": null,
       "wheel": {
-        "filename": "yarl-1.25.1-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl",
-        "url": "https://files.pythonhosted.org/packages/bc/7b/ca212cbe170ac8b96e45317ecbcf9c3c3ecf0cdec98d5b088a9c4088929b/yarl-1.25.1-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl",
+        "filename": "yarl-1.25.1-cp313-cp313-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl",
+        "url": "https://files.pythonhosted.org/packages/0e/b7/a82a49bf88340b837ef6972b508a1604ae377b9e6904b46b10cf5f1cf925/yarl-1.25.1-cp313-cp313-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl",
         "digests": {
-          "blake2b_256": "bc7bca212cbe170ac8b96e45317ecbcf9c3c3ecf0cdec98d5b088a9c4088929b",
-          "md5": "ef36aed0b67f88c828f3b5d5112bdfb1",
-          "sha256": "c6f117789d22dce188e5754e8bc65b7e6ebf8cb73963b9fa761f672a5883769d"
+          "blake2b_256": "0eb7a82a49bf88340b837ef6972b508a1604ae377b9e6904b46b10cf5f1cf925",
+          "md5": "abf07865ec4a2cb3233d7caae9a26328",
+          "sha256": "be80550d9bfe83d9b62398a37081a90434e6df2d978ec345c3d2820de6beddab"
         },
-        "size": 117050
+        "size": 117012
       }
     }
   ],
-  "limits": "Metadata license declarations need legal review; an empty advisory list does not prove absence of vulnerabilities. Published wheel hashes do not verify installed bytes."
+  "limits": "Metadata license declarations need legal review; an empty advisory list does not prove absence of vulnerabilities. Published wheel hashes do not verify installed bytes.",
+  "python_version": "3.13.18"
 }
