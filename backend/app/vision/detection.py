@@ -5,17 +5,14 @@ Full upstream license: docs/ai-vision/licenses/YOLOX-OpenCV-Zoo-Apache-2.0.txt.
 Only the fixed, verified ONNX artifact is accepted; no runtime downloading.
 """
 import hashlib
-from pathlib import Path
 
 import cv2
 import numpy as np
 from pydantic import Field
 
 from .contracts import BoundingBox, Contract
+from .model_artifact import MODEL_SHA256, MODEL_SIZE, MODEL_VERSION, verify_model
 
-MODEL_SHA256 = "c5c2d13e59ae883e6af3b45daea64af4833a4951c92d116ec270d9ddbe998063"
-MODEL_SIZE = 35858002
-MODEL_VERSION = "opencv-zoo:yolox_s:2022nov:c5c2d13e"
 COCO_CLASSES = tuple("person bicycle car motorcycle airplane bus train truck boat traffic_light fire_hydrant stop_sign parking_meter bench bird cat dog horse sheep cow elephant bear zebra giraffe backpack umbrella handbag tie suitcase frisbee skis snowboard sports_ball kite baseball_bat baseball_glove skateboard surfboard tennis_racket bottle wine_glass cup fork knife spoon bowl banana apple sandwich orange broccoli carrot hot_dog pizza donut cake chair couch potted_plant bed dining_table toilet tv laptop mouse remote keyboard cell_phone microwave oven toaster sink refrigerator book clock vase scissors teddy_bear hair_drier toothbrush".split())
 
 
@@ -25,17 +22,6 @@ class ObjectDetection(Contract):
     bbox: BoundingBox
 
 
-def verify_model(path):
-    file = Path(path)
-    if file.stat().st_size != MODEL_SIZE:
-        raise ValueError("model size mismatch")
-    digest = hashlib.sha256()
-    with file.open("rb") as source:
-        for chunk in iter(lambda: source.read(1024 * 1024), b""):
-            digest.update(chunk)
-    if digest.hexdigest() != MODEL_SHA256:
-        raise ValueError("model checksum mismatch")
-    return file
 
 
 class YOLOXDetector:

@@ -6,7 +6,7 @@ import sys
 import tempfile
 from urllib.request import urlopen
 sys.path.insert(0,str(Path(__file__).resolve().parents[1]))
-from app.vision.detection import MODEL_SIZE, verify_model
+from app.vision.model_artifact import MODEL_SIZE, verify_model
 
 URL='https://media.githubusercontent.com/media/opencv/opencv_zoo/48b10fa505aeb51fbd127fc60a5c660040e823b7/models/object_detection_yolox/object_detection_yolox_2022nov.onnx'
 
