@@ -3,10 +3,15 @@ FROM cgr.dev/chainguard/wolfi-base@sha256:771146c2dfc880902a185f060c3db5571473c4
 USER 0:0
 # Packages are authenticated against the frozen upstream signed index, then pinned by SHA256.
 RUN --mount=type=bind,from=osupdates,target=/os-updates,readonly \
+    --mount=type=bind,target=/src,readonly \
     (cd /os-updates && sha256sum -c SHA256SUMS) && \
     set -- && while IFS= read -r constraint; do set -- "$@" "$constraint"; done < /os-updates/world.txt && \
     apk --no-network --no-cache --repositories-file /dev/null --repository /os-updates add "$@" && \
-    python3.13 -m venv /venv
+    python3.13 -m venv /venv && \
+    mkdir -p /licenses && \
+    python3.13 -B /src/scripts/apply_python_backports.py --review /src/runtime-patches/review.json --receipt /licenses/python-stdlib-backports.json && \
+    python3.13 -B /src/scripts/validate_python_backports.py --output /licenses/python-stdlib-regression.json && \
+    cp -R /src/runtime-patches /licenses/python-stdlib-patches
 ENV PATH=/venv/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
 WORKDIR /code
 ENV PYTHONDONTWRITEBYTECODE=1 PYTHONUNBUFFERED=1

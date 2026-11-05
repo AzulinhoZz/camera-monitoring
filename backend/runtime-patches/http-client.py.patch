@@ -1,0 +1,28 @@
+--- a/http/client.py
++++ b/http/client.py
+@@ -167,0 +168,5 @@
++# RFC 9112: Content-Length = 1*DIGIT and chunk-size = 1*HEXDIG.
++# int() is more permissive, so we match against the grammar before calling it.
++_is_legal_content_length = re.compile(r'[0-9]+').fullmatch
++_is_legal_chunk_size = re.compile(rb'[0-9a-fA-F]+').fullmatch
++
+@@ -386,8 +391,6 @@
+-        if length and not self.chunked:
+-            try:
+-                self.length = int(length)
+-            except ValueError:
+-                self.length = None
+-            else:
+-                if self.length < 0:  # ignore nonsensical negative lengths
+-                    self.length = None
++        if length is not None:
++            # RFC 9112, section 5.1: optional whitespace (SP / HTAB) around
++            # the field value is not part of the value.
++            length = length.strip(' \t')
++        if length and not self.chunked and _is_legal_content_length(length):
++            self.length = int(length)
+@@ -559,0 +563 @@
++        line = line.rstrip()
+@@ -560,0 +565,2 @@
++            if not _is_legal_chunk_size(line):
++                raise ValueError("invalid chunk size")
