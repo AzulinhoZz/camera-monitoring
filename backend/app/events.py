@@ -1,6 +1,7 @@
 import os
 from datetime import datetime, timezone
 from typing import Optional
+
 from fastapi import APIRouter, Depends, HTTPException, Query
 from pydantic import BaseModel, Field
 from supabase import create_client
@@ -21,23 +22,26 @@ class ReviewAlertPayload(BaseModel):
     review_status: str = Field(pattern="^(reviewed_ok|help_requested)$")
 
 
+def _get_client():
+    return create_client(
+        os.environ["SUPABASE_URL"],
+        os.environ["SUPABASE_SECRET_KEY"],
+    )
+
+
 @router.get("")
 def list_events(
     camera_id: Optional[str] = Query(None),
     user: dict = Depends(get_current_user),
 ):
     try:
-        client = create_client(
-            os.environ["SUPABASE_URL"],
-            os.environ["SUPABASE_SECRET_KEY"],
-        )
-
+        client = _get_client()
         auth_camera_ids = get_authorized_camera_ids(user)
         if not auth_camera_ids:
             return {"total": 0, "events": []}
 
         if camera_id:
-            if not has_camera_access(user, camera_id):
+            if camera_id not in auth_camera_ids and not has_camera_access(user, camera_id):
                 raise HTTPException(status_code=403, detail="No tiene acceso a esta cámara")
             target_ids = [camera_id]
         else:
@@ -51,9 +55,13 @@ def list_events(
         )
         camera_map = {cam["id"]: cam["name"] for cam in (user_cameras.data or [])}
 
+        # These columns are added by migrations 005, 006, 008 and 009.
         result = (
             client.table("camera_events")
-            .select("id, camera_id, event_type, detected_at, description")
+            .select(
+                "id, camera_id, event_type, detected_at, description, "
+                "evidence_path, clip_path, is_protected, review_status, reviewed_at"
+            )
             .in_("camera_id", target_ids)
             .order("detected_at", desc=True)
             .limit(100)
@@ -64,7 +72,7 @@ def list_events(
         for record in result.data or []:
             cam_id = record.get("camera_id")
             ev_path = record.get("evidence_path")
-            cl_path = record.get("clip_path")
+            clip_path = record.get("clip_path")
             events.append({
                 "id": record.get("id"),
                 "camera_id": cam_id,
@@ -74,25 +82,19 @@ def list_events(
                 "description": record.get("description", "Movimiento detectado"),
                 "evidence_path": ev_path,
                 "has_evidence": bool(ev_path),
-                "clip_path": cl_path,
-                "has_clip": bool(cl_path),
+                "clip_path": clip_path,
+                "has_clip": bool(clip_path),
                 "is_protected": bool(record.get("is_protected", False)),
                 "review_status": record.get("review_status", "pending"),
                 "reviewed_at": record.get("reviewed_at"),
             })
 
-        return {
-            "total": len(events),
-            "events": events,
-        }
+        return {"total": len(events), "events": events}
 
     except HTTPException:
         raise
     except Exception as e:
-        raise HTTPException(
-            status_code=500,
-            detail=f"Error al listar los eventos: {str(e)}",
-        )
+        raise HTTPException(status_code=500, detail=f"Error al listar los eventos: {str(e)}")
 
 
 @router.post("/{event_id}/review")
@@ -102,12 +104,13 @@ def review_event_alert(
     user: dict = Depends(get_current_user),
 ):
     try:
-        client = create_client(
-            os.environ["SUPABASE_URL"],
-            os.environ["SUPABASE_SECRET_KEY"],
+        client = _get_client()
+        ev_res = (
+            client.table("camera_events")
+            .select("id, camera_id")
+            .eq("id", event_id)
+            .execute()
         )
-
-        ev_res = client.table("camera_events").select("id, camera_id").eq("id", event_id).execute()
         if not ev_res.data:
             raise HTTPException(status_code=404, detail="Evento no encontrado")
 
@@ -116,27 +119,28 @@ def review_event_alert(
             raise HTTPException(status_code=403, detail="No tiene permisos para revisar este evento")
 
         now_iso = datetime.now(timezone.utc).isoformat()
-        try:
-            client.table("camera_events").update({
+        update_res = (
+            client.table("camera_events")
+            .update({
                 "review_status": payload.review_status,
-                "reviewed_at": now_iso
-            }).eq("id", event_id).execute()
-        except Exception:
-            pass
+                "reviewed_at": now_iso,
+            })
+            .eq("id", event_id)
+            .execute()
+        )
+        if not update_res.data:
+            raise HTTPException(status_code=500, detail="No se pudo guardar la revisión")
 
         return {
             "event_id": event_id,
             "review_status": payload.review_status,
-            "reviewed_at": now_iso
+            "reviewed_at": now_iso,
         }
 
     except HTTPException:
         raise
     except Exception as e:
-        raise HTTPException(
-            status_code=500,
-            detail=f"Error al registrar la revisión del evento: {str(e)}",
-        )
+        raise HTTPException(status_code=500, detail=f"Error al registrar la revisión del evento: {str(e)}")
 
 
 @router.get("/{event_id}/evidence")
@@ -145,55 +149,44 @@ def get_event_evidence(
     user: dict = Depends(get_current_user),
 ):
     try:
-        client = create_client(
-            os.environ["SUPABASE_URL"],
-            os.environ["SUPABASE_SECRET_KEY"],
-        )
-
+        client = _get_client()
         event_res = (
             client.table("camera_events")
-            .select("id, camera_id")
+            .select("id, camera_id, evidence_path")
             .eq("id", event_id)
             .execute()
         )
-
         if not event_res.data:
             raise HTTPException(status_code=404, detail="Evento no encontrado")
 
         event = event_res.data[0]
         camera_id = event.get("camera_id")
-        evidence_path = event.get("evidence_path")
-
         if not has_camera_access(user, camera_id):
             raise HTTPException(status_code=403, detail="No tiene permisos para acceder a esta evidencia")
 
+        evidence_path = event.get("evidence_path")
         if not evidence_path:
             return {"event_id": event_id, "has_evidence": False, "signed_url": None}
 
-        signed_url = None
-        try:
-            res = client.storage.from_("motion-evidence").create_signed_url(evidence_path, 1800)
-            if isinstance(res, dict):
-                signed_url = res.get("signedURL") or res.get("signedUrl") or res.get("signed_url")
-            elif isinstance(res, str):
-                signed_url = res
-        except Exception as st_err:
-            pass
+        res = client.storage.from_("motion-evidence").create_signed_url(evidence_path, 1800)
+        signed_url = (
+            res.get("signedURL") or res.get("signedUrl") or res.get("signed_url")
+            if isinstance(res, dict) else res if isinstance(res, str) else None
+        )
+        if not signed_url:
+            raise HTTPException(status_code=502, detail="No se pudo generar el enlace temporal de la evidencia")
 
         return {
             "event_id": event_id,
             "has_evidence": True,
             "evidence_path": evidence_path,
-            "signed_url": signed_url
+            "signed_url": signed_url,
         }
 
     except HTTPException:
         raise
     except Exception as e:
-        raise HTTPException(
-            status_code=500,
-            detail=f"Error al obtener evidencia del evento: {str(e)}",
-        )
+        raise HTTPException(status_code=500, detail=f"Error al obtener evidencia del evento: {str(e)}")
 
 
 @router.get("/{event_id}/clip")
@@ -202,55 +195,44 @@ def get_event_clip(
     user: dict = Depends(get_current_user),
 ):
     try:
-        client = create_client(
-            os.environ["SUPABASE_URL"],
-            os.environ["SUPABASE_SECRET_KEY"],
-        )
-
+        client = _get_client()
         event_res = (
             client.table("camera_events")
-            .select("id, camera_id")
+            .select("id, camera_id, clip_path")
             .eq("id", event_id)
             .execute()
         )
-
         if not event_res.data:
             raise HTTPException(status_code=404, detail="Evento no encontrado")
 
         event = event_res.data[0]
         camera_id = event.get("camera_id")
-        clip_path = event.get("clip_path")
-
         if not has_camera_access(user, camera_id):
             raise HTTPException(status_code=403, detail="No tiene permisos para acceder a este clip")
 
+        clip_path = event.get("clip_path")
         if not clip_path:
             return {"event_id": event_id, "has_clip": False, "signed_url": None}
 
-        signed_url = None
-        try:
-            res = client.storage.from_("motion-clips").create_signed_url(clip_path, 1800)
-            if isinstance(res, dict):
-                signed_url = res.get("signedURL") or res.get("signedUrl") or res.get("signed_url")
-            elif isinstance(res, str):
-                signed_url = res
-        except Exception as st_err:
-            pass
+        res = client.storage.from_("motion-clips").create_signed_url(clip_path, 1800)
+        signed_url = (
+            res.get("signedURL") or res.get("signedUrl") or res.get("signed_url")
+            if isinstance(res, dict) else res if isinstance(res, str) else None
+        )
+        if not signed_url:
+            raise HTTPException(status_code=502, detail="No se pudo generar el enlace temporal del clip")
 
         return {
             "event_id": event_id,
             "has_clip": True,
             "clip_path": clip_path,
-            "signed_url": signed_url
+            "signed_url": signed_url,
         }
 
     except HTTPException:
         raise
     except Exception as e:
-        raise HTTPException(
-            status_code=500,
-            detail=f"Error al obtener clip del evento: {str(e)}",
-        )
+        raise HTTPException(status_code=500, detail=f"Error al obtener clip del evento: {str(e)}")
 
 
 @router.post("", status_code=201)
@@ -262,11 +244,7 @@ def create_event(
         if not has_camera_access(user, event.camera_id):
             raise HTTPException(status_code=403, detail="Cámara no encontrada o no pertenece al usuario")
 
-        client = create_client(
-            os.environ["SUPABASE_URL"],
-            os.environ["SUPABASE_SECRET_KEY"],
-        )
-
+        client = _get_client()
         res = (
             client.table("camera_events")
             .insert({
@@ -276,12 +254,10 @@ def create_event(
             })
             .execute()
         )
-
         if not res.data:
             raise HTTPException(status_code=500, detail="Error al registrar el evento")
 
         record = res.data[0]
-
         return {
             "id": record.get("id"),
             "camera_id": record.get("camera_id"),
@@ -294,7 +270,4 @@ def create_event(
     except HTTPException:
         raise
     except Exception as e:
-        raise HTTPException(
-            status_code=500,
-            detail=f"Error al crear el evento: {str(e)}",
-        )
+        raise HTTPException(status_code=500, detail=f"Error al crear el evento: {str(e)}")
