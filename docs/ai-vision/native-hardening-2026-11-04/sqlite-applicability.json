@@ -1,0 +1,7 @@
+{
+  "sqlite_version": "3.54.1",
+  "sqlite_cli_present": false,
+  "recover_symbol_exported": false,
+  "limits": "Component applicability under investigation; raw CVE match retained without VEX/ignore",
+  "image_id": "sha256:15e2c0b40177c275b1ef1141071dcebfc95f5ae5f9d62e93c5230621ea37f6ce"
+}

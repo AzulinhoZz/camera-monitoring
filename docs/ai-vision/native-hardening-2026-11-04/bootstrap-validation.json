@@ -1,0 +1,16 @@
+{
+  "result": "PASS",
+  "installer_sha256": "b4729adaaafc8226e15c667f29d5362319a01a0a2142320c3884ee6f40e1c81a",
+  "backend_tests": {
+    "tests": 253,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "installer_runtime_image_id": "sha256:62c8a4676f30e50b236d485712f0ea852390c2f20d6d6c39c15446b046947b40",
+  "source_semantics": "0ef6c51; final8539b10 changes whitespace only, AST equality checked; final CI separately tests8539b10.",
+  "environment_draft_saved": true,
+  "requires_publish": true,
+  "runtime_applied_by_save": false,
+  "secrets_or_network_policy_modified": false
+}

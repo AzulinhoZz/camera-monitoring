@@ -1,0 +1,10 @@
+{
+  "source_commit": "8539b10d5a2c0cc79ed1c1b30674d1adbd59adce",
+  "image_id": "sha256:15e2c0b40177c275b1ef1141071dcebfc95f5ae5f9d62e93c5230621ea37f6ce",
+  "archive_sha256": "cf2935ea38d0bd8f5203967b49f3c8fc5130ae9a74b165d4172a713d8f79eae8",
+  "archive_bytes": 434897408,
+  "tag": "camera-monitoring-native:review",
+  "platform": "linux/amd64",
+  "build_network": "none",
+  "limits": "Local artifact, no registry push/deployment. CI builds its own separately identified image, not bit reproducibility proof."
+}

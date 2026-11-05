@@ -1,0 +1,38 @@
+backend	Disposable PostgreSQL isolation and rollback	﻿2026-11-05T00:28:32.3011626Z ##[group]Run python backend/scripts/validate_database_security.py
+backend	Disposable PostgreSQL isolation and rollback	2026-11-05T00:28:32.3012086Z [36;1mpython backend/scripts/validate_database_security.py[0m
+backend	Disposable PostgreSQL isolation and rollback	2026-11-05T00:28:32.3034105Z shell: /usr/bin/bash -e {0}
+backend	Disposable PostgreSQL isolation and rollback	2026-11-05T00:28:32.3034453Z env:
+backend	Disposable PostgreSQL isolation and rollback	2026-11-05T00:28:32.3034672Z   SUPABASE_URL:
+backend	Disposable PostgreSQL isolation and rollback	2026-11-05T00:28:32.3034910Z   SUPABASE_SECRET_KEY:
+backend	Disposable PostgreSQL isolation and rollback	2026-11-05T00:28:32.3035188Z   FIREBASE_CREDENTIALS_PATH:
+backend	Disposable PostgreSQL isolation and rollback	2026-11-05T00:28:32.3035453Z   GOOGLE_APPLICATION_CREDENTIALS:
+backend	Disposable PostgreSQL isolation and rollback	2026-11-05T00:28:32.3035714Z   OMP_NUM_THREADS: 1
+backend	Disposable PostgreSQL isolation and rollback	2026-11-05T00:28:32.3035961Z   OPENBLAS_NUM_THREADS: 1
+backend	Disposable PostgreSQL isolation and rollback	2026-11-05T00:28:32.3036268Z   pythonLocation: /opt/hostedtoolcache/Python/3.13.18/x64
+backend	Disposable PostgreSQL isolation and rollback	2026-11-05T00:28:32.3036696Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.13.18/x64/lib/pkgconfig
+backend	Disposable PostgreSQL isolation and rollback	2026-11-05T00:28:32.3037075Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.13.18/x64
+backend	Disposable PostgreSQL isolation and rollback	2026-11-05T00:28:32.3037436Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.13.18/x64
+backend	Disposable PostgreSQL isolation and rollback	2026-11-05T00:28:32.3037793Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.13.18/x64
+backend	Disposable PostgreSQL isolation and rollback	2026-11-05T00:28:32.3038230Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.13.18/x64/lib
+backend	Disposable PostgreSQL isolation and rollback	2026-11-05T00:28:32.3038542Z ##[endgroup]
+backend	Disposable PostgreSQL isolation and rollback	2026-11-05T00:28:38.2893887Z /opt/hostedtoolcache/Python/3.13.18/x64/lib/python3.13/site-packages/fastapi/testclient.py:1: StarletteDeprecationWarning: Using `httpx` with `starlette.testclient` is deprecated; install `httpx2` instead.
+backend	Disposable PostgreSQL isolation and rollback	2026-11-05T00:28:38.2894745Z   from starlette.testclient import TestClient as TestClient  # noqa
+backend	Disposable PostgreSQL isolation and rollback	2026-11-05T00:28:38.5769098Z INFO:httpx:HTTP Request: PUT http://testserver/cameras/c1000000-0000-0000-0000-000000000001/vision-rules "HTTP/1.1 200 OK"
+backend	Disposable PostgreSQL isolation and rollback	2026-11-05T00:28:39.2404759Z INFO:httpx:HTTP Request: GET http://testserver/events/36a88c8d-e958-57ca-abde-0d76576f008c/evidence "HTTP/1.1 200 OK"
+backend	Disposable PostgreSQL isolation and rollback	2026-11-05T00:28:39.3498276Z INFO:httpx:HTTP Request: GET http://testserver/events/36a88c8d-e958-57ca-abde-0d76576f008c/clip "HTTP/1.1 200 OK"
+backend	Disposable PostgreSQL isolation and rollback	2026-11-05T00:28:39.4579986Z INFO:httpx:HTTP Request: POST http://testserver/events/36a88c8d-e958-57ca-abde-0d76576f008c/review "HTTP/1.1 200 OK"
+backend	Disposable PostgreSQL isolation and rollback	2026-11-05T00:28:39.5690290Z INFO:httpx:HTTP Request: GET http://testserver/events "HTTP/1.1 200 OK"
+backend	Disposable PostgreSQL isolation and rollback	2026-11-05T00:28:39.8802469Z INFO:retention_manager:Cleanup for user f7210242-a53d-495b-a7d7-26f0e0313ca1 (dry_run=False): 0 photos, 0 clips, 0.0 MB freed
+backend	Disposable PostgreSQL isolation and rollback	2026-11-05T00:28:40.2941503Z INFO:retention_manager:Cleanup for user f7210242-a53d-495b-a7d7-26f0e0313ca1 (dry_run=False): 1 photos, 1 clips, 2.7 MB freed
+backend	Disposable PostgreSQL isolation and rollback	2026-11-05T00:28:47.9697847Z preservation, minimum privileges, isolation, escalation, unit check, atomic grants, stale-grant revocation
+backend	Disposable PostgreSQL isolation and rollback	2026-11-05T00:28:47.9698939Z (1 row)
+backend	Disposable PostgreSQL isolation and rollback	2026-11-05T00:28:47.9699865Z vision config permissions/RLS/revision, event idempotency/cooldown/review preservation and media scope
+backend	Disposable PostgreSQL isolation and rollback	2026-11-05T00:28:47.9700780Z (1 row)
+backend	Disposable PostgreSQL isolation and rollback	2026-11-05T00:28:47.9702256Z PASS: API config → scoped rules → PostgreSQL event → JPEG/MP4 → media lookup → human review/protection/retention; local Auth/Storage substitutes
+backend	Disposable PostgreSQL isolation and rollback	2026-11-05T00:28:47.9703925Z Synthetic workflow artifacts: /tmp/camera-phase3-workflow-mxxyg4m7
+backend	Disposable PostgreSQL isolation and rollback	2026-11-05T00:28:47.9704830Z PASS: vision rollback preserves legacy events; reapply passes
+backend	Disposable PostgreSQL isolation and rollback	2026-11-05T00:28:47.9705753Z PASS: rollback preserves cameras; reapply and security assertions pass
+backend	Disposable PostgreSQL isolation and rollback	2026-11-05T00:28:47.9706787Z PASS: concurrent organization change blocked until atomic grant transaction completes
+backend	Disposable PostgreSQL isolation and rollback	2026-11-05T00:28:47.9708230Z PASS: concurrent indexes valid/idempotent; rollback preserves rows; rule index access path available (not production latency proof)
+backend	Disposable PostgreSQL isolation and rollback	2026-11-05T00:28:47.9710340Z PASS: streamed encrypted fixture backup + durable key + separate restore process -> independent cluster/roles/database/storage -> rows/RLS/grants/media/owner isolation; corruption rejected
+backend	Disposable PostgreSQL isolation and rollback	2026-11-05T00:28:47.9712044Z Encrypted backup/restore fixture artifacts: /tmp/camera-phase6-restore-f0bc3yy4

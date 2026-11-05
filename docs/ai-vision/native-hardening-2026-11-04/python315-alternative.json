@@ -1,0 +1,39 @@
+{
+  "image_python": "3.15.2",
+  "scope": "wheel tags for Linux AMD64; no source compilation or package installation",
+  "packages": [
+    {
+      "package": "pyyaml",
+      "version": "6.0.3",
+      "cp315_compatible_wheels": []
+    },
+    {
+      "package": "numpy",
+      "version": "2.5.4",
+      "cp315_compatible_wheels": [
+        "numpy-2.5.4-cp315-cp315-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl"
+      ]
+    },
+    {
+      "package": "pydantic-core",
+      "version": "2.50.1",
+      "cp315_compatible_wheels": [
+        "pydantic_core-2.50.1-cp315-cp315-manylinux_2_17_x86_64.manylinux2014_x86_64.whl"
+      ]
+    },
+    {
+      "package": "cffi",
+      "version": "2.1.1",
+      "cp315_compatible_wheels": [
+        "cffi-2.1.1-cp315-cp315-manylinux2014_x86_64.manylinux_2_17_x86_64.whl"
+      ]
+    },
+    {
+      "package": "grpcio",
+      "version": "1.85.0",
+      "cp315_compatible_wheels": [
+        "grpcio-1.85.0-cp315-cp315-manylinux2014_x86_64.manylinux_2_17_x86_64.whl"
+      ]
+    }
+  ]
+}

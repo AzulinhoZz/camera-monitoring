@@ -1,0 +1,95 @@
+{
+  "scope": "current cloud host; synthetic frames; isolated camera groups with one CPU slot each; not target-hardware soak or natural accuracy",
+  "configured_inference_fps": 3,
+  "pose_enabled": false,
+  "production_accessed": false,
+  "results": [
+    {
+      "cameras": 1,
+      "status": "MEASURED",
+      "exit_code": 0,
+      "peak_group_rss_mib": 264.3046875,
+      "per_camera": {
+        "00000000-0000-0000-0000-000000000001": {
+          "inference_fps": 2.4464000543644455,
+          "inference_frames": 72,
+          "capture_fps": 9.921592387539292,
+          "inference_dropped": 14
+        }
+      },
+      "target_fps": 2,
+      "meets_fps_target": true
+    },
+    {
+      "cameras": 2,
+      "status": "MEASURED",
+      "exit_code": 0,
+      "peak_group_rss_mib": 530.03125,
+      "per_camera": {
+        "00000000-0000-0000-0000-000000000001": {
+          "inference_fps": 2.3936723791021994,
+          "inference_frames": 69,
+          "capture_fps": 9.921590479089762,
+          "inference_dropped": 15
+        },
+        "00000000-0000-0000-0000-000000000002": {
+          "inference_fps": 2.415120756037802,
+          "inference_frames": 69,
+          "capture_fps": 9.940657591701255,
+          "inference_dropped": 14
+        }
+      },
+      "target_fps": 2,
+      "meets_fps_target": true
+    },
+    {
+      "cameras": 4,
+      "status": "MEASURED",
+      "exit_code": 0,
+      "peak_group_rss_mib": 1058.703125,
+      "per_camera": {
+        "00000000-0000-0000-0000-000000000004": {
+          "inference_fps": 2.3465397041319505,
+          "inference_frames": 69,
+          "capture_fps": 9.930296531414388,
+          "inference_dropped": 17
+        },
+        "00000000-0000-0000-0000-000000000002": {
+          "inference_fps": 2.348696303356253,
+          "inference_frames": 69,
+          "capture_fps": 9.939477188040051,
+          "inference_dropped": 17
+        },
+        "00000000-0000-0000-0000-000000000001": {
+          "inference_fps": 2.378572167258437,
+          "inference_frames": 69,
+          "capture_fps": 9.928087671254639,
+          "inference_dropped": 16
+        },
+        "00000000-0000-0000-0000-000000000003": {
+          "inference_fps": 2.366660950094323,
+          "inference_frames": 69,
+          "capture_fps": 9.912585311464518,
+          "inference_dropped": 16
+        }
+      },
+      "target_fps": 2,
+      "meets_fps_target": true
+    }
+  ],
+  "container_limits": {
+    "cpu": 4,
+    "memory_gib": 3,
+    "network": "none",
+    "read_only": true,
+    "tmpfs_noexec": true
+  },
+  "original_benchmark_script_sha256": "a2931db8c75704f8807b877ab10810f404a0762310ecc86835a7874915c047ed",
+  "location_shim_only": "repo/backend layout mapped to /code/app; benchmark logic unchanged",
+  "runtime_trial_image_id": "sha256:684615606acf434494f38eb7440e53e70331db49d8b7c7025e01059087528dc7",
+  "final_image_retested_for_load": false,
+  "duration_seconds_per_scale": 30,
+  "cpu_quota": 4,
+  "memory_limit_gib": 3,
+  "identity_limits": "Tag/build and smoke bind trial runtime; benchmark originally did not embed image ID. Same runtime profile; not independently rerun on final documentation/refactor image."
+}

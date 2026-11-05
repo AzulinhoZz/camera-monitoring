@@ -1,0 +1,8 @@
+{
+  "exit_code": 0,
+  "index_sha256": "72f4e7ad6d9560bf2ed730318192b333c2c5579468ee913ca72f74e59c986eff",
+  "index_bytes": 7425489,
+  "packages": 16,
+  "network": "none",
+  "allow_untrusted": false
+}

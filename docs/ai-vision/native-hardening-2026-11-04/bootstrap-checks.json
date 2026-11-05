@@ -1,0 +1,9 @@
+{
+  "exit_code": 0,
+  "oom_killed": false,
+  "runtime_image_id": "sha256:62c8a4676f30e50b236d485712f0ea852390c2f20d6d6c39c15446b046947b40",
+  "network": "none",
+  "read_only": true,
+  "uid": "65534:65534",
+  "limits": "QA-only executable tmpfs permits the timeout fixture; production /tmp remains noexec. No managed integration."
+}

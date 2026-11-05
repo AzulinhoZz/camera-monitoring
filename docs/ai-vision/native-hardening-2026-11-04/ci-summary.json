@@ -1,0 +1,27 @@
+{
+  "source_commit": "8539b10d5a2c0cc79ed1c1b30674d1adbd59adce",
+  "run": 41941333561,
+  "backend": {
+    "tests": 253,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "android": {
+    "tests": 19,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "android_job": "success",
+  "backend_job": "failure",
+  "failing_step": "Full image inventory and vulnerability gate",
+  "workflow": "failure",
+  "database": "PASS disposable cluster only; local Auth/Storage substitutes; not managed staging",
+  "android_release_negative_test": "Expected validateReleaseEndpoint failure is asserted by build harness; job succeeded.",
+  "python_advisories": {
+    "packages": 70,
+    "affected_packages": 0,
+    "lookup_errors": 0
+  }
+}

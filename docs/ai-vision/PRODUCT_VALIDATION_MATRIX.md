@@ -1,6 +1,6 @@
 # Aceptación externa pendiente
 
-Estado al entregar el incremento: **NO EJECUTADA** para todas las filas siguientes. No equivale a fallo reproducido: faltan entorno, dispositivo/dataset o acuerdo operativo. La compilación/pruebas unitarias, PostgreSQL desechable, benchmarks sintéticos y escáneres ya ejecutados se describen en [la entrega](PHASE_7_PRODUCT_DELIVERY.md).
+Estado original al entregar el incremento: **NO EJECUTADA** para las pruebas externas. Actualización 4nov2026: seguridad nativa EJECUTADA CON HALLAZGOS (37,23High); carga nube sintética PARCIAL (1/2/4 cámaras), precisión natural/dispositivo/hardware objetivo siguen pendientes. Véase [hardening actual](NATIVE_HARDENING_2026_11_04.md). No equivale a fallo reproducido: faltan entorno, dispositivo/dataset o acuerdo operativo. La compilación/pruebas unitarias, PostgreSQL desechable, benchmarks sintéticos y escáneres ya ejecutados se describen en [la entrega](PHASE_7_PRODUCT_DELIVERY.md).
 
 | Prueba | Preparación necesaria | Evidencia/criterio por registrar |
 | --- | --- | --- |
@@ -17,4 +17,4 @@ Estado al entregar el incremento: **NO EJECUTADA** para todas las filas siguient
 | Seguridad nativa | Fuentes/builds corregidos y revisados para Debian/FFmpeg/Python | Nueva imagen identificada, SBOM+DB reciente y gate sin findings pendientes; no ignorar matches ni reemplazar `.so` manualmente. Android nativo requiere análisis específico, no basta el gate Maven. |
 | Licencias y aprobación | Model cards/datasets/pesos y responsables operativos | Licencias/uso aprobados y operador revisa gates completos. No solicitar aprobación de producción mientras NO_GO. |
 
-Estas pruebas no se ejecutan automáticamente sobre el proyecto Supabase configurado: una clave presente no demuestra que sea staging. No habilitar alertas sensibles ni usar personas como material de prueba sin autorización aplicable. Los scripts locales no escriben en ese proyecto.
+El usuario confirmó explícitamente que el proyecto configurado es staging y autorizó fixtures sintéticos propios; el preflight sigue BLOCKED por transporte antes de escribir. Una clave presente por sí sola no demuestra que otro proyecto sea staging. No habilitar alertas sensibles ni usar personas como material de prueba sin autorización aplicable. Los scripts locales no escriben en ese proyecto.

@@ -1,3 +1,5 @@
+> Validación actual (4nov2026):253 backend y19 Android unitarias PASS; imagen nativa37 hallazgos (23High), **NO_GO**. [Entrega, límites y evidencia](docs/ai-vision/NATIVE_HARDENING_2026_11_04.md).
+
 # Camera Monitoring AI 2.0 — Development candidate
 
 FastAPI + Supabase + MediaMTX for local development on macOS.

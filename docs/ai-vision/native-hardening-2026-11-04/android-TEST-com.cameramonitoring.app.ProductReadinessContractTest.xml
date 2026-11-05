@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.cameramonitoring.app.ProductReadinessContractTest" tests="7" skipped="0" failures="0" errors="0" timestamp="2026-11-05T00:30:07.475Z" hostname="runnervm7aw5e" time="1.266">
+  <properties/>
+  <testcase name="requestedRuleFilterRequiresServerAcknowledgement" classname="com.cameramonitoring.app.ProductReadinessContractTest" time="0.106"/>
+  <testcase name="customSearchRangeUsesLocalZoneAndIncludesTheFinalMinute" classname="com.cameramonitoring.app.ProductReadinessContractTest" time="0.015"/>
+  <testcase name="partialAttentionNeverClaimsUnseenCamerasHaveZeroIncidents" classname="com.cameramonitoring.app.ProductReadinessContractTest" time="0.001"/>
+  <testcase name="uncertainSignalsRemainHumanReviewAndDatesRespectOffsets" classname="com.cameramonitoring.app.ProductReadinessContractTest" time="0.035"/>
+  <testcase name="customRangeRejectsReversedLongAndAmbiguousDaylightSavingTimes" classname="com.cameramonitoring.app.ProductReadinessContractTest" time="0.003"/>
+  <testcase name="cancelledNetworkRequestDoesNotReturnAsAnOrdinaryFailure" classname="com.cameramonitoring.app.ProductReadinessContractTest" time="1.01"/>
+  <testcase name="zoneFilterIsSentToBothHistoryAndStatistics" classname="com.cameramonitoring.app.ProductReadinessContractTest" time="0.094"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

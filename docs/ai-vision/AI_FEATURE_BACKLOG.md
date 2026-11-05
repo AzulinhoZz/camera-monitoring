@@ -226,3 +226,7 @@ Pendiente de aceptación, no cerrado: native200; integración staging; dispositi
 ## Remediación pyasn1 aplicada — 4 de noviembre de2026
 
 [Entrega del parche](PYASN1_REMEDIATION_2026_11_04.md):0.6.4→0.6.5, wheel/licencia/diff revisados, locks/hash y revisión actual de wheels sincronizados,247 backend PASS, nueva imagen/smoke PASS, PyPI0 afectados. Los cuatro avisos pyasn1 salen del scan y quedan221 matches/82 High. Comprobación de staging repetida: CONNECT403 antes de toda escritura. Pendientes: demás componentes nativos, conectividad/aceptación administrada y gates externos; teléfono no ejecutado conforme a alcance nube. No cerrar aceptación global ni R2 por este parche.
+
+## Hardening de plataforma — 4 de noviembre de2026
+
+[Entrega y evidencia](NATIVE_HARDENING_2026_11_04.md): Wolfi/Python3.13 fijados,16 APK autenticados offline, versiones Python conservadas/14 wheels ABI revisados,253 backend y19 Android PASS. Native221→37 (23High), sin ignores; FFmpeg34, Python2, SQLite1 en investigación. Build/smoke/SQL restore PASS; CI global FAIL por gate nativo. Carga sintética1/2/4 cámaras >=2FPS; no precisión/hardware/soak real. Staging vuelve a BLOCKED antes de escribir. Instalador probado y borrador guardado, no aplicado/publicado. R2 parcial, R3–R5 y aceptación global NO_GO; completar FFmpeg compatible, transporte staging y validación externa.
