@@ -18,4 +18,3 @@ def verify_model(path):
     if digest.hexdigest() != MODEL_SHA256:
         raise ValueError("model checksum mismatch")
     return file
-

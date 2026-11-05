@@ -21,9 +21,6 @@ class ObjectDetection(Contract):
     confidence: float = Field(ge=0, le=1)
     bbox: BoundingBox
 
-
-
-
 class YOLOXDetector:
     def __init__(self, path):
         verified = verify_model(path)
