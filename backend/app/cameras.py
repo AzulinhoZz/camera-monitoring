@@ -48,7 +48,7 @@ def _format_camera(record: dict) -> dict:
     return {
         "id": record["id"],
         "user_id": record.get("user_id"),
-        "name": record["name"],
+        "name": record.get("name", "Cámara"),
         "rtsp_url": rtsp_url,
         "status": record.get("status", "online"),
         "last_seen_at": record.get("last_seen_at") or record.get("created_at"),
@@ -82,7 +82,14 @@ def create_camera(camera: CameraCreate, user: dict = Depends(get_current_user)):
         raise HTTPException(status_code=500, detail="Error al crear la cámara")
 
     rec = result.data[0]
-    # A camera is offline until a real RTSP connectivity check succeeds.
+    # Start the detector; it will report offline until the RTSP source is reachable.
+    motion_manager.start_detector(
+        camera_id=rec["id"],
+        rtsp_url=rec["rtsp_url"],
+        min_area=1500,
+        threshold=25,
+        cooldown_seconds=5.0,
+    )
     return _format_camera(rec)
 
 
